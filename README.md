@@ -18,3 +18,5 @@
 ### Librerías utilizadas
 
 ### Extensiones utilizadas en Visual Studio Code
+- Prettier 
+  <img width="515" alt="image" src="https://user-images.githubusercontent.com/38388588/183514332-dc8fa5b3-bdce-4cbf-a1a2-ad1ca9c7d612.png">
