@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@storybook/addon-postcss": "^3.0.0-alpha.1",
+    "firebase": "^9.9.2",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0"
