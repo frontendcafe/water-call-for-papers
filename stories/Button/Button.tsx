@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ButtonProps {
   /**
@@ -18,11 +18,7 @@ interface ButtonProps {
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({
-  backgroundColor,
-  label,
-  ...props
-}: ButtonProps) => {
+export const Button = ({ backgroundColor, label, ...props }: ButtonProps) => {
   return (
     <button
       type="button"
