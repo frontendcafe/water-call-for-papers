@@ -22,4 +22,8 @@
 <img width="515" alt="image" src="https://user-images.githubusercontent.com/38388588/183514332-dc8fa5b3-bdce-4cbf-a1a2-ad1ca9c7d612.png">
 - Eslint
 <img width="515" alt="image" src="https://user-images.githubusercontent.com/38388588/183516938-19699e4c-934c-487b-b166-e1e48d62639f.png">
+- ErrorLens
+<img width="638" alt="image" src="https://user-images.githubusercontent.com/38388588/183519331-53546449-82d0-4d64-9a5c-ecc24074165a.png">
+- Tailwind CSS IntelliSense
+<img width="638" alt="image" src="https://user-images.githubusercontent.com/38388588/183519369-c5d2d390-e3e9-4fb4-9f37-eadc9887519a.png">
 
