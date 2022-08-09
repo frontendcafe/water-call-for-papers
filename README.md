@@ -13,6 +13,41 @@
 
 ### Inicializar el proyecto
 
+- Clonar repositorio
+- Ejecutar `yarn` para instalar las dependencias, si no tienes instalado yarn ejecuta 
+  antes `npm i -g yarn`
+- Agregar configuración básica para prettier y eslint
+  - Instalar extensiones recomendadas
+  - Ingresar a la configuración de vscode `ctrl + shift + p` o `cmd + shift + p`
+  - Buscar `Preferences: Open User Settings (JSON)`
+  - Pegar las siguientes reglas: 
+```json
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+```
+  - Si hay alguna duplicada, aparecera con un subrayado azul, eliminar la regla vieja.
+  - Cualquier duda consultar en los canales de discord correspondientes al equipo
+
 ### Comandos útiles
 
 ### Librerías utilizadas
