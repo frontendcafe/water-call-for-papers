@@ -14,6 +14,14 @@
 ### Inicializar el proyecto
 
 ### Comandos útiles
+Para correr la app en http://localhost:3000
+```bash
+npm run dev
+```
+Para correr Storybook en http://localhost:6006
+```bash
+npm run storybook
+```
 
 ### Librerías utilizadas
 
