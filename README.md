@@ -14,8 +14,7 @@
 ### Inicializar el proyecto
 
 - Clonar repositorio
-- Ejecutar `yarn` para instalar las dependencias, si no tienes instalado yarn ejecuta 
-  antes `npm i -g yarn`
+- Ejecutar `npm install` para instalar las dependencias
 - Agregar configuración básica para prettier y eslint
   - Instalar extensiones recomendadas
   - Ingresar a la configuración de vscode `ctrl + shift + p` o `cmd + shift + p`
