@@ -6,7 +6,8 @@
     "start": "next start",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "lint": "eslint --ignore-path .gitignore '**/*.{jsx,js,tsx,ts}'"
+    "lint": "eslint --ignore-path .gitignore '**/*.{jsx,js,tsx,ts}'",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@storybook/addon-postcss": "^3.0.0-alpha.1",
