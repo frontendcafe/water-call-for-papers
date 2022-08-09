@@ -15,5 +15,5 @@ export const Primary = Template.bind({});
 //👇 We pass the props to the Primary story
 Primary.args = {
   label: "Button",
-  backgroundColor: "bg-blue-500",
+  backgroundColor: "red",
 };
