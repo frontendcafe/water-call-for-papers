@@ -51,7 +51,9 @@ export const InputText = ({
   visible,
   ...props
 }: InputTextProps) => {
-  const positionWithIcon = position == "left" && "pl-8 pr-2 py-2";
+  const positionIconText = position == "left" && "pl-8 pr-2 py-2";
+
+  const positionIcon = position == "left" ? `left-6` : `right-6`;
 
   const withError = error
     ? "border-red-400 focus:border-red-400"
@@ -69,7 +71,7 @@ export const InputText = ({
       >
         {label}
       </label>
-      {description ?? (
+      {description && (
         <p className="text-xs leading-6 text-gray-400">{description}</p>
       )}
       <input
@@ -77,7 +79,7 @@ export const InputText = ({
         placeholder={placeholder}
         id={idValue}
         value={value}
-        className={`px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 ${positionWithIcon} ${withError} ${withDisabled}`}
+        className={`px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 ${positionIconText} ${withError} ${withDisabled}`}
         disabled={disabled}
         {...props}
       />
@@ -85,8 +87,8 @@ export const InputText = ({
         <div
           className={
             visible
-              ? `absolute top-[50px] ${position}-6`
-              : `absolute top-[30px] ${position}-6`
+              ? `absolute top-[50px] ${positionIcon}`
+              : `absolute top-[30px] ${positionIcon}`
           }
         >
           <svg
