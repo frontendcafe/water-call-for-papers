@@ -8,7 +8,6 @@ export default {
   title: "TagList",
 };
 
-// const Template = (args) => <TagList {...args} />;
 const Template: ComponentStory<typeof TagList> = (args) => (
   <TagList {...args} />
 );
@@ -17,7 +16,7 @@ export const Default = Template.bind({});
 
 Default.args = {
   // Shaping the stories through args composition.
-  // The data was inherited from the Default story in Task.stories.js.
+  // The data was inherited from the Default story in Tag.stories.js.
   tags: [
     { ...TagStories.PrimaryTag.args, label: "Ux Writing", style: "primary" },
     { ...TagStories.PrimaryTag.args, label: "Diseño UI", style: "secondary" },
