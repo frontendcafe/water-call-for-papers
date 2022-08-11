@@ -3,7 +3,7 @@ import { CandidateId } from "./candidates-types";
 export enum ProposalStatus {
   Enviada = "Enviada",
   EnEspera = "En espera",
-  Preseleccion = "Preseleccion",
+  Preseleccion = "Preselección",
   Aprobada = "Aprobada",
   Rechazada = "Rechazada",
 }
@@ -20,7 +20,7 @@ export type TalkProposalId = string;
 export interface TalkProposal {
   id: TalkProposalId;
   title: string;
-  abstract: string;
+  summary: string;
   estimatedDuration: number;
   status: ProposalStatus;
   attachments: string[];

@@ -2,7 +2,7 @@ export type CandidateId = string;
 
 export interface Candidate {
   id: CandidateId;
-  name: string;
+  firstName: string;
   lastName: string;
   email: string;
 }

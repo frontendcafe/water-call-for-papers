@@ -2,6 +2,6 @@ export type OrganizerId = string;
 
 export interface Organizer {
   id: OrganizerId;
-  name: string;
+  fullName: string;
   email: string;
 }

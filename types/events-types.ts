@@ -3,12 +3,12 @@ import { OrganizerId } from "./organizers-types";
 export enum EventType {
   Presencial = "Presencial",
   Virtual = "Virtual",
-  Hibrido = "Hibrido",
+  Hibrido = "Híbrido",
 }
 
 export enum EventStatus {
   Borrador = "Borrador",
-  NoSeTomanMasPropuestas = "No se toman mas propuestas",
+  NoSeTomanMasPropuestas = "No se toman más propuestas",
   EnCurso = "En curso",
   Finalizado = "Finalizado",
 }
