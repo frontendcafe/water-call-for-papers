@@ -1,6 +1,7 @@
 interface InputFileProps {
   label: string;
   placeholder: string;
+  tabIndex: number;
 }
 
 /**
@@ -8,6 +9,7 @@ interface InputFileProps {
  */
 
 export const InputFile = ({
+  tabIndex,
   label,
   placeholder,
 }: InputFileProps) => {
@@ -17,6 +19,8 @@ export const InputFile = ({
         {label}
       </label>
       <label
+        tabIndex={tabIndex}
+        onKeyDown={(e: any) => e.key === 'Enter' && e.target.click()}
         className="flex justify-center items-center font-bold text-base pt-4 pb-4 bg-gray-500 text-gray-600 rounded"
         htmlFor="file"
       >

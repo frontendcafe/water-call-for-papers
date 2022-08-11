@@ -13,6 +13,7 @@ const Template: ComponentStory<typeof InputFile> = (args) => (
 export const InputFileDefault = Template.bind({});
 
 InputFileDefault.args = {
+  tabIndex: 1,
   label: "Banner del evento",
   placeholder: "Cargar imagen",
 };
