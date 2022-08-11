@@ -23,3 +23,11 @@ SecondaryTag.args = {
   label: "UI/UX Design",
   secondary: true,
 };
+
+export const SmallTag = Template.bind({});
+
+SmallTag.args = {
+  label: "Programación",
+  primary: true,
+  size: "sm",
+};
