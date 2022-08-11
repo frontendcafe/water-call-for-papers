@@ -20,7 +20,7 @@ PrimaryTag.args = {
 export const SecondaryTag = Template.bind({});
 
 SecondaryTag.args = {
-  label: "UI/UX Design",
+  label: "Diseño UX",
   secondary: true,
 };
 
@@ -30,4 +30,20 @@ SmallTag.args = {
   label: "Programación",
   primary: true,
   size: "sm",
+};
+
+export const MediumTag = Template.bind({});
+
+MediumTag.args = {
+  label: "Diseño UX",
+  primary: true,
+  size: "md",
+};
+
+export const LargeTag = Template.bind({});
+
+LargeTag.args = {
+  label: "UX Writing",
+  primary: true,
+  size: "lg",
 };

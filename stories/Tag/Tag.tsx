@@ -10,9 +10,9 @@ interface TagProps {
 export const Tag = ({ label, ...props }: TagProps) => {
   const primaryStyle = props.primary && "bg-blue-400";
   const secondaryStyle = props.secondary && "bg-emerald-400";
-  const smallSize = props.size === "sm" && "text-sm py-px px-1";
-  const MediumSize = props.size === "md" && "text-base py-px px-1";
-  const LargeSize = props.size === "lg" && "text-lg py-px px-1";
+  const smallSize = props.size === "sm" && "text-sm";
+  const MediumSize = props.size === "md" && "text-base";
+  const LargeSize = props.size === "lg" && "text-lg";
 
   return (
     <div
