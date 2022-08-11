@@ -8,6 +8,7 @@ interface InputTextProps {
   description?: string;
   placeholder?: string;
   value: string;
+  idValue: string;
   error?: string;
   pathIcon?: string;
   visible?: boolean;
@@ -37,6 +38,7 @@ export const InputText = ({
   label,
   placeholder,
   value,
+  idValue,
   description,
   error,
   icon,
@@ -59,13 +61,21 @@ export const InputText = ({
 
   return (
     <div className="flex flex-col">
-      {visible && (
-        <label className="text-sm font-semibold text-gray-800">{label}</label>
+      <label
+        htmlFor={idValue}
+        className={`text-sm font-semibold text-gray-800 ${
+          visible ? "block" : "hidden"
+        }`}
+      >
+        {label}
+      </label>
+      {description ?? (
+        <p className="text-xs leading-6 text-gray-400">{description}</p>
       )}
-      <p className="text-xs leading-6 text-gray-400">{description}</p>
       <input
         type="text"
         placeholder={placeholder}
+        id={idValue}
         value={value}
         className={`px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 ${positionWithIcon} ${withError} ${withDisabled}`}
         disabled={disabled}
