@@ -1,18 +1,17 @@
 interface TagProps {
   label: string;
-  primary: boolean;
-  secondary: boolean;
-  hidden: boolean;
-  size: string;
+  hidden?: boolean | undefined;
+  size?: string | undefined;
+  style: string;
 }
 
 export const Tag = ({ label, ...props }: TagProps) => {
-  const primaryStyle = props.primary && "bg-blue-400";
-  const secondaryStyle = props.secondary && "bg-emerald-400";
   const smallSize = props.size === "sm" && "text-sm";
   const mediumSize = props.size === "md" && "text-base";
   const largeSize = props.size === "lg" && "text-lg";
   const hidden = props.hidden && "opacity-0";
+  const primaryStyle = props.style === "primary" && "bg-blue-400";
+  const secondaryStyle = props.style === "secondary" && "bg-emerald-400";
 
   return (
     <div
