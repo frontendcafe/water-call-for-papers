@@ -27,4 +27,5 @@ export interface TalkProposal {
   streamed: boolean;
   topics: TopicId[];
   proponents: CandidateId[];
+  uniqueCode: string;
 }

@@ -11,6 +11,7 @@ export const talks: TalkProposal[] = [
     streamed: true,
     topics: ["4000003"],
     proponents: ["3000003"],
+    uniqueCode: "c7af5da6-bfc9-4770-ac98-58c8c1656459",
   },
   {
     id: "5000002",
@@ -22,6 +23,7 @@ export const talks: TalkProposal[] = [
     streamed: true,
     topics: ["4000004"],
     proponents: ["3000001"],
+    uniqueCode: "2e0ecb24-f575-4d5f-ba66-7e8eac4709b6",
   },
   {
     id: "5000003",
@@ -33,6 +35,7 @@ export const talks: TalkProposal[] = [
     streamed: false,
     topics: ["4000001"],
     proponents: ["3000002"],
+    uniqueCode: "d1e8eb70-14fe-481f-b11b-346d2c2a877c",
   },
   {
     id: "5000004",
@@ -44,5 +47,6 @@ export const talks: TalkProposal[] = [
     streamed: true,
     topics: ["4000002"],
     proponents: ["3000004"],
+    uniqueCode: "09b99ce4-2e5f-4bd5-bac2-fd6a5d6c9aaf",
   },
 ];
