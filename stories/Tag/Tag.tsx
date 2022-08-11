@@ -8,5 +8,13 @@ interface TagProps {
 }
 
 export const Tag = ({ label, ...props }: TagProps) => {
-  return <div>{label}</div>;
+  return (
+    <div
+      className={`${props.primary && "bg-blue-400"} ${
+        props.secondary && "bg-emerald-400"
+      }  p-1.5 rounded-full w-1/5 text-center`}
+    >
+      {label}
+    </div>
+  );
 };

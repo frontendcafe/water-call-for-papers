@@ -16,3 +16,10 @@ PrimaryTag.args = {
   label: "Programación",
   primary: true,
 };
+
+export const SecondaryTag = Template.bind({});
+
+SecondaryTag.args = {
+  label: "UI/UX Design",
+  secondary: true,
+};
