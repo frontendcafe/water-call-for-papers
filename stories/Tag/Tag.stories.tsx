@@ -15,5 +15,4 @@ export const PrimaryTag = Template.bind({});
 PrimaryTag.args = {
   label: "Programación",
   primary: true,
-  size: "lg",
 };
