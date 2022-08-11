@@ -1,4 +1,5 @@
 import { OrganizerId } from "./organizers-types";
+import { TalkProposalId } from "./talk-types";
 
 export enum EventType {
   Presencial = "Presencial",
@@ -18,7 +19,7 @@ export interface Event {
   name: string;
   type: EventType;
   description: string;
-  talks: [];
+  talks: TalkProposalId[];
   startingDate: Date;
   endDate: Date;
   bannerUrl: string;
