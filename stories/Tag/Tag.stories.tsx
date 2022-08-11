@@ -47,3 +47,12 @@ LargeTag.args = {
   primary: true,
   size: "lg",
 };
+
+export const HiddenTag = Template.bind({});
+
+HiddenTag.args = {
+  label: "UX Writing",
+  primary: true,
+  size: "lg",
+  hidden: true,
+};
