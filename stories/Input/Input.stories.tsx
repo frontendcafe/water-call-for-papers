@@ -47,3 +47,18 @@ InputWithError.args = {
   error: "This is an error",
   visible: true,
 };
+
+/**
+ * InputText with Error Template
+ */
+export const InputWithIcon = Template.bind({});
+
+InputWithIcon.args = {
+  label: "Label Name",
+  placeholder: "Text your text here ...",
+  pathIcon: "",
+  otherPathIcon: "",
+  colorIcon: "",
+  position: "left",
+  visible: true,
+};
