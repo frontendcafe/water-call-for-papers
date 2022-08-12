@@ -15,3 +15,11 @@ const firebaseConfig: FirebaseOptions = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+export const firebaseCollections = {
+  events: "events",
+  candidates: "candidates",
+  organizers: "organizers",
+  topics: "topics",
+  talks: "talks",
+};
