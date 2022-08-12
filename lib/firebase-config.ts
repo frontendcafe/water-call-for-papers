@@ -1,6 +1,6 @@
-import { initializeApp, FirebaseOptions, FirebaseApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { FirebaseOptions, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { collection, getFirestore } from "firebase/firestore";
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -15,3 +15,9 @@ const firebaseConfig: FirebaseOptions = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+export const candidatesRef = collection(db, firebaseCollections.candidates);
+export const eventsRef = collection(db, firebaseCollections.events);
+export const organizersRef = collection(db, firebaseCollections.organizers);
+export const talksRef = collection(db, firebaseCollections.talks);
+export const topicsRef = collection(db, firebaseCollections.topics);
