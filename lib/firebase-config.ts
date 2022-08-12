@@ -16,6 +16,14 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
+export const firebaseCollections = {
+  events: "events",
+  candidates: "candidates",
+  organizers: "organizers",
+  topics: "topics",
+  talks: "talks",
+};
+
 export const candidatesRef = collection(db, firebaseCollections.candidates);
 export const eventsRef = collection(db, firebaseCollections.events);
 export const organizersRef = collection(db, firebaseCollections.organizers);
