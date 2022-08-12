@@ -1,8 +1,8 @@
 interface TagProps {
   label: string;
   hidden?: boolean | undefined;
-  size?: string | undefined;
-  style: string;
+  size?: "sm" | "md" | "lg";
+  style: "primary" | "secondary";
 }
 
 export const Tag = ({ label, ...props }: TagProps) => {
