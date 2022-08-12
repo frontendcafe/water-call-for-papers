@@ -1,4 +1,4 @@
-import { OrganizerId } from "./organizers-types";
+import { OrganizerId, Organizer } from "./organizers-types";
 import { TalkProposalId } from "./talk-types";
 
 export enum EventType {
@@ -24,7 +24,7 @@ export interface Event {
   endDate: Date;
   bannerUrl: string;
   location: string;
-  organizers: OrganizerId[];
+  organizers: Organizer[];
   status: EventStatus;
   proposalsStartingDate: Date;
   proposalsEndDate: Date;
