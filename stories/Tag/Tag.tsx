@@ -5,22 +5,28 @@ interface TagProps {
   style: "primary" | "secondary";
 }
 
-export const Tag = ({ label, ...props }: TagProps) => {
-  const defaultStyle = "bg-blue-400";
-  const smallSize = props.size === "sm" ? "text-sm" : "";
-  const mediumSize = props.size === "md" ? "text-base" : "";
-  const largeSize = props.size === "lg" ? "text-lg" : "";
-  const hidden = props.hidden ? "opacity-0" : "opacity-100";
-  const primaryStyle = props.style === "primary" ? "bg-blue-400" : "";
-  const secondaryStyle = props.style === "secondary" ? "bg-emerald-400" : "";
+const styleList = {
+  primary: "bg-blue-400",
+  secondary: "bg-emerald-400",
+  sm: "text-sm",
+  md: "text-base",
+  lg: "text-lg",
+};
+
+export const Tag = ({
+  label,
+  size = "md",
+  style = "primary",
+  hidden,
+}: TagProps) => {
+  const styleColorClass = styleList[style];
+  const styleSizeClass = styleList[size];
 
   return (
     <div
-      className={`${defaultStyle} ${primaryStyle}} ${secondaryStyle} ${smallSize} ${mediumSize} ${largeSize} ${hidden} py-1.5 px-8 rounded-full text-center max-w-max`}
+      className={`${styleColorClass} ${styleSizeClass} py-1.5 px-8 rounded-full text-center max-w-max`}
     >
       <label>{label}</label>
     </div>
   );
 };
-
-// <Tag />
