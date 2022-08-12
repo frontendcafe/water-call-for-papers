@@ -1,8 +1,8 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { db, firebaseCollections } from "../../lib/firebase-config";
-import { Event } from "../../types/events-types";
-import { timestamp } from "../../lib/utils";
-import { Organizer } from "../../types/organizers-types";
+import { db, firebaseCollections } from "../lib/firebase-config";
+import { Event } from "../types/events-types";
+import { timestamp } from "../lib/utils";
+import { Organizer } from "../types/organizers-types";
 
 export async function getAllEvents(): Promise<Event[]> {
   // get all events

@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
-import { db, firebaseCollections } from "../../lib/firebase-config";
-import { Organizer } from "../../types/organizers-types";
+import { db, firebaseCollections } from "../lib/firebase-config";
+import { Organizer } from "../types/organizers-types";
 
 export async function getAllOrganizer(): Promise<Organizer[]> {
   // get all events
