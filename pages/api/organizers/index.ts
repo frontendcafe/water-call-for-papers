@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getAllOrganizer } from "../../../services/organizerServices";
+import { getAllOrganizer } from "../../../services/organizers";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Event } from "../../../types/events-types";
 import { Error } from "../../../types/others";
-import { getAllEvents } from "../../../services/eventService";
+import { getAllEvents } from "../../../services/events";
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,7 +20,6 @@ export default async function handler(
         });
       }
       break;
-
     default:
       break;
   }
