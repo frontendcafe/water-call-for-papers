@@ -16,7 +16,7 @@ export const Tag = ({ label, ...props }: TagProps) => {
 
   return (
     <div
-      className={`${defaultStyle} ${primaryStyle}} ${secondaryStyle} ${smallSize} ${mediumSize} ${largeSize} ${hidden} p-1.5 rounded-full text-center`}
+      className={`${defaultStyle} ${primaryStyle}} ${secondaryStyle} ${smallSize} ${mediumSize} ${largeSize} ${hidden} py-1.5 px-8 rounded-full text-center max-w-max`}
     >
       <label>{label}</label>
     </div>
