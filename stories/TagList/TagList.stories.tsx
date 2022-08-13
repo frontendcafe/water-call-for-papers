@@ -15,11 +15,10 @@ const Template: ComponentStory<typeof TagList> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  // Shaping the stories through args composition.
-  // The data was inherited from the Default story in Tag.stories.js.
+  // Datos heredados de la historia PrimaryTag en Tag.stories.tsx
   tags: [
-    { ...TagStories.PrimaryTag.args, label: "Ux Writing", style: "primary" },
+    { ...TagStories.PrimaryTag.args, label: "Ux Writing" },
     { ...TagStories.PrimaryTag.args, label: "Diseño UI", style: "secondary" },
-    { ...TagStories.PrimaryTag.args, label: "Programación", style: "primary" },
+    { ...TagStories.PrimaryTag.args, label: "Programación" },
   ],
 };

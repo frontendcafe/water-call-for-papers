@@ -4,7 +4,7 @@ interface TagListProps {
   tags: Array<{
     label: string;
     size?: "sm" | "md" | "lg";
-    style: "primary" | "secondary";
+    style?: "primary" | "secondary";
   }>;
 }
 
