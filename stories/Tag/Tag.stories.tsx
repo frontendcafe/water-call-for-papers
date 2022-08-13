@@ -21,7 +21,6 @@ export const PrimaryTag = Template.bind({});
 PrimaryTag.args = {
   label: "Programación",
   style: "primary",
-  hidden: false,
   size: "lg",
 };
 
@@ -54,13 +53,4 @@ LargeTag.args = {
   label: "UX Writing",
   style: "secondary",
   size: "lg",
-};
-
-export const HiddenTag = Template.bind({});
-
-HiddenTag.args = {
-  label: "UX Writing",
-  style: "secondary",
-  size: "lg",
-  hidden: true,
 };

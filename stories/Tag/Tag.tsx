@@ -1,6 +1,5 @@
 interface TagProps {
   label: string;
-  hidden?: boolean;
   size?: "sm" | "md" | "lg";
   style: "primary" | "secondary";
 }
@@ -13,12 +12,7 @@ const styleList = {
   lg: "text-lg",
 };
 
-export const Tag = ({
-  label,
-  size = "md",
-  style = "primary",
-  hidden,
-}: TagProps) => {
+export const Tag = ({ label, size = "md", style = "primary" }: TagProps) => {
   const styleColorClass = styleList[style];
   const styleSizeClass = styleList[size];
 
