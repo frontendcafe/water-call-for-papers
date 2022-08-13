@@ -45,25 +45,10 @@ interface ButtonProps {
    * Click handler required for the button.
    */
   onClickHandler: (event: MouseEvent<HTMLButtonElement>) => void;
-
-  children?: React.ReactNode;
-
-  // TODO: These two are only for the storybook. Remove it when we have a proper styles for it.
-  /**
-   * Button background color
-   */
-  backgroundColor?: string;
-  /**
-   * Button text color
-   */
-  color?: string;
 }
 
 export const Button = ({
   ariaLabel,
-  backgroundColor,
-  children,
-  color,
   disabled,
   icon,
   label,
@@ -110,13 +95,12 @@ export const Button = ({
       aria-label={ariaLabel}
       className={` align-middle font-medium ${borderRadius[rounded]} ${focusStyles} ${mode[variant]} ${button[size]} ${disabledStyles}`}
       disabled={loading || disabled}
-      style={{ backgroundColor, color }}
       type={type}
       onClick={onClickHandler}
       {...props}
     >
       {icon}
-      {label ? <span className="mx-1 align-middle">{label}</span> : children}
+      {label && <span className="mx-1 align-middle">{label}</span>}
       {rightIcon}
     </button>
   );
