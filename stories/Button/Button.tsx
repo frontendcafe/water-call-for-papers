@@ -2,47 +2,47 @@ import { MouseEvent } from "react";
 
 interface ButtonProps {
   /**
-   * Estilos de botón.
+   * Button styles.
    */
   variant?: "primary" | "secondary" | "outlined" | "icon";
   /**
-   * Tamaño del botón
+   * Button sizes.
    */
   size?: "small" | "medium" | "large" | "stretched";
   /**
-   * Label requerida para describir el botón.
+   * Required aria-label to describe the button.
    */
   ariaLabel: string;
   /**
-   * Label opcional para describiendo el botón.
+   * Opcional label to describe the button.
    */
   label?: string;
   /**
-   * Indica que el botón esta deshabilitad, esto previene que se pueda hacer click en el botón.
+   * Indicates that the button is disabled, this prevents the button from being clickable.
    */
   disabled?: boolean;
   /**
-   * Indica que el botón esta cargando, esto previene que se pueda hacer click en el botón.
+   * Indicates that the button is in a loading state, this prevents the button from being clickable.
    */
   loading?: boolean;
   /**
-   * Tipo de botón, en este caso por defecto es "button".
+   * Button type, in *this case* by default is "type='button'".
    */
   type: "submit" | "reset" | "button";
   /**
-   * El icono para mostrar en el botón. Por defecto se muestra a la izquierda del texto (si este existe).
+   * The icon to display on the button. By default it is displayed to the left of the text (if it exists).
    */
   icon?: React.ReactNode;
   /**
-   * El icono para mostrar en el botón. Por defecto se muestra a la derecha del texto (si este existe).
+   * The icon to display on the button. By default it is displayed to the right of the text (if it exists).
    */
   rightIcon?: React.ReactNode;
   /**
-   * Borde redondeado del botón. Por defecto es "md".
+   * Button rounded corners. Default is "base".
    */
   rounded?: "base" | "md" | "lg";
   /**
-   * Click handler requerido para el botón
+   * Click handler required for the button.
    */
   onClickHandler: (event: MouseEvent<HTMLButtonElement>) => void;
 
@@ -50,11 +50,11 @@ interface ButtonProps {
 
   // TODO: These two are only for the storybook. Remove it when we have a proper styles for it.
   /**
-   * Color de fondo de botón
+   * Button background color
    */
   backgroundColor?: string;
   /**
-   * Color de texto de botón
+   * Button text color
    */
   color?: string;
 }
