@@ -1,18 +1,27 @@
 interface InputFileProps {
+  /**
+   * The label to display above the input.
+   */
   label: string;
+  /**
+   * Text to display in the input.
+   */
   placeholder: string;
+  /**
+   * The index of the element when pressing tab
+   */
   tabIndex: number;
+  /**
+   * The extend of the properties of the HTMLInputElement
+   */
+  props?: HTMLInputElement;
 }
 
 /**
  * Input File Default
  */
 
-export const InputFile = ({
-  tabIndex,
-  label,
-  placeholder,
-}: InputFileProps) => {
+export const InputFile = ({ tabIndex, label, placeholder }: InputFileProps) => {
   return (
     <div className="flex flex-col">
       <label className="font-semibold text-sm text-gray-600" htmlFor="file">
@@ -20,7 +29,7 @@ export const InputFile = ({
       </label>
       <label
         tabIndex={tabIndex}
-        onKeyDown={(e: any) => e.key === 'Enter' && e.target.click()}
+        onKeyDown={(e: any) => e.key === "Enter" && e.target.click()}
         className="flex justify-center items-center font-bold text-base pt-4 pb-4 bg-gray-500 text-gray-600 rounded"
         htmlFor="file"
       >
