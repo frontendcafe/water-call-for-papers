@@ -1,6 +1,6 @@
-import { MouseEvent } from "react";
+import { ButtonHTMLAttributes, MouseEvent } from "react";
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button styles.
    */
@@ -14,10 +14,6 @@ interface ButtonProps {
    */
   ariaLabel: string;
   /**
-   * Opcional label to describe the button.
-   */
-  label?: string;
-  /**
    * Indicates that the button is disabled, this prevents the button from being clickable.
    */
   disabled?: boolean;
@@ -25,10 +21,6 @@ interface ButtonProps {
    * Indicates that the button is in a loading state, this prevents the button from being clickable.
    */
   loading?: boolean;
-  /**
-   * Button type, in *this case* by default is "type='button'".
-   */
-  type: "submit" | "reset" | "button";
   /**
    * The icon to display on the button. By default it is displayed to the left of the text (if it exists).
    */
@@ -45,19 +37,20 @@ interface ButtonProps {
    * Click handler required for the button.
    */
   onClickHandler: (event: MouseEvent<HTMLButtonElement>) => void;
+
+  children?: React.ReactNode;
 }
 
 export const Button = ({
   ariaLabel,
+  children,
   disabled,
   icon,
-  label,
   loading,
   onClickHandler,
   rightIcon,
   rounded = "base",
   size = "medium",
-  type = "button",
   variant = "primary",
   ...props
 }: ButtonProps) => {
@@ -76,9 +69,8 @@ export const Button = ({
     stretched: "w-full px-6 py-3 text-base",
   };
 
-  const disabledStyles = disabled
-    ? "disabled:cursor-not-allowed disabled:bg-[#b3b8c0] disabled:text-[#FFFFFF]"
-    : "";
+  const disabledStyles =
+    "disabled:cursor-not-allowed disabled:bg-[#b3b8c0] disabled:text-[#FFFFFF]";
 
   const focusStyles =
     "focus:outline-2 focus:outline-offset-2 focus:outline-dashed focus:outline-neutral-400";
@@ -93,14 +85,13 @@ export const Button = ({
     <button
       aria-disabled={loading || disabled}
       aria-label={ariaLabel}
-      className={` align-middle font-medium ${borderRadius[rounded]} ${focusStyles} ${mode[variant]} ${button[size]} ${disabledStyles}`}
+      className={`align-middle font-medium ${borderRadius[rounded]} ${focusStyles} ${mode[variant]} ${button[size]} ${disabledStyles}`}
       disabled={loading || disabled}
-      type={type}
       onClick={onClickHandler}
       {...props}
     >
       {icon}
-      {label && <span className="mx-1 align-middle">{label}</span>}
+      {children && <span className="mx-1 align-middle">{children}</span>}
       {rightIcon}
     </button>
   );

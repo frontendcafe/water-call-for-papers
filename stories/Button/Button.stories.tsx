@@ -8,7 +8,15 @@ export default {
   component: Button,
   // More info about argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    backgroundColor: { control: "color" },
+    children: {
+      control: "text",
+    },
+  },
+  // More info about args: https://storybook.js.org/docs/react/writing-stories/args#component-args
+  args: {
+    children: "Button",
+    loading: false,
+    disabled: false,
   },
 } as ComponentMeta<typeof Button>;
 
@@ -17,57 +25,49 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 // More info about args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-  label: "Button",
-};
+Primary.args = {};
 
 export const Secondary = Template.bind({});
 
 Secondary.args = {
   variant: "secondary",
-  label: "Button",
 };
 
 export const Outlined = Template.bind({});
 Outlined.args = {
   variant: "outlined",
-  label: "Button",
 };
 
 export const Small = Template.bind({});
 Small.args = {
   size: "small",
-  label: "Button",
 };
 
 export const Medium = Template.bind({});
 Medium.args = {
   size: "medium",
-  label: "Button",
 };
 
 export const Large = Template.bind({});
 Large.args = {
   size: "large",
-  label: "Button",
 };
 
 export const Stretched = Template.bind({});
 Stretched.args = {
   size: "stretched",
-  label: "Button",
 };
 
 export const Loading = Template.bind({});
 Loading.args = {
-  label: "Loading...",
+  children: "Loading...",
   loading: true,
   rightIcon: "🦄",
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  label: "Disabled",
+  children: "Disabled",
   disabled: true,
 };
 
@@ -80,13 +80,11 @@ OnlyIcon.args = {
 
 export const LeftIcon = Template.bind({});
 LeftIcon.args = {
-  label: "Label",
   icon: "🦄",
 };
 
 export const RightIcon = Template.bind({});
 RightIcon.args = {
-  label: "Label",
   rightIcon: "🦄",
 };
 
