@@ -5,6 +5,11 @@ import { Tag } from "./Tag";
 export default {
   title: "Example/Tag", // Title for our storybook
   component: Tag, // Component to render
+  args: {
+    //Todas las historias para el componente tag
+    //tendran un estilo secundario por defecto
+    style: "secondary",
+  },
 } as ComponentMeta<typeof Tag>;
 
 //👇 We create a “template” of how args map to rendering
@@ -28,14 +33,12 @@ export const SecondaryTag = Template.bind({});
 
 SecondaryTag.args = {
   label: "Diseño UX",
-  style: "secondary",
 };
 
 export const SmallTag = Template.bind({});
 
 SmallTag.args = {
   label: "Programación",
-  style: "secondary",
   size: "sm",
 };
 
@@ -43,7 +46,6 @@ export const MediumTag = Template.bind({});
 
 MediumTag.args = {
   label: "Diseño UX",
-  style: "secondary",
   size: "md",
 };
 
@@ -51,6 +53,5 @@ export const LargeTag = Template.bind({});
 
 LargeTag.args = {
   label: "UX Writing",
-  style: "secondary",
   size: "lg",
 };
