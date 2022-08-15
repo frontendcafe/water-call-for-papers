@@ -83,7 +83,6 @@ export const Button = ({
 
   return (
     <button
-      aria-disabled={loading || disabled}
       aria-label={ariaLabel}
       className={`align-middle font-medium ${borderRadius[rounded]} ${focusStyles} ${mode[variant]} ${button[size]} ${disabledStyles}`}
       disabled={loading || disabled}
