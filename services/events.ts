@@ -1,21 +1,22 @@
-import { doc, getDoc } from "firebase/firestore";
-import { eventsRef, organizersRef, talksRef } from "../lib/firebase-config";
+import { doc, DocumentData, getDoc } from "firebase/firestore";
+import { collectionsRef } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { OrganizerId } from "../types/organizers-types";
 import { TalkProposalId } from "../types/talk-types";
 
 export const getEvent = async (id: string) => {
-  const eventSnap = await getDoc(doc(eventsRef, id));
+  const eventSnap = await getDoc(doc(collectionsRef.events, id));
 
   // TODO: Add error handling
   if (!eventSnap.exists()) return { error: "El evento no existe!" };
 
-  const organizersIds: OrganizerId[] = eventSnap.data().organizers;
-  const talksIds: TalkProposalId[] = eventSnap.data().talks;
-  const event = eventSnap.data();
+  let event = eventSnap.data();
+  const organizersIds: OrganizerId[] = event.organizers;
+  const talksIds: TalkProposalId[] = event.talks;
 
-  event.organizers = await getDocById(organizersIds, organizersRef);
-  event.talks = await getDocById(talksIds, talksRef);
+  event.organizers = await getDocById(organizersIds, collectionsRef.organizers);
+  event.talks = await getDocById(talksIds, collectionsRef.talks);
+  event = (await getDocById(id, collectionsRef.events)) as DocumentData;
 
   return event;
 };
