@@ -5,7 +5,7 @@ import { getAllEvents } from "../../../services/events";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Event[] | Error>
+  res: NextApiResponse<Event[] | Error | any>
 ) {
   const { method } = req;
   switch (method) {
