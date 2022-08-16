@@ -1,11 +1,12 @@
 import React from "react";
+import { ErrorIcon } from "../Icons/ErrorIcon";
 
 interface TextAreaProps {
   // Button content
   label: string;
 
   // Label visibility, optional.
-  visible?: boolean;
+  isLabelVisible?: boolean;
 
   // Element description, optional.
   description?: string;
@@ -40,7 +41,7 @@ interface TextAreaProps {
 
 export const TextArea = ({
   label,
-  visible,
+  isLabelVisible,
   description,
   maxLength,
   placeholder,
@@ -54,39 +55,58 @@ export const TextArea = ({
 }: TextAreaProps) => {
   // Conditionally apply specific border depending if there is an error.
   const withError = error
-    ? "border-red-400 focus:border-red-400"
+    ? "border-red-400/80 focus:border-red-400"
     : "border-gray-500";
 
   // Conditionally apply display value depending if there is a description.
-  const visibility = visible ? "block" : "hidden";
+  const labelVisibility = isLabelVisible ? "block" : "sr-only";
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 text-[#667080]">
       <label
-        className={`text-sm font-semibold ${visibility}`}
+        className={`text-sm font-semibold  ${labelVisibility} `}
         htmlFor={idValue}
       >
         {label}
       </label>
 
-      <p className={`text-xs`}>{description}</p>
+      {description && <p className={`text-xs`}>{description}</p>}
 
       <textarea
-        className={`text-base border-2 p-3 rounded-lg active:bg-slate-100 focus:border-red-400 disabled:bg-slate-200/50 ${withError}`}
+        className={`text-base border-2 p-3 rounded-lg active:bg-slate-100 disabled:bg-slate-200/50 ${withError}`}
         id={idValue}
         name={idValue}
         maxLength={maxLength}
         placeholder={placeholder}
-        value={error || value}
+        value={value}
         disabled={disabled}
         required={required}
         rows={rows}
         cols={columns}
       />
 
-      <label className="text-xs text-right text">
-        Máx {maxLength} caracteres.
-      </label>
+      {/* If there is an error or maxLength, the div elemet will be rendered. */}
+      {error || maxLength ? (
+        <div
+          // Dependign if there is an error, apply different property value.
+          className={`flex ${
+            error ? "justify-between" : "justify-end"
+          } text-xs`}
+        >
+          {/* If error evaluated to true, display it. */}
+          {error && (
+            <div className="flex gap-1.5">
+              <ErrorIcon />
+              <p>Este campo es requerido.</p>
+            </div>
+          )}
+
+          {/* If maxLength evaluated to true, display it. */}
+          {maxLength && <span>Máx {maxLength} caracteres.</span>}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
