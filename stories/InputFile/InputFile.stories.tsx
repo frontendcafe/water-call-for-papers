@@ -13,7 +13,14 @@ const Template: ComponentStory<typeof InputFile> = (args) => (
 export const InputFileDefault = Template.bind({});
 
 InputFileDefault.args = {
-  tabIndex: 1,
+  label: "Banner del evento",
+  placeholder: "Cargar imagen",
+  description: "1500 x 600. Max. 5MB",
+};
+
+export const InputFileWithoutDescription = Template.bind({});
+
+InputFileWithoutDescription.args = {
   label: "Banner del evento",
   placeholder: "Cargar imagen",
 };
