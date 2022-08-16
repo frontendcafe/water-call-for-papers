@@ -13,12 +13,9 @@ const styleList = {
 };
 
 export const Tag = ({ label, size = "md", style = "primary" }: TagProps) => {
-  const styleColorClass = styleList[style];
-  const styleSizeClass = styleList[size];
-
   return (
     <div
-      className={`${styleColorClass} ${styleSizeClass} py-1.5 px-8 rounded-full text-center max-w-max`}
+      className={`${styleList[style]} ${styleList[size]} py-1.5 px-8 rounded-full text-center max-w-max`}
     >
       <span>{label}</span>
     </div>
