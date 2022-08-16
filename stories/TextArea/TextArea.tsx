@@ -86,7 +86,7 @@ export const TextArea = ({
       />
 
       {/* If there is an error or maxLength, the div elemet will be rendered. */}
-      {error || maxLength ? (
+      {(error || maxLength) && (
         <div
           // Dependign if there is an error, apply different property value.
           className={`flex ${
@@ -97,15 +97,13 @@ export const TextArea = ({
           {error && (
             <div className="flex gap-1.5">
               <ErrorIcon />
-              <p>Este campo es requerido.</p>
+              <p>{error}</p>
             </div>
           )}
 
           {/* If maxLength evaluated to true, display it. */}
           {maxLength && <span>Máx {maxLength} caracteres.</span>}
         </div>
-      ) : (
-        ""
       )}
     </div>
   );
