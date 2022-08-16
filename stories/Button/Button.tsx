@@ -1,18 +1,14 @@
-import { ButtonHTMLAttributes, MouseEvent } from "react";
+import React, { ButtonHTMLAttributes, MouseEvent } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button styles.
    */
-  variant?: "primary" | "secondary" | "outlined" | "icon";
+  variant?: "primary" | "secondary" | "transparent";
   /**
    * Button sizes.
    */
   size?: "small" | "medium" | "large" | "stretched";
-  /**
-   * Required aria-label to describe the button.
-   */
-  ariaLabel: string;
   /**
    * Indicates that the button is disabled, this prevents the button from being clickable.
    */
@@ -22,76 +18,90 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
    */
   loading?: boolean;
   /**
-   * The icon to display on the button. By default it is displayed to the left of the text (if it exists).
+   * Button rounded corners. Default is "md".
    */
-  icon?: React.ReactNode;
-  /**
-   * The icon to display on the button. By default it is displayed to the right of the text (if it exists).
-   */
-  rightIcon?: React.ReactNode;
-  /**
-   * Button rounded corners. Default is "base".
-   */
-  rounded?: "base" | "md" | "lg";
+  rounded?: "small" | "medium" | "full";
   /**
    * Click handler required for the button.
    */
-  onClickHandler: (event: MouseEvent<HTMLButtonElement>) => void;
-
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  /**
+   * Button text content or/and icon.
+   */
   children?: React.ReactNode;
+  /**
+   * Applies styles to the button to render a only an icon and hides the text content.
+   */
+  icon?: boolean;
 }
 
+/**
+ * A button that can be styled in a variety of ways.
+ * @param {React.ReactNode} children - The content of the button, can be text or icon, or both.
+ * @param {boolean} disabled - The disabled state of the button, this prevents the button from being clickable.
+ * @param {boolean} icon - The content of the button.
+ * @param {boolean} loading - Triggers the disabled state of the button, this prevents the button from being clickable.
+ * @param {function} onClick - The click handler for the button.
+ * @param {string} rounded - The rounded corners of the button, small, medium, or full (circle in icons).
+ * @param {string} size - The size of the button, can be small, medium, large, or stretched (takes all width of parent).
+ * @param {string} variant - The variant of the button, can be primary, secondary, or transparent.
+ */
 export const Button = ({
-  ariaLabel,
   children,
   disabled,
   icon,
   loading,
-  onClickHandler,
-  rightIcon,
-  rounded = "base",
+  onClick,
+  rounded = icon ? "full" : "small",
   size = "medium",
   variant = "primary",
   ...props
 }: ButtonProps) => {
   const mode = {
     primary: "bg-[#667080] text-[#FFFFFF] active:bg-[#5d6572]",
-    secondary: "bg-[#eef1f4] text-[#667080] active:bg-[#fff1f4]",
-    outlined:
+    secondary:
       "bg-transparent ring-1 ring-[#667080] text-[#667080] active:bg-[#F5F5F5]",
-    icon: "bg-transparent text-[#667080] py-1 px-2 active:bg-[#F5F5F5]",
+    transparent: "bg-transparent text-[#667080] active:bg-[#F5F5F5]",
   };
 
   const button = {
-    small: "px-4 py-2 text-xs",
-    medium: "px-5 py-2 text-sm",
-    large: "px-6 py-3 text-base",
-    stretched: "w-full px-6 py-3 text-base",
+    small: icon ? "p-1" : "text-xs px-6 py-2 ",
+    medium: icon ? "p-2" : "text-base px-8 py-2 ",
+    large: icon ? "p-4" : "text-lg px-12 py-2 ",
+    // TODO: Come back to this later.
+    stretched: icon ? "p-2 w-full" : "px-6 py-2 w-full",
   };
 
   const disabledStyles =
-    "disabled:cursor-not-allowed disabled:bg-[#b3b8c0] disabled:text-[#FFFFFF]";
+    "disabled:cursor-not-allowed disabled:bg-[#ADB2BA] disabled:text-[#FFFFFF]";
 
   const focusStyles =
-    "focus:outline-2 focus:outline-offset-2 focus:outline-dashed focus:outline-neutral-400";
+    "focus:outline-2 focus:ring-1 focus:ring-[#BAC0CA] focus:outline-offset-2 focus:outline-dashed focus:outline-neutral-400";
 
   const borderRadius = {
-    base: "rounded",
-    md: "rounded-md",
-    lg: "rounded-lg",
+    small: "rounded-md",
+    medium: "rounded-xl",
+    full: "rounded-full",
   };
+
+  const alignmentStyles = "inline-flex items-center justify-center gap-1";
 
   return (
     <button
-      aria-label={ariaLabel}
-      className={`align-middle font-medium ${borderRadius[rounded]} ${focusStyles} ${mode[variant]} ${button[size]} ${disabledStyles}`}
+      className={`${alignmentStyles} font-bold ${borderRadius[rounded]} ${focusStyles} ${mode[variant]} ${button[size]} ${disabledStyles}`}
       disabled={loading || disabled}
-      onClick={onClickHandler}
+      onClick={onClick}
       {...props}
     >
-      {icon}
-      {children && <span className="mx-1 align-middle">{children}</span>}
-      {rightIcon}
+      {React.Children.map(children, (child) =>
+        typeof child === "string" ? (
+          <span className={`${icon ? "sr-only" : ""} whitespace-nowrap`}>
+            {child}
+          </span>
+        ) : (
+          child
+        )
+      )}
     </button>
   );
 };

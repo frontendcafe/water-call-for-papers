@@ -15,8 +15,12 @@ export default {
   // More info about args: https://storybook.js.org/docs/react/writing-stories/args#component-args
   args: {
     children: "Button",
-    loading: false,
     disabled: false,
+    icon: false,
+    loading: false,
+    rounded: "small",
+    size: "medium",
+    variant: "primary",
   },
 } as ComponentMeta<typeof Button>;
 
@@ -33,9 +37,9 @@ Secondary.args = {
   variant: "secondary",
 };
 
-export const Outlined = Template.bind({});
-Outlined.args = {
-  variant: "outlined",
+export const Transparent = Template.bind({});
+Transparent.args = {
+  variant: "transparent",
 };
 
 export const Small = Template.bind({});
@@ -60,9 +64,8 @@ Stretched.args = {
 
 export const Loading = Template.bind({});
 Loading.args = {
-  children: "Loading...",
+  children: ["Loading...", "🦄"],
   loading: true,
-  rightIcon: "🦄",
 };
 
 export const Disabled = Template.bind({});
@@ -71,24 +74,31 @@ Disabled.args = {
   disabled: true,
 };
 
+export const IconWithText = Template.bind({});
+IconWithText.args = {
+  children: [<span>🦄</span>, "Button"],
+  rounded: "medium",
+};
+
 export const OnlyIcon = Template.bind({});
 OnlyIcon.args = {
-  ariaLabel: "Icon",
-  variant: "icon",
-  icon: "🦄",
+  children: ["Button", <span>🦄</span>],
+  icon: true,
+  rounded: "full",
 };
 
-export const LeftIcon = Template.bind({});
-LeftIcon.args = {
-  icon: "🦄",
+export const IconWithoutBackground = Template.bind({});
+IconWithoutBackground.args = {
+  children: ["Button", <span>🦄</span>],
+  icon: true,
+  rounded: "full",
+  variant: "transparent",
 };
 
-export const RightIcon = Template.bind({});
-RightIcon.args = {
-  rightIcon: "🦄",
+export const SquaredIconWithOutline = Template.bind({});
+SquaredIconWithOutline.args = {
+  children: ["Button", <span>🦄</span>],
+  icon: true,
+  rounded: "small",
+  variant: "secondary",
 };
-
-// export const Label = Template.bind({});
-// Label.args = {
-//   // FIXME: TypeScript must be complaining about the missing label or ariaLabel prop, but it's not.
-// };
