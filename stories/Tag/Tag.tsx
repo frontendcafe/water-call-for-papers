@@ -20,7 +20,7 @@ export const Tag = ({ label, size = "md", style = "primary" }: TagProps) => {
     <div
       className={`${styleColorClass} ${styleSizeClass} py-1.5 px-8 rounded-full text-center max-w-max`}
     >
-      <label>{label}</label>
+      <span>{label}</span>
     </div>
   );
 };
