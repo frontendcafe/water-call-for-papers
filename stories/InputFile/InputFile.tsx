@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, DragEvent } from "react";
 import ShiftBy from "../../utils/ShiftBy";
 
 interface InputFileProps {
@@ -35,18 +35,18 @@ export const InputFile = ({
   description,
 }: InputFileProps) => {
   const [dragActive, setDragActive] = useState(false);
-  const inputRef = useRef<any>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function handleFile(files: FileList) {
     alert("Numero de archivos: " + files.length);
   }
 
   const onButtonClick = () => {
-    inputRef.current.click();
+    inputRef.current?.click();
   };
 
   // handle drag events
-  const handleDrag = (e: any) => {
+  const handleDrag = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
     if (e.type === "dragenter" || e.type === "dragover") {
@@ -57,7 +57,7 @@ export const InputFile = ({
   };
 
   // triggers when file is dropped
-  const handleDrop = function (e: any) {
+  const handleDrop = function (e: DragEvent<HTMLDivElement>) {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
@@ -98,7 +98,9 @@ export const InputFile = ({
         <ShiftBy y={-2}>{placeholder}</ShiftBy>
         <input ref={inputRef} type="file" id="file" className="hidden" />
       </div>
-      {description && <p className={`font-normal text-xs text-gray-600`}>{description}</p>}
+      {description && (
+        <p className={`font-normal text-xs text-gray-600`}>{description}</p>
+      )}
     </div>
   );
 };
