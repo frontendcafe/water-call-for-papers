@@ -15,8 +15,6 @@ import {
   MenuAlt1Icon,
   PlusCircleIcon,
 } from "@heroicons/react/outline";
-import {} from "@heroicons/react/solid";
-import Home from "../../pages";
 
 const iconsSupported: Record<string, any> = {
   "arrow-right": <ArrowRightIcon className=" h-14 w-18 text-white" />,
