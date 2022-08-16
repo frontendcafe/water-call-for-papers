@@ -15,8 +15,8 @@ export const Primary = Template.bind({});
 
 Primary.args = {
   label: "Primary",
-  visible: true,
-  description: "I'm runing out of ideas",
+  isLabelVisible: false,
+  description: "I'm running out of ideas",
   idValue: "Primary",
   maxLength: 250,
   placeholder: "Another placeholder!",
@@ -27,7 +27,7 @@ export const MaxLengthTextArea = Template.bind({});
 
 MaxLengthTextArea.args = {
   label: "MaxLength",
-  visible: true,
+  isLabelVisible: true,
   idValue: "MaxLengthTextArea",
   maxLength: 200,
   placeholder: "Random label",
@@ -37,7 +37,7 @@ export const DisabledTextArea = Template.bind({});
 
 DisabledTextArea.args = {
   label: "Disabled",
-  visible: true,
+  isLabelVisible: true,
   idValue: "DisabledTextArea",
   maxLength: 200,
   placeholder:
@@ -51,7 +51,7 @@ export const ErrorTextArea = Template.bind({});
 
 ErrorTextArea.args = {
   label: "Text area with error",
-  visible: true,
+  isLabelVisible: true,
   idValue: "ErrorTextArea",
   maxLength: 180,
   value: "ErrorTextArea",
@@ -62,7 +62,7 @@ export const DescriptionTextArea = Template.bind({});
 
 DescriptionTextArea.args = {
   label: "Description",
-  visible: false,
+  isLabelVisible: false,
   idValue: "DescriptionTextArea",
   description: "This is a random description",
   maxLength: 190,
