@@ -4,14 +4,37 @@ interface InputTextProps {
   /**
    * Input Default Values
    */
+  /**
+   * Label Name.
+   */
   label: string;
+  /**
+   * Input with a litle description below tag label.
+   */
   description?: string;
+  /**
+   * Placeholder in tag input.
+   */
   placeholder?: string;
+  /**
+   * Value in tag input.
+   */
   value: string;
+  /**
+   * idValue relation between label and input (htmlFor).
+   */
   idValue: string;
+  /**
+   * Error text on input
+   */
   error?: string;
-  pathIcon?: string;
+  /**
+   * Label name visible option
+   */
   visible?: boolean;
+  /**
+   * Input required option
+   */
   required?: string;
 
   onClick?: () => void;
@@ -24,10 +47,7 @@ interface InputTextProps {
   /**
    * Optional Variables
    */
-  position?: string; // To position Icon to the right or left of the input
-  colorIcon?: string;
-  otherPathIcon?: string;
-  icon?: React.ReactNode;
+  position?: "left" | "right"; // To position Icon to the right or left of the input
 }
 
 /**
@@ -41,11 +61,7 @@ export const InputText = ({
   idValue,
   description,
   error,
-  icon,
   required,
-  pathIcon,
-  otherPathIcon,
-  colorIcon,
   position,
   disabled,
   visible,
@@ -53,20 +69,16 @@ export const InputText = ({
 }: InputTextProps) => {
   const positionIconText = position == "left" && "pl-8 pr-2 py-2";
 
-  const positionIcon = position == "left" ? `left-6` : `right-6`;
-
   const withError = error
     ? "border-red-400 focus:border-red-400"
     : "border-gray-500";
-
-  const withDisabled = disabled && "disabled:border-gray-200";
 
   return (
     <div className="flex flex-col">
       <label
         htmlFor={idValue}
         className={`text-sm font-semibold text-gray-800 ${
-          visible ? "block" : "hidden"
+          visible ? "not-sr-only" : "sr-only"
         }`}
       >
         {label}
@@ -79,36 +91,27 @@ export const InputText = ({
         placeholder={placeholder}
         id={idValue}
         value={value}
-        className={`px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 ${positionIconText} ${withError} ${withDisabled}`}
+        className={`px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 disabled:border-gray-200 ${positionIconText} ${withError}`}
         disabled={disabled}
         {...props}
       />
-      {pathIcon && (
-        <div
+      {/* Icon component goes here */}
+      {/* <div
           className={
             visible
-              ? `absolute top-[50px] ${positionIcon}`
-              : `absolute top-[30px] ${positionIcon}`
+              ? `absolute top-[50px] ${position}-6`
+              : `absolute top-[30px] ${position}-6`
           }
         >
-          <svg
-            fill="none"
-            stroke="currentColor"
-            className={`w-6 text-${colorIcon}`}
-            viewBox="0 0 24 24"
-          >
-            <path d={pathIcon}></path>
-            <path d={otherPathIcon}></path>
-          </svg>
-        </div>
+          Icon component goes here
+        </div> */}
+      {error && <p className="mt-2 text-xs text-red-500">{error}</p>}
+      {required && (
+        <p className="flex mt-2 text-xs text-gray-600">
+          <span className="mr-1">{/* Icon component goes here */}</span>
+          {required}
+        </p>
       )}
-      {(error && <p className="mt-2 text-xs text-red-500">{error}</p>) ||
-        (required && (
-          <p className="flex mt-2 text-xs text-gray-600">
-            <span className="mr-1">{icon}</span>
-            {required}
-          </p>
-        ))}
     </div>
   );
 };
