@@ -7,7 +7,7 @@ interface InputFileProps {
    */
   label: string;
   /**
-   * Para ocultar el texto del label para los usuarios pero no para los lectores de pantalla.
+   * To hide the label text for users but not for screen readers.
    */
   labelHidden?: boolean;
   /**
