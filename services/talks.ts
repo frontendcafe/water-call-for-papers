@@ -10,5 +10,12 @@ export const getTalksFromEvent = async (eventId: string) => {
 
   const { talks: talksIds } = eventSnap.data();
 
-  return await getDocById(talksIds, collectionsRef.talks);
+  const talks = (await getDocById(
+    talksIds,
+    collectionsRef.talks
+  )) as DocumentData[];
+
+  talks.forEach((talk) => delete talk.uniqueCode);
+
+  return talks;
 };
