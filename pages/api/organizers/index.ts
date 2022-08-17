@@ -12,13 +12,14 @@ export default async function handler(
         res.send(results);
       } catch (error) {
         res.status(400).json({
-          message: "disconnect db",
+          message: "error method",
           status: 400,
         });
       }
       break;
 
     default:
+      res.status(500).send("Method not allowed");
       break;
   }
 }

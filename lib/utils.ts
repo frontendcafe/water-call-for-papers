@@ -1,3 +1,3 @@
-export const timestamp = (date: any): Date => {
+export const formatFirebaseDate = (date: any): Date => {
   return new Date(date * 1000);
 };

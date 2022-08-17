@@ -24,7 +24,7 @@ export interface Event {
   endDate: Date;
   bannerUrl: string;
   location: string;
-  organizers: Organizer[];
+  organizers: OrganizerId[];
   status: EventStatus;
   proposalsStartingDate: Date;
   proposalsEndDate: Date;
