@@ -1,12 +1,4 @@
-import {
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-  Timestamp,
-  orderBy,
-} from "firebase/firestore";
+import { doc, getDoc, getDocs } from "firebase/firestore";
 import { eventsRef, organizersRef, talksRef } from "../lib/firebase-config";
 import { Event } from "../types/events-types";
 import { formatFirebaseDate } from "../lib/utils";
@@ -17,7 +9,7 @@ import { TalkProposalId } from "../types/talk-types";
 export async function getAllEvents(): Promise<any[]> {
   // get all events
   const querySnapshot = await getDocs(eventsRef);
-  const result = await Promise.all(
+  return Promise.all(
     querySnapshot.docs.map(async (result) => {
       const events: Event[] = [];
       const datas = result.data();
@@ -40,10 +32,9 @@ export async function getAllEvents(): Promise<any[]> {
         proposalsEndDate: formatFirebaseDate(datas.proposalsEndDate.seconds),
         timezone: datas.timezone,
       });
-      return await events;
+      return events;
     })
   );
-  return result;
 }
 
 const getOrganizer = async (params: any): Promise<any[]> => {
