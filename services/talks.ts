@@ -7,6 +7,7 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { Candidate, CandidateId } from "../types/candidates-types";
@@ -40,12 +41,10 @@ export const postTalk = async ({
   candidates,
   estimatedDuration,
   id,
-  status,
   streamed,
   summary,
   title,
   topics,
-  uniqueCode,
 }: TalkProposal) => {
   // TODO: Add error handling, should be our next priority.
   // TODO: These loops probably can be extracted to a function to reuse.
@@ -99,7 +98,6 @@ export const postTalk = async ({
     candidatesData.push(candidate);
   }
 
-  // [ ] Deberá crear un uuid(uniqueCode) auto generado (https://www.npmjs.com/package/uuid)
   const talkRef = doc(collectionsRef.talks);
   const talkData: TalkProposal = {
     attachments: [],
@@ -111,12 +109,12 @@ export const postTalk = async ({
     summary,
     title,
     topics: topicsIds,
-    // TODO: Generate uniqueCode
-    uniqueCode,
+    uniqueCode: uuidv4(),
   };
 
-  // TODO: Figure out why setDoc returns undefined, should be a promise.
   await setDoc(talkRef, talkData);
+
+  delete talkData.uniqueCode;
 
   return { ...talkData, topics: topicsData, candidates: candidatesData };
 };
