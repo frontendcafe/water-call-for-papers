@@ -7,7 +7,7 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
-import { collectionsRef } from "../lib/firebase-config";
+import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { Candidate, CandidateId } from "../types/candidates-types";
 import {
@@ -48,7 +48,7 @@ export const postTalk = async ({
   uniqueCode,
 }: TalkProposal) => {
   // TODO: Add error handling, should be our next priority.
-  // TODO: These two loops probably can be extracted to a function to reuse.
+  // TODO: These loops probably can be extracted to a function to reuse.
 
   const topicsIds: TopicId[] = [];
   const topicsData: Topic[] = [];
@@ -80,41 +80,23 @@ export const postTalk = async ({
     });
   }
 
-  // [ ] Si el candidato no existe deberá ser agregado a la db Candidates.
-  //? Is the candidate just one or there can be many?
   const candidatesIds: CandidateId[] = [];
   const candidatesData: Candidate[] = [];
 
-  for (const { email, firstName, lastName } of candidates as Candidate[]) {
-    const constrain = where("email", "==", email);
-    const q = query(collectionsRef.candidates, constrain);
+  for (const candidate of candidates as Candidate[]) {
+    const candidateRef = doc(collectionsRef.candidates, candidate.id);
+    const getCandidate = await getDoc(candidateRef);
 
-    const candidatesSnap = await getDocs(q);
+    if (!getCandidate.exists()) {
+      const candidateRef = doc(db, "candidates", candidate.id);
 
-    if (candidatesSnap.empty) {
-      const candidateRef = doc(collectionsRef.candidates);
-
-      const newCandidate: Candidate = {
-        email,
-        firstName,
-        id: candidateRef.id,
-        lastName,
-      };
+      const newCandidate: Candidate = { ...candidate, id: candidateRef.id };
 
       await setDoc(candidateRef, newCandidate);
-
-      candidatesIds.push(candidateRef.id);
-      candidatesData.push(newCandidate);
-
-      continue;
     }
 
-    candidatesSnap.forEach((candidate) => {
-      const candidateRes = candidate.data() as Candidate;
-
-      candidatesIds.push(candidateRes.id);
-      candidatesData.push(candidateRes);
-    });
+    candidatesIds.push(candidate.id);
+    candidatesData.push(candidate);
   }
 
   // [ ] Deberá crear un uuid(uniqueCode) auto generado (https://www.npmjs.com/package/uuid)
