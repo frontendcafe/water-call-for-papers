@@ -1,4 +1,4 @@
-import { OrganizerId } from "./organizers-types";
+import { OrganizerId, Organizer } from "./organizers-types";
 import { TalkProposalId } from "./talk-types";
 
 export enum EventType {
