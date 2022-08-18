@@ -1,5 +1,5 @@
-import { getDocs } from "firebase/firestore";
-import { collectionsRef } from "../lib/firebase-config";
+import { doc, getDocs, setDoc } from "firebase/firestore";
+import { collectionsRef, db } from "../lib/firebase-config";
 import { Organizer } from "../types/organizers-types";
 
 export async function getAllOrganizer(): Promise<Organizer[]> {
@@ -16,4 +16,13 @@ export async function getAllOrganizer(): Promise<Organizer[]> {
   });
 
   return data;
+}
+
+export async function addOrganizer(dataOrganizer: Organizer) {
+  //create Organizer
+  const docRef = await setDoc(
+    doc(db, "organizers", dataOrganizer.email),
+    dataOrganizer
+  );
+  return docRef;
 }
