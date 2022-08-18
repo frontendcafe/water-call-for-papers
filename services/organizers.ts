@@ -1,4 +1,4 @@
-import { addDoc, doc, getDocs, setDoc } from "firebase/firestore";
+import { doc, getDocs, setDoc } from "firebase/firestore";
 import { collectionsRef, db } from "../lib/firebase-config";
 import { Organizer } from "../types/organizers-types";
 

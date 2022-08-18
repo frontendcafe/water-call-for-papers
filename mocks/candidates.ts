@@ -2,31 +2,31 @@ import { Candidate } from "../types/candidates-types";
 
 export const candidates: Candidate[] = [
   {
-    id: "3000001",
+    id: "atuny0@sohu.com",
     firstName: "Terry",
     lastName: "Medhurst",
     email: "atuny0@sohu.com",
   },
   {
-    id: "3000002",
+    id: "hbingley1@plala.or.jp",
     firstName: "Sheldon",
     lastName: "Quigley",
     email: "hbingley1@plala.or.jp",
   },
   {
-    id: "3000003",
+    id: "rshawe2@51.la",
     firstName: "Terril",
     lastName: "Hills",
     email: "rshawe2@51.la",
   },
   {
-    id: "3000004",
+    id: "yraigatt3@nature.com",
     firstName: "Miles",
     lastName: "Cummerata",
     email: "yraigatt3@nature.com",
   },
   {
-    id: "3000005",
+    id: "kmeus4@upenn.edu",
     firstName: "Mavis",
     lastName: "Schultz",
     email: "kmeus4@upenn.edu",
