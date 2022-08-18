@@ -1,6 +1,11 @@
-import { initializeApp, FirebaseOptions, FirebaseApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { FirebaseOptions, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import {
+  collection,
+  CollectionReference,
+  DocumentData,
+  getFirestore,
+} from "firebase/firestore";
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -15,3 +20,15 @@ const firebaseConfig: FirebaseOptions = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+interface FirebaseCollectionsRefs {
+  [key: string]: CollectionReference<DocumentData>;
+}
+
+export const collectionsRef: FirebaseCollectionsRefs = {
+  candidates: collection(db, "candidates"),
+  events: collection(db, "events"),
+  organizers: collection(db, "organizers"),
+  talks: collection(db, "talks"),
+  topics: collection(db, "topics"),
+};
