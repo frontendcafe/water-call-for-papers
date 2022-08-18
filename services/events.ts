@@ -6,38 +6,39 @@ import { Organizer, OrganizerId } from "../types/organizers-types";
 import { getDocById } from "../lib/helpers";
 import { TalkProposalId } from "../types/talk-types";
 
-export async function getAllEvents(): Promise<any[]> {
+export async function getAllEvents(): Promise<Event[]> {
   // get all events
   const querySnapshot = await getDocs(collectionsRef.events);
   return Promise.all(
     querySnapshot.docs.map(async (result) => {
-      const events: Event[] = [];
-      const datas = result.data();
-      const organizers = await getOrganizer(datas.organizers);
-      events.push({
-        id: result.id,
-        name: datas.name,
-        type: datas.type,
-        description: datas.description,
-        talks: datas.talks,
-        startingDate: formatFirebaseDate(datas.startingDate.seconds),
-        endDate: formatFirebaseDate(datas.endDate.seconds),
-        bannerUrl: datas.bannerUrl,
-        location: datas.location,
+      const data = result.data();
+      const organizers = await getOrganizer(data.organizers);
+
+      const event: Event = {
+        id: data.id,
+        name: data.name,
+        description: data.description,
+        talks: data.talks,
+        startingDate: formatFirebaseDate(data.startingDate.seconds),
+        endDate: formatFirebaseDate(data.endDate.seconds),
         organizers,
-        status: datas.status,
         proposalsStartingDate: formatFirebaseDate(
-          datas.proposalsStartingDate.seconds
+          data.proposalsStartingDate.seconds
         ),
-        proposalsEndDate: formatFirebaseDate(datas.proposalsEndDate.seconds),
-        timezone: datas.timezone,
-      });
-      return events;
+        proposalsEndDate: formatFirebaseDate(data.proposalsEndDate.seconds),
+        location: data.location,
+        bannerUrl: data.bannerUrl,
+        status: data.status,
+        timezone: data.timezone,
+        type: data.type,
+      };
+
+      return event;
     })
   );
 }
 
-const getOrganizer = async (params: any): Promise<any[]> => {
+const getOrganizer = async (params: OrganizerId[]): Promise<Organizer[]> => {
   // get organizers by id
   const response = await getDocById(params, collectionsRef.organizers);
   return response as Organizer[];
