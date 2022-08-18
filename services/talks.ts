@@ -21,7 +21,9 @@ export const getTalksFromEvent = async (eventId: string) => {
   return talks;
 };
 
-export const updateStatusFromTalks = async (params: TalkProposal) => {
+export const updateStatusFromTalks = async (
+  params: Pick<TalkProposal, "id" | "status">
+) => {
   // update status from talks
   const TalksRef = doc(db, "talks", params.id);
   await updateDoc(TalksRef, {
