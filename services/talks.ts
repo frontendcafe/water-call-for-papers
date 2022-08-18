@@ -52,7 +52,6 @@ export const postTalk = async ({
   attachments,
   candidates,
   estimatedDuration,
-  id,
   streamed,
   summary,
   title,
@@ -103,7 +102,7 @@ export const postTalk = async ({
 
   const talkRef = doc(collectionsRef.talks);
   const talkData: TalkProposal = {
-    attachments: [],
+    attachments,
     candidates: candidatesIds,
     estimatedDuration,
     id: talkRef.id,

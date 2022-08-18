@@ -6,11 +6,8 @@ export default async function handler(
 ) {
   const { method } = req;
   switch (method) {
-    case "POST":
-      const { firstName, lastName, email } = req.body;
-      break;
-
     default:
+      res.status(500).send("Method not allowed");
       break;
   }
 }
