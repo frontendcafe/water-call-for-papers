@@ -26,6 +26,6 @@ export interface TalkProposal {
   attachments: string[];
   streamed: boolean;
   topics: TopicId[];
-  proponents: CandidateId[];
+  candidates: CandidateId[];
   uniqueCode: string;
 }
