@@ -9,7 +9,6 @@ export enum EventType {
 
 export enum EventStatus {
   Borrador = "Borrador",
-  NoSeTomanMasPropuestas = "No se toman más propuestas",
   EnCurso = "En curso",
   Finalizado = "Finalizado",
 }
@@ -24,7 +23,7 @@ export interface Event {
   endDate: Date;
   bannerUrl: string;
   location: string;
-  organizers: OrganizerId[];
+  organizers: OrganizerId[] | Organizer[];
   status: EventStatus;
   proposalsStartingDate: Date;
   proposalsEndDate: Date;

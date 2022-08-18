@@ -1,9 +1,9 @@
 import { CandidateId } from "./candidates-types";
 
 export enum ProposalStatus {
-  Enviada = "Enviada",
-  EnEspera = "En espera",
-  Preseleccion = "Preselección",
+  EnEsperaSinAbrir = "En revisión sin abrir",
+  EnEspera = "En revisión",
+  AprobadaSinNotificar = "Aprobada sin notificar",
   Aprobada = "Aprobada",
   Rechazada = "Rechazada",
 }
