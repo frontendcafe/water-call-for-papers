@@ -1,13 +1,22 @@
 import { Tab } from "@headlessui/react";
 
-export const Tabs = () => {
+interface TabsProps {
+  selected: boolean;
+}
+
+export const Tabs = ({ selected }: TabsProps) => {
   return (
     <Tab.Group>
       <Tab.List>
-        <Tab>Todos</Tab>
-        <Tab>En Curso</Tab>
-        <Tab>Guardados</Tab>
-        <Tab>Finalizados</Tab>
+        <Tab>
+          <button
+            className={
+              selected ? "border-b-4 border-cyan-700" : "text-sky-400/25"
+            }
+          >
+            Todos
+          </button>
+        </Tab>
       </Tab.List>
     </Tab.Group>
   );
