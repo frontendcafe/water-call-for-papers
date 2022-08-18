@@ -6,7 +6,7 @@ export default {
   title: "TabsGroup/Tabs",
   component: Tabs,
   args: {
-    states: "selected",
+    states: "active",
   },
 } as ComponentMeta<typeof Tabs>;
 
@@ -19,4 +19,9 @@ export const SelectedTabs = Template.bind({});
 export const NotSelectedTabs = Template.bind({});
 NotSelectedTabs.args = {
   states: "noSelected",
+};
+
+export const FocusTabs = Template.bind({});
+FocusTabs.args = {
+  states: "focus",
 };
