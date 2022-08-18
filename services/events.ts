@@ -1,5 +1,5 @@
-import { doc, getDoc, getDocs } from "firebase/firestore";
-import { collectionsRef } from "../lib/firebase-config";
+import { deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
+import { collectionsRef, db } from "../lib/firebase-config";
 import { Event } from "../types/events-types";
 import { formatFirebaseDate } from "../lib/utils";
 import { Organizer, OrganizerId } from "../types/organizers-types";
@@ -59,4 +59,9 @@ export const getEvent = async (id: string) => {
   event.talks = await getDocById(talksIds, collectionsRef.talks);
 
   return event;
+};
+
+export const deleteEvent = async ({ id }: Pick<Event, "id">) => {
+  // delete one event
+  await deleteDoc(doc(db, "events", id));
 };
