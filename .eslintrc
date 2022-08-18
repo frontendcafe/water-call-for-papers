@@ -9,6 +9,7 @@
   ],
   "rules": {
     "no-console": 2,
-    "prefer-const": 2
+    "prefer-const": 2,
+    "@typescript-eslint/no-explicit-any": 2
   }
 }
