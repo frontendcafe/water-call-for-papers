@@ -1,5 +1,5 @@
 import { doc, getDoc, getDocs } from "firebase/firestore";
-import { eventsRef, organizersRef, talksRef } from "../lib/firebase-config";
+import { collectionsRef } from "../lib/firebase-config";
 import { Event } from "../types/events-types";
 import { formatFirebaseDate } from "../lib/utils";
 import { Organizer, OrganizerId } from "../types/organizers-types";
@@ -8,7 +8,7 @@ import { TalkProposalId } from "../types/talk-types";
 
 export async function getAllEvents(): Promise<any[]> {
   // get all events
-  const querySnapshot = await getDocs(eventsRef);
+  const querySnapshot = await getDocs(collectionsRef.events);
   return Promise.all(
     querySnapshot.docs.map(async (result) => {
       const events: Event[] = [];
@@ -39,13 +39,13 @@ export async function getAllEvents(): Promise<any[]> {
 
 const getOrganizer = async (params: any): Promise<any[]> => {
   // get organizers by id
-  const response = await getDocById(params, organizersRef);
+  const response = await getDocById(params, collectionsRef.organizers);
   return response as Organizer[];
 };
 
 export const getEvent = async (id: string) => {
   // get one event
-  const eventSnap = await getDoc(doc(eventsRef, id));
+  const eventSnap = await getDoc(doc(collectionsRef.events, id));
 
   // TODO: Add error handling
   if (!eventSnap.exists()) return { error: "El evento no existe!" };
@@ -54,8 +54,8 @@ export const getEvent = async (id: string) => {
   const talksIds: TalkProposalId[] = eventSnap.data().talks;
   const event = eventSnap.data();
 
-  event.organizers = await getDocById(organizersIds, organizersRef);
-  event.talks = await getDocById(talksIds, talksRef);
+  event.organizers = await getDocById(organizersIds, collectionsRef.organizers);
+  event.talks = await getDocById(talksIds, collectionsRef.talks);
 
   return event;
 };

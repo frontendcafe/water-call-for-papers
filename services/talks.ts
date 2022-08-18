@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { collectionsRef } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 
