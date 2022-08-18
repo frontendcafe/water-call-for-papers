@@ -8,7 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
-import { collectionsRef, db } from "../lib/firebase-config";
+import { collectionsRef } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { Candidate, CandidateId } from "../types/candidates-types";
 import {
@@ -17,6 +17,7 @@ import {
   Topic,
   TopicId,
 } from "../types/talk-types";
+import { saveCandidate } from "./candidate";
 
 export const getTalksFromEvent = async (eventId: string) => {
   const eventSnap = await getDoc(doc(collectionsRef.events, eventId));
@@ -83,16 +84,7 @@ export const postTalk = async ({
   const candidatesData: Candidate[] = [];
 
   for (const candidate of candidates as Candidate[]) {
-    const candidateRef = doc(collectionsRef.candidates, candidate.id);
-    const getCandidate = await getDoc(candidateRef);
-
-    if (!getCandidate.exists()) {
-      const candidateRef = doc(db, "candidates", candidate.id);
-
-      const newCandidate: Candidate = { ...candidate, id: candidateRef.id };
-
-      await setDoc(candidateRef, newCandidate);
-    }
+    await saveCandidate(candidate);
 
     candidatesIds.push(candidate.id);
     candidatesData.push(candidate);
@@ -104,7 +96,7 @@ export const postTalk = async ({
     candidates: candidatesIds,
     estimatedDuration,
     id: talkRef.id,
-    status: ProposalStatus.Enviada,
+    status: ProposalStatus.EnEsperaSinAbrir,
     streamed,
     summary,
     title,
