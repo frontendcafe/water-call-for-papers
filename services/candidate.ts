@@ -1,5 +1,5 @@
-import { addDoc, doc, setDoc } from "firebase/firestore";
-import { collectionsRef, db } from "../lib/firebase-config";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../lib/firebase-config";
 import { Candidate } from "../types/candidates-types";
 
 export async function saveCandidate(dataCandidate: Candidate) {
