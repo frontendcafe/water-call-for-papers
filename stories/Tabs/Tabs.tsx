@@ -1,16 +1,16 @@
 import { Tab } from "@headlessui/react";
 
 interface TabsProps {
-  states: "selected" | "noSelected" | "hover" | "focus";
+  states: "active" | "disabled" | "noSelected" | "hover" | "focus";
 }
 
 const tabsStyles = {
-  selected: "shadow border-b-4 border-cyan-700",
+  active: "border-b-4 border-cyan-700",
   noSelected: "text-blue-300",
   hover: "hover:bg-sky-700",
-  focus: "focus:outline-none focus:ring focus:ring-violet-300",
+  focus: "focus:outline-none focus:ring focus:ring-cyan-400 rounded-lg",
 };
 
-export const Tabs = ({ states = "selected" }: TabsProps) => {
-  return <button className={`${tabsStyles[states]}`}>Todos</button>;
+export const Tabs = ({ states = "active" }: TabsProps) => {
+  return <button className={`${tabsStyles[states]} py-2 px-4 `}>Todos</button>;
 };
