@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Spinner } from "../Icons/Spinner";
 
 import { Button } from "./Button";
 
@@ -64,7 +65,7 @@ Stretched.args = {
 
 export const Loading = Template.bind({});
 Loading.args = {
-  children: ["Loading...", "🦄"],
+  children: ["Loading...", <Spinner />],
   loading: true,
 };
 
@@ -89,16 +90,13 @@ OnlyIcon.args = {
 
 export const IconWithoutBackground = Template.bind({});
 IconWithoutBackground.args = {
-  children: ["Button", <span>🦄</span>],
-  icon: true,
-  rounded: "full",
+  ...OnlyIcon.args,
   variant: "transparent",
 };
 
 export const SquaredIconWithOutline = Template.bind({});
 SquaredIconWithOutline.args = {
-  children: ["Button", <span>🦄</span>],
-  icon: true,
+  ...OnlyIcon.args,
   rounded: "small",
   variant: "secondary",
 };
