@@ -1,30 +1,15 @@
 import { Tab } from "@headlessui/react";
 import { useState } from "react";
 
-export const Tabs = () => {
-  const [events] = useState([
-    {
-      type: "Todos",
-      title: "Todos los eventos",
-      disabled: false,
-    },
-    {
-      type: "En curso",
-      title: "Eventos en curso",
-      disabled: false,
-    },
-    {
-      type: "Guardados",
-      title: "Eventos guardados",
-      disabled: false,
-    },
-    {
-      type: "Finalizados",
-      title: "Eventos finalizados",
-      disabled: true,
-    },
-  ]);
+interface TabsProps {
+  events: Array<{
+    type: string;
+    title: string;
+    disabled: boolean;
+  }>;
+}
 
+export const Tabs = ({ events }: TabsProps) => {
   return (
     <div>
       <Tab.Group>
