@@ -26,25 +26,3 @@ export default function errorHandler(
     });
   };
 }
-
-export const endpoint = {
-  // TODO: Add the missing methods and types.
-
-  GET: async (
-    res: NextApiResponse,
-    callback: () => void,
-    code?: number,
-    message?: string
-  ) => {
-    res.status(code || 200).json({ results: await callback(), message });
-  },
-
-  POST: async (
-    res: NextApiResponse,
-    callback: () => void,
-    code?: number,
-    message?: string
-  ) => {
-    res.status(code || 201).json({ results: await callback(), message });
-  },
-};
