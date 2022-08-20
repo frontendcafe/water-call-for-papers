@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   return (
     <div className="bg-slate-500 rounded p-10">
       Hola
-      <Button label="Click" />
+      <Button onClick={() => null}>Click</Button>
     </div>
   );
 };
