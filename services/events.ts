@@ -1,14 +1,32 @@
-import { deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  OrderByDirection,
+  query,
+  where,
+} from "firebase/firestore";
 import { collectionsRef, db } from "../lib/firebase-config";
-import { Event } from "../types/events-types";
-import { formatFirebaseDate } from "../lib/utils";
-import { Organizer, OrganizerId } from "../types/organizers-types";
 import { getDocById } from "../lib/helpers";
+import { formatFirebaseDate } from "../lib/utils";
+import { Event } from "../types/events-types";
+import { Organizer, OrganizerId } from "../types/organizers-types";
 import { TalkProposalId } from "../types/talk-types";
 
-export async function getAllEvents(): Promise<Event[]> {
+export async function getAllEvents(
+  order: OrderByDirection = "asc",
+  filter: string[] = [""]
+): Promise<Event[]> {
   // get all events
-  const querySnapshot = await getDocs(collectionsRef.events);
+  const sortBy = orderBy("startingDate", order);
+  // const max = limit(10);
+  // TODO: #81 Agregar query index en Firebase requerido para filtrar por tipo de evento
+  const docField = where("type", "in", filter);
+  const q = query(collectionsRef.events, docField, sortBy /* max */);
+  const querySnapshot = await getDocs(q);
+  // return events;
   return Promise.all(
     querySnapshot.docs.map(async (result) => {
       const data = result.data();
