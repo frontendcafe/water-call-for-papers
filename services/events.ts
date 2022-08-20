@@ -12,8 +12,9 @@ import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { formatFirebaseDate } from "../lib/utils";
 import { Event } from "../types/events-types";
-import { Organizer, OrganizerId } from "../types/organizers-types";
+import { OrganizerId } from "../types/organizers-types";
 import { TalkProposalId } from "../types/talk-types";
+import { getOrganizer } from "./organizers";
 
 export async function getAllEvents(
   order: OrderByDirection = "asc",
@@ -22,15 +23,14 @@ export async function getAllEvents(
   // get all events
   const docField = where("type", "in", filter);
   const sortBy = orderBy("startingDate", order);
-  // const max = limit(10);
 
-  let q = query(collectionsRef.events, sortBy /* max */);
+  let q = query(collectionsRef.events, sortBy);
   if (filter.length > 0) {
-    q = query(collectionsRef.events, docField, sortBy /* max */);
+    q = query(collectionsRef.events, docField, sortBy);
   }
 
   const querySnapshot = await getDocs(q);
-  // return events;
+
   return Promise.all(
     querySnapshot.docs.map(async (result) => {
       const data = result.data();
@@ -59,12 +59,6 @@ export async function getAllEvents(
     })
   );
 }
-
-const getOrganizer = async (params: OrganizerId[]): Promise<Organizer[]> => {
-  // get organizers by id
-  const response = await getDocById(params, collectionsRef.organizers);
-  return response as Organizer[];
-};
 
 export const getEvent = async (id: string) => {
   // get one event
