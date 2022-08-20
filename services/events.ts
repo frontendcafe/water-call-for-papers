@@ -1,14 +1,36 @@
-import { deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  OrderByDirection,
+  query,
+  where,
+} from "firebase/firestore";
 import { collectionsRef, db } from "../lib/firebase-config";
-import { Event } from "../types/events-types";
-import { formatFirebaseDate } from "../lib/utils";
-import { Organizer, OrganizerId } from "../types/organizers-types";
 import { getDocById } from "../lib/helpers";
+import { formatFirebaseDate } from "../lib/utils";
+import { Event } from "../types/events-types";
+import { OrganizerId } from "../types/organizers-types";
 import { TalkProposalId } from "../types/talk-types";
+import { getOrganizer } from "./organizers";
 
-export async function getAllEvents(): Promise<Event[]> {
+export async function getAllEvents(
+  order: OrderByDirection = "asc",
+  filter: string[] = []
+): Promise<Event[]> {
   // get all events
-  const querySnapshot = await getDocs(collectionsRef.events);
+  const docField = where("type", "in", filter);
+  const sortBy = orderBy("startingDate", order);
+
+  let q = query(collectionsRef.events, sortBy);
+  if (filter.length > 0) {
+    q = query(collectionsRef.events, docField, sortBy);
+  }
+
+  const querySnapshot = await getDocs(q);
+
   return Promise.all(
     querySnapshot.docs.map(async (result) => {
       const data = result.data();
@@ -37,12 +59,6 @@ export async function getAllEvents(): Promise<Event[]> {
     })
   );
 }
-
-const getOrganizer = async (params: OrganizerId[]): Promise<Organizer[]> => {
-  // get organizers by id
-  const response = await getDocById(params, collectionsRef.organizers);
-  return response as Organizer[];
-};
 
 export const getEvent = async (id: string) => {
   // get one event
