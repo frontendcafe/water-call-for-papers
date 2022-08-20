@@ -17,14 +17,18 @@ import { TalkProposalId } from "../types/talk-types";
 
 export async function getAllEvents(
   order: OrderByDirection = "asc",
-  filter: string[] = [""]
+  filter: string[] = []
 ): Promise<Event[]> {
   // get all events
+  const docField = where("type", "in", filter);
   const sortBy = orderBy("startingDate", order);
   // const max = limit(10);
-  // TODO: #81 Agregar query index en Firebase requerido para filtrar por tipo de evento
-  const docField = where("type", "in", filter);
-  const q = query(collectionsRef.events, docField, sortBy /* max */);
+
+  let q = query(collectionsRef.events, sortBy /* max */);
+  if (filter.length > 0) {
+    q = query(collectionsRef.events, docField, sortBy /* max */);
+  }
+
   const querySnapshot = await getDocs(q);
   // return events;
   return Promise.all(
