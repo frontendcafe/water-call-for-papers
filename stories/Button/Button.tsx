@@ -93,15 +93,7 @@ export const Button = ({
       onClick={onClick}
       {...props}
     >
-      {React.Children.map(children, (child) =>
-        typeof child === "string" ? (
-          <span className={`${icon ? "sr-only" : ""} whitespace-nowrap`}>
-            {child}
-          </span>
-        ) : (
-          child
-        )
-      )}
+      {children}
     </button>
   );
 };

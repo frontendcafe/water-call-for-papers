@@ -65,7 +65,11 @@ Stretched.args = {
 
 export const Loading = Template.bind({});
 Loading.args = {
-  children: ["Loading...", <Spinner />],
+  children: (
+    <>
+      <>Loading...</> <Spinner />
+    </>
+  ),
   loading: true,
 };
 
@@ -77,13 +81,23 @@ Disabled.args = {
 
 export const IconWithText = Template.bind({});
 IconWithText.args = {
-  children: [<span>🦄</span>, "Button"],
+  children: (
+    // TODO: Add proper icon component or SVG
+    <>
+      <span>🦄</span> <span className="sr-only">Button</span>
+    </>
+  ),
   rounded: "medium",
 };
 
 export const OnlyIcon = Template.bind({});
 OnlyIcon.args = {
-  children: ["Button", <span>🦄</span>],
+  children: (
+    // TODO: Add proper icon component or SVG
+    <>
+      <span className="sr-only">Button</span> <span>🦄</span>
+    </>
+  ),
   icon: true,
   rounded: "full",
 };
