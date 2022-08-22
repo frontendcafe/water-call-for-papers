@@ -30,6 +30,7 @@ export const err = {
   "404": { code: 404, message: "Not Found" },
   "405": { code: 405, message: "Method Not Allowed" },
   "406": { code: 406, message: "Not Acceptable" },
+  "422": { code: 422, message: "Unprocessable Entity" },
   //
   "500": { code: 500, message: "Internal Server Error" },
   "501": { code: 501, message: "Not Implemented" },
