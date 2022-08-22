@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Event } from "../../../types/events-types";
-import { Error } from "../../../types/others";
 import { getAllEvents } from "../../../services/events";
+import { Event } from "../../../types/events-types";
+import { ResponseError } from "../../../types/others";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Event[] | Error | string>
+  res: NextApiResponse<Event[] | ResponseError | string>
 ) {
   const { method } = req;
   switch (method) {
@@ -14,10 +14,7 @@ export default async function handler(
         const results = await getAllEvents();
         res.status(200).send(results);
       } catch (error) {
-        res.status(400).json({
-          message: "error method",
-          status: 400,
-        });
+        res.status(400).json({ message: "error method", code: 400 });
       }
       break;
     default:
