@@ -1,5 +1,6 @@
 import { FirebaseOptions, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getStorage, ref } from "firebase/storage";
 import {
   collection,
   CollectionReference,
@@ -20,6 +21,8 @@ const firebaseConfig: FirebaseOptions = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+export const storage = getStorage(app);
+export const storageRef = (fileName: string) => ref(storage, fileName);
 
 interface FirebaseCollectionsRefs {
   [key: string]: CollectionReference<DocumentData>;
