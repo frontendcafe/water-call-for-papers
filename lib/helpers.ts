@@ -14,7 +14,13 @@ export async function getDocById(
   const recursivelyGetDoc = async (id: string) => {
     const docSnap = await getDoc(doc(docRef, id));
 
-    if (!docSnap.exists()) return { error: "El documento no existe!" };
+    if (!docSnap.exists()) {
+      // TODO: Add error handler
+      // throw { code: 404, message: `Un documento relacionado no existe!` };
+
+      // TODO: ID is just for debugging?, delete ID from template string.
+      return { error: `El documento con ID: ${id} no existe!` };
+    }
 
     const docData = docSnap.data();
 

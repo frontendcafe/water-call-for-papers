@@ -30,6 +30,7 @@ export async function getAllEvents(
   }
 
   const querySnapshot = await getDocs(q);
+  if (querySnapshot.empty) return [];
 
   return Promise.all(
     querySnapshot.docs.map(async (result) => {
@@ -61,11 +62,15 @@ export async function getAllEvents(
 }
 
 export const getEvent = async (id: string) => {
+  if (!id) {
+    throw { code: 422, message: "Se requiere el ID del evento" };
+  }
   // get one event
   const eventSnap = await getDoc(doc(collectionsRef.events, id));
 
-  // TODO: Add error handling
-  if (!eventSnap.exists()) return { error: "El evento no existe!" };
+  if (!eventSnap.exists()) {
+    throw { code: 404, message: "El evento no existe!" };
+  }
 
   const organizersIds: OrganizerId[] = eventSnap.data().organizers;
   const talksIds: TalkProposalId[] = eventSnap.data().talks;
@@ -78,6 +83,9 @@ export const getEvent = async (id: string) => {
 };
 
 export const deleteEvent = async ({ id }: Pick<Event, "id">) => {
+  if (!id) {
+    throw { code: 422, message: "Se requiere el ID del evento" };
+  }
   // delete one event
   await deleteDoc(doc(db, "events", id));
 };

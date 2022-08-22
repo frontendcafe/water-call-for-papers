@@ -21,10 +21,14 @@ import {
 import { saveCandidate } from "./candidate";
 
 export const getTalksFromEvent = async (eventId: string) => {
-  const eventSnap = await getDoc(doc(collectionsRef.events, eventId));
+  if (!eventId) {
+    throw { code: 422, message: "Se requiere el ID del evento" };
+  }
 
-  // TODO: Add error handling
-  if (!eventSnap.exists()) return { error: "El evento no existe!" };
+  const eventSnap = await getDoc(doc(collectionsRef.events, eventId));
+  if (!eventSnap.exists()) {
+    throw { code: 404, message: "El evento no existe!" };
+  }
 
   const { talks: talksIds } = eventSnap.data();
 
@@ -57,8 +61,7 @@ export const postTalk = async ({
   title,
   topics,
 }: TalkProposal) => {
-  // TODO: Add error handling, should be our next priority.
-  // TODO: These loops probably can be extracted to a function to reuse.
+  // TODO: Add validations?
 
   const topicsIds: TopicId[] = [];
   const topicsData: Topic[] = [];
@@ -119,4 +122,31 @@ export const postTalk = async ({
   delete talkData.uniqueCode;
 
   return { ...talkData, topics: topicsData, candidates: candidatesData };
+};
+
+export const getTalk = async (talkId: string) => {
+  if (!talkId) {
+    throw { code: 422, message: "Se requiere el ID de la propuesta de charla" };
+  }
+  const talkSnap = await getDoc(doc(collectionsRef.talks, talkId));
+
+  // TODO: Not sure if we should throw an error or send a message
+  if (!talkSnap.exists()) {
+    throw { code: 404, message: "La propuesta de charla no existe!" };
+  }
+
+  const talk = talkSnap.data();
+
+  const candidatesIds: CandidateId[] = talk.candidates;
+  const topicsIds: TopicId[] = talk.topics;
+
+  talk.candidates = await getDocById(candidatesIds, collectionsRef.candidates);
+  talk.topics = await getDocById(topicsIds, collectionsRef.topics);
+
+  // TODO: Validate a code (uuid) which will be previously sent by mail.
+  // ...
+
+  delete talk.uniqueCode;
+
+  return talk;
 };
