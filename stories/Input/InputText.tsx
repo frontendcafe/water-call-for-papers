@@ -19,7 +19,7 @@ interface InputTextProps {
   /**
    * Value in tag input.
    */
-  value: string;
+  value?: string;
   /**
    * idValue relation between label and input (htmlFor).
    */
@@ -57,14 +57,12 @@ interface InputTextProps {
 export const InputText = ({
   label,
   placeholder,
-  value,
   idValue,
   description,
   error,
   required,
   position,
   disabled,
-  visible,
   ...props
 }: InputTextProps) => {
   const positionIconText = position == "left" && "pl-8 pr-2 py-2";
@@ -78,7 +76,7 @@ export const InputText = ({
       <label
         htmlFor={idValue}
         className={`text-sm font-semibold text-gray-800 ${
-          visible ? "not-sr-only" : "sr-only"
+          label ? "not-sr-only" : "sr-only"
         }`}
       >
         {label}
@@ -90,10 +88,9 @@ export const InputText = ({
         type="text"
         placeholder={placeholder}
         id={idValue}
-        value={value}
+        value={props.value}
         className={`px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 disabled:border-gray-200 ${positionIconText} ${withError}`}
         disabled={disabled}
-        {...props}
       />
       {/* Icon component goes here */}
       {/* <div
