@@ -6,6 +6,7 @@ import {
   orderBy,
   OrderByDirection,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { collectionsRef, db } from "../lib/firebase-config";
@@ -80,4 +81,15 @@ export const getEvent = async (id: string) => {
 export const deleteEvent = async ({ id }: Pick<Event, "id">) => {
   // delete one event
   await deleteDoc(doc(db, "events", id));
+};
+
+export const updateEvent = async (eventId: string, eventData: {}) => {
+  if (!eventId) {
+    throw { code: 422, message: "Se requiere el ID del evento" };
+  }
+
+  const eventRef = doc(db, "events", eventId);
+  await updateDoc(eventRef, { ...eventData }).catch(() => {
+    throw { code: 404, message: "El evento no existe!" };
+  });
 };
