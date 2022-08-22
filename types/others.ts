@@ -1,9 +1,10 @@
 import { CollectionReference } from "firebase/firestore";
 
 // interfaces error
-export interface Error {
+export interface ResponseError {
+  name?: string;
   message: string;
-  status: number;
+  code?: number;
 }
 
 export interface FirebaseCollectionsRefs {

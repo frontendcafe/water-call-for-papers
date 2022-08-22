@@ -1,32 +1,20 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import errorHandler from "../../lib/error-handling";
-import { getAllEvents } from "../../services/events";
-import { postTalk } from "../../services/talks";
+import errorHandler, { err } from "../../lib/error-handling";
 
 export default errorHandler(
   async (req: NextApiRequest, res: NextApiResponse) => {
-    // throw new Error("Something went intentionally wrong");
-    // throw { message: "Something went intentionally wrong" };
-    // Types? { name?: string; message: string; code?: number };
+    const { method } = req;
 
-    const { body } = req;
+    if (method === "GET") {
+      const data: object[] = [];
+      const message: string = "Mensaje en español";
 
-    if (req.method === "GET") {
-      const data = await getAllEvents();
+      throw { message: "Something went intentionally wrong" };
 
-      return res.status(200).send(data);
+      return res.status(200).json({ data, message });
     }
 
-    if (req.method === "POST") {
-      const data = await postTalk(body);
-
-      // Should be have a predefined response JSON object?, like:
-      const response = { data, message: "Mensaje en español" };
-
-      return res.status(201).send(response);
-    }
-
-    res.status(405).send("Method not allowed");
+    res.status(405).json(err[405]);
   }
 );
