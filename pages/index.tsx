@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { Button } from "../stories/Button/Button";
+import { Icons } from "../stories/Icons/Icons";
 
 const Home: NextPage = () => {
   return (

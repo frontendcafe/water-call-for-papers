@@ -17,3 +17,10 @@ Primary.args = {
   label: "Button",
   backgroundColor: "bg-blue-500",
 };
+//👇 Each story then reuses that template
+export const Secundary = Template.bind({});
+//👇 We pass the props to the Primary story
+Secundary.args = {
+  label: "Button",
+  backgroundColor: "bg-red-500",
+};
