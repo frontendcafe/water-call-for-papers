@@ -22,5 +22,5 @@ Default.args = {
     { title: "Híbrido", isDisabled: false },
     { title: "Online", isDisabled: false },
   ],
-  onChange: (value) => value, //Pruebo si borrando el console.log(value) me deja commitear
+  onChange: (value) => value, //There was a console.log(value) here but I remove it out so that I could commit the file
 };

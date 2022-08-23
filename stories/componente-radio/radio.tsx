@@ -27,7 +27,7 @@ export const RadioButtons = ({ label, opciones, onChange }: RadioGroup) => {
                 key={opcion.title}
                 value={opcion.title}
                 disabled={opcion.isDisabled}
-                //Estilos a definir cuando se decidan los diseños
+                //The styles aren't the final ones
                 className={({ active, checked }) =>
                   `${
                     active

@@ -8,7 +8,7 @@ const Home: NextPage = () => {
       Hola
       <Button label="Click" />
       <RadioButtons
-        onChange={(value) => value} //Pruebo si borrando el console.log(value) me deja commitear
+        onChange={(value) => value} //There was a console.log(value) here but I remove it out so that I could commit the file
         label="Modalidad del evento"
         opciones={[
           { title: "Presencial", isDisabled: false },
