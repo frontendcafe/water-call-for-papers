@@ -9,8 +9,7 @@ import {
   ChevronRightIcon,
   ClockIcon,
   CogIcon,
-  DotsVerticalIcon,
-  ExclamationCircleIcon,
+  DotsVerticalIcon, 
   FilterIcon,
   HomeIcon,
   InformationCircleIcon,
@@ -26,7 +25,7 @@ import {
   TrashIcon,
   ViewListIcon,
 } from "@heroicons/react/outline";
-import { ExclamationIcon } from "@heroicons/react/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/solid";
 
 const iconsSupported: Record<string, JSX.Element> = {
   "menu-alt-2": <MenuAlt2Icon />,
@@ -53,7 +52,7 @@ const iconsSupported: Record<string, JSX.Element> = {
   "cheveron-right": <ChevronRightIcon className="w-14 h-7 text-black" />,
   "arrow-left": <ArrowLeftIcon className="h-9.33 w-12 text-black" />,
   "mail-correo": <MailIcon className="w-14,29 h-11,43" />,
-  "exclamation-circle": <ExclamationIcon className="h-12 w-12" />,
+  "exclamation-circle": <ExclamationCircleIcon className="h-12 w-12" />,
 };
 
 export function Icons({

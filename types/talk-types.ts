@@ -1,9 +1,9 @@
-import { CandidateId } from "./candidates-types";
+import { Candidate, CandidateId } from "./candidates-types";
 
 export enum ProposalStatus {
-  Enviada = "Enviada",
-  EnEspera = "En espera",
-  Preseleccion = "Preselección",
+  EnEsperaSinAbrir = "En revisión sin abrir",
+  EnEspera = "En revisión",
+  AprobadaSinNotificar = "Aprobada sin notificar",
   Aprobada = "Aprobada",
   Rechazada = "Rechazada",
 }
@@ -25,7 +25,7 @@ export interface TalkProposal {
   status: ProposalStatus;
   attachments: string[];
   streamed: boolean;
-  topics: TopicId[];
-  candidates: CandidateId[];
-  uniqueCode: string;
+  topics: TopicId[] | Topic[];
+  candidates: CandidateId[] | Candidate[];
+  uniqueCode?: string;
 }
