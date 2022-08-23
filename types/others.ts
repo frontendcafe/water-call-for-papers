@@ -1,4 +1,4 @@
-import { CollectionReference } from "firebase/firestore";
+import { CollectionReference, OrderByDirection } from "firebase/firestore";
 
 // interfaces error
 export interface ResponseError {
@@ -14,4 +14,9 @@ export interface FirebaseCollectionsRefs {
   organizers: CollectionReference;
   talks: CollectionReference;
   topics: CollectionReference;
+}
+
+export interface QueryParams {
+  order?: OrderByDirection;
+  type?: string | string[];
 }
