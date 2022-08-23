@@ -14,7 +14,7 @@ export default errorHandler(
       const data = await getAllEvents(order, filter);
       const message = undefined;
 
-      res.status(200).json({ data, message });
+      return res.status(200).json({ data, message });
     }
 
     if (method === "POST") {
