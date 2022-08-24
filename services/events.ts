@@ -6,6 +6,7 @@ import {
   orderBy,
   OrderByDirection,
   query,
+  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -15,7 +16,7 @@ import { formatFirebaseDate } from "../lib/utils";
 import { Event } from "../types/events-types";
 import { OrganizerId } from "../types/organizers-types";
 import { TalkProposalId } from "../types/talk-types";
-import { getOrganizer } from "./organizers";
+import { addOrganizer, getOrganizer } from "./organizers";
 
 export async function getAllEvents(
   order: OrderByDirection = "asc",
@@ -100,4 +101,23 @@ export const updateEvent = async (eventId: string, eventData: {}) => {
   await updateDoc(eventRef, { ...eventData }).catch(() => {
     throw { code: 404, message: "El evento no existe!" };
   });
+};
+
+export const createEvent = async (event: Event) => {
+  // create new event
+  event.organizers.map(async (result) => {
+    const id = result as OrganizerId;
+    const eventSnap = await getDoc(doc(collectionsRef.organizers, id));
+    if (!eventSnap.exists()) {
+      // validate if organizer exists and create a new organizer
+      await addOrganizer({
+        id,
+        fullName: "",
+        email: id,
+      });
+    }
+  });
+  //create events
+  const docRef = await setDoc(doc(db, "events", event.id), event);
+  return docRef;
 };
