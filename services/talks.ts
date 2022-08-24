@@ -129,7 +129,7 @@ export const postTalk = async ({
   return { ...talkData, topics: topicsData, candidates: candidatesData };
 };
 
-export const getTalk = async (talkId: string) => {
+export const getTalk = async (talkId: TalkProposalId) => {
   if (!talkId) {
     throw { code: 422, message: "Se requiere el ID de la propuesta de charla" };
   }
