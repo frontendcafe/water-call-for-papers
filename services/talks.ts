@@ -15,6 +15,7 @@ import { Candidate, CandidateId } from "../types/candidates-types";
 import {
   ProposalStatus,
   TalkProposal,
+  TalkProposalId,
   Topic,
   TopicId,
 } from "../types/talk-types";
@@ -43,12 +44,16 @@ export const getTalksFromEvent = async (eventId: string) => {
 };
 
 export const updateStatusFromTalks = async (
-  params: Pick<TalkProposal, "id" | "status">
+  talkId: TalkProposalId,
+  { status }: Pick<TalkProposal, "status">
 ) => {
   // update status from talks
-  const TalksRef = doc(db, "talks", params.id);
-  await updateDoc(TalksRef, {
-    status: params.status,
+  if (!status) {
+    throw { code: 422, message: "Se requiere el estado de la propuesta" };
+  }
+  const TalksRef = doc(db, "talks", talkId);
+  await updateDoc(TalksRef, { status }).catch(() => {
+    throw { code: 404, message: `El evento no existe!` };
   });
 };
 
