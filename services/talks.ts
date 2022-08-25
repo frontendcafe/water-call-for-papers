@@ -2,23 +2,16 @@ import {
   doc,
   DocumentData,
   getDoc,
-  getDocs,
-  query,
   setDoc,
   updateDoc,
-  where,
 } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { Candidate, CandidateId } from "../types/candidates-types";
-import {
-  ProposalStatus,
-  TalkProposal,
-  Topic,
-  TopicId,
-} from "../types/talk-types";
+import { ProposalStatus, TalkProposal, TopicId } from "../types/talk-types";
 import { saveCandidate } from "./candidate";
+import { addTopic } from "./topic";
 
 export const getTalksFromEvent = async (eventId: string) => {
   if (!eventId) {
@@ -60,38 +53,14 @@ export const postTalk = async ({
   summary,
   title,
   topics,
-}: TalkProposal) => {
+}: Omit<TalkProposal, "topics"> & { topics: { description: string }[] }) => {
   // TODO: Add validations?
 
-  const topicsIds: TopicId[] = [];
-  const topicsData: Topic[] = [];
+  const topicsData = await addTopic(topics);
 
-  for (const { description } of topics as Topic[]) {
-    const constrain = where("description", "==", description);
-    const q = query(collectionsRef.topics, constrain);
-
-    const topicsSnap = await getDocs(q);
-
-    if (topicsSnap.empty) {
-      const topicRef = doc(collectionsRef.topics);
-
-      const newTopic: Topic = { id: topicRef.id, description };
-
-      await setDoc(topicRef, newTopic);
-
-      topicsIds.push(topicRef.id);
-      topicsData.push(newTopic);
-
-      continue;
-    }
-
-    topicsSnap.forEach((topic) => {
-      const topicRes = topic.data() as Topic;
-
-      topicsIds.push(topicRes.id);
-      topicsData.push(topicRes);
-    });
-  }
+  const topicsIds = topicsData.map((topic) => {
+    return topic.id as TopicId;
+  });
 
   const candidatesIds: CandidateId[] = [];
   const candidatesData: Candidate[] = [];
