@@ -1,15 +1,24 @@
-import { useEffect, Fragment, MouseEvent } from "react";
+import { useEffect, useRef, Fragment, ReactNode } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 interface ModalProps {
   /**
-   * The label to display above the input.
+   * The set function to change the state.
    */
-  handleOpen: Function;
+  setIsOpen: (value: boolean) => void;
+  /**
+   * The value to the open state or close.
+   */
   open: boolean;
+  /**
+   * The children node.
+   */
+  children: ReactNode;
 }
 
-export const Modal = ({ open, handleOpen }: ModalProps) => {
+export const Modal = ({ open, setIsOpen, children }: ModalProps) => {
+  const closeButtonRef = useRef(null);
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -20,7 +29,12 @@ export const Modal = ({ open, handleOpen }: ModalProps) => {
 
   return (
     <Transition appear show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={handleOpen}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        initialFocus={closeButtonRef}
+        onClose={() => setIsOpen(false)}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -30,7 +44,10 @@ export const Modal = ({ open, handleOpen }: ModalProps) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-white bg-opacity-25" />
+          <div
+            className="fixed inset-0 bg-white bg-opacity-25"
+            aria-hidden="true"
+          />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -48,13 +65,16 @@ export const Modal = ({ open, handleOpen }: ModalProps) => {
                 <div className="w-[375px] rounded-xl bg-white">
                   <div className="flex justify-end">
                     <button
-                      onClick={handleOpen}
+                      autoFocus
+                      ref={closeButtonRef}
+                      aria-label="Cerrar"
+                      onClick={() => setIsOpen(false)}
                       className="mt-5 mr-5 text-2xl font-normal text-gray-600"
                     >
                       X
                     </button>
                   </div>
-                  <div className="flex p-[15px]"></div>
+                  <div className="flex p-[15px]">{children}</div>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
