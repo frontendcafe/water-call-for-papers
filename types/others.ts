@@ -20,3 +20,11 @@ export interface QueryParams {
   order?: OrderByDirection;
   type?: string | string[];
 }
+
+export interface FilterOptions {
+  duration?: string;
+  order?: OrderByDirection;
+  status?: string;
+  streamed?: string;
+  topics?: string[];
+}

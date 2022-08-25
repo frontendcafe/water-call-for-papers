@@ -1,9 +1,10 @@
 import {
   doc,
-  DocumentData,
   getDoc,
   getDocs,
+  orderBy,
   query,
+  QueryConstraint,
   setDoc,
   updateDoc,
   where,
@@ -12,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { Candidate, CandidateId } from "../types/candidates-types";
+import { FilterOptions } from "../types/others";
 import {
   ProposalStatus,
   TalkProposal,
@@ -21,26 +23,53 @@ import {
 } from "../types/talk-types";
 import { saveCandidate } from "./candidate";
 
-export const getTalksFromEvent = async (eventId: string) => {
+export const getTalksFromEvent = async (
+  eventId: string,
+  { duration, order = "asc", status, streamed, topics = [] }: FilterOptions
+) => {
   if (!eventId) {
     throw { code: 422, message: "Se requiere el ID del evento" };
   }
+  const topicsArr = topics.toString().split(",");
+  const queryConstraints: QueryConstraint[] = [];
 
-  const eventSnap = await getDoc(doc(collectionsRef.events, eventId));
-  if (!eventSnap.exists()) {
-    throw { code: 404, message: "El evento no existe!" };
+  queryConstraints.push(where("eventId", "==", eventId));
+
+  if (duration) {
+    queryConstraints.push(where("estimatedDuration", "==", parseInt(duration)));
+  }
+  if (order) {
+    queryConstraints.push(orderBy("createdAt", order));
+  }
+  if (status) {
+    queryConstraints.push(where("status", "==", status));
+  }
+  if (streamed) {
+    queryConstraints.push(where("streamed", "==", streamed === "true"));
+  }
+  if (topics.length > 0) {
+    queryConstraints.push(where("topics", "array-contains-any", topicsArr));
   }
 
-  const { talks: talksIds } = eventSnap.data();
+  const q = query(collectionsRef.talks, ...queryConstraints);
+  const querySnapshot = await getDocs(q);
 
-  const talks = (await getDocById(
-    talksIds,
-    collectionsRef.talks
-  )) as DocumentData[];
+  if (querySnapshot.empty) return [];
 
-  talks.forEach((talk) => delete talk.uniqueCode);
+  const talks = querySnapshot.docs.map(async (talkDoc) => {
+    const talk = talkDoc.data();
+    const candidates = talk.candidates;
+    const topics = talk.topics;
 
-  return talks;
+    talk.candidates = await getDocById(candidates, collectionsRef.candidates);
+    talk.topics = await getDocById(topics, collectionsRef.topics);
+
+    delete talk.uniqueCode;
+
+    return talk;
+  });
+
+  return Promise.all(talks);
 };
 
 export const updateStatusFromTalks = async (
