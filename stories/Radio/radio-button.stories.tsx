@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { RadioButtons } from "./radio";
+import { RadioButtons } from "./radio-button";
 
 export default {
   title: "RadioButtons/MyRadioGroup", // Title for our storybook

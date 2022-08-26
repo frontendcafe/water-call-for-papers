@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { Button } from "../stories/Button/Button";
-import { RadioButtons } from "../stories/componente-radio/radio";
+import { RadioButtons } from "../stories/Radio/radio-button";
 
 const Home: NextPage = () => {
   return (
