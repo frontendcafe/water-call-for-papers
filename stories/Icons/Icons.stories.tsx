@@ -8,35 +8,34 @@ export default {
 } as ComponentMeta<typeof Icons>;
 
 const Template: ComponentStory<typeof Icons> = (args) => <Icons {...args} />;
-// Columna 1
 //👇 Each story then reuses that template
-export const MenuAlt2Icon = Template.bind({});
+export const EnvelopeIcon = Template.bind({});
 //👇 We pass the props to the Primary story
-MenuAlt2Icon.args = {
-  iconName: "menu-icon",
+EnvelopeIcon.args = {
+  iconName: "mail",
   theme: "light",
-  size: "medium",
+  size: "small", //h-11.43 w-14.29
 };
 
-export const PlusCircle = Template.bind({});
-PlusCircle.args = {
-  iconName: "plus-circle",
-  theme: "dark",
-  size: "large", //h-18 w-18 large
+export const BellIcon = Template.bind({});
+BellIcon.args = {
+  iconName: "bell",
+  theme: "light",
+  size: "small", //h-11.43 w-14.29
 };
 
 export const HomeIcon = Template.bind({});
 HomeIcon.args = {
-  iconName: "home-casa",
+  iconName: "home",
   theme: "neutral",
   size: "large", //h-18 w-18
 };
 
-export const ViewListIcon = Template.bind({});
-ViewListIcon.args = {
-  iconName: "view-list",
+export const ShieldExclamationIcon = Template.bind({});
+ShieldExclamationIcon.args = {
+  iconName: "home-casa",
   theme: "neutral",
-  size: "medium", //h-12 w-16
+  size: "large", //h-18 w-18
 };
 
 export const CogIcon = Template.bind({});
@@ -46,30 +45,100 @@ CogIcon.args = {
   size: "large", //h-18 w-18
 };
 
-export const LogoutIcon = Template.bind({});
-LogoutIcon.args = {
-  iconName: "Logout-salir",
-  theme: "neutral",
-  size: "large", //h-18 w-18
-};
-
-export const SearchIcon = Template.bind({});
-SearchIcon.args = {
-  iconName: "search-glass",
+export const CheckIcon = Template.bind({});
+CheckIcon.args = {
+  iconName: "check",
   theme: "neutral",
   size: "large", //h-19 w-19
 };
 
-export const FilterIcon = Template.bind({});
-FilterIcon.args = {
-  iconName: "filter-filtro",
+export const PencilSquareIcon = Template.bind({});
+PencilSquareIcon.args = {
+  iconName: "pen-detalle",
   theme: "neutral",
-  size: "large", //h-19 w-19
+  size: "medium", //h-10 w-10
 };
 
-export const PlusSmIcon = Template.bind({});
-PlusSmIcon.args = {
-  iconName: "plus-sm",
+export const PencilIcon = Template.bind({});
+PencilIcon.args = {
+  iconName: "pencil",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const EyeIcon = Template.bind({});
+EyeIcon.args = {
+  iconName: "eye",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const BookmarkIcon = Template.bind({});
+BookmarkIcon.args = {
+  iconName: "pen-detalle",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const MapPinIcon = Template.bind({});
+MapPinIcon.args = {
+  iconName: "mapin",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const UserIcon = Template.bind({});
+UserIcon.args = {
+  iconName: "user",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const UsersIcon = Template.bind({});
+UsersIcon.args = {
+  iconName: "users",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const UserGroupIcon = Template.bind({});
+UserGroupIcon.args = {
+  iconName: "usergroup",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const ClockIcon = Template.bind({});
+ClockIcon.args = {
+  iconName: "clock-reloj",
+  theme: "neutral",
+  size: "large", //h-13.33 w-13.33
+};
+
+export const DocumentIcon = Template.bind({});
+DocumentIcon.args = {
+  iconName: "document",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const TagIcon = Template.bind({});
+TagIcon.args = {
+  iconName: "tag",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const XMarkIcon = Template.bind({});
+XMarkIcon.args = {
+  iconName: "xmark",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const PlusIcon = Template.bind({});
+PlusIcon.args = {
+  iconName: "plus",
   theme: "dark",
   size: "medium", //h-12 w-12
 };
@@ -81,6 +150,27 @@ CalendarIcon.args = {
   size: "medium", //h-6.4 w-16
 };
 
+export const Bars3CenterLeftIcon = Template.bind({});
+Bars3CenterLeftIcon.args = {
+  iconName: "barsCenterLeft",
+  theme: "dark",
+  size: "large", //h-11.43        w-14.29
+};
+
+export const Bars3BottomLeftIcon = Template.bind({});
+Bars3BottomLeftIcon.args = {
+  iconName: "barsBottomLeft",
+  theme: "dark",
+  size: "large", //h-11.43        w-14.29
+};
+
+export const Bars3BottomRightIcon = Template.bind({});
+Bars3BottomRightIcon.args = {
+  iconName: "barsBottomRight",
+  theme: "dark",
+  size: "large", //h-11.43        w-14.29
+};
+
 export const ShareIcon = Template.bind({});
 ShareIcon.args = {
   iconName: "share-compartir",
@@ -88,81 +178,109 @@ ShareIcon.args = {
   size: "medium", //h-12.25 w-11.25
 };
 
-export const PencilAltIcon = Template.bind({});
-PencilAltIcon.args = {
-  iconName: "pen-detalle",
+export const ArrowRightCircleIcon = Template.bind({});
+ArrowRightCircleIcon.args = {
+  iconName: "arrowRightC",
   theme: "neutral",
   size: "medium", //h-10 w-10
 };
 
-export const TrashIcon = Template.bind({});
-TrashIcon.args = {
-  iconName: "trash-basura",
-  theme: "neutral",
-  size: "medium", //h-10 w-10
-};
-
-export const DotsVerticalcon = Template.bind({});
-DotsVerticalcon.args = {
-  iconName: "dots-vertical",
-  theme: "neutral",
-  size: "large", //h-24 w-24
-};
-
-export const PhotographIcon = Template.bind({});
-PhotographIcon.args = {
-  iconName: "photo-grafia",
-  theme: "neutral",
-  size: "large", //h-18 w-18
-};
-
-export const ChevronDownIcon = Template.bind({});
-ChevronDownIcon.args = {
-  iconName: "chevron-down",
+export const UserCircleIcon = Template.bind({});
+UserCircleIcon.args = {
+  iconName: "userCirlcle",
   theme: "dark",
-  size: "large", //h-7 w-14
+  size: "large", //h-18 w-18 large
 };
 
-export const ClockIcon = Template.bind({});
-ClockIcon.args = {
-  iconName: "clock-reloj",
-  theme: "neutral",
-  size: "large", //h-13.33 w-13.33
-};
-
-export const ExclamationCircleIcon = Template.bind({});
-ExclamationCircleIcon.args = {
-  iconName: "exclamation-circle",
-  theme: "neutral",
-  size: "small", //h-13.33 w-13.33
-};
-
-export const ArrowRightIcon = Template.bind({});
-ArrowRightIcon.args = {
-  iconName: "arrow-right",
+export const DocumentArrowDownIcon = Template.bind({});
+DocumentArrowDownIcon.args = {
+  iconName: "documentArrowDown",
   theme: "dark",
-  size: "medium", //h-7 w-14
+  size: "large", //h-18 w-18 large
+};
+
+export const DocumentPlusIcon = Template.bind({});
+DocumentPlusIcon.args = {
+  iconName: "documentPlus",
+  theme: "dark",
+  size: "large", //h-18 w-18 large
+};
+
+export const DocumentMinusIcon = Template.bind({});
+DocumentMinusIcon.args = {
+  iconName: "documentMinus",
+  theme: "dark",
+  size: "large", //h-18 w-18 large
+};
+
+export const LinkIcon = Template.bind({});
+LinkIcon.args = {
+  iconName: "link",
+  theme: "dark",
+  size: "large", //h-18 w-18 large
+};
+
+export const QuestionMarkCircleIcon = Template.bind({});
+QuestionMarkCircleIcon.args = {
+  iconName: "questionMark",
+  theme: "dark",
+  size: "large", //h-18 w-18 large
+};
+
+export const ExclamationTriangleIcon = Template.bind({});
+ExclamationTriangleIcon.args = {
+  iconName: "exclamationTriangule",
+  theme: "dark",
+  size: "large", //h-18 w-18 large
+};
+
+export const Square2StackIcon = Template.bind({});
+Square2StackIcon.args = {
+  iconName: "squareTwoStack",
+  theme: "dark",
+  size: "large", //h-18 w-18 large
 };
 
 export const ArrowLeftIcon = Template.bind({});
 ArrowLeftIcon.args = {
-  iconName: "arrow-left",
+  iconName: "arrowLeft",
   theme: "neutral",
   size: "medium", //h-7 w-14
 };
 
-export const MailIcon = Template.bind({});
-MailIcon.args = {
-  iconName: "mail-correo",
-  theme: "light",
-  size: "small", //h-11.43        w-14.29
+export const MinusCircleIcon = Template.bind({});
+MinusCircleIcon.args = {
+  iconName: "minusCircule",
+  theme: "neutral",
+  size: "medium", //h-7 w-14
 };
 
-export const BellIcon = Template.bind({});
-BellIcon.args = {
-  iconName: "bell-campana",
-  theme: "light",
-  size: "small", //h-11.43        w-14.29
+export const ChevronDownIcon = Template.bind({});
+ChevronDownIcon.args = {
+  iconName: "chevronDown",
+  theme: "neutral",
+  size: "medium", //h-7 w-14
+};
+
+export const ArrowLeftCircleIcon = Template.bind({});
+ArrowLeftCircleIcon.args = {
+  iconName: "arrowLeftCircule",
+  theme: "neutral",
+  size: "medium", //h-7 w-14
+};
+
+export const ChevronUpIcon = Template.bind({});
+ChevronUpIcon.args = {
+  iconName: "chevronUp",
+  theme: "dark",
+  size: "large", //h-7 w-14
+};
+
+export const AdjustmentsVerticalIcon = Template.bind({});
+AdjustmentsVerticalIcon.args = {
+  iconName: "adjustment",
+  theme: "dark",
+  size: "large", //h-11.43        w-14.29
 };
 
 export const InformationCircleIcon = Template.bind({});
@@ -172,11 +290,81 @@ InformationCircleIcon.args = {
   size: "large", //h-11.43        w-14.29
 };
 
-export const ChevronLeftIcon = Template.bind({});
-ChevronLeftIcon.args = {
-  iconName: "cheveron-left",
+export const ArrowUpIcon = Template.bind({});
+ArrowUpIcon.args = {
+  iconName: "arrowUp",
   theme: "dark",
   size: "large", //h-11.43        w-14.29
+};
+
+export const DocumentDuplicateIcon = Template.bind({});
+DocumentDuplicateIcon.args = {
+  iconName: "documentDuplicate",
+  theme: "dark",
+  size: "large", //h-11.43        w-14.29
+};
+
+export const ArrowDownIcon = Template.bind({});
+ArrowDownIcon.args = {
+  iconName: "arrowDown",
+  theme: "dark",
+  size: "large", //h-11.43        w-14.29
+};
+
+export const PlusCircleIcon = Template.bind({});
+PlusCircleIcon.args = {
+  iconName: "plusCircle",
+  theme: "dark",
+  size: "large", //h-18 w-18 large
+};
+
+export const ArrowRightOnRectangleIcon = Template.bind({});
+ArrowRightOnRectangleIcon.args = {
+  iconName: "logout",
+  theme: "dark",
+  size: "large", //h-18 w-18 large
+};
+
+export const PaperClipIcon = Template.bind({});
+PaperClipIcon.args = {
+  iconName: "papper",
+  theme: "dark",
+  size: "large", //h-18 w-18 large
+};
+
+export const TrashIcon = Template.bind({});
+TrashIcon.args = {
+  iconName: "trash",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const ChevronUpDownIcon = Template.bind({});
+ChevronUpDownIcon.args = {
+  iconName: "chevronUpDown",
+  theme: "neutral",
+  size: "medium", //h-10 w-10
+};
+
+export const EllipsisHorizontalIcon = Template.bind({});
+EllipsisHorizontalIcon.args = {
+  iconName: "dotsHorizontal",
+  theme: "neutral",
+  size: "large", //h-24 w-24
+};
+
+export const ArrowRightIcon = Template.bind({});
+ArrowRightIcon.args = {
+  iconName: "arrow-right",
+  theme: "dark",
+  size: "medium", //h-7 w-14
+};
+
+export const ExclamationCircleIcon = Template.bind({});
+ExclamationCircleIcon.args = {
+  iconName: "exclamation-circle",
+  theme: "neutral",
+  size: "small", //h-13.33 w-13.33
 };
 
 export const ChevronRightIcon = Template.bind({});
@@ -186,16 +374,30 @@ ChevronRightIcon.args = {
   size: "large", //h-11.43        w-14.29
 };
 
-export const AdjustmentsIcon = Template.bind({});
-AdjustmentsIcon.args = {
-  iconName: "adjustment",
+export const MagnifyingGlassIcon = Template.bind({});
+MagnifyingGlassIcon.args = {
+  iconName: "glass",
   theme: "dark",
   size: "large", //h-11.43        w-14.29
 };
 
-export const MenuAlt3Icon = Template.bind({});
-MenuAlt3Icon.args = {
-  iconName: "bar",
+export const CheckCircleIcon = Template.bind({});
+CheckCircleIcon.args = {
+  iconName: "checkCircle",
+  theme: "neutral",
+  size: "large", //h-19 w-19
+};
+
+export const ChevronLeftIcon = Template.bind({});
+ChevronLeftIcon.args = {
+  iconName: "cheveron-left",
   theme: "dark",
   size: "large", //h-11.43        w-14.29
+};
+
+export const EllipsisVerticalIcon = Template.bind({});
+EllipsisVerticalIcon.args = {
+  iconName: "dotsVertical",
+  theme: "neutral",
+  size: "large", //h-24 w-24
 };
