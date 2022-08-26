@@ -9,6 +9,7 @@ export default {
 
 const Template: ComponentStory<typeof Clip> = (args) => <Clip {...args} />;
 
-export const ClipGit = () => <Clip clipTextValue={"https://github.com/"} />;
-
-export const ClipAmazon = () => <Clip clipTextValue={"https://amazon.com/"} />;
+export const ClipBoardHistory = Template.bind({});
+ClipBoardHistory.args = {
+  clipTextValue: "https://github.com/",
+};
