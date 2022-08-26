@@ -1,11 +1,8 @@
 import { FirebaseOptions, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {
-  collection,
-  CollectionReference,
-  DocumentData,
-  getFirestore,
-} from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
+import { getStorage, ref } from "firebase/storage";
+import { FirebaseCollectionsRefs } from "../types/others";
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -20,10 +17,8 @@ const firebaseConfig: FirebaseOptions = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
-
-interface FirebaseCollectionsRefs {
-  [key: string]: CollectionReference<DocumentData>;
-}
+export const storage = getStorage(app);
+export const storageRef = (fileName: string) => ref(storage, fileName);
 
 export const collectionsRef: FirebaseCollectionsRefs = {
   candidates: collection(db, "candidates"),

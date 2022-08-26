@@ -1,14 +1,38 @@
-import { deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
+import {
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  OrderByDirection,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { collectionsRef, db } from "../lib/firebase-config";
-import { Event } from "../types/events-types";
-import { formatFirebaseDate } from "../lib/utils";
-import { Organizer, OrganizerId } from "../types/organizers-types";
 import { getDocById } from "../lib/helpers";
+import { formatFirebaseDate } from "../lib/utils";
+import { Event } from "../types/events-types";
+import { OrganizerId } from "../types/organizers-types";
 import { TalkProposalId } from "../types/talk-types";
+import { getOrganizer } from "./organizers";
 
-export async function getAllEvents(): Promise<Event[]> {
+export async function getAllEvents(
+  order: OrderByDirection = "asc",
+  filter: string[] = []
+): Promise<Event[]> {
   // get all events
-  const querySnapshot = await getDocs(collectionsRef.events);
+  const docField = where("type", "in", filter);
+  const sortBy = orderBy("startingDate", order);
+
+  let q = query(collectionsRef.events, sortBy);
+  if (filter.length > 0) {
+    q = query(collectionsRef.events, docField, sortBy);
+  }
+
+  const querySnapshot = await getDocs(q);
+  if (querySnapshot.empty) return [];
+
   return Promise.all(
     querySnapshot.docs.map(async (result) => {
       const data = result.data();
@@ -38,18 +62,16 @@ export async function getAllEvents(): Promise<Event[]> {
   );
 }
 
-const getOrganizer = async (params: OrganizerId[]): Promise<Organizer[]> => {
-  // get organizers by id
-  const response = await getDocById(params, collectionsRef.organizers);
-  return response as Organizer[];
-};
-
 export const getEvent = async (id: string) => {
+  if (!id) {
+    throw { code: 422, message: "Se requiere el ID del evento" };
+  }
   // get one event
   const eventSnap = await getDoc(doc(collectionsRef.events, id));
 
-  // TODO: Add error handling
-  if (!eventSnap.exists()) return { error: "El evento no existe!" };
+  if (!eventSnap.exists()) {
+    throw { code: 404, message: "El evento no existe!" };
+  }
 
   const organizersIds: OrganizerId[] = eventSnap.data().organizers;
   const talksIds: TalkProposalId[] = eventSnap.data().talks;
@@ -61,7 +83,21 @@ export const getEvent = async (id: string) => {
   return event;
 };
 
-export const deleteEvent = async ({ id }: Pick<Event, "id">) => {
+export const deleteEvent = async (id: string) => {
+  if (!id) {
+    throw { code: 422, message: "Se requiere el ID del evento" };
+  }
   // delete one event
   await deleteDoc(doc(db, "events", id));
+};
+
+export const updateEvent = async (eventId: string, eventData: {}) => {
+  if (!eventId) {
+    throw { code: 422, message: "Se requiere el ID del evento" };
+  }
+
+  const eventRef = doc(db, "events", eventId);
+  await updateDoc(eventRef, { ...eventData }).catch(() => {
+    throw { code: 404, message: "El evento no existe!" };
+  });
 };
