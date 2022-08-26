@@ -13,33 +13,21 @@ export default {
 
 const Template: ComponentStory<typeof Alert> = (args) => <Alert {...args} />;
 
-export const AnAlert = Template.bind({});
-AnAlert.args = {
+export const Notification = Template.bind({});
+Notification.args = {
   title: "Titulo",
   text: "En caso de que la propuesta sera aprobada, deberás poder asistir físicamente en las fechas establecidas a:",
 };
 
-export const Error = Template.bind({});
-Error.args = {
-  ...AnAlert.args,
-  type: "error",
-};
-
 export const Warning = Template.bind({});
 Warning.args = {
-  ...AnAlert.args,
+  ...Notification.args,
   type: "warning",
 };
 
-export const Valid = Template.bind({});
-Valid.args = {
-  ...AnAlert.args,
-  type: "valid",
-};
-
-export const AlertWithoutTitle = Template.bind({});
-AlertWithoutTitle.args = {
-  ...AnAlert.args,
+export const NotificationWithoutTitle = Template.bind({});
+NotificationWithoutTitle.args = {
+  ...Notification.args,
   title: "",
 };
 
