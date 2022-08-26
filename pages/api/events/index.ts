@@ -1,28 +1,24 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import errorHandler, { err } from "../../../lib/error-handling";
 import { getAllEvents } from "../../../services/events";
-import { QueryParams } from "../../../types/others";
+import { Event } from "../../../types/events-types";
+import { ResponseError } from "../../../types/others";
 
-export default errorHandler(
-  async (req: NextApiRequest, res: NextApiResponse) => {
-    const { method } = req;
-    const { order, type = [] }: QueryParams = req.query;
-
-    if (method === "GET") {
-      const filter: string[] = typeof type === "string" ? [type] : type;
-
-      const data = await getAllEvents(order, filter);
-      const message = undefined;
-
-      return res.status(200).json({ data, message });
-    }
-
-    if (method === "POST") {
-      // TODO: Implement after issue #21 is closed
-
-      return res.status(501).json(err[501]);
-    }
-
-    res.status(405).json(err[405]);
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Event[] | ResponseError | string>
+) {
+  const { method } = req;
+  switch (method) {
+    case "GET":
+      try {
+        const results = await getAllEvents();
+        res.status(200).send(results);
+      } catch (error) {
+        res.status(400).json({ message: "error method", code: 400 });
+      }
+      break;
+    default:
+      res.status(500).send("Method not allowed");
+      break;
   }
-);
+}

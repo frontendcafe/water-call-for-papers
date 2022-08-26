@@ -83,7 +83,7 @@ export const getEvent = async (id: string) => {
   return event;
 };
 
-export const deleteEvent = async (id: string) => {
+export const deleteEvent = async ({ id }: Pick<Event, "id">) => {
   if (!id) {
     throw { code: 422, message: "Se requiere el ID del evento" };
   }
