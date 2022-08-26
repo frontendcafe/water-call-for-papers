@@ -17,7 +17,7 @@ export const Default = Template.bind({});
 //👇 We pass the props to the Primary story
 Default.args = {
   label: "Modalidad del evento",
-  opciones: [
+  options: [
     { title: "Presencial", isDisabled: false },
     { title: "Híbrido", isDisabled: false },
     { title: "Online", isDisabled: false },

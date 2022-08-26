@@ -4,11 +4,11 @@ import { RadioGroup } from "@headlessui/react";
 interface RadioGroup {
   onChange: (value: string) => void;
   label: string;
-  opciones: { title: string; isDisabled: boolean }[];
+  options: { title: string; isDisabled: boolean }[];
 }
 
-export const RadioButtons = ({ label, opciones, onChange }: RadioGroup) => {
-  const [selected, setSelected] = useState(opciones?.[0].title);
+export const RadioButtons = ({ label, options, onChange }: RadioGroup) => {
+  const [selected, setSelected] = useState(options?.[0].title);
 
   return (
     <div className="w-full px-4 py-16">
@@ -22,11 +22,11 @@ export const RadioButtons = ({ label, opciones, onChange }: RadioGroup) => {
         >
           <RadioGroup.Label className="text-xl">{label}</RadioGroup.Label>
           <div className="space-y-2">
-            {opciones.map((opcion) => (
+            {options.map((option) => (
               <RadioGroup.Option
-                key={opcion.title}
-                value={opcion.title}
-                disabled={opcion.isDisabled}
+                key={option.title}
+                value={option.title}
+                disabled={option.isDisabled}
                 //The styles aren't the final ones
                 className={({ active, checked }) =>
                   `${
@@ -56,7 +56,7 @@ export const RadioButtons = ({ label, opciones, onChange }: RadioGroup) => {
                               checked ? "text-white" : "text-gray-900"
                             }`}
                           >
-                            {opcion.title}
+                            {option.title}
                           </RadioGroup.Label>
                         </div>
                       </div>
