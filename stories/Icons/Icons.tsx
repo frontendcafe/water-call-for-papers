@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  
+  AdjustmentsIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
   BellIcon,
@@ -9,13 +11,14 @@ import {
   ChevronRightIcon,
   ClockIcon,
   CogIcon,
-  DotsVerticalIcon, 
+  DotsVerticalIcon,
   FilterIcon,
   HomeIcon,
   InformationCircleIcon,
   LogoutIcon,
   MailIcon,
   MenuAlt2Icon,
+  MenuAlt3Icon,
   PencilAltIcon,
   PhotographIcon,
   PlusCircleIcon,
@@ -28,39 +31,69 @@ import {
 import { ExclamationCircleIcon } from "@heroicons/react/solid";
 
 const iconsSupported: Record<string, JSX.Element> = {
-  "menu-alt-2": <MenuAlt2Icon />,
-  "view-list": <ViewListIcon />,
-  "cog-engranaje": <CogIcon />,
-  "plus-sm": <PlusSmIcon />,
-  "search-glass": <SearchIcon />,
-  "filter-filtro": <FilterIcon />,
-  "calendar-dias": <CalendarIcon />,
-  "dots-vertical": <DotsVerticalIcon />,
-  "share-compartir": <ShareIcon />,
-  "pen-detalle": <PencilAltIcon />,
-  "Trash-basura": <TrashIcon />,
-  "photo-grafia": <PhotographIcon />,
-  "cheveron-down": <ChevronDownIcon />,
-  "clock-reloj": <ClockIcon />,
-  "arrow-right": <ArrowRightIcon />,
+  "menu-icon": <MenuAlt2Icon />,
   "plus-circle": <PlusCircleIcon />,
   "home-casa": <HomeIcon />,
-  "bell-campana": <BellIcon />,
+  "view-list": <ViewListIcon />,
+  "cog-engranaje": <CogIcon />,
   "logout-salir": <LogoutIcon />,
+  "search-glass": <SearchIcon />,
+  "filter-filtro": <FilterIcon />,
+  "plus-sm": <PlusSmIcon />,
+  "calendar-dias": <CalendarIcon />,
+  "share-compartir": <ShareIcon />,
+  "pen-detalle": <PencilAltIcon />,
+  "trash-basura": <TrashIcon />,
+  "dots-vertical": <DotsVerticalIcon />,
+  "photo-grafia": <PhotographIcon />,
+  "chevron-down": <ChevronDownIcon />,
+  "clock-reloj": <ClockIcon />,
+  "exclamation-circle": <ExclamationCircleIcon />,
+  "arrow-right": <ArrowRightIcon />,
+  "arrow-left": <ArrowLeftIcon />,
+  "mail-correo": <MailIcon />,
+  "bell-campana": <BellIcon />,
   "information-circle": <InformationCircleIcon />,
-  "cheveron-left": <ChevronLeftIcon className="w-14 h-7 text-black" />,
-  "cheveron-right": <ChevronRightIcon className="w-14 h-7 text-black" />,
-  "arrow-left": <ArrowLeftIcon className="h-9.33 w-12 text-black" />,
-  "mail-correo": <MailIcon className="w-14,29 h-11,43" />,
-  "exclamation-circle": <ExclamationCircleIcon className="h-12 w-12" />,
+  "cheveron-left": <ChevronLeftIcon />,
+  "cheveron-right": <ChevronRightIcon />,
+  "adjustment": <AdjustmentsIcon/>,
+  "bar": <MenuAlt3Icon/>
+
+  
+
+  
 };
+
+const iconTheme: Record<string, string> = {
+  dark: "text-black",
+  neutral: "text-gray-500",
+  light: "text-white ",
+};
+
+const iconSize: Record<string, string> = {
+  small: "w-3 h-3",
+  medium: "w-3.5 h-3.5",
+  large: "w-5 h-5",
+};
+
+/* const iconName: Record<string, string> = {
+  dark: "stroke-black",
+  neutral: "stroke-gray-500",
+  light: "stoke-white ",
+}; */
 
 export function Icons({
   iconName,
-  className,
+  theme,
+  size,
 }: {
   iconName: string;
-  className: string;
+  theme: "dark" | "light" | "neutral"; // restrinjo a estos valores en theme (hacer lo mismo con names y con size)
+  size: "large" | "medium" | "small";
 }) {
-  return <div className={className}> {iconsSupported[iconName]}</div>;
+  return (
+    <div className={`${iconTheme[theme]} ${iconSize[size]}`}>
+      {iconsSupported[iconName]}
+    </div>
+  );
 }
