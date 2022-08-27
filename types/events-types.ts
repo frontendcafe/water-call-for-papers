@@ -13,8 +13,10 @@ export enum EventStatus {
   Finalizado = "Finalizado",
 }
 
+export type EventId = string;
+
 export interface Event {
-  id: string;
+  id: EventId;
   name: string;
   type: EventType;
   description: string;

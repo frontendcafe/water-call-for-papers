@@ -3,10 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../stories/Button/Button";
 import logo_vercel from "../public/img/powered-by-vercel.svg";
+import Layout from "../components/Layout";
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-slate-500 rounded p-10">
+    <Layout>
       Hola
       <Button onClick={() => null}>Click</Button>
       <div className="inline-flex bg-slate-700">
@@ -23,7 +24,7 @@ const Home: NextPage = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
