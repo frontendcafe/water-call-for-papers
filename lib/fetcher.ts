@@ -40,6 +40,8 @@ export async function getAllEvents() {
 
 /**
  * Función para retornar un evento de la API en base a un id dado
+ *
+ * @param  {EventId} id
  */
 export async function getEventById(id: EventId) {
   return await fetcher(`/api/events/${id}`);
