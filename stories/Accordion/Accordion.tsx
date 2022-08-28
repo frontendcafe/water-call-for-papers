@@ -22,7 +22,7 @@ export const AccordionDefault = ({ title }: Accordion) => {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="w-full py-2 rounded-md bg-gray-400 text-gray-600 text-left font-bold">
+            <Disclosure.Button className="w-full py-2 rounded-md bg-gray-400 text-gray-600 text-left font-bold hover:bg-gray-200 focus:border-gray-400 focus:border-2">
               <span className="ml-3">{title}</span>
             </Disclosure.Button>
             {!open && (
@@ -43,7 +43,7 @@ export const AccordionDefault = ({ title }: Accordion) => {
                   />
                   <InputText
                     label="Tema"
-                    description="Indicá cuáles son los trmas que te gustaría que se traten en tu evento"
+                    description="Indicá cuáles son los temas que te gustaría que se traten en tu evento"
                     idValue="TagName"
                     placeholder="Escribe un tema"
                   />

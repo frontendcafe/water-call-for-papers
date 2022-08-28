@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 
 interface InputTextProps {
   /**
@@ -17,10 +17,6 @@ interface InputTextProps {
    */
   placeholder?: string;
   /**
-   * Value in tag input.
-   */
-  value?: string;
-  /**
    * idValue relation between label and input (htmlFor).
    */
   idValue: string;
@@ -36,8 +32,6 @@ interface InputTextProps {
    * Input required option
    */
   required?: string;
-
-  onClick?: () => void;
 
   /**
    * Input States
@@ -63,13 +57,19 @@ export const InputText = ({
   required,
   position,
   disabled,
-  ...props
 }: InputTextProps) => {
+  const [value, setValue] = useState("");
+
   const positionIconText = position == "left" && "pl-8 pr-2 py-2";
 
   const withError = error
     ? "border-red-400 focus:border-red-400"
     : "border-gray-500";
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setValue(value);
+  };
 
   return (
     <div className="flex flex-col">
@@ -88,14 +88,15 @@ export const InputText = ({
         type="text"
         placeholder={placeholder}
         id={idValue}
-        value={props.value}
+        value={value}
         className={`px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 disabled:border-gray-200 ${positionIconText} ${withError}`}
         disabled={disabled}
+        onChange={handleChange}
       />
       {/* Icon component goes here */}
       {/* <div
           className={
-            visible
+            props.visible
               ? `absolute top-[50px] ${position}-6`
               : `absolute top-[30px] ${position}-6`
           }
