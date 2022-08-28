@@ -1,7 +1,12 @@
 import React from "react";
 import { Tab } from "@headlessui/react";
 import { TypeChildren } from "./types";
+import { TabsContext } from "./TabsContext/TabsContext";
 
 export const TabsPanels = ({ children }: TypeChildren) => {
-  return <Tab.Panels>{children}</Tab.Panels>;
+  return (
+    <TabsContext.Provider value={{}}>
+      <Tab.Panels>{children}</Tab.Panels>
+    </TabsContext.Provider>
+  );
 };
