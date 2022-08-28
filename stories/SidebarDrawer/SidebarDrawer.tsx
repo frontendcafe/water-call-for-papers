@@ -37,7 +37,6 @@ export const SidebarDrawer = () => {
       className={tw(
         "absolute md:static",
         "bg-black text-secondary-200",
-        "",
         "flex flex-col justify-between",
         "font-semibold whitespace-nowrap",
         "min-h-screen",
@@ -116,7 +115,7 @@ function EventsNavSection({ open }: Pick<DrawerCompProps, "open">) {
 
       <ul className="space-y-2 ">
         {dummyData.map(({ initials, title }) => (
-          <li>
+          <li key={title}>
             <StyledLink>
               <IconContainer>
                 <div className="inline-flex items-center justify-center w-8 h-8 text-xs rounded-full even:text-warning-700 odd:text-black bg-secondary-100">
