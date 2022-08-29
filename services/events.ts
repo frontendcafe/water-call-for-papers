@@ -1,4 +1,5 @@
 import {
+  addDoc,
   deleteDoc,
   doc,
   getDoc,
@@ -13,9 +14,9 @@ import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { formatFirebaseDate } from "../lib/utils";
 import { Event } from "../types/events-types";
-import { OrganizerId } from "../types/organizers-types";
+import { OrganizerId, Organizer } from "../types/organizers-types";
 import { TalkProposalId } from "../types/talk-types";
-import { getOrganizer } from "./organizers";
+import { addOrganizer, getOrganizer } from "./organizers";
 
 export async function getAllEvents(
   order: OrderByDirection = "asc",
@@ -100,4 +101,31 @@ export const updateEvent = async (eventId: string, eventData: {}) => {
   await updateDoc(eventRef, { ...eventData }).catch(() => {
     throw { code: 404, message: "El evento no existe!" };
   });
+};
+
+export const createEvent = async (event: Event) => {
+  // create new event
+  event.organizers.map(async (result) => {
+    const { fullName, email } = result as Omit<Organizer, "id">;
+    const eventSnap = await getDoc(doc(collectionsRef.organizers, email));
+    if (!eventSnap.exists()) {
+      // validate if organizer exists and create a new organizer
+      await addOrganizer({
+        id: email,
+        fullName,
+        email,
+      });
+    }
+  });
+  //create events
+  const docRef = await addDoc(collectionsRef.events, event);
+  const EventRef = doc(db, "events", docRef.id);
+  await updateDoc(EventRef, {
+    id: docRef.id,
+  });
+  const docSnapEvent = await getDoc(EventRef);
+  if (!docSnapEvent.exists()) {
+    throw { code: 404, message: "Evento no creado!" };
+  }
+  return docSnapEvent.data();
 };
