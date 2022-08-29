@@ -1,4 +1,5 @@
 import {
+  addDoc,
   deleteDoc,
   doc,
   getDoc,
@@ -6,7 +7,6 @@ import {
   orderBy,
   OrderByDirection,
   query,
-  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -14,7 +14,7 @@ import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { formatFirebaseDate } from "../lib/utils";
 import { Event } from "../types/events-types";
-import { OrganizerId } from "../types/organizers-types";
+import { OrganizerId, Organizer } from "../types/organizers-types";
 import { TalkProposalId } from "../types/talk-types";
 import { addOrganizer, getOrganizer } from "./organizers";
 
@@ -105,19 +105,24 @@ export const updateEvent = async (eventId: string, eventData: {}) => {
 
 export const createEvent = async (event: Event) => {
   // create new event
-  event.organizers.map(async (result) => {
-    const id = result as OrganizerId;
-    const eventSnap = await getDoc(doc(collectionsRef.organizers, id));
+  const data: Array<Omit<Organizer, "id">> | String[] = event.organizers;
+  data.map(async (result) => {
+    const { fullName, email } = result as Omit<Organizer, "id">;
+    const eventSnap = await getDoc(doc(collectionsRef.organizers, email));
     if (!eventSnap.exists()) {
       // validate if organizer exists and create a new organizer
       await addOrganizer({
-        id,
-        fullName: "",
-        email: id,
+        id: email,
+        fullName,
+        email,
       });
     }
   });
   //create events
-  const docRef = await setDoc(doc(db, "events", event.id), event);
-  return docRef;
+  const docRef = await addDoc(collectionsRef.events, event);
+  const EventRef = doc(db, "events", docRef.id);
+  await updateDoc(EventRef, {
+    id: docRef.id,
+  });
+  return docRef.id;
 };
