@@ -17,6 +17,7 @@ export const addTopic = (topics: Pick<Topic, "description">[]) => {
 
     const [topicData] = topicsSnap.docs.map((topic) => {
       const data = topic.data();
+      data.id = topic.id;
       return data;
     });
 
