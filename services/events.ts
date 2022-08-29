@@ -105,8 +105,7 @@ export const updateEvent = async (eventId: string, eventData: {}) => {
 
 export const createEvent = async (event: Event) => {
   // create new event
-  const data: Array<Omit<Organizer, "id">> | String[] = event.organizers;
-  data.map(async (result) => {
+  event.organizers.map(async (result) => {
     const { fullName, email } = result as Omit<Organizer, "id">;
     const eventSnap = await getDoc(doc(collectionsRef.organizers, email));
     if (!eventSnap.exists()) {
@@ -124,5 +123,9 @@ export const createEvent = async (event: Event) => {
   await updateDoc(EventRef, {
     id: docRef.id,
   });
-  return docRef.id;
+  const docSnapEvent = await getDoc(EventRef);
+  if (!docSnapEvent.exists()) {
+    throw { code: 404, message: "Evento no creado!" };
+  }
+  return docSnapEvent.data();
 };
