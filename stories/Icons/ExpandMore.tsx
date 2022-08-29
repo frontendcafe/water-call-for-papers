@@ -10,9 +10,9 @@ export const ExpandMore = () => (
     <path
       d="M12.3074 5.89746L7.82019 10.3846L3.33301 5.89746"
       stroke="#111827"
-      stroke-width="1.28205"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.28205"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
