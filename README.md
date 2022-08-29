@@ -69,3 +69,7 @@ npm run storybook
 - Tailwind CSS IntelliSense
 <img width="638" alt="image" src="https://user-images.githubusercontent.com/38388588/183519369-c5d2d390-e3e9-4fb4-9f37-eadc9887519a.png">
 
+
+<a href="https://vercel.com/?utm_source=hifrontendcafe&utm_campaign=oss">
+  <img src="https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg" alt="Powered by Vercel" />
+</a>
