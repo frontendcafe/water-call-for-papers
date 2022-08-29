@@ -117,4 +117,5 @@ Expand.args = {
       variant="primary"
     />
   ),
+  menuLabel: "Random label",
 };
