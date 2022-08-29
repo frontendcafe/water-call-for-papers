@@ -5,7 +5,7 @@ import { TabsContext } from "./TabsContext/TabsContext";
 
 export const TabsPanels = ({ children }: TypeChildren) => {
   return (
-    <TabsContext.Provider value={{}}>
+    <TabsContext.Provider value={{ PanelsParent: true }}>
       <Tab.Panels>{children}</Tab.Panels>
     </TabsContext.Provider>
   );

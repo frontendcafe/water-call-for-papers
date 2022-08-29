@@ -5,8 +5,8 @@ import { TabsContext } from "./TabsContext/TabsContext";
 
 export const TabsList = ({ children }: TypeChildren) => {
   return (
-    <TabsContext.Provider value={{}}>
-      <Tab.List className="flex space-x-4 ">{children}</Tab.List>
+    <TabsContext.Provider value={{ ListParent: true }}>
+      <Tab.List className="flex space-x-4">{children}</Tab.List>
     </TabsContext.Provider>
   );
 };

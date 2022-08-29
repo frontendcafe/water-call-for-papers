@@ -1,3 +1,8 @@
 import { createContext } from "react";
 
-export const TabsContext = createContext();
+interface ContextType {
+  ListParent?: boolean;
+  PanelsParent?: boolean;
+}
+
+export const TabsContext = createContext<ContextType>({} as ContextType);

@@ -4,7 +4,8 @@ import { TabsProps } from "./types";
 import { useTabsContext } from "./Hooks/useTabsContext";
 
 const Tabs = ({ children, disabled }: TabsProps) => {
-  useTabsContext("<Tab />", "<TabsList />");
+  const componenteName = "tab";
+  useTabsContext("<Tab />", "<TabsList />", componenteName);
 
   return (
     <Tab

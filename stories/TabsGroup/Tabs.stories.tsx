@@ -1,10 +1,10 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { TabsGroup } from "./TabsGroup";
-import { TabsList } from "./TabsList";
 import { Tab } from "./Tab";
 import { TabsPanels } from "./TabsPanels";
 import { TabsPanel } from "./TabsPanel";
+import { TabsList } from "./TabsList";
 
 const data = [
   {

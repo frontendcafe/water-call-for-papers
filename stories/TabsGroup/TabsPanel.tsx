@@ -4,6 +4,8 @@ import { TypeChildren } from "./types";
 import { useTabsContext } from "./Hooks/useTabsContext";
 
 export const TabsPanel = ({ children }: TypeChildren) => {
-  useTabsContext("<TabsPanel />", "<TabsPanels");
+  const componentName = "panel";
+  useTabsContext("<TabsPanel />", "<TabsPanels", componentName);
+
   return <Tab.Panel className="bg-white p-3">{children}</Tab.Panel>;
 };

@@ -8,13 +8,21 @@ import { TabsContext } from "../TabsContext/TabsContext";
 
 export function useTabsContext(
   childComponentName: string,
-  parentComponentName: string
+  parentComponentName: string,
+  componenteName: string
 ) {
   const context = useContext(TabsContext);
-  if (!context) {
+  if (componenteName === "tab" && !context.ListParent) {
     throw new Error(
       `${childComponentName} is missing a parent ${parentComponentName} component. `
     );
   }
+
+  if (componenteName === "panel" && !context.PanelsParent) {
+    throw new Error(
+      `${childComponentName} is missing a parent ${parentComponentName} component. `
+    );
+  }
+
   return context;
 }
