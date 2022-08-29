@@ -19,6 +19,9 @@ interface MenuDropdownProps {
 
   // button, Button component.
   button: React.ReactNode;
+
+  // ARIA label for menu items, optional.
+  menuLabel?: string;
 }
 
 /**
@@ -26,9 +29,14 @@ interface MenuDropdownProps {
  * Render the button and the item list received as prop.
  * @param {object[]} itemList - Array, in each position contains an object with 'icon', 'textContent' and 'href' props.
  * @param {React.ReactNode} button - JSX component.
+ * @param {string} menuLabel - ARIA label for menu items, default 'Items menú'.
  */
 
-export const MenuDropdown = ({ itemList, button }: MenuDropdownProps) => {
+export const MenuDropdown = ({
+  itemList,
+  button,
+  menuLabel,
+}: MenuDropdownProps) => {
   // Set text color depending on item.textContent
   const textColor = (text: string) =>
     text === "Eliminar" ? "text-[#B91C1C]" : "text-[#393939]";
@@ -59,6 +67,7 @@ export const MenuDropdown = ({ itemList, button }: MenuDropdownProps) => {
     <Menu>
       <Menu.Button as={React.Fragment}>{button}</Menu.Button>
       <Menu.Items
+        aria-label={menuLabel || "Items menú"}
         className={`rounded-md shadow-[0px_5px_9px_rgba(0,0,0,0.25)] w-[176px]`}
       >
         {menuItems}
