@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Icons } from "./Icons";
 
 export default {
-  title: "Example/Icons", // Title for our storybook
+  title: "Example/Icons", // Title for our story  
   component: Icons, // Component to render
 } as ComponentMeta<typeof Icons>;
 
@@ -33,14 +33,14 @@ HomeIcon.args = {
 
 export const ShieldExclamationIcon = Template.bind({});
 ShieldExclamationIcon.args = {
-  iconName: "home-casa",
+  iconName: "shield",
   theme: "neutral",
   size: "large", //h-18 w-18
 };
 
 export const CogIcon = Template.bind({});
 CogIcon.args = {
-  iconName: "cog-engranaje",
+  iconName: "cog",
   theme: "neutral",
   size: "large", //h-18 w-18
 };
@@ -54,7 +54,7 @@ CheckIcon.args = {
 
 export const PencilSquareIcon = Template.bind({});
 PencilSquareIcon.args = {
-  iconName: "pen-detalle",
+  iconName: "detail",
   theme: "neutral",
   size: "medium", //h-10 w-10
 };
@@ -75,7 +75,7 @@ EyeIcon.args = {
 
 export const BookmarkIcon = Template.bind({});
 BookmarkIcon.args = {
-  iconName: "pen-detalle",
+  iconName: "book",
   theme: "neutral",
   size: "medium", //h-10 w-10
 };
@@ -110,7 +110,7 @@ UserGroupIcon.args = {
 
 export const ClockIcon = Template.bind({});
 ClockIcon.args = {
-  iconName: "clock-reloj",
+  iconName: "clock",
   theme: "neutral",
   size: "large", //h-13.33 w-13.33
 };
@@ -145,7 +145,7 @@ PlusIcon.args = {
 
 export const CalendarIcon = Template.bind({});
 CalendarIcon.args = {
-  iconName: "calendar-dias",
+  iconName: "calendar",
   theme: "neutral",
   size: "medium", //h-6.4 w-16
 };
@@ -173,7 +173,7 @@ Bars3BottomRightIcon.args = {
 
 export const ShareIcon = Template.bind({});
 ShareIcon.args = {
-  iconName: "share-compartir",
+  iconName: "share",
   theme: "neutral",
   size: "medium", //h-12.25 w-11.25
 };
@@ -187,7 +187,7 @@ ArrowRightCircleIcon.args = {
 
 export const UserCircleIcon = Template.bind({});
 UserCircleIcon.args = {
-  iconName: "userCirlcle",
+  iconName: "userCircle",
   theme: "dark",
   size: "large", //h-18 w-18 large
 };
@@ -285,9 +285,9 @@ AdjustmentsVerticalIcon.args = {
 
 export const InformationCircleIcon = Template.bind({});
 InformationCircleIcon.args = {
-  iconName: "information-circle",
+  iconName: "informationCircle",
   theme: "dark",
-  size: "large", //h-11.43        w-14.29
+  size: "large", //h-11.43  w-14.29
 };
 
 export const ArrowUpIcon = Template.bind({});
@@ -355,21 +355,21 @@ EllipsisHorizontalIcon.args = {
 
 export const ArrowRightIcon = Template.bind({});
 ArrowRightIcon.args = {
-  iconName: "arrow-right",
+  iconName: "arrowRight",
   theme: "dark",
   size: "medium", //h-7 w-14
 };
 
 export const ExclamationCircleIcon = Template.bind({});
 ExclamationCircleIcon.args = {
-  iconName: "exclamation-circle",
+  iconName: "exclamationCircle",
   theme: "neutral",
   size: "small", //h-13.33 w-13.33
 };
 
 export const ChevronRightIcon = Template.bind({});
 ChevronRightIcon.args = {
-  iconName: "cheveron-right",
+  iconName: "chevronRight",
   theme: "dark",
   size: "large", //h-11.43        w-14.29
 };
@@ -390,14 +390,14 @@ CheckCircleIcon.args = {
 
 export const ChevronLeftIcon = Template.bind({});
 ChevronLeftIcon.args = {
-  iconName: "cheveron-left",
+  iconName: "chevronLeft",
   theme: "dark",
   size: "large", //h-11.43        w-14.29
 };
 
 export const EllipsisVerticalIcon = Template.bind({});
 EllipsisVerticalIcon.args = {
-  iconName: "dotsVertical",
+  iconName: "ellipsisVertical",
   theme: "neutral",
   size: "large", //h-24 w-24
 };
