@@ -15,7 +15,7 @@ export enum EventStatus {
 
 export type EventId = string;
 
-export interface Event {
+export interface EventData {
   id: EventId;
   name: string;
   type: EventType;

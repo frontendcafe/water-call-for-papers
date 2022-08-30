@@ -12,7 +12,7 @@ import {
 import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { formatFirebaseDate } from "../lib/utils";
-import { Event } from "../types/events-types";
+import { EventData } from "../types/events-types";
 import { OrganizerId } from "../types/organizers-types";
 import { TalkProposalId } from "../types/talk-types";
 import { getOrganizer } from "./organizers";
@@ -20,7 +20,7 @@ import { getOrganizer } from "./organizers";
 export async function getAllEvents(
   order: OrderByDirection = "asc",
   filter: string[] = []
-): Promise<Event[]> {
+): Promise<EventData[]> {
   // get all events
   const docField = where("type", "in", filter);
   const sortBy = orderBy("startingDate", order);
@@ -38,7 +38,7 @@ export async function getAllEvents(
       const data = result.data();
       const organizers = await getOrganizer(data.organizers);
 
-      const event: Event = {
+      const event: EventData = {
         id: data.id,
         name: data.name,
         description: data.description,

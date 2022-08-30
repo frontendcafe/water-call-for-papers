@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../../components/Layout";
 import { getAllEvents } from "../../lib/fetcher";
 import { Spinner } from "../../stories/Icons/Spinner";
+import { EventData } from "../../types/events-types";
 
 const ListEvent = () => {
-  const [events, setEvents] = useState<Event[] | null>(null);
+  const [events, setEvents] = useState<EventData[] | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getAllEvents()
       .then(({ data }) => {
-        setEvents(data as Event[]);
+        setEvents(data as EventData[]);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -25,10 +25,10 @@ const ListEvent = () => {
   }
 
   if (error) {
-    return <Layout>{JSON.stringify({ error })}</Layout>;
+    return <>{JSON.stringify({ error })}</>;
   }
 
-  return <Layout>{JSON.stringify({ events })}</Layout>;
+  return <>{JSON.stringify({ events })}</>;
 };
 
 export default ListEvent;

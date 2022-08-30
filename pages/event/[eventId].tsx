@@ -1,16 +1,16 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Layout from "../../components/Layout";
 import { getEventById } from "../../lib/fetcher";
 import { Spinner } from "../../stories/Icons/Spinner";
+import { EventData } from "../../types/events-types";
 
-const Event: NextPage = () => {
+const EventPage: NextPage = () => {
   const {
     query: { eventId },
   } = useRouter();
 
-  const [event, setEvent] = useState<Event | null>(null);
+  const [event, setEvent] = useState<EventData | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -18,7 +18,7 @@ const Event: NextPage = () => {
     if (!eventId) return;
     getEventById(String(eventId))
       .then(({ data }) => {
-        setEvent(data as Event);
+        setEvent(data as EventData);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -32,10 +32,10 @@ const Event: NextPage = () => {
   }
 
   if (error) {
-    return <Layout>{JSON.stringify({ error })}</Layout>;
+    return <>{JSON.stringify({ error })}</>;
   }
 
-  return <Layout>{JSON.stringify(event)}</Layout>;
+  return <>{JSON.stringify(event)}</>;
 };
 
-export default Event;
+export default EventPage;
