@@ -103,7 +103,7 @@ export const updateEvent = async (eventId: string, eventData: {}) => {
   });
 };
 
-export const createEvent = async (event: Event) => {
+export const createEvent = async (event: EventData) => {
   // create new event
   event.organizers.map(async (result) => {
     const { fullName, email } = result as Omit<Organizer, "id">;
