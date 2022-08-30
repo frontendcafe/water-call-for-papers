@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import errorHandler, { err } from "../../../lib/error-handling";
-import { getAllEvents } from "../../../services/events";
+import { createEvent, getAllEvents } from "../../../services/events";
 import { QueryParams } from "../../../types/others";
 
 export default errorHandler(
   async (req: NextApiRequest, res: NextApiResponse) => {
-    const { method } = req;
+    const { body, method } = req;
     const { order, type = [] }: QueryParams = req.query;
 
     if (method === "GET") {
@@ -18,9 +18,10 @@ export default errorHandler(
     }
 
     if (method === "POST") {
-      // TODO: Implement after issue #21 is closed
+      const data = await createEvent(body);
+      const message = "Se ha creado el evento";
 
-      return res.status(501).json(err[501]);
+      return res.status(201).json({ data, message });
     }
 
     res.status(405).json(err[405]);
