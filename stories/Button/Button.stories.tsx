@@ -1,4 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Bookmark } from "../Icons/Bookmark";
+import { DotsVertical } from "../Icons/DotsVertical";
 import { Spinner } from "../Icons/Spinner";
 
 import { Button } from "./Button";
@@ -15,7 +17,11 @@ export default {
   },
   // More info about args: https://storybook.js.org/docs/react/writing-stories/args#component-args
   args: {
-    children: "Button",
+    children: (
+      <>
+        <Bookmark /> Button <Bookmark />
+      </>
+    ),
     disabled: false,
     icon: false,
     loading: false,
@@ -72,23 +78,24 @@ Disabled.args = {
 export const IconWithText = Template.bind({});
 IconWithText.args = {
   children: (
-    // TODO: Add proper icon component or SVG
     <>
-      <span>🦄</span> <span className="sr-only">Button</span>
+      <DotsVertical /> <span className="sr-only">Button</span>
     </>
   ),
+  icon: true,
+  variant: "secondary",
   rounded: "medium",
 };
 
 export const OnlyIcon = Template.bind({});
 OnlyIcon.args = {
   children: (
-    // TODO: Add proper icon component or SVG
     <>
-      <span className="sr-only">Button</span> <span>🦄</span>
+      <span className="sr-only">Button</span> <DotsVertical />
     </>
   ),
   icon: true,
+  variant: "secondary",
   rounded: "full",
 };
 
