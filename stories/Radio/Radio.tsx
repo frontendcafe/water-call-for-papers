@@ -29,15 +29,9 @@ const RadioButtons = ({
                 disabled={option.isDisabled}
                 //Use Figma's actualized styles keeping in mind HeadlessUI
                 className={({ active, checked }) =>
-                  `${
-                    active
-                      ? "ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300"
-                      : ""
-                  }
-                  ${
-                    checked ? "bg-sky-900 bg-opacity-75 text-white" : "bg-white"
-                  }
-                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
+                  `${active ? "" : ""}
+                  ${checked ? "text-black" : "bg-white"}
+                    relative flex cursor-pointer rounded-lg px-5 py-4 `
                 }
               >
                 {({ checked }) => (
@@ -47,15 +41,15 @@ const RadioButtons = ({
                         <div className="flex text-sm">
                           {checked && (
                             <div className="shrink-0 text-white">
-                              <CheckIcon className="h-6 w-6" />{" "}
+                              <CheckIcon className="h-6 w-6 px-5 py-4" />{" "}
                               {/*Use Icons component*/}
                             </div>
                           )}
                           {/*Use Figma's actualized styles keeping in mind HeadlessUI*/}
                           <RadioGroup.Label
                             as="p"
-                            className={`font-medium  ${
-                              checked ? "text-white" : "text-gray-900"
+                            className={`font-family: 'Work Sans' font-style: normal ${
+                              checked ? "text-black" : "text-black"
                             }`}
                           >
                             {option.title}
