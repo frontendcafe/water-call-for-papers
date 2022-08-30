@@ -19,7 +19,7 @@ export default {
     disabled: false,
     icon: false,
     loading: false,
-    rounded: "small",
+    rounded: "medium",
     size: "medium",
     variant: "primary",
   },
@@ -106,11 +106,4 @@ export const IconWithoutBackground = Template.bind({});
 IconWithoutBackground.args = {
   ...OnlyIcon.args,
   variant: "transparent",
-};
-
-export const SquaredIconWithOutline = Template.bind({});
-SquaredIconWithOutline.args = {
-  ...OnlyIcon.args,
-  rounded: "small",
-  variant: "secondary",
 };

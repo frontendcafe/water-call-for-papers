@@ -20,7 +20,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button rounded corners. Default is "md".
    */
-  rounded?: "small" | "medium" | "full";
+  rounded?: "medium" | "full";
   /**
    * Click handler required for the button.
    */
@@ -52,7 +52,7 @@ export const Button = ({
   icon,
   loading,
   onClick,
-  rounded = icon ? "full" : "small",
+  rounded = icon ? "full" : "medium",
   size = "medium",
   variant = "primary",
   ...props
@@ -79,7 +79,6 @@ export const Button = ({
     "focus:outline-2 focus:ring-1 focus:ring-[#BAC0CA] focus:outline-offset-2 focus:outline-dashed focus:outline-neutral-400";
 
   const borderRadius = {
-    small: "rounded-md",
     medium: "rounded-xl",
     full: "rounded-full",
   };
