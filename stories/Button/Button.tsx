@@ -8,7 +8,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button sizes.
    */
-  size?: "small" | "medium" | "large" | "stretched";
+  size?: "small" | "normal" | "stretched";
   /**
    * Indicates that the button is disabled, this prevents the button from being clickable.
    */
@@ -53,7 +53,7 @@ export const Button = ({
   loading,
   onClick,
   rounded = icon ? "full" : "medium",
-  size = "medium",
+  size = "normal",
   variant = "primary",
   ...props
 }: ButtonProps) => {
@@ -65,11 +65,10 @@ export const Button = ({
   };
 
   const button = {
-    small: icon ? "p-1" : "text-xs px-6 py-2 ",
-    medium: icon ? "p-2" : "text-base px-8 py-2 ",
-    large: icon ? "p-4" : "text-lg px-12 py-2 ",
-    // TODO: Come back to this later.
-    stretched: icon ? "p-2 w-full" : "px-6 py-2 w-full",
+    small: icon ? "" : "px-4 py-2",
+    normal: icon ? "p-1" : "px-6 py-4",
+    // TODO: Maybe I can add 'stretched' as a boolean to be able to use it with both 'small' and 'normal' sizes
+    stretched: icon ? "p-1 w-full" : "py-4 w-full",
   };
 
   const disabledStyles =
@@ -87,7 +86,7 @@ export const Button = ({
 
   return (
     <button
-      className={`${alignmentStyles} font-bold ${borderRadius[rounded]} ${focusStyles} ${mode[variant]} ${button[size]} ${disabledStyles}`}
+      className={`${alignmentStyles} font-medium text-base ${borderRadius[rounded]} ${focusStyles} ${mode[variant]} ${button[size]} ${disabledStyles}`}
       disabled={loading || disabled}
       onClick={onClick}
       {...props}

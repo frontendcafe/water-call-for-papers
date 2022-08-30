@@ -20,7 +20,7 @@ export default {
     icon: false,
     loading: false,
     rounded: "medium",
-    size: "medium",
+    size: "normal",
     variant: "primary",
   },
 } as ComponentMeta<typeof Button>;
@@ -46,16 +46,6 @@ Transparent.args = {
 export const Small = Template.bind({});
 Small.args = {
   size: "small",
-};
-
-export const Medium = Template.bind({});
-Medium.args = {
-  size: "medium",
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  size: "large",
 };
 
 export const Stretched = Template.bind({});
