@@ -18,20 +18,20 @@ export default {
 export const RadioGroupButtons: ComponentStory<typeof RadioButtons> = () => {
   const options = [
     { title: "Presencial", isDisabled: false },
-    { title: "Híbrido", isDisabled: false },
     { title: "Online", isDisabled: false },
-  ]
+    { title: "Híbrido", isDisabled: false },
+  ];
   const [selected, setSelected] = useState<string>(options[0].title);
   //Typing functions with <type> is like using : in the props
   return (
     //I have to check Figma's styles
     <div className="flex flex-col items-start">
-      <RadioButtons 
-      label="Modalidad del evento"
-      options={options}
-      onSelectedChange={(value: string) => setSelected(value)}
-      value={selected}
-      defaultValue={options[0].title}
+      <RadioButtons
+        label="Modalidad (*)"
+        options={options}
+        onSelectedChange={(value: string) => setSelected(value)}
+        value={selected}
+        defaultValue={options[0].title}
       />
     </div>
   );
