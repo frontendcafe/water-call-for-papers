@@ -1,12 +1,11 @@
-interface AlertProps {
+import { HTMLAttributes } from "react";
+
+type AllowAttrib = "aria-live" | "role";
+interface AlertProps extends Pick<HTMLAttributes<HTMLDivElement>, AllowAttrib> {
   /**
    * Type of alert, by default its color grey (notification).
    */
   type: "notification" | "warning";
-  /**
-   * aria-live required attribute
-   */
-  "aria-live": "off" | "polite" | "assertive";
   /**
    * Title of the alert, can be optional
    */
@@ -22,7 +21,6 @@ interface AlertProps {
 }
 
 export const Alert = ({
-  "aria-live": ariaLive,
   title,
   text,
   type = "notification",
@@ -36,7 +34,6 @@ export const Alert = ({
 
   return (
     <div
-      aria-live={ariaLive}
       className={`w-full p-4 border-l-[6px] rounded-md ${variant[type]}`}
       {...props}
     >

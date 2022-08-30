@@ -8,6 +8,7 @@ export default {
 
   args: {
     "aria-live": "polite",
+    role: "alert",
   },
 } as ComponentMeta<typeof Alert>;
 
@@ -23,6 +24,7 @@ export const Warning = Template.bind({});
 Warning.args = {
   ...Notification.args,
   type: "warning",
+  "aria-live": "assertive",
 };
 
 export const NotificationWithoutTitle = Template.bind({});
