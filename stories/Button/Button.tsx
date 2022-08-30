@@ -1,7 +1,8 @@
 import React, { ButtonHTMLAttributes, MouseEvent } from "react";
 import { tw } from "../../lib/helpers";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps
+  extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, "aria-label" | "type"> {
   /**
    * Button styles.
    */
@@ -25,7 +26,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Click handler required for the button.
    */
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   /**
    * Button text content or/and icon.
    */
