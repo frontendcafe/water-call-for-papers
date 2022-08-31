@@ -6,8 +6,8 @@ interface ClipProps {
 
 export const Clip = ({ clipTextValue }: ClipProps) => {
   const refButton = useRef<HTMLButtonElement>(null);
-  const [classNameValue, setClassNameValue] = useState("0");
   const [messageContent, setMessageContent] = useState("Copiado");
+  const [isCopy, setIsCopy] = useState(false);
 
   const handleClick = () => {
     const valueToRead = refButton?.current?.value;
@@ -15,13 +15,12 @@ export const Clip = ({ clipTextValue }: ClipProps) => {
       navigator.clipboard
         .writeText(valueToRead)
         .then(() => {
-          setClassNameValue("1");
+          setIsCopy(true);
         })
         .catch((error) => {
-          setClassNameValue("1");
           setMessageContent(error);
         });
-      setTimeout(() => setClassNameValue("0"), 1000);
+      setTimeout(() => setIsCopy(false), 1000);
     }
   };
 
@@ -57,9 +56,9 @@ export const Clip = ({ clipTextValue }: ClipProps) => {
           </span>
         </div>
       </button>
-      <span className={`absolute -left-0 -bottom-8 opacity-${classNameValue}`}>
-        {messageContent}
-      </span>
+      {isCopy && (
+        <span className={`absolute -left-0 -bottom-8`}>{messageContent}</span>
+      )}
     </div>
   );
 };
