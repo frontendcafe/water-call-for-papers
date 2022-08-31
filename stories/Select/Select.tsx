@@ -2,11 +2,11 @@ import { Fragment, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
-
 interface SelectValue {
   name: string;
   value: string;
-  isSelected: boolean;
+  isSelected?: boolean;
+  isDisabled?: boolean;
 }
 
 interface SelectProps {
@@ -23,6 +23,10 @@ interface SelectProps {
    */
   errorMessage?: string;
   /**
+   * Whether the input is disabled
+   */
+  isInputDisabled?: boolean;
+  /**
    * Whether the label should be visible
    */
   isLabelVisible?: boolean;
@@ -34,7 +38,7 @@ interface SelectProps {
    * Optional placeholder of the select input
    */
   placeholder?: string;
-    /**
+  /**
    * Optional placeholder of the select input
    */
   values: SelectValue[];
@@ -43,23 +47,28 @@ interface SelectProps {
 const Select = ({
   description,
   errorMessage,
+  isInputDisabled,
   isLabelVisible,
   label,
   placeholder,
-  values
+  values,
 }: SelectProps) => {
   const [selected, setSelected] = useState(values[0]);
 
   useEffect(() => {
-    const defaultValue = values.find(value => value.isSelected);
-    if(defaultValue) {
-      setSelected(defaultValue)
+    const defaultValue = values.find((value) => value.isSelected);
+    if (defaultValue) {
+      setSelected(defaultValue);
     }
-  });
+  }, []);
 
   return (
     <div className="fixed top-16 w-72">
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox
+        disabled={isInputDisabled}
+        onChange={setSelected}
+        value={selected}
+      >
         {/* Creo que esto no resuelve ok el tema de que no se renderice si isLabelVisible
     es false, pero no encontré otra manera mejor de hacerlo. */}
         {isLabelVisible ? (
@@ -96,6 +105,7 @@ const Select = ({
                     }`
                   }
                   value={value}
+                  disabled={value.isDisabled}
                 >
                   {({ selected }) => (
                     <>
