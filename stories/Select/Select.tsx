@@ -11,10 +11,6 @@ interface SelectValue {
 
 interface SelectProps {
   /**
-   * Optional default value of the select input
-   */
-  defaultValue?: string;
-  /**
    * Optional description of the select input
    */
   description?: string;
