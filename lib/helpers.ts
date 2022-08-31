@@ -41,12 +41,3 @@ export async function getDocById(
     return Promise.all(entityIds.map(recursivelyGetDoc));
   }
 }
-
-/**
- * It takes a list of strings, filters out the falsy values, and joins the rest with a space
- * @param {string[]} classes - Tailwind's utility classes as an array of strings.
- * @returns A function that takes in strings and returns a string.
- */
-export function tw(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
