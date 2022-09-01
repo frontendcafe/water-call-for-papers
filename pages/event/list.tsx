@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllEvents } from "../../lib/fetcher";
-import { Spinner } from "../../stories/Icons/Spinner";
+import { Spinner } from "../../stories/Spinner/Spinner";
 import { EventData } from "../../types/events-types";
 
 const ListEvent = () => {

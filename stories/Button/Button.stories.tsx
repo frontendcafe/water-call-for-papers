@@ -1,8 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Bookmark } from "../Icons/Bookmark";
-import { DotsVertical } from "../Icons/DotsVertical";
-import { Spinner } from "../Icons/Spinner";
-
+import { Icon } from "../Icon/Icon";
+import { Spinner } from "../Spinner/Spinner";
 import { Button } from "./Button";
 
 // More info about default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -19,7 +17,7 @@ export default {
   args: {
     children: (
       <>
-        <Bookmark /> Button <Bookmark />
+        <Icon iconName="book" /> Button <Icon iconName="book" />
       </>
     ),
     disabled: false,
@@ -79,7 +77,7 @@ export const IconWithText = Template.bind({});
 IconWithText.args = {
   children: (
     <>
-      <DotsVertical /> <span className="sr-only">Button</span>
+      <Icon iconName="dotsVertical" /> <span className="sr-only">Button</span>
     </>
   ),
   icon: true,
@@ -91,7 +89,7 @@ export const OnlyIcon = Template.bind({});
 OnlyIcon.args = {
   children: (
     <>
-      <span className="sr-only">Button</span> <DotsVertical />
+      <span className="sr-only">Button</span> <Icon iconName="dotsVertical" />
     </>
   ),
   icon: true,
