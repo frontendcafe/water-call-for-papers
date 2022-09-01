@@ -1,6 +1,8 @@
 import React, { ButtonHTMLAttributes, MouseEvent } from "react";
+import { tw } from "../../lib/utils";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps
+  extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, "aria-label" | "type"> {
   /**
    * Button styles.
    */
@@ -8,7 +10,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button sizes.
    */
-  size?: "small" | "medium" | "large" | "stretched";
+  size?: "small" | "normal" | "stretched";
   /**
    * Indicates that the button is disabled, this prevents the button from being clickable.
    */
@@ -20,11 +22,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Button rounded corners. Default is "md".
    */
-  rounded?: "small" | "medium" | "full";
+  rounded?: "medium" | "full";
   /**
    * Click handler required for the button.
    */
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   /**
    * Button text content or/and icon.
    */
@@ -52,34 +54,49 @@ export const Button = ({
   icon,
   loading,
   onClick,
-  rounded = icon ? "full" : "small",
-  size = "medium",
+  rounded = icon ? "full" : "medium",
+  size = "normal",
   variant = "primary",
   ...props
 }: ButtonProps) => {
   const mode = {
-    primary: "bg-[#667080] text-[#FFFFFF] active:bg-[#5d6572]",
-    secondary:
-      "bg-transparent ring-1 ring-[#667080] text-[#667080] active:bg-[#F5F5F5]",
-    transparent: "bg-transparent text-[#667080] active:bg-[#F5F5F5]",
+    primary: tw(
+      "bg-primary-500 text-white",
+      "hover:bg-primary-600",
+      "focus:bg-primary-700",
+      "active:bg-primary-800",
+      "disabled:bg-secondary-50"
+    ),
+    secondary: tw(
+      "bg-primary-50 text-primary-700",
+      "hover:bg-primary-100",
+      "focus:bg-primary-200",
+      "active:bg-primary-300",
+      "disabled:bg-white",
+      "ring-1 ring-primary-700 disabled:ring-secondary-200"
+    ),
+
+    transparent: tw(
+      "bg-transparent text-primary-500",
+      "hover:bg-primary-50 hover:text-primary-700",
+      "focus:bg-primary-200 focus:text-primary-700",
+      "active:bg-primary-300 active:text-primary-700",
+      "disabled:bg-transparent"
+    ),
   };
 
   const button = {
-    small: icon ? "p-1" : "text-xs px-6 py-2 ",
-    medium: icon ? "p-2" : "text-base px-8 py-2 ",
-    large: icon ? "p-4" : "text-lg px-12 py-2 ",
-    // TODO: Come back to this later.
-    stretched: icon ? "p-2 w-full" : "px-6 py-2 w-full",
+    small: icon ? "" : "px-4 py-2",
+    normal: icon ? "p-1" : "px-6 py-4",
+    // NOTE: Maybe we can add 'stretched' as a boolean to be able to use it with
+    // both 'small' and 'normal' sizes. It may break some components already using it.
+    stretched: icon ? "p-1 w-full" : "py-4 w-full",
   };
 
-  const disabledStyles =
-    "disabled:cursor-not-allowed disabled:bg-[#ADB2BA] disabled:text-[#FFFFFF]";
-
-  const focusStyles =
-    "focus:outline-2 focus:ring-1 focus:ring-[#BAC0CA] focus:outline-offset-2 focus:outline-dashed focus:outline-neutral-400";
+  const statesStyles =
+    "focus:outline-none active:shadow-md disabled:text-secondary-300 disabled:cursor-not-allowed";
 
   const borderRadius = {
-    small: "rounded-md",
     medium: "rounded-xl",
     full: "rounded-full",
   };
@@ -88,7 +105,15 @@ export const Button = ({
 
   return (
     <button
-      className={`${alignmentStyles} font-bold ${borderRadius[rounded]} ${focusStyles} ${mode[variant]} ${button[size]} ${disabledStyles}`}
+      className={tw(
+        "font-medium text-base",
+        "transition duration-100",
+        alignmentStyles,
+        borderRadius[rounded],
+        button[size],
+        mode[variant],
+        statesStyles
+      )}
       disabled={loading || disabled}
       onClick={onClick}
       {...props}

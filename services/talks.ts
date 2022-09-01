@@ -1,9 +1,10 @@
 import {
   doc,
-  DocumentData,
   getDoc,
   getDocs,
+  orderBy,
   query,
+  QueryConstraint,
   setDoc,
   updateDoc,
   where,
@@ -15,36 +16,73 @@ import { Candidate, CandidateId } from "../types/candidates-types";
 import {
   ProposalStatus,
   TalkProposal,
-  Topic,
+  TalkProposalId,
   TopicId,
 } from "../types/talk-types";
+import { FilterOptions } from "../types/others";
 import { saveCandidate } from "./candidate";
+import { addTopic } from "./topic";
 
-export const getTalksFromEvent = async (eventId: string) => {
-  const eventSnap = await getDoc(doc(collectionsRef.events, eventId));
+export const getTalksFromEvent = async (
+  eventId: string,
+  { duration, order = "asc", status, streamed, topics = [] }: FilterOptions
+) => {
+  if (!eventId) {
+    throw { code: 422, message: "Se requiere el ID del evento" };
+  }
+  const topicsArr = topics.toString().split(",");
+  const queryConstraints: QueryConstraint[] = [];
 
-  // TODO: Add error handling
-  if (!eventSnap.exists()) return { error: "El evento no existe!" };
+  queryConstraints.push(where("eventId", "==", eventId));
 
-  const { talks: talksIds } = eventSnap.data();
+  if (duration) {
+    queryConstraints.push(where("estimatedDuration", "==", parseInt(duration)));
+  }
+  if (order) {
+    queryConstraints.push(orderBy("createdAt", order));
+  }
+  if (status) {
+    queryConstraints.push(where("status", "==", status));
+  }
+  if (streamed) {
+    queryConstraints.push(where("streamed", "==", streamed === "true"));
+  }
+  if (topics.length > 0) {
+    queryConstraints.push(where("topics", "array-contains-any", topicsArr));
+  }
 
-  const talks = (await getDocById(
-    talksIds,
-    collectionsRef.talks
-  )) as DocumentData[];
+  const q = query(collectionsRef.talks, ...queryConstraints);
+  const querySnapshot = await getDocs(q);
 
-  talks.forEach((talk) => delete talk.uniqueCode);
+  if (querySnapshot.empty) return [];
 
-  return talks;
+  const talks = querySnapshot.docs.map(async (talkDoc) => {
+    const talk = talkDoc.data();
+    const candidates = talk.candidates;
+    const topics = talk.topics;
+
+    talk.candidates = await getDocById(candidates, collectionsRef.candidates);
+    talk.topics = await getDocById(topics, collectionsRef.topics);
+
+    delete talk.uniqueCode;
+
+    return talk;
+  });
+
+  return Promise.all(talks);
 };
 
 export const updateStatusFromTalks = async (
-  params: Pick<TalkProposal, "id" | "status">
+  talkId: TalkProposalId,
+  { status }: Pick<TalkProposal, "status">
 ) => {
   // update status from talks
-  const TalksRef = doc(db, "talks", params.id);
-  await updateDoc(TalksRef, {
-    status: params.status,
+  if (!status) {
+    throw { code: 422, message: "Se requiere el estado de la propuesta" };
+  }
+  const TalksRef = doc(db, "talks", talkId);
+  await updateDoc(TalksRef, { status }).catch(() => {
+    throw { code: 404, message: `El evento no existe!` };
   });
 };
 
@@ -56,39 +94,14 @@ export const postTalk = async ({
   summary,
   title,
   topics,
-}: TalkProposal) => {
-  // TODO: Add error handling, should be our next priority.
-  // TODO: These loops probably can be extracted to a function to reuse.
+}: Omit<TalkProposal, "topics"> & { topics: { description: string }[] }) => {
+  // TODO: Add validations?
 
-  const topicsIds: TopicId[] = [];
-  const topicsData: Topic[] = [];
+  const topicsData = await addTopic(topics);
 
-  for (const { description } of topics as Topic[]) {
-    const constrain = where("description", "==", description);
-    const q = query(collectionsRef.topics, constrain);
-
-    const topicsSnap = await getDocs(q);
-
-    if (topicsSnap.empty) {
-      const topicRef = doc(collectionsRef.topics);
-
-      const newTopic: Topic = { id: topicRef.id, description };
-
-      await setDoc(topicRef, newTopic);
-
-      topicsIds.push(topicRef.id);
-      topicsData.push(newTopic);
-
-      continue;
-    }
-
-    topicsSnap.forEach((topic) => {
-      const topicRes = topic.data() as Topic;
-
-      topicsIds.push(topicRes.id);
-      topicsData.push(topicRes);
-    });
-  }
+  const topicsIds = topicsData.map((topic) => {
+    return topic.id as TopicId;
+  });
 
   const candidatesIds: CandidateId[] = [];
   const candidatesData: Candidate[] = [];
@@ -119,4 +132,31 @@ export const postTalk = async ({
   delete talkData.uniqueCode;
 
   return { ...talkData, topics: topicsData, candidates: candidatesData };
+};
+
+export const getTalk = async (talkId: TalkProposalId) => {
+  if (!talkId) {
+    throw { code: 422, message: "Se requiere el ID de la propuesta de charla" };
+  }
+  const talkSnap = await getDoc(doc(collectionsRef.talks, talkId));
+
+  // TODO: Not sure if we should throw an error or send a message
+  if (!talkSnap.exists()) {
+    throw { code: 404, message: "La propuesta de charla no existe!" };
+  }
+
+  const talk = talkSnap.data();
+
+  const candidatesIds: CandidateId[] = talk.candidates;
+  const topicsIds: TopicId[] = talk.topics;
+
+  talk.candidates = await getDocById(candidatesIds, collectionsRef.candidates);
+  talk.topics = await getDocById(topicsIds, collectionsRef.topics);
+
+  // TODO: Validate a code (uuid) which will be previously sent by mail.
+  // ...
+
+  delete talk.uniqueCode;
+
+  return talk;
 };
