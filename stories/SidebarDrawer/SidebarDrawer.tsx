@@ -105,16 +105,16 @@ function BrandSection({ open, clickHandler }: DrawerCompProps) {
 
 function EventsNavSection({ open }: Pick<DrawerCompProps, "open">) {
   return (
-    <details open className="marker:content-[''] marker:md:hidden select-none">
-      <summary className="flex items-center gap-2 px-2 py-1 mb-6 text-white rounded-lg cursor-pointer ">
+    <div className="space-y-2">
+      <h2 className="flex items-center gap-2 p-2 text-white">
         <IconContainer>
           <Icon size="large" iconName="calendar" theme="light" />
         </IconContainer>
 
         <TextContainer open={open}>Mis Eventos</TextContainer>
-      </summary>
+      </h2>
 
-      <ul className="space-y-2 ">
+      <ul aria-label="Listado de próximos eventos" className="space-y-2">
         {dummyData.map(({ initials, title }) => (
           <li key={title}>
             <StyledLink>
@@ -131,7 +131,7 @@ function EventsNavSection({ open }: Pick<DrawerCompProps, "open">) {
           </li>
         ))}
       </ul>
-    </details>
+    </div>
   );
 }
 
