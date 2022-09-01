@@ -57,6 +57,9 @@ export default {
   ],
 } as ComponentMeta<typeof TabsGroup>;
 
+//Documentación
+//https://www.notion.so/Tabs-0d516cee0607492d94f876cc48da1efe
+
 export const TabsHistory: ComponentStory<typeof TabsGroup> = () => (
   <TabsGroup>
     <TabsList>
