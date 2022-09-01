@@ -12,8 +12,8 @@ export const Clip = ({ clipTextValue }: ClipProps) => {
   const handleClick = () => {
     const valueToRead = refButton?.current?.value;
     if (valueToRead) {
-      navigator.clipboard
-        .writeText(valueToRead)
+      navigator?.clipboard
+        ?.writeText(valueToRead)
         .then(() => {
           setIsCopy(true);
         })
