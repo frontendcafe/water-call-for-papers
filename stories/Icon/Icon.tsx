@@ -58,6 +58,7 @@ import {
   PhotoIcon,
 } from "@heroicons/react/24/outline";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
+import { tw } from "../../lib/utils";
 
 const iconsSupported = {
   mail: <EnvelopeIcon />,
@@ -122,26 +123,28 @@ const iconsSupported = {
 const iconTheme = {
   dark: "text-black",
   neutral: "text-gray-500",
-  light: "text-white ",
+  light: "text-white",
 };
 
 const iconSize = {
-  small: "w-3 h-3",
-  medium: "w-3.5 h-3.5",
-  large: "w-5 h-5",
+  small: "w-3.5 h-3.5",
+  medium: "w-6 h-6",
+  large: "w-8 h-8",
 };
 
 export function Icon({
   iconName,
   theme = "neutral",
   size = "small",
+  color = "",
 }: {
   iconName: keyof typeof iconsSupported;
   theme?: keyof typeof iconTheme;
   size?: keyof typeof iconSize;
+  color?: string;
 }) {
   return (
-    <div className={`${iconTheme[theme]} ${iconSize[size]}`}>
+    <div className={tw(iconTheme[theme], iconSize[size], color)}>
       {iconsSupported[iconName]}
     </div>
   );
