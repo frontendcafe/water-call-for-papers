@@ -3,7 +3,7 @@ import { Tab } from "@headlessui/react";
 import { TabsProps } from "./types";
 import { useTabsContext } from "./Hooks/useTabsContext";
 
-const setClass = (selected: boolean, disabled: boolean) => {
+const setClassName = (selected: boolean, disabled: boolean) => {
   const disableClass = disabled ? "" : "hover:bg-blue-300 hover:text-white";
   const disabledAndNotSelectedClass =
     disabled && !selected ? "text-slate-300" : "text-slate-500";
@@ -23,7 +23,7 @@ const Tabs = ({ children, disabled }: TabsProps) => {
         `
        py-2 px-4
        focus:outline-none focus:ring-2 focus:ring-blue-800 rounded-t-lg 
-        ${setClass(selected, disabled)}
+        ${setClassName(selected, disabled)}
        `
       }
       disabled={disabled}
