@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { tw } from "../../lib/helpers";
+import { tw } from "../../lib/utils";
 import logo_vercel from "../../public/img/powered-by-vercel.svg";
 import { Button } from "../Button/Button";
-import { LogoCallForPapers } from "../Icons/LogoCallForPapers";
+import { Icon } from "../Icon/Icon";
+import { LogoCallForPapers } from "../Spinner/LogoCallForPapers";
 import { IconContainer } from "./IconContainer";
 import { StyledLink } from "./StyledLink/StyledLink";
 import { TextContainer } from "./TextContainer";
@@ -52,7 +53,7 @@ export const SidebarDrawer = () => {
           <TextContainer open={open}>Crear Evento</TextContainer>
 
           <IconContainer>
-            {/* TODO: Add icon: PlusCircle */}
+              <Icon iconName="plusCircle" size="medium" theme="light" />
           </IconContainer>
         </StyledLink>
 
@@ -94,7 +95,7 @@ function BrandSection({ open, clickHandler }: DrawerCompProps) {
           variant="transparent"
         >
           <IconContainer>
-            {/* TODO: Add icon: ChevronLeft */}
+            <Icon size="large" iconName="chevronLeft" theme="light" />
           </IconContainer>
         </Button>
       </span>
@@ -107,7 +108,7 @@ function EventsNavSection({ open }: Pick<DrawerCompProps, "open">) {
     <details open className="marker:content-[''] marker:md:hidden select-none">
       <summary className="flex items-center gap-2 px-2 py-1 mb-6 text-white rounded-lg cursor-pointer ">
         <IconContainer>
-          {/* TODO: Add icon: Calendar */}
+          <Icon size="large" iconName="calendar" theme="light" />
         </IconContainer>
 
         <TextContainer open={open}>Mis Eventos</TextContainer>
@@ -140,7 +141,7 @@ function AboutNavSection({ open }: Pick<DrawerCompProps, "open">) {
       <li className="">
         <StyledLink>
           <IconContainer>
-            {/* TODO: Add icon: QuestionMarkCircle */}
+            <Icon size="large" iconName="questionMark" theme="light" />
           </IconContainer>
 
           <TextContainer open={open}>Acerca de</TextContainer>
@@ -150,7 +151,7 @@ function AboutNavSection({ open }: Pick<DrawerCompProps, "open">) {
       <li>
         <StyledLink>
           <IconContainer>
-            {/* TODO: Add icon: Logout */}
+            <Icon size="large" iconName="logout" theme="light" />
           </IconContainer>
 
           <TextContainer open={open}>Cerrar</TextContainer>
