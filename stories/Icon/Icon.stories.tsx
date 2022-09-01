@@ -1,13 +1,13 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Icons } from "./Icons";
+import { Icon } from "./Icon";
 
 export default {
-  title: "Example/Icons", // Title for our story  
-  component: Icons, // Component to render
-} as ComponentMeta<typeof Icons>;
+  title: "Example/Icon", // Title for our story
+  component: Icon, // Component to render
+} as ComponentMeta<typeof Icon>;
 
-const Template: ComponentStory<typeof Icons> = (args) => <Icons {...args} />;
+const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />;
 //👇 Each story then reuses that template
 export const EnvelopeIcon = Template.bind({});
 //👇 We pass the props to the Primary story
@@ -397,7 +397,7 @@ ChevronLeftIcon.args = {
 
 export const EllipsisVerticalIcon = Template.bind({});
 EllipsisVerticalIcon.args = {
-  iconName: "ellipsisVertical",
+  iconName: "dotsVertical",
   theme: "neutral",
   size: "large", //h-24 w-24
 };

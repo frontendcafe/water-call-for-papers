@@ -55,10 +55,11 @@ import {
   TagIcon,
   XMarkIcon,
   ChevronUpIcon,
+  PhotoIcon,
 } from "@heroicons/react/24/outline";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
-const iconsSupported: Record<string, JSX.Element> = {
+const iconsSupported = {
   mail: <EnvelopeIcon />,
   bell: <BellIcon />,
   home: <HomeIcon />,
@@ -69,7 +70,6 @@ const iconsSupported: Record<string, JSX.Element> = {
   pencil: <PencilIcon />,
   eye: <EyeIcon />,
   book: <BookmarkIcon />,
-
   mapin: <MapPinIcon />,
   user: <UserIcon />,
   users: <UsersIcon />,
@@ -80,7 +80,6 @@ const iconsSupported: Record<string, JSX.Element> = {
   xmark: <XMarkIcon />,
   plus: <PlusIcon />,
   calendar: <CalendarIcon />,
-
   barsCenterLeft: <Bars3CenterLeftIcon />,
   barsBottomLeft: <Bars3BottomLeftIcon />,
   barsBottomRight: <Bars3BottomRightIcon />,
@@ -91,7 +90,6 @@ const iconsSupported: Record<string, JSX.Element> = {
   documentPlus: <DocumentPlusIcon />,
   documentMinus: <DocumentMinusIcon />,
   link: <LinkIcon />,
-
   questionMark: <QuestionMarkCircleIcon />,
   exclamationTriangule: <ExclamationTriangleIcon />,
   squareTwoStack: <Square2StackIcon />,
@@ -102,7 +100,6 @@ const iconsSupported: Record<string, JSX.Element> = {
   chevronUp: <ChevronUpIcon />,
   adjustment: <AdjustmentsVerticalIcon />,
   informationCircle: <InformationCircleIcon />,
-
   arrowUp: <ArrowUpIcon />,
   documentDuplicate: <DocumentDuplicateIcon />,
   arrowDown: <ArrowDownIcon />,
@@ -111,99 +108,37 @@ const iconsSupported: Record<string, JSX.Element> = {
   papper: <PaperClipIcon />,
   trash: <TrashIcon />,
   chevronUpDown: <ChevronUpDownIcon />,
-
   dotsHorizontal: <EllipsisHorizontalIcon />,
   arrowRight: <ArrowRightIcon />,
   exclamationCircle: <ExclamationCircleIcon />,
   chevronRight: <ChevronRightIcon />,
   glass: <MagnifyingGlassIcon />,
-
   checkCircle: <CheckCircleIcon />,
   chevronLeft: <ChevronLeftIcon />,
-
-  ellipsisVertical: <EllipsisVerticalIcon />,
+  dotsVertical: <EllipsisVerticalIcon />,
+  photo: <PhotoIcon />,
 };
 
-const iconTheme: Record<string, string> = {
+const iconTheme = {
   dark: "text-black",
   neutral: "text-gray-500",
   light: "text-white ",
 };
 
-const iconSize: Record<string, string> = {
+const iconSize = {
   small: "w-3 h-3",
   medium: "w-3.5 h-3.5",
   large: "w-5 h-5",
 };
 
-/* const iconName: Record<string, string> = {
-  names:"mail"
-};  */
-
-export function Icons({
+export function Icon({
   iconName,
-  theme,
-  size,
+  theme = "neutral",
+  size = "small",
 }: {
-  iconName:
-    | "mail"
-    | "bell"
-    | "home"
-    | "shield"
-    | "cog"
-    | "check"
-    | "detail"
-    | "pencil"
-    | "eye"
-    | "book"
-    | "mapin"
-    | "user"
-    | "users"
-    | "usergroup"
-    | "clock"
-    | "document"
-    | "tag"
-    | "xmark"
-    | "plus"
-    | "calendar"
-    | "barsCenterLeft"
-    | "barsBottomLeft"
-    | "barsBottomRight"
-    | "share"
-    | "arrowRightC"
-    | "userCircle"
-    | "documentArrowDown"
-    | "documentPlus"
-    | "documentMinus"
-    | "link"
-    | "questionMark"
-    | "exclamationTriangule"
-    | "squareTwoStack"
-    | "arrowLeft"
-    | "minusCircule"
-    | "chevronDown"
-    | "arrowLeftCircule"
-    | "chevronUp"
-    | "adjustment"
-    | "informationCircle"
-    | "arrowUp"
-    | "documentDuplicate"
-    | "arrowDown"
-    | "plusCircle"
-    | "logout"
-    | "papper"
-    | "trash"
-    | "chevronUpDown"
-    | "dotsHorizontal"
-    | "arrowRight"
-    | "exclamationCircle"
-    | "chevronRight"
-    | "glass"
-    | "checkCircle"
-    | "chevronLeft"
-    | "ellipsisVertical";
-  theme: "dark" | "light" | "neutral"; // restrinjo a estos valores en theme (hacer lo mismo con names y con size)
-  size: "large" | "medium" | "small";
+  iconName: keyof typeof iconsSupported;
+  theme?: keyof typeof iconTheme;
+  size?: keyof typeof iconSize;
 }) {
   return (
     <div className={`${iconTheme[theme]} ${iconSize[size]}`}>
