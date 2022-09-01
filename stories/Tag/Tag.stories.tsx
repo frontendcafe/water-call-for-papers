@@ -19,13 +19,15 @@ export const DefaultTag = Template.bind({});
 
 DefaultTag.args = {
   label: "Programación",
+  style: "passed",
+  color: "green",
+  size: "sm",
 };
 
 export const PrimaryTag = Template.bind({});
 
 PrimaryTag.args = {
   label: "Programación",
-  style: "primary",
   size: "lg",
 };
 
