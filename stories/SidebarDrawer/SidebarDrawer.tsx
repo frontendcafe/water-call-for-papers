@@ -50,7 +50,7 @@ export const SidebarDrawer = ({ events = [] }: { events: EventData[] }) => {
         <div className="space-y-6">
           <BrandSection open={open} clickHandler={clickHandler} />
 
-          <StyledLink variant="primary">
+          <StyledLink href="/event/create" variant="primary">
             <TextContainer open={open}>Crear Evento</TextContainer>
             <IconContainer>
               <Icon iconName="plusCircle" size="medium" theme="light" />
@@ -143,7 +143,7 @@ function EventsNavSection({
       <ul aria-label="Listado de próximos eventos" className="space-y-2">
         {events.map(({ id, name }) => (
           <li key={id}>
-            <StyledLink href={`event/${id}`}>
+            <StyledLink href={`/event/${id}`}>
               <IconContainer>
                 <div className="inline-flex items-center justify-center w-8 h-8 text-xs text-black rounded-full bg-secondary-100">
                   {name.substring(0, 2).toUpperCase()}
