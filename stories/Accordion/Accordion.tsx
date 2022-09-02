@@ -19,7 +19,7 @@ export const AccordionDefault = ({ title, children }: Accordion) => {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex w-full justify-between items-center py-2 rounded-md bg-primary-50 text-primary-700 text-left font-semibold hover:bg-primary-100 focus:border-[1.5px] focus:border-primary-700 focus:bg-primary-200 focus:text-primary-800">
+            <Disclosure.Button className="flex w-full justify-between items-center py-2 rounded-md bg-primary-50 text-primary-700 text-left font-semibold hover:bg-primary-100 focus:border-2 focus:border-primary-700 focus:bg-primary-200 focus:text-primary-800">
               <span className="ml-3">{title}</span>
               <span className="mr-3">
                 <Icon
@@ -32,14 +32,9 @@ export const AccordionDefault = ({ title, children }: Accordion) => {
               </span>
             </Disclosure.Button>
             {!open && (
-              <div>
-                <Disclosure.Panel
-                  className="flex flex-col space-y-4 pt-2"
-                  static
-                >
-                  {children}
-                </Disclosure.Panel>
-              </div>
+              <Disclosure.Panel className="flex flex-col space-y-4 pt-2" static>
+                {children}
+              </Disclosure.Panel>
             )}
           </>
         )}
