@@ -1,19 +1,104 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Icon } from "../Icon/Icon";
+import { Spinner } from "../Spinner/Spinner";
 import { Button } from "./Button";
 
+// More info about default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Example/Button", // Title for our storybook
-  component: Button, // Component to render
+  title: "Components/Button",
+  component: Button,
+  // More info about argTypes: https://storybook.js.org/docs/react/api/argtypes
+  argTypes: {
+    children: {
+      control: "text",
+    },
+  },
+  // More info about args: https://storybook.js.org/docs/react/writing-stories/args#component-args
+  args: {
+    children: (
+      <>
+        <Icon iconName="book" /> Button <Icon iconName="book" />
+      </>
+    ),
+    disabled: false,
+    icon: false,
+    loading: false,
+    rounded: "medium",
+    size: "normal",
+    variant: "primary",
+  },
 } as ComponentMeta<typeof Button>;
 
-//👇 We create a “template” of how args map to rendering
+// More info about component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
-//👇 Each story then reuses that template
 export const Primary = Template.bind({});
-//👇 We pass the props to the Primary story
-Primary.args = {
-  label: "Button",
-  backgroundColor: "bg-blue-500",
+// More info about args: https://storybook.js.org/docs/react/writing-stories/args
+Primary.args = {};
+
+export const Secondary = Template.bind({});
+
+Secondary.args = {
+  variant: "secondary",
+};
+
+export const Transparent = Template.bind({});
+Transparent.args = {
+  variant: "transparent",
+};
+
+export const Small = Template.bind({});
+Small.args = {
+  size: "small",
+};
+
+export const Stretched = Template.bind({});
+Stretched.args = {
+  size: "stretched",
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  children: (
+    <>
+      <>Loading...</> <Spinner />
+    </>
+  ),
+  loading: true,
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  children: "Disabled",
+  disabled: true,
+};
+
+export const IconWithText = Template.bind({});
+IconWithText.args = {
+  children: (
+    <>
+      <Icon iconName="dotsVertical" /> <span className="sr-only">Button</span>
+    </>
+  ),
+  icon: true,
+  variant: "secondary",
+  rounded: "medium",
+};
+
+export const OnlyIcon = Template.bind({});
+OnlyIcon.args = {
+  children: (
+    <>
+      <span className="sr-only">Button</span> <Icon iconName="dotsVertical" />
+    </>
+  ),
+  icon: true,
+  variant: "secondary",
+  rounded: "full",
+};
+
+export const IconWithoutBackground = Template.bind({});
+IconWithoutBackground.args = {
+  ...OnlyIcon.args,
+  variant: "transparent",
 };

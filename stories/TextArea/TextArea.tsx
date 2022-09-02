@@ -1,5 +1,5 @@
 import React from "react";
-import { ErrorIcon } from "../Icons/ErrorIcon";
+import { Icon } from "../Icon/Icon";
 
 interface TextAreaProps {
   // Button content
@@ -96,7 +96,7 @@ export const TextArea = ({
           {/* If error evaluated to true, display it. */}
           {error && (
             <div className="flex gap-1.5">
-              <ErrorIcon />
+              <Icon iconName="exclamationCircle" />
               <p>{error}</p>
             </div>
           )}
