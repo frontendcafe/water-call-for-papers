@@ -35,7 +35,7 @@ interface SelectProps {
    */
   placeholder?: string;
   /**
-   * Optional placeholder of the select input
+   * Selectable values
    */
   values: SelectValue[];
 }
