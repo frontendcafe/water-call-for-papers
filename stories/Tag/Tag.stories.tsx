@@ -8,7 +8,6 @@ export default {
   args: {
     //Todas las historias para el componente tag
     //tendran un estilo secundario por defecto
-    style: "secondary",
   },
 } as ComponentMeta<typeof Tag>;
 
@@ -19,16 +18,12 @@ export const DefaultTag = Template.bind({});
 
 DefaultTag.args = {
   label: "Programación",
-  style: "passed",
-  color: "green",
-  size: "sm",
 };
 
 export const PrimaryTag = Template.bind({});
 
 PrimaryTag.args = {
   label: "Programación",
-  size: "lg",
 };
 
 export const SecondaryTag = Template.bind({});
@@ -41,19 +36,16 @@ export const SmallTag = Template.bind({});
 
 SmallTag.args = {
   label: "Programación",
-  size: "sm",
 };
 
 export const MediumTag = Template.bind({});
 
 MediumTag.args = {
   label: "Diseño UX",
-  size: "md",
 };
 
 export const LargeTag = Template.bind({});
 
 LargeTag.args = {
   label: "UX Writing",
-  size: "lg",
 };
