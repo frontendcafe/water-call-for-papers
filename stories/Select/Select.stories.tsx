@@ -15,12 +15,12 @@ const storyValues = [
   {
     name: "Argentina",
     value: "Argentina",
-    isSelected: true,
+    isSelected: false,
   },
   {
     name: "Chile",
     value: "Chile",
-    isSelected: true,
+    isSelected: false,
   },
   {
     name: "Uruguay",
