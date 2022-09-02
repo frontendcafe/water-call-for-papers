@@ -49,7 +49,7 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
           "font-semibold whitespace-nowrap",
           "min-h-screen",
           "p-3",
-          "top-0",
+          "top-0 left-0",
           "z-10",
           responsiveBehavior
         )}
@@ -83,7 +83,7 @@ function TopBarButton({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
   };
 
   return (
-    <div className="fixed top-0 z-20 inline-flex items-center gap-2 p-2 text-white md:hidden">
+    <div className="fixed top-0 left-0 z-20 inline-flex items-center gap-2 p-2 text-white md:hidden">
       <Button
         aria-label="Toggle drawer"
         icon
