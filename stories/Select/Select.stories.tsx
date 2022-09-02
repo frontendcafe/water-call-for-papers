@@ -7,7 +7,7 @@ export default {
   component: Select,
 } as ComponentMeta<typeof Select>;
 
-export const Template: ComponentStory<typeof Select> = (args) => (
+const Template: ComponentStory<typeof Select> = (args) => (
   <Select {...args} />
 );
 
