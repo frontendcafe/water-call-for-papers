@@ -7,37 +7,67 @@ export default {
   component: Select,
 } as ComponentMeta<typeof Select>;
 
-export const Template   : ComponentStory<typeof Select> = (args) => (
-    <Select {...args} />
+export const Template: ComponentStory<typeof Select> = (args) => (
+  <Select {...args} />
 );
 
+const storyValues = [
+  {
+    name: "Argentina",
+    value: "Argentina",
+    isSelected: true,
+  },
+  {
+    name: "Chile",
+    value: "Chile",
+    isSelected: true,
+  },
+  {
+    name: "Uruguay",
+    value: "Uruguay",
+    isSelected: false,
+  },
+]
 /**
- * Select Template
+ * Select default template
  */
- export const SelectDefault = Template.bind({});
+export const SelectDefault = Template.bind({});
 
- SelectDefault.args = {
-    description: "",
-    errorMessage: "Este campo es obligatorio",
-    isInputDisabled: false,
-    isLabelVisible: true,
-    label: "País",
-    placeholder: "Elige tu país",
-    values: [
-        {
-            name: "Argentina",
-            value: "Argentina",
-            isSelected: true
-          },
-          {
-            name: "Chile",
-            value: "Chile",
-            isSelected: false
-          },
-          {
-            name: "Uruguay",
-            value: "Uruguay",
-            isSelected: false
-          }
-    ],
+SelectDefault.args = {
+  description: "Aquí puedes elegir tu país de residencia",
+  isInputDisabled: false,
+  isLabelVisible: true,
+  label: "País",
+  placeholder: "Elige tu país",
+  values: storyValues
 };
+
+/**
+ * Select with error
+ */
+export const SelectWithError = Template.bind({});
+
+SelectWithError.args = {
+  description: "Aquí puedes elegir tu país de residencia",
+  errorMessage: "Este campo es obligatorio",
+  isInputDisabled: false,
+  isLabelVisible: true,
+  label: "País",
+  placeholder: "Elige tu país",
+  values: storyValues
+};
+
+/**
+ * Select with hidden label
+ */
+ export const SelectWithHiddenLabel = Template.bind({});
+
+ SelectWithHiddenLabel.args = {
+   description: "Aquí puedes elegir tu país de residencia",
+   errorMessage: "Este campo es obligatorio",
+   isInputDisabled: false,
+   isLabelVisible: false,
+   label: "País",
+   placeholder: "Elige tu país",
+   values: storyValues
+ };
