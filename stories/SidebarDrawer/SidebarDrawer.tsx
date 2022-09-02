@@ -11,13 +11,20 @@ import { IconContainer } from "./IconContainer";
 import { StyledLink } from "./StyledLink/StyledLink";
 import { TextContainer } from "./TextContainer";
 
+interface SidebarProps {
+  /**
+   * Sidebar drawer events list.
+   */
+  events: EventData[];
+}
+
 interface DrawerCompProps {
   clickHandler: () => void;
   events: EventData[];
   open: boolean;
 }
 
-export const SidebarDrawer = ({ events = [] }: { events: EventData[] }) => {
+export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
   const [open, setOpen] = useState(true);
 
   const clickHandler = () => {
