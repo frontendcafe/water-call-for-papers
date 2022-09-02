@@ -24,52 +24,80 @@ export const SidebarDrawer = ({ events = [] }: { events: EventData[] }) => {
     setOpen(!open);
   };
 
-  const respAnimations = `transition-all md:translate-x-0 ${
-    open ? "-translate-x-0 md:w-[17rem]" : "-translate-x-full md:w-[4.5rem]"
+  const responsiveBehavior = `transition-all md:translate-x-0 w-full ${
+    open
+      ? "invisible -translate-x-full md:visible md:flex md:w-[17rem]"
+      : "visible -translate-x-0 md:w-[4.5rem]"
   }`;
 
   return (
-    <nav
-      aria-label="Sidebar"
-      className={tw(
-        "absolute md:static",
-        "bg-black text-secondary-200",
-        "flex flex-col justify-between",
-        "font-semibold whitespace-nowrap",
-        "min-h-screen",
-        "p-3",
-        "z-10",
-        respAnimations
-      )}
-    >
-      <div className="space-y-6">
-        <BrandSection open={open} clickHandler={clickHandler} />
+    <div className="relative md:static">
+      <TopBarButton clickHandler={clickHandler} open={open} />
+      <nav
+        aria-label="Sidebar"
+        className={tw(
+          "bg-black text-secondary-200",
+          "fixed md:sticky",
+          "flex flex-col justify-between",
+          "font-semibold whitespace-nowrap",
+          "min-h-screen",
+          "p-3",
+          "top-0",
+          "z-10",
+          responsiveBehavior
+        )}
+      >
+        <div className="space-y-6">
+          <BrandSection open={open} clickHandler={clickHandler} />
 
-        <StyledLink variant="primary">
-          <TextContainer open={open}>Crear Evento</TextContainer>
+          <StyledLink variant="primary">
+            <TextContainer open={open}>Crear Evento</TextContainer>
+            <IconContainer>
+              <Icon iconName="plusCircle" size="medium" theme="light" />
+            </IconContainer>
+          </StyledLink>
 
-          <IconContainer>
-            <Icon iconName="plusCircle" size="medium" theme="light" />
-          </IconContainer>
-        </StyledLink>
+          <EventsNavSection open={open} events={events} />
+        </div>
 
-        <EventsNavSection open={open} events={events} />
-      </div>
-
-      <AboutNavSection open={open} />
-    </nav>
+        <AboutNavSection open={open} />
+      </nav>
+    </div>
   );
 };
+
+function TopBarButton({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
+  const TogglerIcon = () => {
+    return open ? (
+      <Icon color="text-primary-600" iconName="barsCenterLeft" size="large" />
+    ) : (
+      <Icon color="text-primary-600" iconName="xmark" size="large" />
+    );
+  };
+
+  return (
+    <div className="fixed top-0 z-20 inline-flex items-center gap-2 p-2 text-white md:hidden">
+      <Button
+        aria-label="Toggle drawer"
+        icon
+        onClick={clickHandler}
+        variant="transparent"
+      >
+        <TogglerIcon />
+      </Button>
+      <LogoCallForPapers />
+    </div>
+  );
+}
 
 function BrandSection({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
   return (
     <div className="flex items-center">
-      <span className="px-1">
+      <span className="hidden px-1 md:block">
         <Button
           aria-label="Toggle drawer"
           icon
           onClick={clickHandler}
-          size="small"
           variant="transparent"
         >
           <IconContainer>
@@ -78,16 +106,15 @@ function BrandSection({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
         </Button>
       </span>
 
-      <h1 className="text-xl grow">
+      <h1 className="pl-20 text-xl grow md:p-1">
         <TextContainer open={open}>Call for Papers</TextContainer>
       </h1>
 
-      <span className={`${open ? "" : "hidden"}`}>
+      <span className={`${open ? "hidden md:block" : "hidden"}`}>
         <Button
           aria-label="Toggle drawer"
           icon
           onClick={clickHandler}
-          size="small"
           variant="transparent"
         >
           <IconContainer>
