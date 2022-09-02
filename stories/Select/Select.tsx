@@ -15,7 +15,7 @@ interface SelectProps {
    */
   description?: string;
   /**
-   * Optional error message of the select input
+   * Optional error message of the select input. If entered, the message will be shown
    */
   errorMessage?: string;
   /**
@@ -47,12 +47,24 @@ const Select = ({
   isLabelVisible,
   label,
   placeholder,
-  values,
+  values
 }: SelectProps) => {
-  const [selected, setSelected] = useState(values[0]);
+  const renderValues = placeholder ?
+    [
+      {
+        name: placeholder,
+        value: '',
+        isDisabled: true,
+        isSelected: false
+      },
+      ...values
+    ] :
+    values;
+  const [selected, setSelected] = useState(renderValues[0]);
 
   useEffect(() => {
-    const defaultValue = values.find((value) => value.isSelected);
+    // Si en los values hay varios elementos con isSelect === true, se tomará solo el primero.
+    const defaultValue = renderValues.find((value) => value.isSelected);
     if (defaultValue) {
       setSelected(defaultValue);
     }
@@ -72,8 +84,7 @@ const Select = ({
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <span className="block truncate">
-              {/* Aquí se muestra siempre el placeholder (cuando hay) y no actualiza a los valores elegidos. :( */}
-              {placeholder ?? selected.name}
+              {selected.name}
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <SelectorIcon
@@ -89,12 +100,11 @@ const Select = ({
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              {values.map((value, valueIdx) => (
+              {renderValues.map((value, valueIdx) => (
                 <Listbox.Option
                   key={valueIdx}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                      active ? "bg-amber-100 text-amber-900" : "text-gray-900"
+                    `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? "bg-amber-100 text-amber-900" : "text-gray-900"
                     }`
                   }
                   value={value}
@@ -103,9 +113,8 @@ const Select = ({
                   {({ selected }) => (
                     <>
                       <span
-                        className={`block truncate ${
-                          selected ? "font-medium" : "font-normal"
-                        }`}
+                        className={`block truncate ${selected ? "font-medium" : "font-normal"
+                          }`}
                       >
                         {value.name}
                       </span>
