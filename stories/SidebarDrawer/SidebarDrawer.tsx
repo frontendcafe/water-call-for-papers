@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { tw } from "../../lib/utils";
 import logo_vercel from "../../public/img/powered-by-vercel.svg";
+import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
 import { LogoCallForPapers } from "../Spinner/LogoCallForPapers";
@@ -11,17 +12,12 @@ import { StyledLink } from "./StyledLink/StyledLink";
 import { TextContainer } from "./TextContainer";
 
 interface DrawerCompProps {
-  open: boolean;
   clickHandler: () => void;
+  events: EventData[];
+  open: boolean;
 }
 
-const dummyData = [
-  { initials: "CM", title: "CMYK" },
-  { initials: "FC", title: "Frontend Cafe" },
-  { initials: "SD", title: "Service Design Club" },
-];
-
-export const SidebarDrawer = () => {
+export const SidebarDrawer = ({ events = [] }: { events: EventData[] }) => {
   const [open, setOpen] = useState(true);
 
   const clickHandler = () => {
@@ -53,11 +49,11 @@ export const SidebarDrawer = () => {
           <TextContainer open={open}>Crear Evento</TextContainer>
 
           <IconContainer>
-              <Icon iconName="plusCircle" size="medium" theme="light" />
+            <Icon iconName="plusCircle" size="medium" theme="light" />
           </IconContainer>
         </StyledLink>
 
-        <EventsNavSection open={open} />
+        <EventsNavSection open={open} events={events} />
       </div>
 
       <AboutNavSection open={open} />
@@ -65,7 +61,7 @@ export const SidebarDrawer = () => {
   );
 };
 
-function BrandSection({ open, clickHandler }: DrawerCompProps) {
+function BrandSection({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
   return (
     <div className="flex items-center">
       <span className="px-1">
@@ -103,7 +99,10 @@ function BrandSection({ open, clickHandler }: DrawerCompProps) {
   );
 }
 
-function EventsNavSection({ open }: Pick<DrawerCompProps, "open">) {
+function EventsNavSection({
+  events,
+  open,
+}: Omit<DrawerCompProps, "clickHandler">) {
   return (
     <div className="space-y-2">
       <h2 className="flex items-center gap-2 p-2 text-white">
@@ -115,17 +114,17 @@ function EventsNavSection({ open }: Pick<DrawerCompProps, "open">) {
       </h2>
 
       <ul aria-label="Listado de próximos eventos" className="space-y-2">
-        {dummyData.map(({ initials, title }) => (
-          <li key={title}>
-            <StyledLink>
+        {events.map(({ id, name }) => (
+          <li key={id}>
+            <StyledLink href={`event/${id}`}>
               <IconContainer>
-                <div className="inline-flex items-center justify-center w-8 h-8 text-xs rounded-full even:text-warning-700 odd:text-black bg-secondary-100">
-                  {initials}
+                <div className="inline-flex items-center justify-center w-8 h-8 text-xs text-black rounded-full bg-secondary-100">
+                  {name.substring(0, 2).toUpperCase()}
                 </div>
               </IconContainer>
 
               <TextContainer truncate open={open}>
-                {title}
+                {name}
               </TextContainer>
             </StyledLink>
           </li>
