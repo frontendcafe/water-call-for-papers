@@ -31,6 +31,7 @@ import {
   EllipsisVerticalIcon,
   EnvelopeIcon,
   ExclamationTriangleIcon,
+  ExclamationCircleIcon as ExclamationCircleIconOutline,
   EyeIcon,
   HomeIcon,
   InformationCircleIcon,
@@ -118,6 +119,7 @@ const iconsSupported = {
   chevronLeft: <ChevronLeftIcon />,
   dotsVertical: <EllipsisVerticalIcon />,
   photo: <PhotoIcon />,
+  exclamationCircleIconOutline: <ExclamationCircleIconOutline />,
 };
 
 const iconTheme = {
