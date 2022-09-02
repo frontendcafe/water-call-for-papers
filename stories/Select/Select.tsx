@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { Icon } from "../Icon/Icon";
 
 interface SelectValue {
   name: string;
@@ -47,19 +47,19 @@ const Select = ({
   isLabelVisible,
   label,
   placeholder,
-  values
+  values,
 }: SelectProps) => {
-  const renderValues = placeholder ?
-    [
-      {
-        name: placeholder,
-        value: '',
-        isDisabled: true,
-        isSelected: false
-      },
-      ...values
-    ] :
-    values;
+  const renderValues = placeholder
+    ? [
+        {
+          name: placeholder,
+          value: "",
+          isDisabled: true,
+          isSelected: false,
+        },
+        ...values,
+      ]
+    : values;
   const [selected, setSelected] = useState(renderValues[0]);
 
   useEffect(() => {
@@ -83,14 +83,9 @@ const Select = ({
         {description && <div>{description}</div>}
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-            <span className="block truncate">
-              {selected.name}
-            </span>
+            <span className="block truncate">{selected.name}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-              <SelectorIcon
-                className="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
+              <Icon iconName="chevronDown" />
             </span>
           </Listbox.Button>
           <Transition
@@ -104,7 +99,8 @@ const Select = ({
                 <Listbox.Option
                   key={valueIdx}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? "bg-amber-100 text-amber-900" : "text-gray-900"
+                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                      active ? "bg-amber-100 text-amber-900" : "text-gray-900"
                     }`
                   }
                   value={value}
@@ -113,14 +109,15 @@ const Select = ({
                   {({ selected }) => (
                     <>
                       <span
-                        className={`block truncate ${selected ? "font-medium" : "font-normal"
-                          }`}
+                        className={`block truncate ${
+                          selected ? "font-medium" : "font-normal"
+                        }`}
                       >
                         {value.name}
                       </span>
                       {selected ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                          <Icon iconName="check" />
                         </span>
                       ) : null}
                     </>
