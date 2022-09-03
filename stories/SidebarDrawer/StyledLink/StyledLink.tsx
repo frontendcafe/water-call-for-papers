@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { AnchorHTMLAttributes } from "react";
 import { tw } from "../../../lib/utils";
 
-interface StyledLinkProps {
+interface StyledLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children?: React.ReactNode;
   href?: string;
   variant?: "primary" | "transparent";

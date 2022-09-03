@@ -170,7 +170,7 @@ function EventsNavSection({
 
 function AboutNavSection({ open }: Pick<DrawerCompProps, "open">) {
   return (
-    <ul className="space-y-2 ">
+    <ul className="space-y-2">
       <li className="">
         <StyledLink>
           <IconContainer>
@@ -191,19 +191,21 @@ function AboutNavSection({ open }: Pick<DrawerCompProps, "open">) {
         </StyledLink>
       </li>
 
-      <li className="px-2">
-        <Link href="https://vercel.com/?utm_source=hifrontendcafe&utm_campaign=oss">
-          <a target="_blank" rel="noopener noreferrer">
-            <Image
-              src={logo_vercel.src}
-              alt="Powered by Vercel"
-              width={logo_vercel.width}
-              height={logo_vercel.height}
-              placeholder="blur"
-              blurDataURL={logo_vercel.src}
-            />
-          </a>
-        </Link>
+      <li>
+        <StyledLink
+          href="https://vercel.com/?utm_source=hifrontendcafe&utm_campaign=oss"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            src={logo_vercel.src}
+            alt="Powered by Vercel"
+            width={150}
+            height={32}
+            placeholder="blur"
+            blurDataURL={logo_vercel.src}
+          />
+        </StyledLink>
       </li>
     </ul>
   );
