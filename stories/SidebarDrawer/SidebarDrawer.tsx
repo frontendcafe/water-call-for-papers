@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { tw } from "../../lib/utils";
 import logo_vercel from "../../public/img/powered-by-vercel.svg";
 import { EventData } from "../../types/events-types";
@@ -25,16 +24,22 @@ interface DrawerCompProps {
 }
 
 export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const isMobile = () => window.matchMedia("(min-width: 768px)").matches;
+
+    setOpen(isMobile);
+  }, []);
 
   const clickHandler = () => {
     setOpen(!open);
   };
 
-  const responsiveBehavior = `transition-all md:translate-x-0 w-full ${
+  const responsiveBehavior = `transition-all -translate-x-0 md:translate-x-0 w-full ${
     open
-      ? "invisible -translate-x-full md:visible md:flex md:w-[17rem]"
-      : "visible -translate-x-0 md:w-[4.5rem]"
+      ? "visible md:w-[17rem]"
+      : "invisible md:visible -translate-x-full md:w-[4.5rem]"
   }`;
 
   return (
@@ -76,9 +81,9 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
 function TopBarButton({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
   const TogglerIcon = () => {
     return open ? (
-      <Icon color="text-primary-600" iconName="barsCenterLeft" size="large" />
-    ) : (
       <Icon color="text-primary-600" iconName="xmark" size="large" />
+    ) : (
+      <Icon color="text-primary-600" iconName="barsCenterLeft" size="large" />
     );
   };
 
