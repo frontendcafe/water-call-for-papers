@@ -65,7 +65,7 @@ const Select = ({
               {label}
             </Listbox.Label>
             {description && <div>{description}</div>}
-            <div className="relative mt-1" aria-labelledby="test">
+            <div className="relative mt-1" aria-labelledby="select-message">
               <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                 <span className="block truncate">
                   {selected ? selected.name : placeholder}
@@ -118,7 +118,7 @@ const Select = ({
           </>
         )}
       </Listbox>
-      {errorMessage && <p id="test">{errorMessage}</p>}
+      {errorMessage && <div id="select-message">{errorMessage}</div>}
     </div>
   );
 };
