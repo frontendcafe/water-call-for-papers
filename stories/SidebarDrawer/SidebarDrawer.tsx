@@ -23,6 +23,8 @@ interface DrawerCompProps {
   open: boolean;
 }
 
+const setBtnLabel = (open: boolean) => (open ? "Cerrar menu" : "Abrir menu");
+
 export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
   const [open, setOpen] = useState(false);
 
@@ -46,7 +48,9 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
     <div className="relative md:static">
       <TopBarButton clickHandler={clickHandler} open={open} />
       <nav
+        id="sidebar-drawer"
         aria-label="Sidebar"
+        aria-expanded={open ? "true" : "false"}
         className={tw(
           "bg-black text-secondary-200",
           "fixed md:sticky",
@@ -90,7 +94,8 @@ function TopBarButton({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
   return (
     <div className="fixed top-0 left-0 z-20 inline-flex items-center gap-2 p-2 text-white md:hidden">
       <Button
-        aria-label="Toggle drawer"
+        aria-controls="sidebar-drawer"
+        aria-label={setBtnLabel(open)}
         icon
         onClick={clickHandler}
         variant="transparent"
@@ -107,7 +112,8 @@ function BrandSection({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
     <div className="flex items-center">
       <span className="hidden px-1 md:block">
         <Button
-          aria-label="Toggle drawer"
+          aria-controls="sidebar-drawer"
+          aria-label={setBtnLabel(open)}
           icon
           onClick={clickHandler}
           variant="transparent"
@@ -124,7 +130,8 @@ function BrandSection({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
 
       <span className={`${open ? "hidden md:block" : "hidden"}`}>
         <Button
-          aria-label="Toggle drawer"
+          aria-controls="sidebar-drawer"
+          aria-label={setBtnLabel(open)}
           icon
           onClick={clickHandler}
           variant="transparent"

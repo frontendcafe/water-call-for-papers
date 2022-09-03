@@ -7,7 +7,7 @@ export const IconContainer = ({
   children: React.ReactNode;
 }) => {
   return (
-    <span className="flex-shrink-0 inline-flex" {...props}>
+    <span aria-hidden className="flex-shrink-0 inline-flex" {...props}>
       {children}
     </span>
   );
