@@ -36,6 +36,7 @@ export const Clip = ({ clipTextValue }: ClipProps) => {
         onClick={handleClick}
         value={clipTextValue}
         title="copiar-texto"
+        aria-labelledby="message-content"
       >
         <div className="">
           <span className="block">
@@ -47,7 +48,7 @@ export const Clip = ({ clipTextValue }: ClipProps) => {
         </span>
       </button>
       {isCopy && (
-        <span className={`absolute -left-0 -bottom-8`}>
+        <span id="message-content" className={`absolute -left-0 -bottom-8`}>
           {messageContent} {clipTextValue}
         </span>
       )}
