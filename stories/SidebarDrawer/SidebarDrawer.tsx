@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { tw } from "../../lib/utils";
 import logo_vercel from "../../public/img/powered-by-vercel.svg";
 import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
@@ -51,17 +50,7 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
         id="sidebar-drawer"
         aria-label="Sidebar"
         aria-expanded={open ? "true" : "false"}
-        className={tw(
-          "bg-black text-secondary-200",
-          "fixed md:sticky",
-          "flex flex-col justify-between",
-          "font-semibold whitespace-nowrap",
-          "min-h-screen",
-          "p-3",
-          "top-0 left-0",
-          "z-10",
-          responsiveBehavior
-        )}
+        className={`bg-black text-secondary-200 fixed md:sticky flex flex-col justify-between font-semibold whitespace-nowrap min-h-screen p-3 top-0 left-0 z-10 ${responsiveBehavior}`}
       >
         <div className="space-y-6">
           <BrandSection open={open} clickHandler={clickHandler} />
