@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getDate } from "../../lib/utils";
 import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
@@ -7,7 +8,7 @@ export const Card = ({ event }: { event: EventData }) => {
   const { endDate, id, name, startingDate, talks } = event;
 
   return (
-    <div className="max-w-md transition-shadow bg-white shadow-md duration-20z0 rounded-2xl hover:shadow-xl">
+    <div className="max-w-md transition-shadow duration-200 bg-white shadow-md rounded-2xl hover:shadow-xl">
       <Link href={`/event/${id}`}>
         <a>
           <div className="relative overflow-hidden rounded-t-2xl bg-gradient-to-b to-primary-500/25 from-primary-500">
@@ -21,9 +22,7 @@ export const Card = ({ event }: { event: EventData }) => {
             <h5 className="text-xl font-semibold line-clamp-2">{name}</h5>
             <div className="flex items-center gap-1 text-sm text-secondary-700">
               <Icon iconName="calendar" />
-              {/* TODO: Extract to a function */}
-              {new Date(startingDate).toLocaleDateString()} -{" "}
-              {new Date(endDate).toLocaleDateString()}
+              {getDate(startingDate)} - {getDate(endDate)}
             </div>
             <div>{/* TODO: Add Tags component */}</div>
             <div className="flex items-end">
