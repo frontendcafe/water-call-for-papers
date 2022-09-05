@@ -6,8 +6,6 @@ interface TagProps {
   label: string;
   size?: "sm" | "md" | "lg";
   status?: "approved" | "reprobate" | "review" | "theme" | "format" | "event";
-  backgroundClassName?: string;
-  textColorClassName?: string;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
