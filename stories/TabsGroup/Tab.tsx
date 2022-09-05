@@ -1,7 +1,6 @@
 import React from "react";
 import { Tab } from "@headlessui/react";
 import { TabsProps } from "./types";
-import { useTabsContext } from "./Hooks/useTabsContext";
 
 const setClassName = (selected: boolean, disabled: boolean) => {
   const disableClass = disabled ? "" : "hover:bg-blue-300 hover:text-white";
@@ -14,9 +13,6 @@ const setClassName = (selected: boolean, disabled: boolean) => {
 };
 
 const Tabs = ({ children, disabled }: TabsProps) => {
-  const componenteName = "tab";
-  useTabsContext("<Tab />", "<TabsList />", componenteName);
-
   return (
     <Tab
       className={({ selected }) =>
