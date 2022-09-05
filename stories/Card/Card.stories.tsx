@@ -24,17 +24,8 @@ const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 export const SingleCard = Template.bind({});
 SingleCard.args = {};
 
-export const SingleCardInAGrid = Template.bind({});
-SingleCardInAGrid.decorators = [
-  (Card) => (
-    <div className="grid gap-4">
-      <Card event={dummyData} />
-    </div>
-  ),
-];
-
-export const MultipleCardsInAGrid = Template.bind({});
-MultipleCardsInAGrid.decorators = [
+export const MultipleCards = Template.bind({});
+MultipleCards.decorators = [
   (Card) => (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
       {dummyDataArr.map((dummyData) => (
