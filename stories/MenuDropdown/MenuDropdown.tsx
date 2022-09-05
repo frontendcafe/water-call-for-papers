@@ -3,24 +3,25 @@ import Link from "next/link";
 import { Menu } from "@headlessui/react";
 
 interface Item {
-  //  icon, optional.
+  /** icon, optional. */
+
   icon?: React.ReactNode;
 
-  // textContent, menu item's text content.
+  /** textContent, menu item's text content. */
   textContent: string;
 
-  // href, direction to redirect to.
+  /**  href, direction to redirect to. */
   href: string;
 }
 
 interface MenuDropdownProps {
-  // itemList, array with objects as elements.
+  /**  itemList, array with objects as elements. */
   itemList: Item[];
 
-  // button, Button component.
+  /**  button, Button component. */
   button: React.ReactNode;
 
-  // ARIA label for menu items, optional.
+  /**  ARIA label for menu items, optional. */
   menuLabel?: string;
 }
 
@@ -41,36 +42,40 @@ export const MenuDropdown = ({
   const textColor = (text: string) =>
     text === "Eliminar" ? "text-[#B91C1C]" : "text-[#393939]";
 
-  // Iterate over itemList(array of objects) and return menu items.
-  const menuItems = itemList.map((item, index) => (
-    <Menu.Item key={index}>
-      {({ active }) => (
-        <div className="text-sm">
-          <Link href={item.href}>
-            <a
-              className={`${
-                active && "bg-[#EEF1F4]"
-              } inline-flex gap-2 items-center p-4 align-middle w-full ${textColor(
-                item.textContent
-              )}`}
-            >
-              {item.icon}
-              {item.textContent}
-            </a>
-          </Link>
-        </div>
-      )}
-    </Menu.Item>
-  ));
+  // Create MenuItem element, receive an item as prop.
+  const MenuItem = ({ item }) => {
+    return (
+      <Menu.Item>
+        {({ active }) => (
+          <div>
+            <Link href={item.href}>
+              <a
+                className={`${
+                  active && "bg-[#EEF1F4]"
+                } inline-flex gap-2 items-center p-4 align-middle w-full ${textColor(
+                  item.textContent
+                )}`}
+              >
+                {item.icon}
+                {item.textContent}
+              </a>
+            </Link>
+          </div>
+        )}
+      </Menu.Item>
+    );
+  };
 
   return (
     <Menu>
-      <Menu.Button as={React.Fragment}>{button}</Menu.Button>
+      <Menu.Button as={"div"}>{button}</Menu.Button>
       <Menu.Items
-        aria-label={menuLabel || "Items menú"}
+        aria-label={menuLabel ?? "Items menú"}
         className={`rounded-md shadow-[0px_5px_9px_rgba(0,0,0,0.25)] w-[176px]`}
       >
-        {menuItems}
+        {itemList.map((item, index) => (
+          <MenuItem item={item} key={index} />
+        ))}
       </Menu.Items>
     </Menu>
   );

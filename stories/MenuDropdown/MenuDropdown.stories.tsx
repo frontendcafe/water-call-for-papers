@@ -1,15 +1,17 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { MenuDropdown } from "./MenuDropdown";
 
+// Import icons
+import {
+  DocumentDuplicateIcon,
+  EllipsisVerticalIcon,
+  PencilIcon,
+  ShareIcon,
+  TrashIcon,
+} from "../Icon/Icon.stories";
+
 // Button
 import { Button } from "../Button/Button";
-
-// Icons
-import { ExpandMore } from "../Icons/ExpandMore";
-import { Share } from "../Icons/Share";
-import { Edit } from "../Icons/Edit";
-import { Delete } from "../Icons/Delete";
-import { Duplicate } from "../Icons/Duplicate";
 
 export default {
   title: "Components/MenuDropdown",
@@ -25,17 +27,17 @@ export const WithText = Template.bind({});
 WithText.args = {
   itemList: [
     {
-      icon: <Share />,
+      icon: <ShareIcon iconName="share" theme="neutral" size="medium" />,
       textContent: "Compartir",
       href: "#",
     },
     {
-      icon: <Edit />,
+      icon: <PencilIcon iconName="pencil" theme="neutral" size="medium" />,
       textContent: "Editar",
       href: "#",
     },
     {
-      icon: <Delete />,
+      icon: <TrashIcon iconName="trash" theme="neutral" size="medium" />,
       textContent: "Eliminar",
       href: "#",
     },
@@ -46,8 +48,8 @@ WithText.args = {
       disabled={false}
       icon={false}
       loading={false}
-      rounded="small"
-      size="medium"
+      rounded="medium"
+      size="normal"
       variant="primary"
     />
   ),
@@ -58,28 +60,39 @@ export const Disabled = Template.bind({});
 Disabled.args = {
   itemList: [
     {
-      icon: <Edit />,
+      icon: <PencilIcon iconName="pencil" theme="neutral" size="medium" />,
       textContent: "Editar",
       href: "#",
     },
     {
-      icon: <Duplicate />,
+      icon: (
+        <DocumentDuplicateIcon
+          iconName="documentDuplicate"
+          theme="neutral"
+          size="medium"
+        />
+      ),
       textContent: "Duplicar",
       href: "#",
     },
     {
-      icon: <Delete />,
+      icon: <TrashIcon iconName="trash" theme="neutral" size="medium" />,
       textContent: "Eliminar",
       href: "#",
     },
   ],
   button: (
     <Button
-      children={<ExpandMore />}
+      children={
+        <EllipsisVerticalIcon
+          iconName="dotsVertical"
+          theme="neutral"
+          size="medium"
+        />
+      }
       disabled={true}
       icon={true}
-      loading={true}
-      rounded="small"
+      rounded="medium"
       size="small"
       variant="primary"
     />
@@ -91,29 +104,41 @@ export const Expand = Template.bind({});
 Expand.args = {
   itemList: [
     {
-      icon: <Edit />,
+      icon: <PencilIcon iconName="pencil" theme="neutral" size="medium" />,
       textContent: "Editar",
       href: "#",
     },
     {
-      icon: <Duplicate />,
+      icon: (
+        <DocumentDuplicateIcon
+          iconName="documentDuplicate"
+          theme="neutral"
+          size="medium"
+        />
+      ),
       textContent: "Duplicar",
       href: "#",
     },
     {
-      icon: <Delete />,
+      icon: <TrashIcon iconName="trash" theme="neutral" size="medium" />,
       textContent: "Eliminar",
       href: "#",
     },
   ],
   button: (
     <Button
-      children={<ExpandMore />}
+      children={
+        <EllipsisVerticalIcon
+          iconName="dotsVertical"
+          theme="neutral"
+          size="medium"
+        />
+      }
       disabled={false}
       icon={true}
       loading={false}
-      rounded="small"
-      size="small"
+      rounded="medium"
+      size="normal"
       variant="primary"
     />
   ),
