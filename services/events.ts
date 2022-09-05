@@ -4,9 +4,10 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit as limitMax,
   orderBy,
-  OrderByDirection,
   query,
+  QueryConstraint,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -15,20 +16,29 @@ import { getDocById } from "../lib/helpers";
 import { formatFirebaseDate } from "../lib/utils";
 import { EventData } from "../types/events-types";
 import { Organizer } from "../types/organizers-types";
+import { EventQueryOptions } from "../types/others";
 import { addOrganizer, getOrganizer } from "./organizers";
 
-export async function getAllEvents(
-  order: OrderByDirection = "asc",
-  filter: string[] = []
-): Promise<EventData[]> {
+export async function getAllEvents({
+  limit,
+  order = "asc",
+  type = [],
+}: Partial<EventQueryOptions>): Promise<EventData[]> {
   // get all events
-  const docField = where("type", "in", filter);
-  const sortBy = orderBy("startingDate", order);
+  const typeArr = type.toString().split(",");
+  const queryConstraints: QueryConstraint[] = [];
 
-  let q = query(collectionsRef.events, sortBy);
-  if (filter.length > 0) {
-    q = query(collectionsRef.events, docField, sortBy);
+  if (type.length > 0) {
+    queryConstraints.push(where("type", "in", typeArr));
   }
+  if (order) {
+    queryConstraints.push(orderBy("startingDate", order));
+  }
+  if (limit && parseInt(limit) > 0) {
+    queryConstraints.push(limitMax(parseInt(limit)));
+  }
+
+  const q = query(collectionsRef.events, ...queryConstraints);
 
   const querySnapshot = await getDocs(q);
   if (querySnapshot.empty) return [];

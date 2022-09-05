@@ -1,17 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import errorHandler, { err } from "../../../lib/error-handling";
 import { createEvent, getAllEvents } from "../../../services/events";
-import { QueryParams } from "../../../types/others";
 
 export default errorHandler(
   async (req: NextApiRequest, res: NextApiResponse) => {
-    const { body, method } = req;
-    const { order, type = [] }: QueryParams = req.query;
+    const { body, method, query } = req;
 
     if (method === "GET") {
-      const filter: string[] = typeof type === "string" ? [type] : type;
-
-      const data = await getAllEvents(order, filter);
+      const data = await getAllEvents(query);
       const message = undefined;
 
       return res.status(200).json({ data, message });
