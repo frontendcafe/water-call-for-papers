@@ -18,6 +18,7 @@ export const DefaultTag = Template.bind({});
 
 DefaultTag.args = {
   label: "Programación",
+  status: "approved",
 };
 
 export const PrimaryTag = Template.bind({});
