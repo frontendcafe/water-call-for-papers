@@ -14,8 +14,7 @@ import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { formatFirebaseDate } from "../lib/utils";
 import { EventData } from "../types/events-types";
-import { OrganizerId, Organizer } from "../types/organizers-types";
-import { TalkProposalId } from "../types/talk-types";
+import { Organizer } from "../types/organizers-types";
 import { addOrganizer, getOrganizer } from "./organizers";
 
 export async function getAllEvents(
@@ -67,21 +66,8 @@ export const getEvent = async (id: string) => {
   if (!id) {
     throw { code: 422, message: "Se requiere el ID del evento" };
   }
-  // get one event
-  const eventSnap = await getDoc(doc(collectionsRef.events, id));
-
-  if (!eventSnap.exists()) {
-    throw { code: 404, message: "El evento no existe!" };
-  }
-
-  const organizersIds: OrganizerId[] = eventSnap.data().organizers;
-  const talksIds: TalkProposalId[] = eventSnap.data().talks;
-  const event = eventSnap.data();
-
-  event.organizers = await getDocById(organizersIds, collectionsRef.organizers);
-  event.talks = await getDocById(talksIds, collectionsRef.talks);
-
-  return event;
+  const event = (await getDocById(id, collectionsRef.events)) as EventData[];
+  return event[0];
 };
 
 export const deleteEvent = async (id: string) => {
