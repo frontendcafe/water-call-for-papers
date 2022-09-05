@@ -128,14 +128,25 @@ const iconSize = {
 // This also can be used
 // extends React.ComponentProps<"svg">
 interface IconProps {
+  "aria-hidden"?: boolean | "false" | "true";
   iconName: keyof typeof iconsSupported;
   size?: keyof typeof iconSize;
   // Custom sizes, fill, stroke via className (as props)
   className?: string;
 }
 
-export function Icon({ iconName, size = "medium", className }: IconProps) {
+export function Icon({
+  "aria-hidden": ariaHidden = "true",
+  iconName,
+  size = "medium",
+  className,
+}: IconProps) {
   const SelectedIcon = iconsSupported[iconName];
 
-  return <SelectedIcon className={`${iconSize[size]} ${className}`} />;
+  return (
+    <SelectedIcon
+      aria-hidden={ariaHidden}
+      className={`${iconSize[size]} ${className}`}
+    />
+  );
 }
