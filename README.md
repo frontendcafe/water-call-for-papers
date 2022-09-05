@@ -3,6 +3,7 @@
 ## App Call for papers
 
 [Notion del proyecto](https://www.notion.so/hifrontendcafe/App-Call-for-papers-e750b95638db430a9cd9c4c890ae63e6)
+[Diseño del proyecto](https://www.figma.com/file/yqFuCDsK4VAVoV7RAYkn0M/Proceso-dise%C3%B1o-CMYK)
 
 ### Documentos importantes
 
