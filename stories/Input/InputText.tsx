@@ -1,6 +1,6 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 
-interface InputTextProps {
+interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   /**
    * Input Default Values
    */
@@ -12,10 +12,6 @@ interface InputTextProps {
    * Input with a litle description below tag label.
    */
   description?: string;
-  /**
-   * Placeholder in tag input.
-   */
-  placeholder?: string;
   /**
    * Value in tag input.
    */
@@ -32,17 +28,8 @@ interface InputTextProps {
    * Label name visible option
    */
   visible?: boolean;
-  /**
-   * Input required option
-   */
-  required?: string;
 
   onClick?: () => void;
-
-  /**
-   * Input States
-   */
-  disabled?: boolean;
 
   /**
    * Optional Variables
