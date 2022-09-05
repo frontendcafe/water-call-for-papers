@@ -1,6 +1,6 @@
 import { MouseEvent } from "react";
 import { Button } from "../Button/Button";
-import { XMarkIcon } from "../Icon/Icon.stories";
+import { Icon } from "../Icon/Icon";
 
 interface TagProps {
   label: string;
@@ -37,7 +37,7 @@ export const Tag = ({
       <span>{label}</span>
       {onClick && (
         <Button size="normal" icon variant="transparent" onClick={onClick}>
-          <XMarkIcon size="small" theme="neutral" iconName="xmark" />
+          <Icon size="small" theme="neutral" iconName="xmark" />
           <span className="sr-only">eliminar tag</span>
         </Button>
       )}
