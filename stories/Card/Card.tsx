@@ -18,7 +18,7 @@ export const Card = ({ event }: { event: EventData }) => {
             <img className="object-cover h-48" src="" />
           </div>
           <div className="p-4 space-y-2">
-            <h5 className="text-xl font-semibold">{name}</h5>
+            <h5 className="text-xl font-semibold line-clamp-2">{name}</h5>
             <div className="flex items-center gap-1 text-sm text-secondary-700">
               <Icon iconName="calendar" />
               {/* TODO: Extract to a function */}
