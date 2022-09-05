@@ -99,5 +99,4 @@ InputWithRequired.args = {
   idValue: "",
   placeholder: "Text your text here ...",
   visible: true,
-  required: "Este campo es requerido",
 };
