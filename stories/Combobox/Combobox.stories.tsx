@@ -1,20 +1,14 @@
 import { ComponentMeta } from "@storybook/react";
 import { useState } from "react";
-import { createTopic } from "../../lib/fetcher";
+import { createTopic } from "../../lib/api-handlers";
 import { Topic } from "../../types/talk-types";
 import { Icon } from "../Icon/Icon";
 import ComboboxComponent from "./Combobox";
 
-// More info about default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Components/Combobox",
   component: ComboboxComponent,
 } as ComponentMeta<typeof ComboboxComponent>;
-
-// More info about component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-// const Template: ComponentStory<typeof ComboboxComponent> = (args) => (
-//   <ComboboxComponent {...args} />
-// );
 
 const topicsObj = [
   {
