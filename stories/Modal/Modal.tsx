@@ -88,7 +88,7 @@ export const Modal = ({
                     onClick={() => setIsOpen(false)}
                     className="absolute"
                   >
-                    <Icon iconName="xmark" />
+                    <Icon iconName="xMark" />
                   </button>
                 </div>
                 <div className="flex flex-col gap-4">{children}</div>
