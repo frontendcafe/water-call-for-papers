@@ -5,7 +5,6 @@ import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
 import { LogoCallForPapers } from "../Spinner/LogoCallForPapers";
-import { IconContainer } from "./IconContainer";
 import { StyledLink } from "./StyledLink/StyledLink";
 import { TextContainer } from "./TextContainer";
 
@@ -23,6 +22,8 @@ interface DrawerCompProps {
 }
 
 const setBtnLabel = (open: boolean) => (open ? "Cerrar menu" : "Abrir menu");
+
+const iconStyles = "inline-flex flex-shrink-0";
 
 export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
   const [open, setOpen] = useState(false);
@@ -57,9 +58,7 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
 
           <StyledLink href="/event/create" variant="primary">
             <TextContainer open={open}>Crear Evento</TextContainer>
-            <IconContainer>
-              <Icon iconName="plusCircle" size="medium" theme="light" />
-            </IconContainer>
+            <Icon className={iconStyles} iconName="plusCircle" />
           </StyledLink>
 
           <EventsNavSection open={open} events={events} />
@@ -74,9 +73,17 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
 function TopBarButton({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
   const TogglerIcon = () => {
     return open ? (
-      <Icon color="text-primary-600" iconName="xmark" size="large" />
+      <Icon
+        className={`${iconStyles} text-primary-600`}
+        iconName="xMark"
+        size="large"
+      />
     ) : (
-      <Icon color="text-primary-600" iconName="barsCenterLeft" size="large" />
+      <Icon
+        className={`${iconStyles} text-primary-600`}
+        iconName="barsCenterLeft"
+        size="large"
+      />
     );
   };
 
@@ -107,9 +114,7 @@ function BrandSection({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
           onClick={clickHandler}
           variant="transparent"
         >
-          <IconContainer>
-            <LogoCallForPapers />
-          </IconContainer>
+          <LogoCallForPapers />
         </Button>
       </span>
 
@@ -125,9 +130,7 @@ function BrandSection({ open, clickHandler }: Omit<DrawerCompProps, "events">) {
           onClick={clickHandler}
           variant="transparent"
         >
-          <IconContainer>
-            <Icon size="large" iconName="chevronLeft" theme="light" />
-          </IconContainer>
+          <Icon className={iconStyles} size="large" iconName="chevronLeft" />
         </Button>
       </span>
     </div>
@@ -141,9 +144,7 @@ function EventsNavSection({
   return (
     <div className="space-y-2">
       <h2 className="flex items-center gap-2 p-2 text-white">
-        <IconContainer>
-          <Icon size="large" iconName="calendar" theme="light" />
-        </IconContainer>
+        <Icon className={iconStyles} size="large" iconName="calendar" />
 
         <TextContainer open={open}>Mis Eventos</TextContainer>
       </h2>
@@ -152,11 +153,9 @@ function EventsNavSection({
         {events.map(({ id, name }) => (
           <li key={id}>
             <StyledLink href={`/event/${id}`}>
-              <IconContainer>
-                <div className="inline-flex items-center justify-center w-8 h-8 text-xs text-black rounded-full bg-secondary-100">
-                  {name.substring(0, 2).toUpperCase()}
-                </div>
-              </IconContainer>
+              <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-xs text-black rounded-full bg-secondary-100">
+                {name.substring(0, 2).toUpperCase()}
+              </div>
 
               <TextContainer truncate open={open}>
                 {name}
@@ -174,20 +173,14 @@ function AboutNavSection({ open }: Pick<DrawerCompProps, "open">) {
     <ul className="space-y-2">
       <li className="">
         <StyledLink>
-          <IconContainer>
-            <Icon size="large" iconName="questionMark" theme="light" />
-          </IconContainer>
-
+          <Icon className={iconStyles} size="large" iconName="questionMark" />
           <TextContainer open={open}>Acerca de</TextContainer>
         </StyledLink>
       </li>
 
       <li>
         <StyledLink>
-          <IconContainer>
-            <Icon size="large" iconName="logout" theme="light" />
-          </IconContainer>
-
+          <Icon className={iconStyles} size="large" iconName="logout" />
           <TextContainer open={open}>Cerrar</TextContainer>
         </StyledLink>
       </li>
