@@ -4,7 +4,6 @@ import { Menu } from "@headlessui/react";
 
 interface Item {
   /** icon, optional. */
-
   icon?: React.ReactNode;
 
   /** textContent, menu item's text content. */
@@ -12,6 +11,8 @@ interface Item {
 
   /**  href, direction to redirect to. */
   href: string;
+
+  target?: "_blank" | "_self";
 }
 
 interface MenuDropdownProps {
@@ -43,7 +44,7 @@ export const MenuDropdown = ({
     text === "Eliminar" ? "text-[#991B1B]" : "text-[#393939]";
 
   // Create MenuItem element, receive an item as prop.
-  const MenuItem = ({ item }) => {
+  const MenuItem = ({ item }: { item: Item }) => {
     return (
       <Menu.Item>
         {({ active }) => (
@@ -67,25 +68,23 @@ export const MenuDropdown = ({
   };
 
   // Get disabled prop value of button.
-  const isButtonDisabled = button.props.disabled;
+  const isButtonDisabled = button?.props.disabled;
 
-  return (
-    <Menu>
-      {({ open }) => (
-        <>
-          <Menu.Button as={"div"}>{button}</Menu.Button>
-          {open && !isButtonDisabled && (
-            <Menu.Items
-              aria-label={menuLabel ?? "Items menú"}
-              className={`rounded-md shadow-[0px_5px_9px_rgba(0,0,0,0.25)] w-[176px] bg-[#FFFFFF]`}
-            >
-              {itemList.map((item, index) => (
-                <MenuItem item={item} key={index} />
-              ))}
-            </Menu.Items>
-          )}
-        </>
+  const MenuContent = ({ open }: { open: boolean }) => (
+    <>
+      <Menu.Button as={"div"}>{button}</Menu.Button>
+      {open && !isButtonDisabled && (
+        <Menu.Items
+          aria-label={menuLabel ?? "Items menú"}
+          className={`rounded-md shadow-[0px_5px_9px_rgba(0,0,0,0.25)] w-[176px] bg-[#FFFFFF]`}
+        >
+          {itemList.map((item, index) => (
+            <MenuItem item={item} key={index} />
+          ))}
+        </Menu.Items>
       )}
-    </Menu>
+    </>
   );
+
+  return <Menu>{({ open }) => <MenuContent open={open} />}</Menu>;
 };
