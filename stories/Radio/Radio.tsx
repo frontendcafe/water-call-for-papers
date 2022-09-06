@@ -29,8 +29,16 @@ const RadioButtons = ({
                 disabled={option.isDisabled}
                 //Use Figma's actualized styles keeping in mind HeadlessUI
                 className={({ active, checked }) =>
-                  `${active ? "" : ""}
-                  ${checked ? "text-black" : "bg-white"}
+                  `${
+                    active
+                      ? "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      : "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  }
+                  ${
+                    checked
+                      ? "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      : "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  }
                     relative flex cursor-pointer rounded-lg px-5 py-4 `
                 }
               >
@@ -41,7 +49,7 @@ const RadioButtons = ({
                         <div className="flex text-sm">
                           {checked && (
                             <div className="shrink-0 text-white">
-                              <CheckIcon className="h-6 w-6 px-5 py-4" />{" "}
+                              <CheckIcon className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />{" "}
                               {/*Use Icons component*/}
                             </div>
                           )}
@@ -49,7 +57,9 @@ const RadioButtons = ({
                           <RadioGroup.Label
                             as="p"
                             className={`font-family: 'Work Sans' font-style: normal ${
-                              checked ? "text-black" : "text-black"
+                              checked
+                                ? "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                : ""
                             }`}
                           >
                             {option.title}
