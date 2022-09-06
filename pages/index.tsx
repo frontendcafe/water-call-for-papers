@@ -1,14 +1,11 @@
 import type { NextPage } from "next";
 // import Image from "next/image";
 import Link from "next/link";
-// import RadioButtons from "../stories/Radio/Radio";
-// import logo_vercel from "../public/img/powered-by-vercel.svg";
-
-// I commented this so I could commit
+import logo_vercel from "../public/img/powered-by-vercel.svg";
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-slate-500 rounded p-10">
+    <div>
       Hola
       <div className="inline-flex bg-slate-700">
         <div className="m-2 mb-1">

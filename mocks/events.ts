@@ -1,6 +1,6 @@
-import { EventType, Event, EventStatus } from "../types/events-types";
+import { EventType, EventData, EventStatus } from "../types/events-types";
 
-export const events: Event[] = [
+export const events: EventData[] = [
   {
     id: "1000001",
     name: "Event 1",

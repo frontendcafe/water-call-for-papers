@@ -1,26 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import errorHandler, { err } from "../../../lib/error-handling";
-import { getAllEvents } from "../../../services/events";
-import { QueryParams } from "../../../types/others";
+import { createEvent, getAllEvents } from "../../../services/events";
 
 export default errorHandler(
   async (req: NextApiRequest, res: NextApiResponse) => {
-    const { method } = req;
-    const { order, type = [] }: QueryParams = req.query;
+    const { body, method, query } = req;
 
     if (method === "GET") {
-      const filter: string[] = typeof type === "string" ? [type] : type;
-
-      const data = await getAllEvents(order, filter);
+      const data = await getAllEvents(query);
       const message = undefined;
 
       return res.status(200).json({ data, message });
     }
 
     if (method === "POST") {
-      // TODO: Implement after issue #21 is closed
+      const data = await createEvent(body);
+      const message = "Se ha creado el evento";
 
-      return res.status(501).json(err[501]);
+      return res.status(201).json({ data, message });
     }
 
     res.status(405).json(err[405]);
