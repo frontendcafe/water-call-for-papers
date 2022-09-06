@@ -28,4 +28,6 @@ export interface TalkProposal {
   topics: TopicId[] | Topic[];
   candidates: CandidateId[] | Candidate[];
   uniqueCode?: string;
+  eventId: string;
+  createdAt: Date;
 }
