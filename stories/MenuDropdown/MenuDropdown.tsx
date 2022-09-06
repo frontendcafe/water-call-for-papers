@@ -40,7 +40,7 @@ export const MenuDropdown = ({
 }: MenuDropdownProps) => {
   // Set text color depending on item.textContent
   const textColor = (text: string) =>
-    text === "Eliminar" ? "text-[#B91C1C]" : "text-[#393939]";
+    text === "Eliminar" ? "text-[#991B1B]" : "text-[#393939]";
 
   // Create MenuItem element, receive an item as prop.
   const MenuItem = ({ item }) => {
@@ -51,7 +51,7 @@ export const MenuDropdown = ({
             <Link href={item.href}>
               <a
                 className={`${
-                  active && "bg-[#EEF1F4]"
+                  active && "bg-[#00000008]"
                 } inline-flex gap-2 items-center p-4 align-middle w-full ${textColor(
                   item.textContent
                 )}`}
@@ -66,17 +66,26 @@ export const MenuDropdown = ({
     );
   };
 
+  // Get disabled prop value of button.
+  const isButtonDisabled = button.props.disabled;
+
   return (
     <Menu>
-      <Menu.Button as={"div"}>{button}</Menu.Button>
-      <Menu.Items
-        aria-label={menuLabel ?? "Items menú"}
-        className={`rounded-md shadow-[0px_5px_9px_rgba(0,0,0,0.25)] w-[176px]`}
-      >
-        {itemList.map((item, index) => (
-          <MenuItem item={item} key={index} />
-        ))}
-      </Menu.Items>
+      {({ open }) => (
+        <>
+          <Menu.Button as={"div"}>{button}</Menu.Button>
+          {open && !isButtonDisabled && (
+            <Menu.Items
+              aria-label={menuLabel ?? "Items menú"}
+              className={`rounded-md shadow-[0px_5px_9px_rgba(0,0,0,0.25)] w-[176px] bg-[#FFFFFF]`}
+            >
+              {itemList.map((item, index) => (
+                <MenuItem item={item} key={index} />
+              ))}
+            </Menu.Items>
+          )}
+        </>
+      )}
     </Menu>
   );
 };
