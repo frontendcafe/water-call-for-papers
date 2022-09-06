@@ -101,7 +101,11 @@ export const InputText = ({
               : `absolute top-[30px] ${positionIcon}`
           }
         >
-          <Icon iconName="calendar" size="medium" color="active:text-gray-80" />
+          <Icon
+            iconName="calendar"
+            size="medium"
+            className="active:text-gray-80"
+          />
         </span>
       )}
 
@@ -111,7 +115,7 @@ export const InputText = ({
             <Icon
               iconName="exclamationCircleIconOutline"
               size="small"
-              color="text-red-600"
+              className="text-red-600"
             />
           </span>
           {error}
