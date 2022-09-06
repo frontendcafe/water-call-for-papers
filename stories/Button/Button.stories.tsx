@@ -23,7 +23,6 @@ export default {
     disabled: false,
     icon: false,
     loading: false,
-    rounded: "medium",
     size: "normal",
     variant: "primary",
   },
@@ -94,7 +93,6 @@ OnlyIcon.args = {
   ),
   icon: true,
   variant: "secondary",
-  rounded: "full",
 };
 
 export const IconWithoutBackground = Template.bind({});

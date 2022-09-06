@@ -24,8 +24,7 @@ export const AccordionDefault = ({ title, children }: Accordion) => {
               <span className="mr-3">
                 <Icon
                   iconName="chevronDown"
-                  theme="dark"
-                  color={`${
+                  className={`${
                     open ? " rotate-180 transform" : ""
                   } w-5 h-5 text-primary-700 focus:text-primary-800`}
                 />
