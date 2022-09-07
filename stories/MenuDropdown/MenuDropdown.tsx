@@ -19,8 +19,8 @@ interface MenuDropdownProps {
   /**  itemList, array with objects as elements. */
   itemList: Item[];
 
-  /**  button, Button component. */
-  button: React.ReactNode;
+  /**  children, Button component. */
+  children: React.ReactNode;
 
   /**  ARIA label for menu items, optional. */
   menuLabel?: string;
@@ -30,13 +30,13 @@ interface MenuDropdownProps {
  * Menu dropdown component.
  * Render the button and the item list received as prop.
  * @param {object[]} itemList - Array, in each position contains an object with 'icon', 'textContent' and 'href' props.
- * @param {React.ReactNode} button - JSX component.
+ * @param {React.ReactNode} children - Button JSX component.
  * @param {string} menuLabel - ARIA label for menu items, default 'Items menú'.
  */
 
 export const MenuDropdown = ({
   itemList,
-  button,
+  children,
   menuLabel,
 }: MenuDropdownProps) => {
   // Set text color depending on item.textContent
@@ -68,22 +68,24 @@ export const MenuDropdown = ({
   };
 
   // Get disabled prop value of button.
-  const isButtonDisabled = button?.props.disabled;
+  // const isButtonDisabled = children?.props.disabled;
 
   const MenuContent = ({ open }: { open: boolean }) => (
-    <>
-      <Menu.Button as={"div"}>{button}</Menu.Button>
-      {open && !isButtonDisabled && (
+    <div className="relative">
+      <Menu.Button as={"div"} className="h-0 mb-12 w-0">
+        {children}
+      </Menu.Button>
+      {open && (
         <Menu.Items
           aria-label={menuLabel ?? "Items menú"}
-          className={`rounded-md shadow-[0px_5px_9px_rgba(0,0,0,0.25)] w-[176px] bg-[#FFFFFF]`}
+          className="absolute bg-white rounded-md shadow-lg left-8 w-max"
         >
           {itemList.map((item, index) => (
             <MenuItem item={item} key={index} />
           ))}
         </Menu.Items>
       )}
-    </>
+    </div>
   );
 
   return <Menu>{({ open }) => <MenuContent open={open} />}</Menu>;
