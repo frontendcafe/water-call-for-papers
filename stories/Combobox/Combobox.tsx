@@ -14,15 +14,21 @@ export interface ComboboxComponentInterface {
 
 const ComboboxSeletedList = ({
   valuesSelected,
-}: Pick<ComboboxComponentInterface, "valuesSelected">) => {
+  handlerDeselectValue,
+}: {
+  valuesSelected: Set<string>;
+  handlerDeselectValue: (value: string, type: "deselect") => void;
+}) => {
   return (
     <div
-      className={`flex flex-row flex-wrap gap-2 p-2 pt-4 rounded bg-white w-full`}
+      className={`flex flex-row flex-wrap gap-2 p-2 pt-4 my-1 rounded bg-white w-full`}
     >
       <TagList
         tags={Array.from(valuesSelected?.values())?.map((value) => ({
           label: value,
           size: "sm",
+          status: "comboLabels",
+          onClick: () => handlerDeselectValue(value, "deselect"),
         }))}
       />
     </div>
@@ -40,13 +46,21 @@ const ComboboxComponent = ({
 }: ComboboxComponentInterface) => {
   const [searchValue, setSearchValue] = useState<string>("");
 
-  const comboboxOnChangeHandler = (value: string) => {
+  const comboboxOnChangeHandler = (
+    value: string,
+    type: "select" | "deselect" = "select"
+  ) => {
     if (value === actionLabel) {
       actionHandler?.(searchValue);
     } else {
       const newValuesSelected = new Set(valuesSelected);
-      newValuesSelected.add(value);
+      if (type === "deselect") {
+        newValuesSelected.delete(value);
+      } else {
+        newValuesSelected.add(value);
+      }
       onChange?.(newValuesSelected);
+      setSearchValue("");
     }
   };
 
@@ -68,10 +82,13 @@ const ComboboxComponent = ({
           className={`p-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 w-full`}
         />
         {valuesSelected?.size > 0 && (
-          <ComboboxSeletedList valuesSelected={valuesSelected} />
+          <ComboboxSeletedList
+            valuesSelected={valuesSelected}
+            handlerDeselectValue={comboboxOnChangeHandler}
+          />
         )}
         <Combobox.Options
-          className={`relative flex flex-col pt-2 rounded bg-white w-full`}
+          className={`relative flex flex-col pt-2 my-1 rounded bg-white w-full`}
         >
           {filteredOptions?.map((option) => (
             <Combobox.Option
