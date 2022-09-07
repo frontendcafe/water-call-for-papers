@@ -47,3 +47,10 @@ export const addTopic = (topics: Pick<Topic, "description">[]) => {
 
   return Promise.all(topicsId);
 };
+
+export const getAllTopics = async (): Promise<Topic[]> => {
+  const topicsSnap = await getDocs(collectionsRef.topics);
+  if (topicsSnap.empty) return [];
+
+  return topicsSnap.docs.map((topic) => topic.data()) as Topic[];
+};

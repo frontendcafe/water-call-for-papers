@@ -18,7 +18,7 @@ Default.args = {
   // Datos heredados de la historia PrimaryTag en Tag.stories.tsx
   tags: [
     { ...TagStories.PrimaryTag.args, label: "Ux Writing" },
-    { ...TagStories.PrimaryTag.args, label: "Diseño UI", style: "secondary" },
+    { ...TagStories.PrimaryTag.args, label: "Diseño UI", status: "event" },
     { ...TagStories.PrimaryTag.args, label: "Programación" },
   ],
 };

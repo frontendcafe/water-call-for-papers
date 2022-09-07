@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon } from "../Icon/Icon";
 
 interface InputTextProps {
   /**
@@ -37,8 +38,6 @@ interface InputTextProps {
    */
   required?: string;
 
-  onClick?: () => void;
-
   /**
    * Input States
    */
@@ -47,7 +46,7 @@ interface InputTextProps {
   /**
    * Optional Variables
    */
-  position?: "left" | "right"; // To position Icon to the right or left of the input
+  position?: "left"; // To position Icon to the right or left of the input
 }
 
 /**
@@ -57,28 +56,28 @@ interface InputTextProps {
 export const InputText = ({
   label,
   placeholder,
-  value,
   idValue,
   description,
   error,
   required,
   position,
   disabled,
-  visible,
   ...props
 }: InputTextProps) => {
-  const positionIconText = position == "left" && "pl-8 pr-2 py-2";
+  const positionIconText = position == "left" && "pl-9 pr-2 py-2";
 
   const withError = error
     ? "border-red-400 focus:border-red-400"
     : "border-gray-500";
 
+  const positionIcon = position == "left" ? `left-6` : `right-6`;
+
   return (
     <div className="flex flex-col">
       <label
         htmlFor={idValue}
-        className={`text-sm font-semibold text-gray-800 ${
-          visible ? "not-sr-only" : "sr-only"
+        className={`text-sm font-semibold text-gray-900 ${
+          label ? "not-sr-only" : "sr-only"
         }`}
       >
         {label}
@@ -90,25 +89,43 @@ export const InputText = ({
         type="text"
         placeholder={placeholder}
         id={idValue}
-        value={value}
-        className={`px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 disabled:border-gray-200 ${positionIconText} ${withError}`}
+        value={props.value}
+        className={`px-2 py-2 mt-1 text-sm text-gray-700 border border-secondary-700 rounded-md placeholder:text-gray-300 focus:border-2 focus:border-primary-900 disabled:border-gray-300 active:border active:border-primary-900 active:text-gray-800 ${positionIconText} ${withError}`}
         disabled={disabled}
-        {...props}
       />
-      {/* Icon component goes here */}
-      {/* <div
+      {position == "left" && (
+        <span
           className={
-            visible
-              ? `absolute top-[50px] ${position}-6`
-              : `absolute top-[30px] ${position}-6`
+            props.visible
+              ? `absolute top-[48px] ${positionIcon}`
+              : `absolute top-[30px] ${positionIcon}`
           }
         >
-          Icon component goes here
-        </div> */}
-      {error && <p className="mt-2 text-xs text-red-500">{error}</p>}
+          <Icon
+            iconName="calendar"
+            size="medium"
+            className="active:text-gray-80"
+          />
+        </span>
+      )}
+
+      {error && (
+        <p className="flex items-start mt-2 text-xs leading-3 text-red-600">
+          <span className="mr-1">
+            <Icon
+              iconName="exclamationCircleIconOutline"
+              size="small"
+              className="text-red-600"
+            />
+          </span>
+          {error}
+        </p>
+      )}
       {required && (
-        <p className="flex mt-2 text-xs text-gray-600">
-          <span className="mr-1">{/* Icon component goes here */}</span>
+        <p className="flex items-start mt-2 text-xs leading-3 text-gray-600">
+          <span className="mr-1">
+            <Icon iconName="exclamationCircleIconOutline" size="small" />
+          </span>
           {required}
         </p>
       )}

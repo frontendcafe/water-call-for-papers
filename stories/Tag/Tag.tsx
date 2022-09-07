@@ -1,23 +1,46 @@
+import { MouseEvent } from "react";
+import { Button } from "../Button/Button";
+import { Icon } from "../Icon/Icon";
+
 interface TagProps {
   label: string;
   size?: "sm" | "md" | "lg";
-  style?: "primary" | "secondary";
+  status?: "approved" | "reprobate" | "review" | "theme" | "format" | "event";
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const styleList = {
-  primary: "bg-blue-400",
-  secondary: "bg-emerald-400",
-  sm: "text-sm",
-  md: "text-base",
-  lg: "text-lg",
-};
+export const Tag = ({
+  label,
+  size = "md",
+  status = "format",
+  onClick,
+}: TagProps) => {
+  const mode = {
+    review: "bg-[#F3F3F3] text-[#393939] ",
+    approved: "bg-[#D1FADF] text-[#245938]",
+    reprobate: "bg-[#FECACA] text-[#A1321A]",
+    event: "bg-black/50 backdrop-blur-sm text-[#F3F3F3]",
+    theme: "bg-[#EDDFFF] text-[#3B0085]",
+    format: "bg-[#E7FFFE] text-[#124C47]",
+  };
 
-export const Tag = ({ label, size = "md", style = "primary" }: TagProps) => {
+  const fontSize = {
+    sm: "px-2 py-1 text-xs",
+    md: "px-4 py-1 text-base",
+    lg: "px-4 py-1 text-lg",
+  };
+
   return (
     <div
-      className={`${styleList[style]} ${styleList[size]} py-1.5 px-8 rounded-full text-center max-w-max`}
+      className={`font-medium rounded-full max-w-max flex flex-row justify-between items-center gap-2 ${fontSize[size]}  ${mode[status]}`}
     >
       <span>{label}</span>
+      {onClick && (
+        <Button size="normal" icon variant="transparent" onClick={onClick}>
+          <Icon size="small" theme="neutral" iconName="xmark" />
+          <span className="sr-only">eliminar tag</span>
+        </Button>
+      )}
     </div>
   );
 };

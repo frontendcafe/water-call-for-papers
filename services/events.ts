@@ -4,9 +4,10 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit as limitMax,
   orderBy,
-  OrderByDirection,
   query,
+  QueryConstraint,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -14,22 +15,30 @@ import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { formatFirebaseDate } from "../lib/utils";
 import { EventData } from "../types/events-types";
-import { OrganizerId, Organizer } from "../types/organizers-types";
-import { TalkProposalId } from "../types/talk-types";
+import { Organizer } from "../types/organizers-types";
+import { EventQueryOptions } from "../types/others";
 import { addOrganizer, getOrganizer } from "./organizers";
 
-export async function getAllEvents(
-  order: OrderByDirection = "asc",
-  filter: string[] = []
-): Promise<EventData[]> {
+export async function getAllEvents({
+  limit,
+  order = "asc",
+  type = [],
+}: Partial<EventQueryOptions>): Promise<EventData[]> {
   // get all events
-  const docField = where("type", "in", filter);
-  const sortBy = orderBy("startingDate", order);
+  const typeArr = type.toString().split(",");
+  const queryConstraints: QueryConstraint[] = [];
 
-  let q = query(collectionsRef.events, sortBy);
-  if (filter.length > 0) {
-    q = query(collectionsRef.events, docField, sortBy);
+  if (type.length > 0) {
+    queryConstraints.push(where("type", "in", typeArr));
   }
+  if (order) {
+    queryConstraints.push(orderBy("startingDate", order));
+  }
+  if (limit && parseInt(limit) > 0) {
+    queryConstraints.push(limitMax(parseInt(limit)));
+  }
+
+  const q = query(collectionsRef.events, ...queryConstraints);
 
   const querySnapshot = await getDocs(q);
   if (querySnapshot.empty) return [];
@@ -67,21 +76,8 @@ export const getEvent = async (id: string) => {
   if (!id) {
     throw { code: 422, message: "Se requiere el ID del evento" };
   }
-  // get one event
-  const eventSnap = await getDoc(doc(collectionsRef.events, id));
-
-  if (!eventSnap.exists()) {
-    throw { code: 404, message: "El evento no existe!" };
-  }
-
-  const organizersIds: OrganizerId[] = eventSnap.data().organizers;
-  const talksIds: TalkProposalId[] = eventSnap.data().talks;
-  const event = eventSnap.data();
-
-  event.organizers = await getDocById(organizersIds, collectionsRef.organizers);
-  event.talks = await getDocById(talksIds, collectionsRef.talks);
-
-  return event;
+  const event = (await getDocById(id, collectionsRef.events)) as EventData[];
+  return event[0];
 };
 
 export const deleteEvent = async (id: string) => {

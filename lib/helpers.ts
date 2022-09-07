@@ -1,5 +1,13 @@
-import { CollectionReference, doc, getDoc } from "firebase/firestore";
+import { CollectionReference, getDocs, query, where } from "firebase/firestore";
 import { collectionsRef } from "./firebase-config";
+
+const datesTimestamps = {
+  createdAt: "createdAt",
+  startingDate: "startingDate",
+  endDate: "endDate",
+  proposalsStartingDate: "proposalsStartingDate",
+  proposalsEndDate: "proposalsEndDate",
+};
 
 /**
  * It takes an array of entity ids and a document reference and returns an array of entities
@@ -11,42 +19,36 @@ export async function getDocById(
   entityIds: string | string[],
   docRef: CollectionReference
 ) {
-  const recursivelyGetDoc = async (id: string) => {
-    const docSnap = await getDoc(doc(docRef, id));
+  const id = entityIds.toString().split(",");
 
-    if (!docSnap.exists()) {
-      // TODO: Add error handler
-      // throw { code: 404, message: `Un documento relacionado no existe!` };
+  const q = query(docRef, where("id", "in", id));
+  const docsSnap = await getDocs(q);
 
-      // TODO: ID is just for debugging?, delete ID from template string.
-      return { error: `El documento con ID: ${id} no existe!` };
-    }
+  if (docsSnap.empty) {
+    // TODO: Add error handler
+    // throw { code: 404, message: `Un documento relacionado no existe!` };
 
-    const docData = docSnap.data();
+    // TODO: ID is just for debugging?, delete ID from template string.
+    return { error: `El documento con ID: ${id} no existe!` };
+  }
+
+  const docsData = docsSnap.docs.map(async (doc) => {
+    const docData = doc.data();
 
     for (const key in docData) {
+      if (key === "uniqueCode") delete docData.uniqueCode;
+
+      if (key in datesTimestamps) {
+        docData[key] = docData[key].toDate();
+      }
+
       if (key in collectionsRef && docData[key].length > 0) {
         docData[key] = await getDocById(docData[key], collectionsRef[key]);
       }
     }
 
     return docData;
-  };
+  });
 
-  if (typeof entityIds === "string") {
-    return recursivelyGetDoc(entityIds);
-  }
-
-  if (Array.isArray(entityIds)) {
-    return Promise.all(entityIds.map(recursivelyGetDoc));
-  }
-}
-
-/**
- * It takes a list of strings, filters out the falsy values, and joins the rest with a space
- * @param {string[]} classes - Tailwind's utility classes as an array of strings.
- * @returns A function that takes in strings and returns a string.
- */
-export function tw(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
+  return Promise.all(docsData);
 }
