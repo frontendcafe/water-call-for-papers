@@ -84,7 +84,11 @@ export const Modal = ({
                     onClick={() => setIsOpen(false)}
                     className="absolute"
                   >
-                    <Icon iconName="xmark" size="medium" color="text-indigo-600" />
+                    <Icon
+                      iconName="xMark"
+                      size="medium"
+                      className="text-indigo-600"
+                    />
                   </button>
                 </div>
                 <div className="flex flex-col gap-4">{children}</div>
