@@ -78,19 +78,19 @@ InputWithDisabled.args = {
 };
 
 /**
- * InputText with Disabled Template
+ * InputText without Label
  */
 export const InputWithoutLabel = Template.bind({});
 
 InputWithoutLabel.args = {
-  label: "Label Name",
+  label: "",
   idValue: "",
   placeholder: "Text your text here ...",
   visible: false,
 };
 
 /**
- * InputText with Disabled Template
+ * InputText with required
  */
 export const InputWithRequired = Template.bind({});
 
@@ -99,4 +99,5 @@ InputWithRequired.args = {
   idValue: "",
   placeholder: "Text your text here ...",
   visible: true,
+  required: "Text your text here...",
 };

@@ -4,7 +4,7 @@ interface TagListProps {
   tags: Array<{
     label: string;
     size?: "sm" | "md" | "lg";
-    style?: "primary" | "secondary";
+    status?: "approved" | "reprobate" | "review" | "theme" | "format" | "event";
   }>;
 }
 
@@ -15,7 +15,7 @@ export const TagList = ({ tags }: TagListProps) => {
         <Tag
           key={tag.label}
           label={tag.label}
-          style={tag.style}
+          status={tag.status}
           size={tag.size}
         />
       ))}
