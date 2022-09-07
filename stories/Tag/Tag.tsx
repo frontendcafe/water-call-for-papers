@@ -37,7 +37,7 @@ export const Tag = ({
       <span>{label}</span>
       {onClick && (
         <Button size="normal" icon variant="transparent" onClick={onClick}>
-          <Icon size="small" theme="neutral" iconName="xmark" />
+          <Icon size="small" iconName="xMark" />
           <span className="sr-only">eliminar tag</span>
         </Button>
       )}
