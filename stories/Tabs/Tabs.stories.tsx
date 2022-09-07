@@ -1,5 +1,4 @@
 import React, { ComponentType } from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Tab } from "@headlessui/react";
 
 const data = [
