@@ -15,8 +15,10 @@ interface ModalProps {
    * The children node.
    */
   children: ReactNode;
-
-  size: "small" | "medium" | "large";
+  /**
+   * The size of the modal.
+   */
+  size: "medium" | "large";
 }
 
 export const Modal = ({
@@ -27,8 +29,6 @@ export const Modal = ({
 }: ModalProps) => {
   const closeButtonRef = useRef(null);
 
-  let width;
-
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -37,11 +37,7 @@ export const Modal = ({
     }
   }, [open]);
 
-  if (size == "large") {
-    width = "max-w-[608px]";
-  } else if (size == "medium") {
-    width = "max-w-[360px]";
-  }
+  const modalWidth = { large: "max-w-2xl", medium: "max-w-sm" };
 
   return (
     <Transition appear show={open} as={Fragment}>
@@ -78,7 +74,7 @@ export const Modal = ({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                className={`w-full ${width} relative transform overflow-hidden rounded-xl pt-8 pl-6 pr-6 pb-4 bg-white shadow-xl transition-all`}
+                className={`w-full ${modalWidth[size]} relative transform overflow-hidden rounded-xl pt-8 pl-6 pr-6 pb-4 bg-white shadow-xl transition-all`}
               >
                 <div className="flex justify-end">
                   <button
@@ -88,7 +84,7 @@ export const Modal = ({
                     onClick={() => setIsOpen(false)}
                     className="absolute"
                   >
-                    <Icon iconName="xMark" />
+                    <Icon iconName="xmark" size="medium" color="text-indigo-600" />
                   </button>
                 </div>
                 <div className="flex flex-col gap-4">{children}</div>
