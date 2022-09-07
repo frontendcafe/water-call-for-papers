@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Spinner } from "../Icons/Spinner";
-
+import { Icon } from "../Icon/Icon";
+import { Spinner } from "../Spinner/Spinner";
 import { Button } from "./Button";
 
 // More info about default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -15,12 +15,16 @@ export default {
   },
   // More info about args: https://storybook.js.org/docs/react/writing-stories/args#component-args
   args: {
-    children: "Button",
+    children: (
+      <>
+        <Icon iconName="book" /> Button <Icon iconName="book" />
+      </>
+    ),
     disabled: false,
     icon: false,
     loading: false,
-    rounded: "small",
-    size: "medium",
+    rounded: "medium",
+    size: "normal",
     variant: "primary",
   },
 } as ComponentMeta<typeof Button>;
@@ -48,16 +52,6 @@ Small.args = {
   size: "small",
 };
 
-export const Medium = Template.bind({});
-Medium.args = {
-  size: "medium",
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  size: "large",
-};
-
 export const Stretched = Template.bind({});
 Stretched.args = {
   size: "stretched",
@@ -82,23 +76,24 @@ Disabled.args = {
 export const IconWithText = Template.bind({});
 IconWithText.args = {
   children: (
-    // TODO: Add proper icon component or SVG
     <>
-      <span>🦄</span> <span className="sr-only">Button</span>
+      <Icon iconName="dotsVertical" /> <span className="sr-only">Button</span>
     </>
   ),
+  icon: true,
+  variant: "secondary",
   rounded: "medium",
 };
 
 export const OnlyIcon = Template.bind({});
 OnlyIcon.args = {
   children: (
-    // TODO: Add proper icon component or SVG
     <>
-      <span className="sr-only">Button</span> <span>🦄</span>
+      <span className="sr-only">Button</span> <Icon iconName="dotsVertical" />
     </>
   ),
   icon: true,
+  variant: "secondary",
   rounded: "full",
 };
 
@@ -106,11 +101,4 @@ export const IconWithoutBackground = Template.bind({});
 IconWithoutBackground.args = {
   ...OnlyIcon.args,
   variant: "transparent",
-};
-
-export const SquaredIconWithOutline = Template.bind({});
-SquaredIconWithOutline.args = {
-  ...OnlyIcon.args,
-  rounded: "small",
-  variant: "secondary",
 };
