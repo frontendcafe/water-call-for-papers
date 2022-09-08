@@ -3,18 +3,18 @@ import { getDate } from "../../lib/utils";
 import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
+import { Tag } from "../Tag/Tag";
 
 export const Card = ({ event }: { event: EventData }) => {
-  const { endDate, id, name, startingDate, talks } = event;
+  const { endDate, id, name, startingDate, talks, status } = event;
 
   return (
     <div className="max-w-md transition-shadow duration-200 bg-white shadow-md rounded-2xl hover:shadow-xl">
       <Link href={`/event/${id}`}>
         <a>
           <div className="relative overflow-hidden rounded-t-2xl bg-gradient-to-b to-primary-500/25 from-primary-500">
-            {/* TODO: Add Tag component */}
-            <span className="absolute px-2 py-1 text-xs font-medium text-white select-none top-4 right-4 bg-black/50 backdrop-blur-sm rounded-2xl">
-              Borrador
+            <span className="absolute select-none top-4 right-4">
+              <Tag label={status} size="sm" status="event" />
             </span>
             <img className="object-cover h-48" src="" />
           </div>
@@ -37,7 +37,7 @@ export const Card = ({ event }: { event: EventData }) => {
                 onClick={(e) => e.preventDefault()}
                 variant="transparent"
               >
-                <Icon iconName="dotsVertical" size="medium" theme="dark" />
+                <Icon iconName="dotsVertical" />
               </Button>
             </div>
           </div>

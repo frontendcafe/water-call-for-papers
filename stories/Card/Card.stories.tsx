@@ -7,6 +7,7 @@ const dummyData = {
   talks: Array(6).fill(null),
   startingDate: new Date(),
   endDate: new Date(),
+  status: "Borrador",
 };
 
 const dummyDataArr = Array(10).fill(dummyData);
