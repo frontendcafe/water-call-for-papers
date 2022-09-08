@@ -1,22 +1,21 @@
-import { Tag } from "../Tag/Tag";
+import { Tag, TagProps } from "../Tag/Tag";
 
 interface TagListProps {
-  tags: Array<{
-    label: string;
-    size?: "sm" | "md" | "lg";
-    style?: "primary" | "secondary";
-  }>;
+  tags: TagProps[];
 }
 
 export const TagList = ({ tags }: TagListProps) => {
   return (
-    <div className="grid gap-4 grid-cols-3">
-      {tags.map((tag) => (
+    <div className="flex flex-row flex-wrap gap-2">
+      {tags.map(({ label, status, size, isSelected, onClick, onDelete }) => (
         <Tag
-          key={tag.label}
-          label={tag.label}
-          style={tag.style}
-          size={tag.size}
+          key={label}
+          label={label}
+          status={status}
+          size={size}
+          isSelected={isSelected}
+          onClick={onClick}
+          onDelete={onDelete}
         />
       ))}
     </div>

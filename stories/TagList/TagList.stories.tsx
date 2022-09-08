@@ -18,7 +18,24 @@ Default.args = {
   // Datos heredados de la historia PrimaryTag en Tag.stories.tsx
   tags: [
     { ...TagStories.PrimaryTag.args, label: "Ux Writing" },
-    { ...TagStories.PrimaryTag.args, label: "Diseño UI", style: "secondary" },
+    { ...TagStories.PrimaryTag.args, label: "Diseño UI", status: "event" },
     { ...TagStories.PrimaryTag.args, label: "Programación" },
+  ],
+};
+
+export const WithOnClick = Template.bind({});
+
+WithOnClick.args = {
+  // Datos heredados de la historia PrimaryTag en Tag.stories.tsx
+  tags: [
+    { ...TagStories.PrimaryTag.args, label: "React", onClick: () => null },
+    {
+      ...TagStories.PrimaryTag.args,
+      label: "Vue",
+      status: "event",
+      onClick: () => null,
+      isSelected: true,
+    },
+    { ...TagStories.PrimaryTag.args, label: "Angular", onDelete: () => null },
   ],
 };
