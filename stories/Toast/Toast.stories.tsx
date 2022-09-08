@@ -12,18 +12,17 @@ export default {
     },
   },
   args: {
-    content: {
-      icon: (
-        <Icon
-          iconName="exclamationCircle"
-          aria-hidden
-          className="text-[#4B64EF]"
-        />
-      ),
-      title: "First toast! :D",
-      description:
-        "The first of many First toast! :DFirst toast! :DFirst toast! :DFirst toast! :DFirst toast! :DFirst toast! :DFirst toast! :DFirst toast! :D",
-    },
+    // icon: (
+    //   <Icon
+    //     iconName="exclamationCircle"
+    //     size="medium"
+    //     aria-hidden
+    //     className="text-[#4B64EF]"
+    //   />
+    // ),
+    title: "First toast! :D",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus fringilla.",
   },
 } as ComponentMeta<typeof Toast>;
 
@@ -32,46 +31,23 @@ const Template: ComponentStory<typeof Toast> = (args) => <Toast {...args} />;
 export const Buttons = Template.bind({});
 
 Buttons.args = {
-  actionButtons: {
-    leftSideBtn: (
-      <Button children={"Left"} variant="primary" aria-label="Left" />
-    ),
-    rightSideBtn: (
-      <Button children={"Right"} variant="primary" aria-label="Right" />
-    ),
-  },
+  leftActionButton: (
+    <Button children={"Left"} variant="primary" aria-label="Left" />
+  ),
+  rightActionButton: (
+    <Button children={"Right"} variant="primary" aria-label="Right" />
+  ),
   timer: 1000,
-};
-
-export const Text = Template.bind({});
-
-Text.args = {
-  content: {
-    icon: <Icon iconName="book" aria-hidden className="text-[#4B64EF]" />,
-    title: "Just text",
-    description: "Its timer has been set to 5 seconds.",
-  },
-  timer: 5,
-};
-
-export const TextWithoutIcon = Template.bind({});
-
-TextWithoutIcon.args = {
-  content: {
-    title: "More text",
-    description:
-      "It has a timer of 10 seconds. Transitions and Animation Layout Spacing Backgrounds Typography Interactivity Box Alignment",
-  },
-  timer: 10,
 };
 
 export const TimerThreeSec = Template.bind({});
 
 TimerThreeSec.args = {
-  content: {
-    title: "More text",
-    description:
-      "Transitions and Animation Layout Spacing Backgrounds Typography Interactivity Box Alignment",
-  },
-  timer: 3,
+  title: "Die unendliche Geschichte",
+  description: "La historia interminable.",
+  icon: <Icon iconName="book" className="text-[#4B64EF]" aria-hidden />,
+  rightActionButton: (
+    <Button children={"Right"} variant="primary" aria-label="Right" />
+  ),
+  timer: 30,
 };
