@@ -183,16 +183,9 @@ function AboutNavSection({ status }: Pick<DrawerCompProps, "status">) {
   return (
     <ul className="space-y-2">
       <li className="">
-        <StyledLink>
+        <StyledLink href="/about-us">
           <Icon className={iconStyles} size="large" iconName="questionMark" />
           <TextContainer status={status}>Acerca de</TextContainer>
-        </StyledLink>
-      </li>
-
-      <li>
-        <StyledLink>
-          <Icon className={iconStyles} size="large" iconName="logout" />
-          <TextContainer status={status}>Cerrar</TextContainer>
         </StyledLink>
       </li>
 
