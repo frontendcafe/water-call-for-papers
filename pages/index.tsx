@@ -1,32 +1,46 @@
 import type { NextPage } from "next";
 import Image from "next/image";
+import { Button } from "../stories/Button/Button";
+
 
 
 const Home: NextPage = () => {
   return (
-    <div className="grid grid-cols-2 h-screen w-screen">
-      <div className="col-span-1">
-        <div>
-          <h1 className="text-blue-500">Aqua</h1>
+    <div className=" grid grid-cols-2 h-screen w-screen">
+      <div className="flex justify-between pl-20 mt-20">
+        <div className="flex flex-row">
+          <Image
+            src="/img/logo.svg"
+            width={40}
+            height={40}
+            objectFit={"contain"}
+          />
+          <h1 className="text-[#003FC1] text-3xl pl-2 pt-3">Aqua</h1>
         </div>
-        <div>
-          <h1>
-            <span className="text-blue-500">Simplifica</span> la organizacion de
-            tus eventos
-          </h1>
-          <p>
-            Con Aqua puedes administrar tu próximo evento, gestionar la
-            convocatoria de charlas, evaluarlas e informar los resultados.
-          </p>
-          <br />
-          <p> Todo en un mismo lugar </p>
-          <button className="">Comenzar</button>
-        </div>
-      </div>
 
-      <div className="col-span-1 bg-[#E5E5FF] ">
-        <Image src="/img/home.svg" width={576} height={518} />
+        <div className="mt-60">
+          <h1 className="text-4xl">
+            <span className="text-[#003FC1] ">Simplifica</span> la organizacion
+            de tus eventos
+          </h1>
+          <br />
+          <p className="text-2xl">
+            Con Aqua puedes administrar tu próximo evento, gestionar la
+            convocatoria de charlas, evaluarlas e informar los resultados.{" "}
+            <br />
+            Todo en un mismo lugar
+          </p>
+
+          <div className="mt-10">
+            <Button>Comenzar</Button>
+          </div>
+        </div>
+
+        <div>
+          <Image src="/img/powered-by-vercel.svg" width={160} height={38} />
+        </div>
       </div>
+      
     </div>
   );
 };
