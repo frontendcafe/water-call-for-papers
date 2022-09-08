@@ -4,18 +4,11 @@ import RadioButtons from "./Radio";
 import { useState } from "react";
 
 export default {
-  title: "RadioButtons/MyRadioGroup", // Title for our storybook
+  title: "RadioButtons/Radio", // Title for our storybook
   component: RadioButtons, // Component to render
 } as ComponentMeta<typeof RadioButtons>;
 
-//👇 We create a “template” of how args map to rendering
-/*const Template: ComponentStory<typeof RadioButtons> = (args) => (
-  <RadioButtons {...args} />
-);*/
-
-// I commented because I didn't want to lose it but I had to commit
-
-export const RadioGroupButtons: ComponentStory<typeof RadioButtons> = () => {
+export const Modalidad: ComponentStory<typeof RadioButtons> = () => {
   const options = [
     { title: "Presencial", isDisabled: false },
     { title: "Online", isDisabled: false },
@@ -24,10 +17,50 @@ export const RadioGroupButtons: ComponentStory<typeof RadioButtons> = () => {
   const [selected, setSelected] = useState<string>(options[0].title);
   //Typing functions with <type> is like using : in the props
   return (
-    //I have to check Figma's styles
     <div className="flex flex-col items-start">
       <RadioButtons
         label="Modalidad (*)"
+        options={options}
+        onSelectedChange={(value: string) => setSelected(value)}
+        value={selected}
+        defaultValue={options[0].title}
+      />
+    </div>
+  );
+};
+
+export const Ordenar: ComponentStory<typeof RadioButtons> = () => {
+  const options = [
+    { title: "Más viejo a más nuevo", isDisabled: false },
+    { title: "Más nuevo a más viejo", isDisabled: false },
+  ];
+  const [selected, setSelected] = useState<string>(options[0].title);
+  //Typing functions with <type> is like using : in the props
+  return (
+    <div className="flex flex-col items-start">
+      <RadioButtons
+        label="Ordenar:"
+        options={options}
+        onSelectedChange={(value: string) => setSelected(value)}
+        value={selected}
+        defaultValue={options[0].title}
+      />
+    </div>
+  );
+};
+
+export const Estado: ComponentStory<typeof RadioButtons> = () => {
+  const options = [
+    { title: "En revisión", isDisabled: false },
+    { title: "Aprobada", isDisabled: false },
+    { title: "Desestimada", isDisabled: false },
+  ];
+  const [selected, setSelected] = useState<string>(options[0].title);
+  //Typing functions with <type> is like using : in the props
+  return (
+    <div className="flex flex-col items-start">
+      <RadioButtons
+        label="Estado:"
         options={options}
         onSelectedChange={(value: string) => setSelected(value)}
         value={selected}
