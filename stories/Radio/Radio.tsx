@@ -20,54 +20,38 @@ const RadioButtons = ({
     <div className="w-full px-4 py-16">
       <div className="mx-auto w-full max-w-md">
         <RadioGroup value={value ?? defaultValue} onChange={onSelectedChange}>
-          <RadioGroup.Label className="text-xl">{label}</RadioGroup.Label>
-          <div className="space-y-2">
+          <RadioGroup.Label className="text-base font-semibold">
+            {label}
+          </RadioGroup.Label>
+          <div className="">
             {options.map((option) => (
               <RadioGroup.Option
                 key={option.title}
                 value={option.title}
                 disabled={option.isDisabled}
-                //Use Figma's actualized styles keeping in mind HeadlessUI
-                className={({ active, checked }) =>
-                  `${
-                    active
-                      ? "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      : "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  }
-                  ${
-                    checked
-                      ? "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      : "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                  }
-                    relative flex cursor-pointer rounded-lg px-5 py-4 `
-                }
               >
                 {({ checked }) => (
-                  <>
-                    <div className="flex w-full items-center justify-between">
-                      <div className="flex items-center">
-                        <div className="flex text-sm">
-                          {checked && (
-                            <div className="shrink-0 text-white">
-                              <CheckIcon className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />{" "}
-                              {/*Use Icons component*/}
-                            </div>
-                          )}
-                          {/*Use Figma's actualized styles keeping in mind HeadlessUI*/}
-                          <RadioGroup.Label
-                            as="p"
-                            className={`font-family: 'Work Sans' font-style: normal ${
-                              checked
-                                ? "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                : ""
-                            }`}
-                          >
-                            {option.title}
-                          </RadioGroup.Label>
-                        </div>
-                      </div>
+                  <div className="relative flex items-start gap-x-2 py-3">
+                    <div className="flex h-5 items-center">
+                      <input
+                        id={option.title}
+                        aria-describedby={`${option.title}-description`}
+                        name="plan"
+                        type="radio"
+                        checked={checked}
+                        aria-checked={checked}
+                        className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-600 bg-white checked:border-primary-600 checked:border-4 focus:outline-none transition duration-200 align-top float-left cursor-pointer"
+                      />
                     </div>
-                  </>
+                    <div className="text-sm">
+                      <RadioGroup.Label
+                        htmlFor={option.title}
+                        className="text-gray-700"
+                      >
+                        {option.title}
+                      </RadioGroup.Label>
+                    </div>
+                  </div>
                 )}
               </RadioGroup.Option>
             ))}
@@ -77,20 +61,5 @@ const RadioButtons = ({
     </div>
   );
 };
-
-function CheckIcon({ className }: { className: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
-      <circle cx={12} cy={12} r={12} fill="#fff" opacity="0.2" />
-      <path
-        d="M7 13l3 3 7-7"
-        stroke="#fff"
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export default RadioButtons;
