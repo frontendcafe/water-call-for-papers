@@ -15,24 +15,27 @@ const Template: ComponentStory<typeof MenuDropdown> = (args) => (
   <MenuDropdown {...args} />
 );
 
-export const WithText = Template.bind({});
+export const MenuText = Template.bind({});
 
-WithText.args = {
+MenuText.args = {
   itemList: [
     {
       icon: <Icon iconName="share" size="medium" aria-hidden />,
-      textContent: "Compartir",
+      textContent: "Disabled",
       href: "#",
+      disabled: true,
     },
     {
       icon: <Icon iconName="pencil" size="medium" aria-hidden />,
       textContent: "Editar",
       href: "#",
+      disabled: false,
     },
     {
       icon: <Icon iconName="trash" size="medium" aria-hidden />,
       textContent: "Eliminar",
       href: "#",
+      disabled: false,
     },
   ],
   children: (
@@ -46,63 +49,33 @@ WithText.args = {
   ),
 };
 
-export const Disabled = Template.bind({});
+export const ExpandIcon = Template.bind({});
 
-Disabled.args = {
+ExpandIcon.args = {
   itemList: [
     {
       icon: <Icon iconName="pencil" size="medium" aria-hidden />,
       textContent: "Editar",
       href: "#",
+      disabled: false,
     },
     {
       icon: <Icon iconName="documentDuplicate" size="medium" aria-hidden />,
       textContent: "Duplicar",
       href: "#",
+      disabled: false,
     },
     {
       icon: <Icon iconName="trash" size="medium" aria-hidden />,
       textContent: "Eliminar",
       href: "#",
+      disabled: true,
     },
   ],
   children: (
     <Button
       children={<Icon iconName="dotsVertical" size="medium" aria-hidden />}
-      disabled
       icon
-      rounded="medium"
-      size="small"
-      variant="primary"
-      aria-label="Menu button"
-    />
-  ),
-};
-
-export const Expand = Template.bind({});
-
-Expand.args = {
-  itemList: [
-    {
-      icon: <Icon iconName="pencil" size="medium" aria-hidden />,
-      textContent: "Editar",
-      href: "#",
-    },
-    {
-      icon: <Icon iconName="documentDuplicate" size="medium" aria-hidden />,
-      textContent: "Duplicar",
-      href: "#",
-    },
-    {
-      icon: <Icon iconName="trash" size="medium" aria-hidden />,
-      textContent: "Eliminar",
-      href: "#",
-    },
-  ],
-  children: (
-    <Button
-      children={<Icon iconName="dotsVertical" size="medium" aria-hidden />}
-      icon={true}
       rounded="medium"
       size="normal"
       variant="primary"
