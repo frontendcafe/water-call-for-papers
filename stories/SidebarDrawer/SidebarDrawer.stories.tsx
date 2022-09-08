@@ -10,7 +10,7 @@ const dummyData: Pick<EventData, "id" | "name">[] = [
 ];
 
 export default {
-  title: "Components/Sidebar Drawer",
+  title: "Components",
   component: SidebarDrawer,
   argTypes: {},
   args: {
@@ -22,5 +22,5 @@ const Template: ComponentStory<typeof SidebarDrawer> = (args) => (
   <SidebarDrawer {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const NavbarDrawer = Template.bind({});
+NavbarDrawer.args = {};
