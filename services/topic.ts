@@ -1,4 +1,4 @@
-import { addDoc, getDocs, query, where } from "firebase/firestore";
+import { where, query, doc, getDocs, setDoc } from "firebase/firestore";
 import { collectionsRef } from "../lib/firebase-config";
 import { Topic } from "../types/talk-types";
 
@@ -30,9 +30,10 @@ export const addTopic = (topics: Pick<Topic, "description">[]) => {
     const topicsSnap = await getDocs(q);
 
     if (topicsSnap.empty) {
-      const topicRef = await addDoc(collectionsRef.topics, { description });
-
-      return { id: topicRef.id, description };
+      const topicRef = doc(collectionsRef.topics);
+      const topicData = { id: topicRef.id, description };
+      await setDoc(topicRef, topicData);
+      return topicData;
     }
 
     const [topicData] = topicsSnap.docs.map((topic) => {
