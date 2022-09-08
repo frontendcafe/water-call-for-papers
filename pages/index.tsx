@@ -1,25 +1,31 @@
 import type { NextPage } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import logo_vercel from "../public/img/powered-by-vercel.svg";
+
 
 const Home: NextPage = () => {
   return (
-    <div>
-      Hola
-      <div className="inline-flex bg-slate-700">
-        <div className="m-2 mb-1">
-          <Link href="https://vercel.com/?utm_source=hifrontendcafe&utm_campaign=oss">
-            <a target="_blank" rel="noopener noreferrer">
-              <Image
-                src={logo_vercel}
-                alt="Powered by Vercel"
-                placeholder="blur"
-                blurDataURL={logo_vercel}
-              />
-            </a>
-          </Link>
+    <div className="grid grid-cols-2 h-screen w-screen">
+      <div className="col-span-1">
+        <div>
+          <h1 className="text-blue-500">Aqua</h1>
         </div>
+        <div>
+          <h1>
+            <span className="text-blue-500">Simplifica</span> la organizacion de
+            tus eventos
+          </h1>
+          <p>
+            Con Aqua puedes administrar tu próximo evento, gestionar la
+            convocatoria de charlas, evaluarlas e informar los resultados.
+          </p>
+          <br />
+          <p> Todo en un mismo lugar </p>
+          <button className="">Comenzar</button>
+        </div>
+      </div>
+
+      <div className="col-span-1 bg-[#E5E5FF] ">
+        <Image src="/img/home.svg" width={576} height={518} />
       </div>
     </div>
   );
