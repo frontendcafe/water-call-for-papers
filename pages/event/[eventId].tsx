@@ -38,15 +38,15 @@ const EventPage: NextPage = () => {
   }
 
   return (
-    <section className="container mx-auto grid gap-6 px-4 py-3 md:grid-cols-3">
-      <div className="py-4 px-3 bg-secondary-50 rounded-xl md:col-span-2 flex flex-col gap-6">
+    <section className="container mx-auto grid gap-6 px-4 py-3 md:grid-cols-12">
+      <div className="py-4 px-3 bg-secondary-50 rounded-xl md:col-span-9 flex flex-col gap-6">
         <div className="flex flex-col">
           <h4 className="text-sm font-normal">Organiza:</h4>
-          {event?.organizers.map((organizer, idx) => (
+          {/* {event?.organizers.map((organizer, idx) => (
             <h2 key={idx} className="text-lg font-bold">
               {organizer.fullName}
             </h2>
-          ))}
+          ))} */}
         </div>
         <div className="flex flex-col">
           <div className="flex gap-2">
@@ -73,8 +73,10 @@ const EventPage: NextPage = () => {
           </div>
           <div className="relative w-full">
             <Image
-              layout="fill"
+              width={350}
+              height={161}
               src={event?.bannerUrl as string}
+              objectFit="cover"
               alt={event?.name}
             />
           </div>
@@ -96,7 +98,7 @@ const EventPage: NextPage = () => {
         </div>
       </div>
 
-      <div className="py-4 px-3 bg-secondary-50 rounded-xl flex flex-col gap-6">
+      <div className="py-4 px-3 bg-secondary-50 rounded-xl flex flex-col gap-6 md:col-span-3">
         <h4 className="text-md font-semibold">Convocatoria</h4>
         <div className="flex flex-col">
           <div className="flex gap-2">
