@@ -13,6 +13,9 @@ interface Item {
   href: string;
 
   target?: "_blank" | "_self";
+
+  /** disabled, indicate if the menu item is disabled. */
+  disabled?: boolean;
 }
 
 interface MenuDropdownProps {
@@ -43,19 +46,22 @@ export const MenuDropdown = ({
   const textColor = (text: string) =>
     text === "Eliminar" ? "text-[#991B1B]" : "text-[#393939]";
 
+  const activeStyle = "bg-[#00000008]";
+  const disabledStyle = "cursor-not-allowed";
+
   // Create MenuItem element, receive an item as prop.
   const MenuItem = ({ item }: { item: Item }) => {
     return (
-      <Menu.Item>
+      <Menu.Item disabled={item.disabled}>
         {({ active }) => (
           <div>
             <Link href={item.href}>
               <a
-                className={`${
-                  active && "bg-[#00000008]"
-                } inline-flex gap-2 items-center p-4 align-middle w-full ${textColor(
-                  item.textContent
-                )}`}
+                className={`inline-flex gap-2 items-center p-4 align-middle w-full ${
+                  active && activeStyle
+                }  ${textColor(item.textContent)} ${
+                  item.disabled && disabledStyle
+                }`}
               >
                 {item.icon}
                 {item.textContent}
@@ -67,15 +73,13 @@ export const MenuDropdown = ({
     );
   };
 
-  // Get disabled prop value of button.
-  // const isButtonDisabled = children?.props.disabled;
+  return (
+    <Menu>
+      <div className="relative">
+        <Menu.Button as={"div"} className="h-fit mb-4 w-fit">
+          {children}
+        </Menu.Button>
 
-  const MenuContent = ({ open }: { open: boolean }) => (
-    <div className="relative">
-      <Menu.Button as={"div"} className="h-0 mb-12 w-0">
-        {children}
-      </Menu.Button>
-      {open && (
         <Menu.Items
           aria-label={menuLabel ?? "Items menú"}
           className="absolute bg-white rounded-md shadow-lg left-8 w-max"
@@ -84,9 +88,7 @@ export const MenuDropdown = ({
             <MenuItem item={item} key={index} />
           ))}
         </Menu.Items>
-      )}
-    </div>
+      </div>
+    </Menu>
   );
-
-  return <Menu>{({ open }) => <MenuContent open={open} />}</Menu>;
 };
