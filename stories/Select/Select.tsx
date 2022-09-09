@@ -61,9 +61,7 @@ const Select = ({
           >
             {label}
           </Listbox.Label>
-
           {description && <div className="text-xs">{description}</div>}
-
           <div className="relative" aria-labelledby="select-message">
             <Listbox.Button
               className={`relative flex gap-1 items-center w-full p-4 text-left transition-shadow bg-white shadow-md cursor-default rounded-xl sm:text-sm focus:outline-none focus-visible:ring-primary-900 focus-visible:ring-[1.5px] hover:ring-[1.5px] ring-1 ${
@@ -84,7 +82,6 @@ const Select = ({
                 iconName={open ? "chevronUp" : "chevronDown"}
               />
             </Listbox.Button>
-
             <Transition
               as={Fragment}
               leave="transition ease-in duration-100"
@@ -121,7 +118,6 @@ const Select = ({
               </Listbox.Options>
             </Transition>
           </div>
-
           {errorMessage && (
             <div
               className="flex items-center gap-1 px-3 text-xs text-alert-600"
