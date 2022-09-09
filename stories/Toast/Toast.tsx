@@ -24,6 +24,13 @@ interface ToastProps
   timer?: number;
 }
 
+/**
+ * @param {string} title - Component title.
+ * @param {string} description - Component description, optional.
+ * @param {icon} icon - Icon rendered at left side of title, optional.
+ * @param {React.ReactNode}
+ * @returns
+ */
 export const Toast = ({
   title,
   description,
@@ -49,12 +56,13 @@ export const Toast = ({
   }
 
   const CloseButton = () => (
-    <Button icon variant="transparent" onClick={handleActive}>
-      <Icon
-        iconName="xMark"
-        className="text-[#4B64EF]"
-        aria-label="Icono para cerrar Toast"
-      />
+    <Button
+      icon
+      variant="transparent"
+      onClick={handleActive}
+      aria-label="Cerrar notificación"
+    >
+      <Icon iconName="xMark" className="text-primary-600" aria-hidden />
     </Button>
   );
 
@@ -66,14 +74,14 @@ export const Toast = ({
   );
 
   const Title = ({ title }: { title: ToastProps["title"] }) => (
-    <h4 className="text-base font-semibold text-[#4B64EF]">{title}</h4>
+    <h4 className="text-base font-semibold text-primary-600">{title}</h4>
   );
 
   const Description = ({
     description,
   }: {
     description: ToastProps["description"];
-  }) => <p className="text-sm font-normal text-[#727272]">{description}</p>;
+  }) => <p className="text-sm font-normal text-secondary-600">{description}</p>;
 
   const contentStyle = `flex grow text-base font-semibold ${
     icon ? "gap-2" : "flex-col"
@@ -103,7 +111,7 @@ export const Toast = ({
       {active && (
         <div
           role="alert"
-          className="flex items-center gap-4 rounded-md shadow-md bg-[#FFFFFF] border-l-[6px] border-[#4B64EF] p-3 relative mt-[40vh]"
+          className="flex items-center gap-4 rounded-md shadow-md bg-white border-l-[6px] text-primary-600 p-3 relative mt-[40vh]"
         >
           <Content />
           {(leftActionButton || rightActionButton) && <ButtonGroup />}
