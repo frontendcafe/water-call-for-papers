@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { DayPicker } from "./DayPicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default {
   title: "Input/DatePicker",
