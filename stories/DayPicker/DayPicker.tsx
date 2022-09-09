@@ -30,7 +30,9 @@ export const DayPicker = ({ date, label, onChange }: DatePickerProps) => {
         <DatePicker
           id="datepicker"
           className="w-full outline-none"
+          dateFormat="dd/MM/yyyy"
           selected={date}
+          locale="es"
           onChange={() => onChange}
         />
       </div>
