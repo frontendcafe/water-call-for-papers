@@ -13,7 +13,7 @@ interface DatePickerProps {
   /**
    *  Event onChange
    */
-  onChange: Event;
+  onChange: () => void;
 }
 
 export const DayPicker = ({ date, label, onChange }: DatePickerProps) => {
@@ -33,7 +33,7 @@ export const DayPicker = ({ date, label, onChange }: DatePickerProps) => {
           dateFormat="dd/MM/yyyy"
           selected={date}
           locale="es"
-          onChange={() => onChange}
+          onChange={onChange}
         />
       </div>
     </div>
