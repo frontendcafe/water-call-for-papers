@@ -3,10 +3,29 @@ import { getDate, tw } from "../../lib/utils";
 import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
+import { Item, MenuDropdown } from "../MenuDropdown/MenuDropdown";
 import { Tag } from "../Tag/Tag";
 
 export const Card = ({ event }: { event: EventData }) => {
   const { endDate, id, name, startingDate, talks, status } = event;
+
+  const menuItems: Item[] = [
+    {
+      href: "#",
+      textContent: "Editar",
+      icon: <Icon iconName="detail" size="small" />,
+    },
+    {
+      href: "#",
+      textContent: "Duplicar",
+      icon: <Icon iconName="documentDuplicate" size="small" />,
+    },
+    {
+      href: "#",
+      textContent: "Eliminar",
+      icon: <Icon iconName="trash" size="small" />,
+    },
+  ];
 
   return (
     <article className="relative max-w-md bg-white">
@@ -39,16 +58,11 @@ export const Card = ({ event }: { event: EventData }) => {
           <span className="text-xs grow text-secondary-800">
             {talks.length} postulaciones recibidas
           </span>
-              {/* TODO: Add dropdown menu   */}
-              <Button
-                type="button"
-                icon
-                size="normal"
-                onClick={(e) => e.preventDefault()}
-                variant="transparent"
-              >
-                <Icon iconName="dotsVertical" />
-              </Button>
+          <MenuDropdown itemList={menuItems}>
+            <Button aria-label="Menu" icon size="normal" variant="transparent">
+              <Icon iconName="dotsVertical" />
+            </Button>
+          </MenuDropdown>
         </div>
       </div>
     </article>

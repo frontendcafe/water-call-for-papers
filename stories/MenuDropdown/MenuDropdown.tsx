@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Menu } from "@headlessui/react";
 
-interface Item {
+export interface Item {
   /** icon, optional. */
   icon?: React.ReactNode;
 
@@ -57,7 +57,7 @@ export const MenuDropdown = ({
           <div>
             <Link href={item.href}>
               <a
-                className={`inline-flex gap-2 items-center p-4 align-middle w-[200px] ${
+                className={`inline-flex gap-2 items-center p-4 align-middle w-32 ${
                   active && activeStyle
                 }  ${textColor(item.textContent)} ${
                   item.disabled && disabledStyle
@@ -75,14 +75,14 @@ export const MenuDropdown = ({
 
   return (
     <Menu>
-      <div className="relative">
-        <Menu.Button as={"div"} className="h-fit mb-4 w-fit">
+      <div className="relative z-10">
+        <Menu.Button as={"div"} className="w-0 h-0 mb-8 mr-8">
           {children}
         </Menu.Button>
 
         <Menu.Items
           aria-label={menuLabel ?? "Items menú"}
-          className="absolute bg-white rounded-md shadow-lg left-8 w-max"
+          className="absolute z-50 overflow-hidden text-sm bg-white rounded-md shadow-lg ring-1 ring-black/5 left-8 w-max"
         >
           {itemList.map((item, index) => (
             <MenuItem item={item} key={index} />
