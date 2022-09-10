@@ -28,7 +28,7 @@ export const Card = ({ event }: { event: EventData }) => {
   ];
 
   return (
-    <article className="relative max-w-md bg-white">
+    <article className="relative max-w-md bg-white rounded-2xl">
       <div className="relative overflow-hidden rounded-t-2xl bg-gradient-to-b to-primary-500/25 from-primary-500">
         <span className="absolute select-none top-4 right-4">
           <Tag label={status} size="sm" status="event" />
