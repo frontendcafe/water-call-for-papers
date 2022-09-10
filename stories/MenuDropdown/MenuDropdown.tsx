@@ -57,7 +57,7 @@ export const MenuDropdown = ({
           <div>
             <Link href={item.href}>
               <a
-                className={`inline-flex gap-2 items-center p-4 align-middle w-full ${
+                className={`inline-flex gap-2 items-center p-4 align-middle w-[200px] ${
                   active && activeStyle
                 }  ${textColor(item.textContent)} ${
                   item.disabled && disabledStyle
