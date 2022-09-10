@@ -26,7 +26,7 @@ export const ContactTeamCard = ({
         <div className="text-gray-500 font-semibold">Social</div>
         <div className="flex flex-wrap justify-start mt-2">
           {social.map(({ iconName, url }) => (
-            <a className="mr-8 mt-2" href={url}>
+            <a key={iconName} className="mr-8 mt-2" href={url}>
               <Icon
                 icon={`ant-design:${iconName}-outlined`}
                 style={{ fontSize: "24px", color: "#6778FF" }}

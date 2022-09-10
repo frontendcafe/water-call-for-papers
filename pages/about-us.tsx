@@ -71,6 +71,7 @@ const AboutUs = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 mt-4">
           {aboutData.map(({ name, rol, description, social }) => (
             <ContactTeamCard
+              key={name}
               name={name}
               rol={rol}
               description={description}
