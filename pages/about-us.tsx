@@ -48,7 +48,7 @@ const aboutData = [
 
 const AboutUs = () => {
   return (
-    <div className="p-10">
+    <div className="p-6 md:p-10">
       <div className="flex flex-col md:flex-row justify-between">
         <div className="md:w-8/12">
           <h1 className="text-4xl">Acerca de CMYK</h1>
@@ -68,7 +68,7 @@ const AboutUs = () => {
       </div>
       <div className="mt-10">
         <h2 className="text-3xl">Equipo</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 mt-4">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 mt-4">
           {aboutData.map(({ name, rol, description, social }) => (
             <ContactTeamCard
               name={name}
