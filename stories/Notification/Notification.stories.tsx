@@ -24,11 +24,11 @@ const Template: ComponentStory<typeof Notification> = (args) => (
 export const Toast = Template.bind({});
 
 Toast.args = {
-  icon: <Icon iconName="book" className="text-[#4B64EF]" aria-hidden />,
+  icon: <Icon iconName="book" aria-hidden />,
   timer: 10,
   children: (
     <>
-      <Button children="left" variant="secondary" />
+      <Button children="left" size="small" />
       <Button children="right" variant="secondary" size="small" />
     </>
   ),
@@ -39,20 +39,20 @@ Toast.args = {
 export const NotificationComp = Template.bind({});
 
 NotificationComp.args = {
-  icon: <Icon iconName="book" className="text-[#4B64EF]" aria-hidden />,
+  icon: <Icon iconName="book" aria-hidden />,
   color: "notification",
 };
 
 export const Warning = Template.bind({});
 
 Warning.args = {
-  icon: <Icon iconName="book" className="text-[#4B64EF]" aria-hidden />,
+  icon: <Icon iconName="book" aria-hidden />,
   color: "warning",
 };
 
 export const Error = Template.bind({});
 
 Error.args = {
-  icon: <Icon iconName="book" className="text-[#4B64EF]" aria-hidden />,
+  icon: <Icon iconName="book" aria-hidden />,
   color: "error",
 };
