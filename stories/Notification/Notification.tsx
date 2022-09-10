@@ -2,7 +2,7 @@ import React, { HTMLAttributes, useEffect, useState } from "react";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
 
-interface ToastProps
+interface NotificationProps
   extends Pick<HTMLAttributes<HTMLDivElement>, "aria-live" | "role"> {
   /** Toast title, mandatory. */
   title: string;
@@ -31,7 +31,7 @@ export const Notification = ({
   timer,
   color = timer ? "toast" : "notification",
   ...props
-}: ToastProps) => {
+}: NotificationProps) => {
   const [active, setActive] = useState(true);
 
   // Convert timer parameter from seconds to milliseconds.
@@ -86,14 +86,14 @@ export const Notification = ({
     warning: "bg-warning-50 border-warning-300 text-warning-600",
     error: "bg-alert-100 border-alert-700 text-alert-700",
     toast:
-      "shadow-md text-primary-600 bg-white text-secondary-600 border-primary-600",
+      "shadow-md text-primary-600 bg-white text-secondary-600 border-primary-600 mt-[40vh]",
   };
 
   return (
     <>
       {active && (
         <div
-          className={`${variant[color]} w-full flex items-center gap-4 border-l-[6px] rounded-md p-4 relative mt-[40vh] `}
+          className={`${variant[color]} w-full flex items-center gap-4 border-l-[6px] rounded-md p-4 relative`}
           {...props}
         >
           <Content />
