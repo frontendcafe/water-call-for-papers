@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { Icon } from "../Icon/Icon";
 
 interface TextAreaProps {
@@ -22,6 +22,7 @@ interface TextAreaProps {
 
   // Element's id
   idValue: string;
+  onChange?: (e: SyntheticEvent) => void;
 
   // Error message, optional.
   error?: string;
@@ -52,6 +53,7 @@ export const TextArea = ({
   required,
   rows,
   columns,
+  onChange,
 }: TextAreaProps) => {
   // Conditionally apply specific border depending if there is an error.
   const withError = error
@@ -64,7 +66,7 @@ export const TextArea = ({
   return (
     <div className="flex flex-col gap-1 text-[#667080]">
       <label
-        className={`text-sm font-semibold  ${labelVisibility} `}
+        className={`text-sm font-semibold text-gray-900  ${labelVisibility} `}
         htmlFor={idValue}
       >
         {label}
@@ -73,7 +75,7 @@ export const TextArea = ({
       {description && <p className={`text-xs`}>{description}</p>}
 
       <textarea
-        className={`text-base border-2 p-3 rounded-lg active:bg-slate-100 disabled:bg-slate-200/50 ${withError}`}
+        className={`px-2 py-2 mt-1 text-sm text-gray-700 border border-secondary-700 rounded-md placeholder:text-gray-300 focus:border-2 focus:border-primary-900 disabled:border-gray-300 active:border active:border-primary-900 active:text-gray-800 ${withError}`}
         id={idValue}
         name={idValue}
         maxLength={maxLength}
@@ -83,6 +85,7 @@ export const TextArea = ({
         required={required}
         rows={rows}
         cols={columns}
+        onChange={onChange}
       />
 
       {/* If there is an error or maxLength, the div elemet will be rendered. */}
@@ -95,10 +98,16 @@ export const TextArea = ({
         >
           {/* If error evaluated to true, display it. */}
           {error && (
-            <div className="flex gap-1.5 items-center text-red-400/80">
-              <Icon iconName="exclamationCircle" />
-              <p>{error}</p>
-            </div>
+            <p className="flex items-start mt-2 text-xs leading-3 text-red-600">
+              <span className="mr-1">
+                <Icon
+                  iconName="exclamationCircleIconOutline"
+                  size="small"
+                  className="text-red-600"
+                />
+              </span>
+              {error}
+            </p>
           )}
 
           {/* If maxLength evaluated to true, display it. */}

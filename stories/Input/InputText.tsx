@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { Icon } from "../Icon/Icon";
 
 interface InputTextProps {
@@ -25,6 +25,7 @@ interface InputTextProps {
    * idValue relation between label and input (htmlFor).
    */
   idValue: string;
+  onChange?: (e: SyntheticEvent) => void;
   /**
    * Error text on input
    */
@@ -62,6 +63,7 @@ export const InputText = ({
   required,
   position,
   disabled,
+  onChange,
   ...props
 }: InputTextProps) => {
   const positionIconText = position == "left" && "pl-9 pr-2 py-2";
@@ -89,9 +91,11 @@ export const InputText = ({
         type="text"
         placeholder={placeholder}
         id={idValue}
+        name={idValue}
         value={props.value}
         className={`px-2 py-2 mt-1 text-sm text-gray-700 border border-secondary-700 rounded-md placeholder:text-gray-300 focus:border-2 focus:border-primary-900 disabled:border-gray-300 active:border active:border-primary-900 active:text-gray-800 ${positionIconText} ${withError}`}
         disabled={disabled}
+        onChange={onChange}
       />
       {position == "left" && (
         <span
