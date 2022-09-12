@@ -1,7 +1,7 @@
-import React, { ChangeEvent } from "react";
+import React, { TextareaHTMLAttributes } from "react";
 import { Icon } from "../Icon/Icon";
 
-interface TextAreaProps {
+interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   // Button content
   label: string;
 
@@ -22,7 +22,6 @@ interface TextAreaProps {
 
   // Element's id
   idValue: string;
-  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 
   // Error message, optional.
   error?: string;
@@ -53,7 +52,6 @@ export const TextArea = ({
   required,
   rows,
   columns,
-  onChange,
 }: TextAreaProps) => {
   // Conditionally apply specific border depending if there is an error.
   const withError = error
