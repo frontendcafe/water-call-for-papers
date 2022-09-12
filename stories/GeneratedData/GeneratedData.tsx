@@ -27,17 +27,7 @@ export const GeneratedData = () => {
 
     if (e.currentTarget.name == "OrganizationName") {
       setData({ ...data, OrganizationName: e.target.value });
-      if (e.target.value.length == 0) {
-        setDataError({
-          ...dataError,
-          OrganizationName: "Este campo no puede estar vacio",
-        });
-      } else if (e.target.value.length > 50) {
-        setDataError({
-          ...dataError,
-          OrganizationName: "Este campo no puede tener mas de 50 caracteres",
-        });
-      } else if (!validation) {
+      if (!validation) {
         setDataError({
           ...dataError,
           OrganizationName: "Este campo solo puede tener letras y numeros",
@@ -47,17 +37,7 @@ export const GeneratedData = () => {
       }
     } else if (e.currentTarget.name == "EventName") {
       setData({ ...data, EventName: e.target.value });
-      if (e.target.value.length == 0) {
-        setDataError({
-          ...dataError,
-          EventName: "Este campo no puede estar vacio",
-        });
-      } else if (e.target.value.length > 50) {
-        setDataError({
-          ...dataError,
-          EventName: "Este campo no puede tener mas de 50 caracteres",
-        });
-      } else if (!validation) {
+      if (!validation) {
         setDataError({
           ...dataError,
           EventName: "Este campo solo puede tener letras y numeros",
@@ -67,17 +47,7 @@ export const GeneratedData = () => {
       }
     } else if (e.currentTarget.name == "Description") {
       setData({ ...data, Description: e.target.value });
-      if (e.target.value.length == 0) {
-        setDataError({
-          ...dataError,
-          Description: "Este campo no puede estar vacio",
-        });
-      } else if (e.target.value.length > 280) {
-        setDataError({
-          ...dataError,
-          Description: "Este campo no puede tener mas de 280 caracteres",
-        });
-      } else if (!validation) {
+      if (!validation) {
         setDataError({
           ...dataError,
           Description: "Este campo solo puede tener letras y numeros",
@@ -109,6 +79,9 @@ export const GeneratedData = () => {
                 value={data.OrganizationName}
                 onChange={handleValidation}
                 error={dataError.OrganizationName}
+                maxLength={50}
+                description="Máximo 50 caracteres"
+                required
               />
 
               <InputText
@@ -118,7 +91,12 @@ export const GeneratedData = () => {
                 value={data.EventName}
                 onChange={handleValidation}
                 error={dataError.EventName}
+                maxLength={50}
+                description="Máximo 50 caracteres"
+                required
               />
+
+              {/* Agregar componente para los temas */}
 
               <InputText
                 label="Temas (*)"
@@ -126,6 +104,7 @@ export const GeneratedData = () => {
                 idValue="Themes"
                 value={data.Themes}
                 onChange={handleValidation}
+                required
               />
 
               <TextArea
@@ -136,6 +115,9 @@ export const GeneratedData = () => {
                 isLabelVisible={true}
                 onChange={handleValidation}
                 error={dataError.Description}
+                maxLength={280}
+                description="Máximo 280 caracteres"
+                required
               />
 
               <InputFile

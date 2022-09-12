@@ -52,6 +52,7 @@ export const TextArea = ({
   required,
   rows,
   columns,
+  ...props
 }: TextAreaProps) => {
   // Conditionally apply specific border depending if there is an error.
   const withError = error
@@ -83,11 +84,11 @@ export const TextArea = ({
         required={required}
         rows={rows}
         cols={columns}
-        onChange={onChange}
+        onChange={props.onChange}
       />
 
       {/* If there is an error or maxLength, the div elemet will be rendered. */}
-      {(error || maxLength) && (
+      {error && (
         <div
           // Dependign if there is an error, apply different property value.
           className={`flex ${
@@ -107,9 +108,6 @@ export const TextArea = ({
               {error}
             </p>
           )}
-
-          {/* If maxLength evaluated to true, display it. */}
-          {maxLength && <span>Máx {maxLength} caracteres.</span>}
         </div>
       )}
     </div>
