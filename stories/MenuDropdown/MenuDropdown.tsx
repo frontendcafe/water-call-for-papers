@@ -82,7 +82,7 @@ export const MenuDropdown = ({
 
         <Menu.Items
           aria-label={menuLabel ?? "Items menú"}
-          className="absolute z-50 overflow-hidden text-sm bg-white rounded-md shadow-lg ring-1 ring-black/5 left-8 w-max"
+          className="absolute z-50 overflow-hidden text-sm bg-white rounded-md shadow-lg ring-1 ring-black/5 -left-16 w-max"
         >
           {itemList.map((item, index) => (
             <MenuItem item={item} key={index} />

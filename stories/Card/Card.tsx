@@ -9,6 +9,7 @@ import { Tag } from "../Tag/Tag";
 export const Card = ({ event }: { event: EventData }) => {
   const { endDate, id, name, startingDate, talks, status } = event;
 
+  // TODO: Add href after functionality gets implemented
   const menuItems: Item[] = [
     {
       href: "#",

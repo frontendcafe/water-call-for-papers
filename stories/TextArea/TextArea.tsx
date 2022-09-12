@@ -1,7 +1,7 @@
-import React from "react";
+import React, { TextareaHTMLAttributes } from "react";
 import { Icon } from "../Icon/Icon";
 
-interface TextAreaProps {
+interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   // Button content
   label: string;
 
