@@ -1,6 +1,15 @@
-import { MouseEvent } from "react";
+import React from "react";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
+
+export interface TagProps {
+  label: string;
+  size?: keyof typeof fontSize;
+  status?: keyof typeof mode;
+  isSelected?: boolean;
+  onClick?(value: string): void;
+  onDelete?(value: string): void;
+}
 
 const mode = {
   review: "bg-[#F3F3F3] text-[#393939] ",
@@ -18,30 +27,57 @@ const fontSize = {
   lg: "px-4 py-1 text-lg",
 };
 
-export interface TagProps {
-  label: string;
-  size?: keyof typeof fontSize;
-  status?: keyof typeof mode;
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
-}
+const TagWrapper = ({
+  onClick,
+  children,
+}: {
+  onClick?(): void;
+  children: React.ReactNode;
+}) => {
+  return onClick ? (
+    <Button size="normal" icon variant="transparent" onClick={onClick}>
+      {children}
+    </Button>
+  ) : (
+    <>{children}</>
+  );
+};
 
 export const Tag = ({
   label,
   size = "md",
   status = "format",
-  onClick,
+  isSelected = false,
+  onClick = undefined,
+  onDelete = undefined,
 }: TagProps) => {
+  const classNames = `font-medium rounded-full max-w-max flex flex-row justify-between items-center gap-2 ${fontSize[size]} ${mode[status]}`;
   return (
-    <div
-      className={`font-medium rounded-full max-w-max flex flex-row justify-between items-center gap-2 ${fontSize[size]}  ${mode[status]}`}
-    >
-      <span>{label}</span>
-      {onClick && (
-        <Button size="normal" icon variant="transparent" onClick={onClick}>
-          <Icon size="small" iconName="xMark" />
-          <span className="sr-only">eliminar tag</span>
-        </Button>
+    <TagWrapper onClick={onClick && (() => onClick(label))}>
+      {onDelete ? (
+        <div className={classNames}>
+          <span>{label}</span>
+          <Button
+            size="normal"
+            icon
+            variant="transparent"
+            onClick={() => onDelete(label)}
+          >
+            <Icon size="small" iconName="xMark" />
+            <span className="sr-only">eliminar tag</span>
+          </Button>
+        </div>
+      ) : (
+        <div className={classNames}>
+          <span>{label}</span>
+          {isSelected && (
+            <>
+              <Icon size="small" iconName="check" />
+              <span className="sr-only">tag seleccionada</span>
+            </>
+          )}
+        </div>
       )}
-    </div>
+    </TagWrapper>
   );
 };

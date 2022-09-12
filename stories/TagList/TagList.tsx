@@ -7,13 +7,15 @@ interface TagListProps {
 export const TagList = ({ tags }: TagListProps) => {
   return (
     <div className="flex flex-row flex-wrap gap-2">
-      {tags.map((tag) => (
+      {tags.map(({ label, status, size, isSelected, onClick, onDelete }) => (
         <Tag
-          key={tag.label}
-          label={tag.label}
-          status={tag.status}
-          size={tag.size}
-          onClick={tag.onClick}
+          key={label}
+          label={label}
+          status={status}
+          size={size}
+          isSelected={isSelected}
+          onClick={onClick}
+          onDelete={onDelete}
         />
       ))}
     </div>
