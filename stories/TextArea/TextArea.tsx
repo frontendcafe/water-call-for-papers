@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { Icon } from "../Icon/Icon";
 
 interface TextAreaProps {
@@ -22,7 +22,7 @@ interface TextAreaProps {
 
   // Element's id
   idValue: string;
-  onChange?: (e: SyntheticEvent) => void;
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 
   // Error message, optional.
   error?: string;

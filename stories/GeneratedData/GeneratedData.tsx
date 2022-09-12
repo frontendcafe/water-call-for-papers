@@ -3,7 +3,7 @@ import { Icon } from "../Icon/Icon";
 import { InputText } from "../Input/InputText";
 import { TextArea } from "../TextArea/TextArea";
 import { InputFile } from "../InputFile/InputFile";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 export const GeneratedData = () => {
   const [data, setData] = useState({
@@ -19,7 +19,9 @@ export const GeneratedData = () => {
     Description: "",
   });
 
-  const handleValidation = (e) => {
+  const handleValidation = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const regex = new RegExp(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ0-9\s]+$/g);
     const validation = regex.test(e.target.value);
 

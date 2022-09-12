@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { Icon } from "../Icon/Icon";
 
 interface InputTextProps {
@@ -25,7 +25,7 @@ interface InputTextProps {
    * idValue relation between label and input (htmlFor).
    */
   idValue: string;
-  onChange?: (e: SyntheticEvent) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   /**
    * Error text on input
    */
