@@ -53,73 +53,82 @@ const Select = ({
   const [selected, setSelected] = useState(defaultValue);
 
   return (
-    <div className="fixed top-16 w-72">
-      <Listbox
-        disabled={isInputDisabled}
-        onChange={setSelected}
-        value={selected}
-      >
-        {({ open }) => (
-          <>
-            <Listbox.Label className={isLabelVisible ? "" : "sr-only"}>
-              {label}
-            </Listbox.Label>
-            {description && <div>{description}</div>}
-            <div className="relative mt-1" aria-labelledby="select-message">
-              <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                <span className="block truncate">
-                  {selected ? selected.name : placeholder}
-                </span>
-                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                  <Icon iconName={open ? "chevronUp" : "chevronDown"} />
-                </span>
-              </Listbox.Button>
-              <Transition
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                  {values.map((value, valueIdx) => (
-                    <Listbox.Option
-                      key={valueIdx}
-                      className={({ active }: { active: boolean }) =>
-                        `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                          active
-                            ? "bg-amber-100 text-amber-900"
-                            : "text-gray-900"
-                        }`
-                      }
-                      value={value}
-                      disabled={value.isDisabled}
-                    >
-                      {({ selected }: { selected: boolean }) => (
-                        <>
-                          <span
-                            className={`block truncate ${
-                              selected ? "font-medium" : "font-normal"
-                            }`}
-                          >
-                            {value.name}
-                          </span>
-                          {selected ? (
-                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                              <Icon iconName="check" />
-                            </span>
-                          ) : null}
-                        </>
-                      )}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
+    <Listbox disabled={isInputDisabled} onChange={setSelected} value={selected}>
+      {({ open }) => (
+        <div className="w-full space-y-2">
+          <Listbox.Label
+            className={`font-semibold ${isLabelVisible ? "" : "sr-only"}`}
+          >
+            {label}
+          </Listbox.Label>
+          {description && <div className="text-xs">{description}</div>}
+          <div className="relative" aria-labelledby="select-message">
+            <Listbox.Button
+              className={`relative flex gap-1 items-center w-full p-4 text-left transition-shadow bg-white shadow-md cursor-default rounded-xl sm:text-sm focus:outline-none focus-visible:ring-primary-900 focus-visible:ring-[1.5px] hover:ring-[1.5px] ring-1 ${
+                open ? "ring-[1.5px] ring-primary-900" : "ring-secondary-500"
+              }
+              `}
+            >
+              <div className="truncate grow">
+                {selected?.name || (
+                  <span className="flex items-center gap-1 text-secondary-300">
+                    <Icon className="text-[#ABADC6]" iconName="globeAltIcon" />
+                    {placeholder}
+                  </span>
+                )}
+              </div>
+              <Icon
+                className="text-[#ABADC6]"
+                iconName={open ? "chevronUp" : "chevronDown"}
+              />
+            </Listbox.Button>
+            <Transition
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Listbox.Options className="absolute w-full my-2 overflow-auto text-sm bg-white rounded-lg shadow-lg focus:outline-none ring-1 ring-black ring-opacity-5">
+                {values.map((value, valueIdx) => (
+                  <Listbox.Option
+                    key={valueIdx}
+                    className={({ active }: { active: boolean }) =>
+                      `flex items-center px-3 cursor-default select-none hover:bg-secondary-50 ${
+                        active ? "bg-secondary-50" : ""
+                      }`
+                    }
+                    value={value}
+                    disabled={value.isDisabled}
+                  >
+                    {({ selected }: { selected: boolean }) => (
+                      <>
+                        <span
+                          className={`block py-4 truncate grow ${
+                            selected ? "font-medium" : "font-normal"
+                          }`}
+                        >
+                          {value.name}
+                        </span>
+
+                        {selected ? <Icon iconName="check" /> : null}
+                      </>
+                    )}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </Transition>
+          </div>
+          {errorMessage && (
+            <div
+              className="flex items-center gap-1 px-3 text-xs text-alert-600"
+              id="select-message"
+            >
+              <Icon iconName="informationCircle" size="small" /> {errorMessage}
             </div>
-          </>
-        )}
-      </Listbox>
-      {errorMessage && <div id="select-message">{errorMessage}</div>}
-    </div>
+          )}
+        </div>
+      )}
+    </Listbox>
   );
 };
 
