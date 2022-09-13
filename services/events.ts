@@ -23,11 +23,15 @@ export async function getAllEvents({
   limit,
   order = "asc",
   type = [],
+  status,
 }: Partial<EventQueryOptions>): Promise<EventData[]> {
   // get all events
   const typeArr = type.toString().split(",");
   const queryConstraints: QueryConstraint[] = [];
 
+  if (status) {
+    queryConstraints.push(where("status", "==", status));
+  }
   if (type.length > 0) {
     queryConstraints.push(where("type", "in", typeArr));
   }
