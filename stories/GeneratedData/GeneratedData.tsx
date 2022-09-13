@@ -25,35 +25,20 @@ export const GeneratedData = () => {
     const regex = new RegExp(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ0-9\s]+$/g);
     const validation = regex.test(e.target.value);
 
-    if (e.currentTarget.name == "OrganizationName") {
-      setData({ ...data, OrganizationName: e.target.value });
+    if (
+      ["OrganizationName", "EventName", "Description"].includes(
+        e.currentTarget.name
+      )
+    ) {
+      setData({ ...data, [e.currentTarget.name]: e.target.value });
       if (!validation) {
         setDataError({
           ...dataError,
-          OrganizationName: "Este campo solo puede tener letras y numeros",
+          [e.currentTarget.name]:
+            "Este campo solo puede tener letras y numeros",
         });
       } else {
-        setDataError({ ...dataError, OrganizationName: "" });
-      }
-    } else if (e.currentTarget.name == "EventName") {
-      setData({ ...data, EventName: e.target.value });
-      if (!validation) {
-        setDataError({
-          ...dataError,
-          EventName: "Este campo solo puede tener letras y numeros",
-        });
-      } else {
-        setDataError({ ...dataError, EventName: "" });
-      }
-    } else if (e.currentTarget.name == "Description") {
-      setData({ ...data, Description: e.target.value });
-      if (!validation) {
-        setDataError({
-          ...dataError,
-          Description: "Este campo solo puede tener letras y numeros",
-        });
-      } else {
-        setDataError({ ...dataError, Description: "" });
+        setDataError({ ...dataError, [e.currentTarget.name]: "" });
       }
     }
   };
