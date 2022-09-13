@@ -42,11 +42,7 @@ const EventPage: NextPage = () => {
       <div className="py-4 px-3 bg-secondary-50 rounded-xl md:col-span-9 flex flex-col gap-6">
         <div className="flex flex-col">
           <h4 className="text-sm font-normal">Organiza:</h4>
-          {/* {event?.organizers.map((organizer, idx) => (
-            <h2 key={idx} className="text-lg font-bold">
-              {organizer.fullName}
-            </h2>
-          ))} */}
+          <h2 className="text-lg font-bold">Service Design Club</h2>
         </div>
         <div className="flex flex-col">
           <div className="flex gap-2">
@@ -71,13 +67,13 @@ const EventPage: NextPage = () => {
             <Icon iconName="photo" />
             <h4 className="text-md font-semibold">Banner del evento</h4>
           </div>
-          <div className="relative w-full">
+          <div className="relative w-full h-40 bg-gradient-to-b from-primary-500 to-primary-500/25 rounded-md mt-2">
             <Image
-              width={350}
-              height={161}
+              layout="fill"
               src={event?.bannerUrl as string}
               objectFit="cover"
               alt={event?.name}
+              className="rounded-md"
             />
           </div>
         </div>
