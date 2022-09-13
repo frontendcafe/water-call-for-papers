@@ -16,7 +16,7 @@ export const ContactTeamCard = ({
   social,
 }: ContactTeamCardProps) => {
   return (
-    <div className="bg-gray-100 p-6 rounded-lg max-w-md">
+    <div className="bg-gray-100 p-6 rounded-lg max-w-sm">
       <div>
         <h3 className="text-lg font-semibold">{name}</h3>
         <h4 className="text-gray-500 font-semibold mt-2">{rol}</h4>
