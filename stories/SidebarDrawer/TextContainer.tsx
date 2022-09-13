@@ -1,15 +1,15 @@
 export interface TextContainerProps {
-  status: boolean;
+  isOpen: boolean;
   truncate?: boolean;
   children?: React.ReactNode;
 }
 
 export const TextContainer = ({
-  status,
+  isOpen,
   truncate,
   children,
 }: TextContainerProps) => {
-  const textStyles = status ? "md:opacity-100" : "md:sr-only md:opacity-0";
+  const textStyles = isOpen ? "md:opacity-100" : "md:sr-only md:opacity-0";
   const textOverflow = truncate ? "truncate max-w-[10ch]" : "";
 
   return (

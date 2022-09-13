@@ -1,9 +1,9 @@
 import { useReducer } from "react";
 
 interface SidebarState {
-  status: boolean;
-  label: string;
-  expanded: boolean;
+  ariaExpanded: boolean;
+  ariaLabel: string;
+  isOpen: boolean;
 }
 interface DispatchAction {
   type: Action;
@@ -14,39 +14,42 @@ export enum Action {
   MOBILE = "MOBILE",
   MOBILE_INITIAL = "MOBILE_INITIAL",
 }
-enum Label {
+enum AriaLabel {
   COMPACT = "Compactar sidebar",
   EXPAND = "Expandir sidebar",
   CLOSE = "Cerrar menu",
   OPEN = "Abrir menu",
 }
 
-const reducer = (state: SidebarState, { type }: DispatchAction) => {
-  const { status } = state;
+const sidebarStateCalculator = (
+  state: SidebarState,
+  { type }: DispatchAction
+) => {
+  const { isOpen } = state;
 
   switch (type) {
     case Action.DESKTOP:
       return {
-        expanded: !status,
-        label: !status ? Label.COMPACT : Label.EXPAND,
-        status: !status,
+        ariaExpanded: !isOpen,
+        ariaLabel: !isOpen ? AriaLabel.COMPACT : AriaLabel.EXPAND,
+        isOpen: !isOpen,
       };
     case Action.DESKTOP_INITIAL:
       return {
         ...state,
-        label: status ? Label.COMPACT : Label.EXPAND,
+        ariaLabel: isOpen ? AriaLabel.COMPACT : AriaLabel.EXPAND,
       };
     case Action.MOBILE:
       return {
-        expanded: status,
-        label: status ? Label.CLOSE : Label.OPEN,
-        status: !status,
+        ariaExpanded: isOpen,
+        ariaLabel: isOpen ? AriaLabel.CLOSE : AriaLabel.OPEN,
+        isOpen: !isOpen,
       };
     case Action.MOBILE_INITIAL:
       return {
         ...state,
-        expanded: !status,
-        label: !status ? Label.CLOSE : Label.OPEN,
+        ariaExpanded: !isOpen,
+        ariaLabel: !isOpen ? AriaLabel.CLOSE : AriaLabel.OPEN,
       };
 
     default:
@@ -55,11 +58,11 @@ const reducer = (state: SidebarState, { type }: DispatchAction) => {
 };
 
 export const useSidebarReducer = () => {
-  const [sidebar, dispatch] = useReducer(reducer, {
-    expanded: true,
-    label: "",
-    status: true,
+  const [sidebarState, setSidebarState] = useReducer(sidebarStateCalculator, {
+    ariaExpanded: true,
+    ariaLabel: "",
+    isOpen: true,
   });
 
-  return { sidebar, dispatch };
+  return { sidebarState, setSidebarState };
 };

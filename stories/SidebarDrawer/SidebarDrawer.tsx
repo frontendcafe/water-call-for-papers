@@ -19,8 +19,8 @@ interface SidebarProps {
 interface DrawerCompProps {
   clickHandler: () => void;
   events: EventData[];
-  label: string;
-  status: boolean;
+  ariaLabel: string;
+  isOpen: boolean;
 }
 
 const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
@@ -28,46 +28,46 @@ const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 const iconStyles = "inline-flex flex-shrink-0";
 
 export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
-  const { sidebar, dispatch } = useSidebarReducer();
-  const { expanded, status } = sidebar;
+  const { sidebarState, setSidebarState } = useSidebarReducer();
+  const { ariaExpanded, isOpen } = sidebarState;
 
   useEffect(() => {
     const type = isMobile() ? Action.MOBILE_INITIAL : Action.DESKTOP_INITIAL;
-    dispatch({ type });
+    setSidebarState({ type });
   }, []);
 
   const clickHandler = () => {
     const type = isMobile() ? Action.MOBILE : Action.DESKTOP;
-    dispatch({ type });
+    setSidebarState({ type });
   };
 
-  const responsiveBehavior = `transition-all md:translate-x-0 w-full ${
-    status
+  const responsiveBehavior = `md:translate-x-0 w-full ${
+    isOpen
       ? "invisible md:visible md:w-[17rem] -translate-x-full"
       : "md:w-[4.5rem]"
   }`;
 
   return (
     <div className="relative md:static">
-      <TopBarButton {...sidebar} clickHandler={clickHandler} />
+      <TopBarButton {...sidebarState} clickHandler={clickHandler} />
       <nav
         id="sidebar-drawer"
         aria-label="Sidebar"
-        aria-expanded={expanded}
-        className={`bg-black text-secondary-200 fixed md:sticky flex flex-col justify-between font-semibold whitespace-nowrap min-h-screen p-3 top-0 left-0 z-10 ${responsiveBehavior}`}
+        aria-expanded={ariaExpanded}
+        className={`fixed top-0 left-0 z-10 flex flex-col justify-between min-h-screen p-3 font-semibold transition-all bg-black text-secondary-200 md:sticky whitespace-nowrap ${responsiveBehavior}`}
       >
         <div className="space-y-6">
-          <BrandSection {...sidebar} clickHandler={clickHandler} />
+          <BrandSection {...sidebarState} clickHandler={clickHandler} />
 
           <StyledLink href="/event/create" variant="primary">
-            <TextContainer {...sidebar}>Crear Evento</TextContainer>
+            <TextContainer {...sidebarState}>Crear Evento</TextContainer>
             <Icon className={iconStyles} iconName="plusCircle" />
           </StyledLink>
 
-          <EventsNavSection {...sidebar} events={events} />
+          <EventsNavSection {...sidebarState} events={events} />
         </div>
 
-        <AboutNavSection {...sidebar} />
+        <AboutNavSection {...sidebarState} />
       </nav>
     </div>
   );
@@ -75,11 +75,11 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
 
 function TopBarButton({
   clickHandler,
-  label,
-  status,
+  ariaLabel,
+  isOpen,
 }: Omit<DrawerCompProps, "events">) {
   const TogglerIcon = () => {
-    return !status ? (
+    return !isOpen ? (
       <Icon
         className={`${iconStyles} text-primary-600`}
         iconName="xMark"
@@ -98,7 +98,7 @@ function TopBarButton({
     <div className="fixed top-0 left-0 z-20 inline-flex items-center gap-2 p-2 text-white md:hidden">
       <Button
         aria-controls="sidebar-drawer"
-        aria-label={label}
+        aria-label={ariaLabel}
         icon
         onClick={clickHandler}
         variant="transparent"
@@ -112,15 +112,15 @@ function TopBarButton({
 
 function BrandSection({
   clickHandler,
-  label,
-  status,
+  ariaLabel,
+  isOpen,
 }: Omit<DrawerCompProps, "events">) {
   return (
     <div className="flex items-center">
       <span className="hidden px-1 md:block">
         <Button
           aria-controls="sidebar-drawer"
-          aria-label={label}
+          aria-label={ariaLabel}
           icon
           onClick={clickHandler}
           variant="transparent"
@@ -130,13 +130,13 @@ function BrandSection({
       </span>
 
       <h1 className="pl-20 text-xl grow md:p-1">
-        <TextContainer status={status}>Call for Papers</TextContainer>
+        <TextContainer isOpen={isOpen}>Call for Papers</TextContainer>
       </h1>
 
-      <span className={`${status ? "hidden md:block" : "hidden"}`}>
+      <span className={`${isOpen ? "hidden md:block" : "hidden"}`}>
         <Button
           aria-controls="sidebar-drawer"
-          aria-label={label}
+          aria-label={ariaLabel}
           icon
           onClick={clickHandler}
           variant="transparent"
@@ -150,14 +150,14 @@ function BrandSection({
 
 function EventsNavSection({
   events,
-  status,
+  isOpen,
 }: Omit<DrawerCompProps, "clickHandler">) {
   return (
     <div className="space-y-2">
       <h2 className="flex items-center gap-2 p-2 text-white">
         <Icon className={iconStyles} size="large" iconName="calendar" />
 
-        <TextContainer status={status}>Mis Eventos</TextContainer>
+        <TextContainer isOpen={isOpen}>Mis Eventos</TextContainer>
       </h2>
 
       <ul aria-label="Listado de próximos eventos" className="space-y-2">
@@ -168,7 +168,7 @@ function EventsNavSection({
                 {name.substring(0, 2).toUpperCase()}
               </div>
 
-              <TextContainer truncate status={status}>
+              <TextContainer truncate isOpen={isOpen}>
                 {name}
               </TextContainer>
             </StyledLink>
@@ -179,13 +179,13 @@ function EventsNavSection({
   );
 }
 
-function AboutNavSection({ status }: Pick<DrawerCompProps, "status">) {
+function AboutNavSection({ isOpen }: Pick<DrawerCompProps, "isOpen">) {
   return (
     <ul className="space-y-2">
       <li className="">
         <StyledLink href="/about-us">
           <Icon className={iconStyles} size="large" iconName="questionMark" />
-          <TextContainer status={status}>Acerca de</TextContainer>
+          <TextContainer isOpen={isOpen}>Acerca de</TextContainer>
         </StyledLink>
       </li>
 
