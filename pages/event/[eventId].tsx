@@ -6,6 +6,7 @@ import { getEventById } from "../../lib/fetcher";
 import { Spinner } from "../../stories/Spinner/Spinner";
 import { EventData } from "../../types/events-types";
 import { Icon } from "../../stories/Icon/Icon";
+import { getDate } from "../../lib/utils";
 
 const EventPage: NextPage = () => {
   const {
@@ -37,12 +38,27 @@ const EventPage: NextPage = () => {
     return <>{JSON.stringify({ error })}</>;
   }
 
+  const daysLeft = () => {
+    const dayStart = new Date();
+    const dayEnd = new Date(event?.startingDate as Date);
+
+    const remainingDays = dayStart.getTime() - dayEnd.getTime();
+    const result = Math.floor(remainingDays / (-1000 * 60 * 60 * 24) + 1);
+
+    return result;
+  };
+
   return (
     <section className="container mx-auto grid gap-6 px-4 py-3 md:grid-cols-12">
       <div className="py-4 px-3 bg-secondary-50 rounded-xl md:col-span-9 flex flex-col gap-6">
         <div className="flex flex-col">
-          <h4 className="text-sm font-normal">Organiza:</h4>
-          <h2 className="text-lg font-bold">Service Design Club</h2>
+          <div className="flex justify-between items-center">
+            <h4 className="text-sm font-normal">Organiza:</h4>
+            <span className="px-2 py-1 text-xs text-white bg-secondary-600 rounded-full">
+              Faltan {daysLeft()} días
+            </span>
+          </div>
+          <h2 className="mt-1 text-lg font-bold">Service Design Club</h2>
         </div>
         <div className="flex flex-col">
           <div className="flex gap-2">
@@ -50,7 +66,8 @@ const EventPage: NextPage = () => {
             <h4 className="text-md font-semibold">Fechas del evento</h4>
           </div>
           <p className="mt-2 text-sm">
-            {/* {event?.startingDate} - {event?.endDate} */}
+            {getDate(event?.startingDate as Date)} -{" "}
+            {getDate(event?.endDate as Date)}
           </p>
         </div>
         <div className="flex flex-col">
@@ -102,7 +119,8 @@ const EventPage: NextPage = () => {
             <h4 className="text-md font-semibold">Período de postulación</h4>
           </div>
           <p className="mt-2 text-sm">
-            {/* {event?.proposalsStartingDate} - {event?.proposalsEndDate} */}
+            {getDate(event?.proposalsStartingDate as Date)} -{" "}
+            {getDate(event?.proposalsEndDate as Date)}
           </p>
         </div>
         <div className="flex flex-col">
