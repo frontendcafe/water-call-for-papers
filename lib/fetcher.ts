@@ -36,8 +36,8 @@ export default async function fetcher(
  *
  * @returns {EventData[]}
  */
-export async function getAllEvents() {
-  return await fetcher("/api/events");
+export async function getAllEvents(searchParams = "/") {
+  return await fetcher(`/api/events${searchParams}`);
 }
 
 /**
