@@ -38,8 +38,6 @@ const EventPage: NextPage = () => {
     return <>{JSON.stringify({ error })}</>;
   }
 
-  console.log(event);
-
   // Calculations for remaining days
   const daysLeft = () => {
     const dayStart = new Date();

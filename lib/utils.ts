@@ -13,4 +13,7 @@ export function tw(...classes: string[]) {
 
 export const getDate = (date: Date) => new Date(date).toLocaleDateString();
 export const getTime = (date: Date) =>
-  new Date(date).toLocaleTimeString().slice(0, -3);
+  new Date(date).toLocaleTimeString(navigator.language, {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
