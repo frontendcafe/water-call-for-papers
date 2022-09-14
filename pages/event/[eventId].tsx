@@ -6,7 +6,7 @@ import { getEventById } from "../../lib/fetcher";
 import { Spinner } from "../../stories/Spinner/Spinner";
 import { EventData } from "../../types/events-types";
 import { Icon } from "../../stories/Icon/Icon";
-import { getDate } from "../../lib/utils";
+import { getDate, getTime } from "../../lib/utils";
 
 const EventPage: NextPage = () => {
   const {
@@ -37,6 +37,8 @@ const EventPage: NextPage = () => {
   if (error) {
     return <>{JSON.stringify({ error })}</>;
   }
+
+  console.log(event);
 
   // Calculations for remaining days
   const daysLeft = () => {
@@ -77,7 +79,8 @@ const EventPage: NextPage = () => {
             <h4 className="text-md font-semibold">Horarios del evento</h4>
           </div>
           <p className="mt-2 text-sm">
-            {/* {event?.startingDate} - {event?.endDate} */}
+            {getTime(event?.startingDate as Date)} -{" "}
+            {getTime(event?.endDate as Date)} ({event?.timezone})
           </p>
         </div>
         <div className="flex flex-col">
