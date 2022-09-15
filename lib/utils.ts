@@ -10,3 +10,6 @@ export const formatFirebaseDate = (date: number): Date => {
 export function tw(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
+
+export const getDate = (date: Date) => new Date(date).toLocaleDateString();
+export const getTime = (date: Date) => new Date(date).toLocaleTimeString();
