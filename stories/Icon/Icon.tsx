@@ -31,6 +31,7 @@ import {
   EllipsisVerticalIcon,
   EnvelopeIcon,
   ExclamationTriangleIcon,
+  ExclamationCircleIcon as ExclamationCircleIconOutline,
   EyeIcon,
   HomeIcon,
   InformationCircleIcon,
@@ -55,6 +56,7 @@ import {
   UserIcon,
   UsersIcon,
   XMarkIcon,
+  GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
@@ -116,6 +118,8 @@ const iconsSupported = {
   chevronLeft: ChevronLeftIcon,
   dotsVertical: EllipsisVerticalIcon,
   photo: PhotoIcon,
+  exclamationCircleIconOutline: ExclamationCircleIconOutline,
+  globeAltIcon: GlobeAltIcon,
 };
 
 const iconSize = {

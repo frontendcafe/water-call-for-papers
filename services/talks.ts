@@ -63,6 +63,7 @@ export const getTalksFromEvent = async (
 
     talk.candidates = await getDocById(candidates, collectionsRef.candidates);
     talk.topics = await getDocById(topics, collectionsRef.topics);
+    talk.createdAt = talk.createdAt.toDate();
 
     delete talk.uniqueCode;
 
@@ -94,6 +95,8 @@ export const postTalk = async ({
   summary,
   title,
   topics,
+  eventId,
+  createdAt,
 }: Omit<TalkProposal, "topics"> & { topics: { description: string }[] }) => {
   // TODO: Add validations?
 
@@ -125,6 +128,8 @@ export const postTalk = async ({
     title,
     topics: topicsIds,
     uniqueCode: uuidv4(),
+    eventId,
+    createdAt,
   };
 
   await setDoc(talkRef, talkData);
@@ -152,6 +157,7 @@ export const getTalk = async (talkId: TalkProposalId) => {
 
   talk.candidates = await getDocById(candidatesIds, collectionsRef.candidates);
   talk.topics = await getDocById(topicsIds, collectionsRef.topics);
+  talk.createdAt = talk.createdAt.toDate();
 
   // TODO: Validate a code (uuid) which will be previously sent by mail.
   // ...
