@@ -62,6 +62,7 @@ export const InputText = ({
   requiredLabel,
   position,
   disabled,
+  onChange,
   ...props
 }: InputTextProps) => {
   const positionIconText = position == "left" && "pl-9 pr-2 py-2";
