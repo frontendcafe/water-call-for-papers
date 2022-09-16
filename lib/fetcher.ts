@@ -1,5 +1,3 @@
-import { EventId, EventData } from "../types/events-types";
-
 interface Response {
   data?: unknown;
   error?: Error;
@@ -29,36 +27,4 @@ export default async function fetcher(
   } catch (error) {
     return { error: error as Error };
   }
-}
-
-/**
- * Función para retornar todos los eventos de la API
- *
- * @returns {EventData[]}
- */
-export async function getAllEvents() {
-  return await fetcher("/api/events");
-}
-
-/**
- * Función para retornar un evento de la API en base a un id dado
- *
- * @param  {EventId} id
- * @returns {EventData}
- */
-export async function getEventById(id: EventId) {
-  return await fetcher(`/api/events/${id}`);
-}
-
-/**
- * Función para crear un evento en la API
- *
- * @param  {Partial<EventData>} event
- * @returns {EventData}
- */
-export async function createEvent(event: Partial<EventData>) {
-  return await fetcher(`/api/events`, {
-    method: "POST",
-    body: JSON.stringify(event),
-  });
 }
