@@ -6,7 +6,7 @@ interface ButtonProps
   /**
    * Button styles.
    */
-  variant?: "primary" | "secondary" | "transparent";
+  variant?: "primary" | "secondary" | "transparent" | "disclosure";
   /**
    * Button sizes.
    */
@@ -83,6 +83,14 @@ export const Button = ({
       "active:bg-primary-300 active:text-primary-700",
       "disabled:bg-transparent"
     ),
+
+    disclosure: tw(
+      "bg-primary-200 text-primary-900 text-xl",
+      "hover:bg-primary-500",
+      "focus:bg-primary-200",
+      "active:bg-primary-200",
+      "disabled:bg-secondary-50"
+    ),
   };
 
   const button = {
@@ -101,7 +109,11 @@ export const Button = ({
     full: "rounded-full",
   };
 
-  const alignmentStyles = "inline-flex items-center justify-center gap-1";
+  const alignmentStyles = `inline-flex items-center ${
+    variant === "disclosure"
+      ? "justify-between px-4 py-3.5"
+      : "justify-center gap-1"
+  }`;
 
   return (
     <button
