@@ -13,7 +13,7 @@ interface DatePickerProps {
   /**
    *  Event onChange
    */
-  onChange: () => void;
+  onChange: (date: Date, event: SyntheticEvent<Event>) => void;
 }
 
 export const DayPicker = ({ date, label, onChange }: DatePickerProps) => {
