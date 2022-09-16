@@ -18,7 +18,7 @@ interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   placeholder?: string;
 
   // Element value.
-  value: string;
+  value?: string;
 
   // Element's id
   idValue: string;
