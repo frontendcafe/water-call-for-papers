@@ -1,7 +1,7 @@
 import DatePicker from "react-datepicker";
 import { Icon } from "../Icon/Icon";
 
-interface DatePickerProps extends HTMLInputElement {
+interface DatePickerProps {
   /**
    *  The date
    */
