@@ -18,7 +18,7 @@ interface DatePickerProps {
 
 export const DayPicker = ({ date, label, onChange }: DatePickerProps) => {
   const containerStyles =
-    "bg-white flex items-center gap-2 px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 disabled:border-gray-200";
+    "bg-white flex items-center gap-2 px-2 py-2 mt-1 text-sm border-2 rounded-xl focus:border-2 focus:border-gray-400 disabled:border-gray-200";
 
   return (
     <div className="flex flex-col">
