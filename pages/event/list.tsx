@@ -79,32 +79,34 @@ const ListEvent = () => {
   }
 
   return (
-    <section className="md:p-4">
-      <header className="flex items-center justify-between p-4">
-        <h2 className="inline-block text-3xl font-semibold">Mis eventos</h2>
-        <StyledLink href="/event/create">
-          <span className="font-medium sr-only md:not-sr-only">
-            Crear evento
-          </span>
-          <Icon iconName="plusCircle" />
-        </StyledLink>
-      </header>
+    <section className="md:px-4">
       <TabsGroup handler={tabHandler}>
-        <TabsList>
-          {charlas.map(({ type, disabled }) => (
-            <Tab key={type} disabled={disabled}>
-              {type}
-            </Tab>
-          ))}
-        </TabsList>
+        <div className="sticky top-0 z-10 pt-11 md:p-0 bg-secondary-50 rounded-b-xl">
+          <header className="flex items-center justify-between px-4 py-4 md:px-0">
+            <h2 className="inline-block text-3xl font-semibold">Mis eventos</h2>
+            <StyledLink href="/event/create">
+              <span className="font-medium sr-only md:not-sr-only">
+                Crear evento
+              </span>
+              <Icon iconName="plusCircle" />
+            </StyledLink>
+          </header>
+          <TabsList>
+            {charlas.map(({ type, disabled }) => (
+              <Tab key={type} disabled={disabled}>
+                {type}
+              </Tab>
+            ))}
+          </TabsList>
+          <FilterBar
+            isLoading={isLoading}
+            searchHandler={searchHandler}
+            searchQuery={searchQuery}
+          />
+        </div>
         <TabsPanels>
           {charlas.map(({ type }) => (
             <TabsPanel key={type}>
-              <FilterBar
-                isLoading={isLoading}
-                searchHandler={searchHandler}
-                searchQuery={searchQuery}
-              />
               <CardsGrid events={events} isLoading={isLoading} />
             </TabsPanel>
           ))}
@@ -122,7 +124,6 @@ interface FilterBarProps {
   searchQuery: string;
 }
 
-// TODO: Maybe we can add this within the TabsPanel component, since is shared between all tabs
 function FilterBar({ searchHandler, searchQuery }: FilterBarProps) {
   return (
     <div className="flex items-center justify-between p-4 bg-white md:rounded-xl md:rounded-tl-none">
@@ -168,7 +169,7 @@ function CardsGrid({ events, isLoading }: CardsGrid) {
 
   if (events && events.length > 0) {
     return (
-      <div className="mt-4 bg-white md:rounded-xl">
+      <div className="my-4 bg-white md:rounded-xl">
         <p className="px-4 py-3 text-sm text-secondary-600">
           {events.length} eventos
         </p>
