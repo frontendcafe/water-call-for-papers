@@ -2,22 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.react-datepicker {
-  border-radius: 12px !important;
-}
-.react-datepicker__header {
-  background-color: #fff !important;
-  border-bottom: none !important;
-}
-.react-datepicker__day--selected {
-  background-color: #4b64ef !important;
-  border-radius: 1.3rem !important;
-}
-.react-datepicker__navigation-icon::before {
-  border-color: #4b64ef !important;
-}
-.react-datepicker__current-month {
-  margin-bottom: 13px !important;
-  font-size: 1rem !important;
-  color: #4b4b4b !important;
+@media (min-width: 768px) {
+  .app-layout {
+    display: grid;
+    grid:
+      min-content
+      1fr / min-content 1fr;
+    min-height: 100vh;
+  }
 }

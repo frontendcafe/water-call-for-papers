@@ -16,7 +16,8 @@ export interface FirebaseCollectionsRefs {
   topics: CollectionReference;
 }
 
-export interface QueryParams {
+export interface EventQueryOptions {
+  limit?: string;
   order?: OrderByDirection;
   type?: string | string[];
 }

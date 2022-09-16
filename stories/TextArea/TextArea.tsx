@@ -1,7 +1,7 @@
-import React from "react";
+import React, { TextareaHTMLAttributes } from "react";
 import { Icon } from "../Icon/Icon";
 
-interface TextAreaProps {
+interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   // Button content
   label: string;
 
@@ -95,7 +95,7 @@ export const TextArea = ({
         >
           {/* If error evaluated to true, display it. */}
           {error && (
-            <div className="flex gap-1.5">
+            <div className="flex gap-1.5 items-center text-red-400/80">
               <Icon iconName="exclamationCircle" />
               <p>{error}</p>
             </div>
