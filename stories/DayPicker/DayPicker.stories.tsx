@@ -19,5 +19,4 @@ export const InputDatePickerDefault = Template.bind({});
 
 InputDatePickerDefault.args = {
   label: "Fecha de inicio",
-  date: new Date(),
 };
