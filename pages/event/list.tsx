@@ -98,38 +98,16 @@ const ListEvent = () => {
           ))}
         </TabsList>
         <TabsPanels>
-          <TabsPanel>
-            <FilterBar
-              isLoading={isLoading}
-              searchHandler={searchHandler}
-              searchQuery={searchQuery}
-            />
-            <CardsGrid events={events} isLoading={isLoading} />
-          </TabsPanel>
-          <TabsPanel>
-            <FilterBar
-              isLoading={isLoading}
-              searchHandler={searchHandler}
-              searchQuery={searchQuery}
-            />
-            <CardsGrid events={events} isLoading={isLoading} />
-          </TabsPanel>
-          <TabsPanel>
-            <FilterBar
-              isLoading={isLoading}
-              searchHandler={searchHandler}
-              searchQuery={searchQuery}
-            />
-            <CardsGrid events={events} isLoading={isLoading} />
-          </TabsPanel>
-          <TabsPanel>
-            <FilterBar
-              isLoading={isLoading}
-              searchHandler={searchHandler}
-              searchQuery={searchQuery}
-            />
-            <CardsGrid events={events} isLoading={isLoading} />
-          </TabsPanel>
+          {charlas.map(({ type }) => (
+            <TabsPanel key={type}>
+              <FilterBar
+                isLoading={isLoading}
+                searchHandler={searchHandler}
+                searchQuery={searchQuery}
+              />
+              <CardsGrid events={events} isLoading={isLoading} />
+            </TabsPanel>
+          ))}
         </TabsPanels>
       </TabsGroup>
     </section>
