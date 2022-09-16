@@ -1,5 +1,8 @@
-import DatePicker from "react-datepicker";
+import es from "date-fns/locale/es";
+import { SyntheticEvent } from "react";
+import DatePicker, { registerLocale } from "react-datepicker";
 import { Icon } from "../Icon/Icon";
+registerLocale("es", es);
 
 interface DatePickerProps {
   /**
