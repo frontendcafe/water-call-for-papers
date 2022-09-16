@@ -18,6 +18,7 @@ const mode = {
   event: "bg-black/50 backdrop-blur-sm text-[#F3F3F3]",
   theme: "bg-[#EDDFFF] text-[#3B0085]",
   format: "bg-[#E7FFFE] text-[#124C47]",
+  comboLabels: "bg-[#E5E5FF] text-[#003FC1]",
 };
 
 const fontSize = {

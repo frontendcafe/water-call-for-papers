@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { getAllEvents } from "../../lib/fetcher";
+import { getAllEvents } from "../../lib/api-handlers";
 import { Button } from "../../stories/Button/Button";
 import { Card } from "../../stories/Card/Card";
 import { CreateEventCard } from "../../stories/Card/CreateEventCard";
