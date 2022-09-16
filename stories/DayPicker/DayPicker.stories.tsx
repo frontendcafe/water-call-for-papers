@@ -9,9 +9,11 @@ export default {
   component: DayPicker,
 } as ComponentMeta<typeof DayPicker>;
 
-const Template: ComponentStory<typeof DayPicker> = (args) => (
-  <DayPicker {...args} />
-);
+const Template: ComponentStory<typeof DayPicker> = (args) => {
+  const [date, setDate] = useState<Date>(new Date());
+
+  return <DayPicker {...args} date={date} onChange={setDate} />;
+};
 
 /**
  * InputText Template
