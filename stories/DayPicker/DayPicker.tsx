@@ -1,7 +1,7 @@
 import DatePicker from "react-datepicker";
 import { Icon } from "../Icon/Icon";
 
-interface DatePickerProps {
+interface DatePickerProps extends HTMLInputElement {
   /**
    *  The date
    */
@@ -17,6 +17,9 @@ interface DatePickerProps {
 }
 
 export const DayPicker = ({ date, label, onChange }: DatePickerProps) => {
+  const containerStyles =
+    "bg-white flex items-center gap-2 px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 disabled:border-gray-200";
+
   return (
     <div className="flex flex-col">
       <label
@@ -25,7 +28,7 @@ export const DayPicker = ({ date, label, onChange }: DatePickerProps) => {
       >
         {label}
       </label>
-      <div className="bg-white flex items-center gap-2 px-2 py-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 disabled:border-gray-200">
+      <div className={containerStyles}>
         <Icon iconName="calendar" size="medium" />
         <DatePicker
           id="datepicker"
