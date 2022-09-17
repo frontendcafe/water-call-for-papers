@@ -1,9 +1,9 @@
-import React, { ReactEventHandler, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { AccordionDefault } from "../../stories/Accordion/Accordion";
 import Select from "../../stories/Select/Select";
 import { timezones } from "../../mocks/timezones";
 import RadioButtons from "../../stories/Radio/Radio";
-import { InputText } from "../../stories/Input/InputText";
+// import { InputText } from "../../stories/Input/InputText";
 
 const options = [
   { title: "Presencial", isDisabled: false },
