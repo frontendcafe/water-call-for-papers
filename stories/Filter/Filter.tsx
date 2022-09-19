@@ -2,13 +2,19 @@ import { Menu, Transition } from "@headlessui/react";
 import { useState } from "react";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
+import RadioButtons from "../Radio/Radio";
 import { TagProps } from "../Tag/Tag";
 import { TagList } from "../TagList/TagList";
 interface FilterProps {
   tags: TagProps[];
 }
 export const Filter = ({ tags }: FilterProps) => {
+  const options = [
+    { title: "Más viejo a más nuevo", isDisabled: false },
+    { title: "Más nuevo a más viejo", isDisabled: false },
+  ];
   const [visible, inVisible] = useState(false);
+  const [selected, setSelected] = useState<string>(options[0].title);
 
   const eventClick = () => {
     inVisible(!visible);
@@ -34,11 +40,15 @@ export const Filter = ({ tags }: FilterProps) => {
         </div>
       </div>
       <Transition>
-        <Menu.Items className="h-screen divide-y divide-gray-100 md:h-72">
+        <Menu.Items className="h-screen divide-y divide-gray-100 md:h-72 overflow-y-scroll">
           <Menu.Item>
-            <div className="py-2 font-semibold">
-              <h3 className="text-sm">Ordenar:</h3>
-            </div>
+            <RadioButtons
+              label="Ordenar:"
+              options={options}
+              onSelectedChange={(value: string) => setSelected(value)}
+              value={selected}
+              defaultValue={options[0].title}
+            />
           </Menu.Item>
           <Menu.Item>
             <div className="py-2 font-semibold">
