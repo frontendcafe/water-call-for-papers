@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (min-width: 768px) {
+  .app-layout {
+    display: grid;
+    grid:
+      min-content
+      1fr / min-content 1fr;
+    min-height: 100vh;
+  }
+}

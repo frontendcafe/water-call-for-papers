@@ -2,7 +2,10 @@ import React, { ButtonHTMLAttributes, MouseEvent } from "react";
 import { tw } from "../../lib/utils";
 
 interface ButtonProps
-  extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, "aria-label" | "type"> {
+  extends Pick<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    "aria-label" | "aria-controls" | "type"
+  > {
   /**
    * Button styles.
    */
