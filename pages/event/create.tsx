@@ -1,9 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { AccordionDefault } from "../../stories/Accordion/Accordion";
 import Select from "../../stories/Select/Select";
 import { timezones } from "../../mocks/timezones";
 import RadioButtons from "../../stories/Radio/Radio";
-// import { InputText } from "../../stories/Input/InputText";
+import { DayPicker } from "../../stories/DayPicker/DayPicker";
+import { TimePicker } from "../../stories/TimePicker/TimePicker";
+import { InputText } from "../../stories/Input/InputText";
 
 const options = [
   { title: "Presencial", isDisabled: false },
@@ -13,8 +15,20 @@ const options = [
 
 const CreateEvent = () => {
   const [selected, setSelected] = useState<string>(options[0].title);
-  const refInputStartDate = useRef(null);
-  const refInputEndTime = useRef(null);
+  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [endDate, setEndDate] = useState<Date>(new Date());
+  const [startTime, setStartTime] = useState<string>(
+    new Date().toLocaleTimeString("es-ES", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+  );
+  const [endTime, setEndTime] = useState<string>(
+    new Date().toLocaleTimeString("es-ES", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+  );
 
   return (
     <form>
@@ -27,31 +41,17 @@ const CreateEvent = () => {
             </div>
             <div className="flex flex-col sm:flex-row gap-x-4">
               <div className="flex flex-col flex-1">
-                <label
-                  htmlFor="start-date"
-                  className={`text-sm  text-gray-900  `}
-                >
-                  Fecha de inicio
-                </label>
-
-                <input
-                  ref={refInputStartDate}
-                  name="start-date"
-                  id="start-date"
-                  className="border border-gray-500 p-4 rounded-xl focus:outline-none focus:ring-primary-900 focus:ring-1 hover:ring-[1.5px] hover:ring-secondary-100"
-                  type="date"
-                  required
+                <DayPicker
+                  date={startDate}
+                  onChange={setStartDate}
+                  label="Fecha de inicio"
                 />
               </div>
               <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
-                <label htmlFor="end-date" className={`text-sm  text-gray-900 `}>
-                  Fecha de finalización
-                </label>
-                <input
-                  name="end-date"
-                  id="end-date"
-                  className="border border-gray-500 p-4 rounded-xl focus:outline-none focus:ring-primary-900 focus:ring-1 hover:ring-[1.5px] hover:ring-secondary-100"
-                  type="date"
+                <DayPicker
+                  date={endDate}
+                  onChange={setEndDate}
+                  label="Fecha de finalización"
                 />
               </div>
             </div>
@@ -78,24 +78,13 @@ const CreateEvent = () => {
                 >
                   Hora de inicio
                 </label>
-                <input
-                  name="start-time"
-                  id="start-time"
-                  className="border border-gray-500 p-4 rounded-xl focus:outline-none focus:ring-primary-900 focus:ring-1 hover:ring-[1.5px] hover:ring-secondary-100"
-                  type="time"
-                />
+                <TimePicker time={startTime} onChange={setStartTime} />
               </div>
               <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
                 <label htmlFor="end-time" className={`text-sm  text-gray-900 `}>
                   Hora de finalización
                 </label>
-                <input
-                  ref={refInputEndTime}
-                  name="end-time"
-                  id="end-time"
-                  className="border border-gray-500 p-4 rounded-xl focus:outline-none focus:ring-primary-900 focus:ring-1 hover:ring-[1.5px] hover:ring-secondary-100"
-                  type="time"
-                />
+                <TimePicker time={endTime} onChange={setEndTime} />
               </div>
             </div>
           </div>
@@ -108,10 +97,17 @@ const CreateEvent = () => {
               defaultValue={options[0].title}
             ></RadioButtons>
           </div>
-          <div></div>
+          <div>
+            <InputText
+              label="Localización"
+              placeholder="Ingrese localización"
+              idValue="localización"
+              description=""
+              value=""
+            />
+          </div>
         </AccordionDefault>
       </div>
-      <button>Submit</button>
     </form>
   );
 };
