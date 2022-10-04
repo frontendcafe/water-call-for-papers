@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-datepicker {
+  @apply rounded-xl !important;
+}
+.react-datepicker__header {
+  @apply bg-white border-b-0 !important;
+}
+.react-datepicker__day--selected {
+  @apply bg-[#4b64ef] rounded-[1.3rem] !important;
+}
+.react-datepicker__navigation-icon::before {
+  @apply border-[#4b64ef] !important;
+}
+.react-datepicker__current-month {
+  @apply mb-[13px] text-base text-[#4b4b4b] !important
+}
+
+@media (min-width: 768px) {
+  .app-layout {
+    display: grid;
+    grid:
+      min-content
+      1fr / min-content 1fr;
+    min-height: 100vh;
+  }
+}

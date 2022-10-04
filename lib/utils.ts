@@ -10,3 +10,28 @@ export const formatFirebaseDate = (date: number): Date => {
 export function tw(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
+
+export const getDate = (date: Date) => new Date(date).toLocaleDateString();
+export const getTime = (date: Date) =>
+  new Date(date).toLocaleTimeString(navigator.language, {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+/**
+ * It takes a date and calculate how many dates are left to today.
+ *
+ * Credits to @yolitzr: https://github.com/yolitzr
+ *
+ * @param {Date} date
+ * @returns The number of days left to today
+ */
+export const calculateDaysLeft = (date: Date) => {
+  const dayStart = new Date();
+  const dayEnd = new Date(date);
+
+  const remainingDays = dayStart.getTime() - dayEnd.getTime();
+  const result = Math.floor(remainingDays / (-1000 * 60 * 60 * 24) + 1);
+
+  return result;
+};
