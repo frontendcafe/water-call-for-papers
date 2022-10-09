@@ -38,17 +38,6 @@ const EventPage: NextPage = () => {
     return <>{JSON.stringify({ error })}</>;
   }
 
-  // Calculations for remaining days
-  const daysLeft = () => {
-    const dayStart = new Date();
-    const dayEnd = new Date(event?.startingDate as Date);
-
-    const remainingDays = dayStart.getTime() - dayEnd.getTime();
-    const result = Math.floor(remainingDays / (-1000 * 60 * 60 * 24) + 1);
-
-    return result;
-  };
-
   return (
     <section className="container mx-auto grid gap-6 px-4 py-3 md:grid-cols-12">
       <div className="py-4 px-3 bg-secondary-50 rounded-xl md:col-span-9 flex flex-col gap-6">
@@ -56,7 +45,7 @@ const EventPage: NextPage = () => {
           <div className="flex justify-between items-center">
             <h4 className="text-sm font-normal">Organiza:</h4>
             <span className="px-2 py-1 text-xs text-white bg-secondary-600 rounded-full">
-              Faltan {daysLeft()} días
+              Faltan {event?.daysLeft} días
             </span>
           </div>
           <h2 className="mt-1 text-lg font-bold">Service Design Club</h2>
