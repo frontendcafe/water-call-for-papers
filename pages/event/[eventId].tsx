@@ -67,8 +67,11 @@ const EventPage: NextPage = () => {
             <h4 className="text-md font-semibold">Fechas del evento</h4>
           </div>
           <p className="mt-2 text-sm">
-            {getDate(event?.startingDate as Date)} -{" "}
-            {getDate(event?.endDate as Date)}
+            {event && (
+              <>
+                {getDate(event?.startingDate)} - {getDate(event?.endDate)}
+              </>
+            )}
           </p>
         </div>
         <div className="flex flex-col">
@@ -77,8 +80,12 @@ const EventPage: NextPage = () => {
             <h4 className="text-md font-semibold">Horarios del evento</h4>
           </div>
           <p className="mt-2 text-sm">
-            {getTime(event?.startingDate as Date)} -{" "}
-            {getTime(event?.endDate as Date)} ({event?.timezone})
+            {event && (
+              <>
+                {getTime(event?.startingDate as Date)} -{" "}
+                {getTime(event?.endDate as Date)} ({event?.timezone})
+              </>
+            )}
           </p>
         </div>
         <div className="flex flex-col">
