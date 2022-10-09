@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { getEventById } from "../../lib/fetcher";
+import { getEventById } from "../../lib/api-handlers";
 import { Spinner } from "../../stories/Spinner/Spinner";
 import { EventData } from "../../types/events-types";
 import { Icon } from "../../stories/Icon/Icon";

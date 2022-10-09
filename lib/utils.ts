@@ -17,3 +17,21 @@ export const getTime = (date: Date) =>
     hour: "2-digit",
     minute: "2-digit",
   });
+
+/**
+ * It takes a date and calculate how many dates are left to today.
+ *
+ * Credits to @yolitzr: https://github.com/yolitzr
+ *
+ * @param {Date} date
+ * @returns The number of days left to today
+ */
+export const calculateDaysLeft = (date: Date) => {
+  const dayStart = new Date();
+  const dayEnd = new Date(date);
+
+  const remainingDays = dayStart.getTime() - dayEnd.getTime();
+  const result = Math.floor(remainingDays / (-1000 * 60 * 60 * 24) + 1);
+
+  return result;
+};
