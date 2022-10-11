@@ -48,7 +48,7 @@ const aboutData = [
 
 const AboutUs = () => {
   return (
-    <div className="p-6 md:p-10 max-w-[1440px]">
+    <div className="px-4 py-16 md:px-10 md:py-8 max-w-[1440px] h-full">
       <div className="flex flex-col md:flex-row justify-between">
         <div className="md:w-8/12">
           <h1 className="text-4xl">Acerca de CMYK</h1>
