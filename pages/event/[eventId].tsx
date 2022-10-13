@@ -39,7 +39,7 @@ const EventPage: NextPage = () => {
   }
 
   return (
-    <section className="container mx-auto grid gap-6 px-4 py-3 md:grid-cols-12">
+    <section className="container mx-auto grid gap-6 px-4 py-3 md:grid-cols-12 bg-white mt-16 md:mt-4 md:rounded-t-xl">
       <div className="py-4 px-3 bg-secondary-50 rounded-xl md:col-span-9 flex flex-col gap-6">
         <div className="flex flex-col">
           <div className="flex justify-between items-center">
