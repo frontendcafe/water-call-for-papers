@@ -1,17 +1,26 @@
 import React from "react";
+import { Icon } from "../Icon/Icon";
 
 interface TimePickerProps {
-  time: string;
+  time: string | undefined;
   id: string;
   label: string;
-  setTime: React.Dispatch<React.SetStateAction<string>>;
+  isValue: boolean;
+  setTime: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-export const TimePicker = ({ time, setTime, label, id }: TimePickerProps) => {
+export const TimePicker = ({
+  time,
+  setTime,
+  label,
+  id,
+  isValue,
+}: TimePickerProps) => {
+  const errorClassName = "flex items-center text-alert-600 text-sm mt-2";
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTime(e.target.value);
   };
-
   return (
     <>
       <label htmlFor={id} className="text-sm  text-gray-900 pb-1">
@@ -20,11 +29,17 @@ export const TimePicker = ({ time, setTime, label, id }: TimePickerProps) => {
       <input
         name={id}
         id={id}
-        className="border border-gray-500 p-4 rounded-xl focus:outline-none focus:ring-primary-900 focus:ring-1 hover:ring-[1.5px] hover:ring-secondary-100"
+        className="ring-1 ring-secondary-500  px-2 h-12 text-sm rounded-xl focus:outline-none focus:ring-primary-900 focus:ring-[1.5px] hover:ring-[1.5px] ring-1"
         type="time"
         value={time}
         onChange={handleChange}
       />
+      {isValue ? null : (
+        <div className={errorClassName}>
+          <Icon iconName="informationCircle" />
+          <span className="ml-2">Este campo es requerido</span>
+        </div>
+      )}
     </>
   );
 };

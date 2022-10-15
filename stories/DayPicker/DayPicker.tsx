@@ -8,7 +8,7 @@ interface DatePickerProps {
   /**
    *  The date
    */
-  date: Date;
+  date: Date | undefined;
   /**
    *  The string
    */
@@ -16,12 +16,20 @@ interface DatePickerProps {
   /**
    *  Event onChange
    */
+  isValue: boolean;
   onChange: (date: Date, event: SyntheticEvent<Event>) => void;
 }
 
-export const DayPicker = ({ date, label, onChange }: DatePickerProps) => {
+export const DayPicker = ({
+  date,
+  label,
+  onChange,
+  isValue,
+}: DatePickerProps) => {
   const containerStyles =
-    "bg-white flex items-center gap-2 px-2 py-2 mt-1 text-sm border-2 rounded-xl focus:border-2 focus:border-gray-400 disabled:border-gray-200";
+    "bg-white flex items-center gap-2 hover:ring-[1.5px] ring-1  mt-1 text-sm ring-1 px-2 ring-secondary-500 h-12 rounded-xl focus:border-2 focus:border-gray-400 disabled:border-gray-200";
+
+  const errorClassName = "flex items-center text-alert-600 text-sm mt-2";
 
   return (
     <div className="flex flex-col">
@@ -42,6 +50,12 @@ export const DayPicker = ({ date, label, onChange }: DatePickerProps) => {
           onChange={onChange}
         />
       </div>
+      {isValue ? null : (
+        <div className={errorClassName}>
+          <Icon iconName="informationCircle" />
+          <span className="ml-2">Este campo es requerido</span>
+        </div>
+      )}
     </div>
   );
 };

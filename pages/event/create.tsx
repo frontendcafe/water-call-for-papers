@@ -1,37 +1,81 @@
 import React, { useState } from "react";
 import Image from "next/image";
+
 import { AccordionDefault } from "../../stories/Accordion/Accordion";
-import Select from "../../stories/Select/Select";
-import { timezones } from "../../mocks/timezones";
+import Select, { SelectValue } from "../../stories/Select/Select";
 import RadioButtons from "../../stories/Radio/Radio";
 import { DayPicker } from "../../stories/DayPicker/DayPicker";
 import { TimePicker } from "../../stories/TimePicker/TimePicker";
 import { InputText } from "../../stories/Input/InputText";
 import { SidebarDrawer } from "../../stories/SidebarDrawer/SidebarDrawer";
+
 import freepikCharacter from "../../public/img/freepik--Character--inject-25.svg";
 
-const options = [
+import { timezones } from "../../mocks/timezones";
+import { Button } from "../../stories/Button/Button";
+
+const modalityOptions = [
   { title: "Presencial", isDisabled: false },
   { title: "Online", isDisabled: false },
   { title: "Híbrido", isDisabled: false },
 ];
 
-interface TimeOptions {
-  hour: "2-digit";
-  minute: "2-digit";
-}
-
 const CreateEvent = () => {
-  const formatTimeOptions: TimeOptions = {
-    hour: "2-digit",
-    minute: "2-digit",
+  const [selected, setSelected] = useState<string>(modalityOptions[0].title);
+  const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState<Date>();
+  const [startTime, setStartTime] = useState<string>();
+  const [endTime, setEndTime] = useState<string>();
+  const [timeZoneSelected, setTimeZoneSelected] = useState<SelectValue>();
+
+  // booleanos para renderizar o no el mensaje de error
+  const [isNotStartTimeValue, setIsNotStartTimeValue] = useState(true);
+  const [isNotEndTimeValue, setIsNotEndTimeValue] = useState(true);
+  const [isNotStartDateValue, setIsNotStarDateValue] = useState(true);
+  const [isNotEndDateValue, setIsNotEndDateValue] = useState(true);
+  const [isNotTimeZoneValue, setIsNotTimeZoneValue] = useState(true);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const inputsValues = [startTime, endTime, startDate, endDate];
+    const isEmptyValue = inputsValues.some(
+      (value) => value === undefined || value === null
+    );
+
+    if (!startTime) {
+      setIsNotStartTimeValue(false);
+    } else {
+      setIsNotStartTimeValue(true);
+    }
+    if (!endTime) {
+      setIsNotEndTimeValue(false);
+    } else {
+      setIsNotEndTimeValue(true);
+    }
+
+    if (!startDate) {
+      setIsNotStarDateValue(false);
+    } else {
+      setIsNotStarDateValue(true);
+    }
+    if (!endDate) {
+      setIsNotEndDateValue(false);
+    } else {
+      setIsNotEndDateValue(true);
+    }
+
+    if (!timeZoneSelected) {
+      setIsNotTimeZoneValue(false);
+    } else {
+      setIsNotTimeZoneValue(true);
+    }
+
+    if (isEmptyValue) {
+      e.preventDefault();
+      return;
+    }
+    // console.log("submit");
+    e.preventDefault();
   };
-  const DATE = new Date().toLocaleTimeString("es-ES", formatTimeOptions);
-  const [selected, setSelected] = useState<string>(options[0].title);
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [endDate, setEndDate] = useState<Date>(new Date());
-  const [startTime, setStartTime] = useState<string>(DATE);
-  const [endTime, setEndTime] = useState<string>(DATE);
 
   return (
     <div className="flex bg-slate-100">
@@ -40,7 +84,7 @@ const CreateEvent = () => {
         <div className="flex-1">
           <h1 className="text-3xl font-semibold mb-8 px-4">Crear Evento</h1>
 
-          <form className="bg-white p-4">
+          <form className="bg-white p-4" onSubmit={handleSubmit}>
             <div className="">
               <AccordionDefault title="Fecha y localización">
                 <div className="">
@@ -53,6 +97,7 @@ const CreateEvent = () => {
                         date={startDate}
                         onChange={setStartDate}
                         label="Fecha de inicio"
+                        isValue={isNotStartDateValue}
                       />
                     </div>
                     <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
@@ -60,6 +105,7 @@ const CreateEvent = () => {
                         date={endDate}
                         onChange={setEndDate}
                         label="Fecha de finalización"
+                        isValue={isNotEndDateValue}
                       />
                     </div>
                   </div>
@@ -71,6 +117,10 @@ const CreateEvent = () => {
                     placeholder="Service Design Club"
                     label="TimeZone"
                     isLabelVisible={true}
+                    timeZoneSelected={timeZoneSelected}
+                    setTimeZoneSelected={setTimeZoneSelected}
+                    isValue={isNotTimeZoneValue}
+                    errorMessage="Este Campo es requerido"
                   ></Select>
                 </div>
 
@@ -85,6 +135,7 @@ const CreateEvent = () => {
                         label="Hora de inicio"
                         time={startTime}
                         setTime={setStartTime}
+                        isValue={isNotStartTimeValue}
                       />
                     </div>
                     <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
@@ -93,6 +144,7 @@ const CreateEvent = () => {
                         label="Hora de finalización"
                         time={endTime}
                         setTime={setEndTime}
+                        isValue={isNotEndTimeValue}
                       />
                     </div>
                   </div>
@@ -100,10 +152,10 @@ const CreateEvent = () => {
                 <div>
                   <RadioButtons
                     label="Modalidad (*)"
-                    options={options}
+                    options={modalityOptions}
                     onSelectedChange={(value: string) => setSelected(value)}
                     value={selected}
-                    defaultValue={options[0].title}
+                    defaultValue={modalityOptions[0].title}
                   ></RadioButtons>
                 </div>
                 <div>
@@ -116,6 +168,9 @@ const CreateEvent = () => {
                   />
                 </div>
               </AccordionDefault>
+            </div>
+            <div className="mt-14">
+              <Button>Crear Evento</Button>
             </div>
           </form>
         </div>
