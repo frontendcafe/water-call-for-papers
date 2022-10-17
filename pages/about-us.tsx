@@ -48,7 +48,7 @@ const aboutData = [
 
 const AboutUs = () => {
   return (
-    <div className="px-4 py-16 md:px-10 md:py-8 max-w-[1440px] h-full">
+    <div className="bg-white px-4 py-16 md:px-10 md:py-8 max-w-[1440px] h-full">
       <div className="flex flex-col md:flex-row justify-between">
         <div className="md:w-8/12">
           <h1 className="text-4xl">Acerca de CMYK</h1>
@@ -56,10 +56,14 @@ const AboutUs = () => {
             La iniciativa CMYK promueve el desarrollo de proyectos colaborativos
             con el objetivo de ganar experiencia en un entorno profesional.
             Organizada por la comunidad{" "}
-            <span className="text-blue-500">Frontend Café</span> desde el año
-            XXXX, en esta ocasión por primera vez se suma a la etapa de diseño
-            la comunidad del{" "}
-            <span className="text-blue-500">Service Design Club.</span>
+            <a href="https://frontend.cafe/">
+              <span className="text-blue-500">Frontend Café</span>
+            </a>
+            desde el año XXXX, en esta ocasión por primera vez se suma a la
+            etapa de diseño la comunidad del{" "}
+            <a href="https://servicedesignclub.com/">
+              <span className="text-blue-500">Service Design Club.</span>
+            </a>
           </p>
         </div>
         <div>
