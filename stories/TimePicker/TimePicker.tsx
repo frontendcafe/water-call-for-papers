@@ -6,6 +6,7 @@ interface TimePickerProps {
   id: string;
   label: string;
   isValue: boolean;
+  errorMessage: string;
   setTime: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
@@ -15,6 +16,7 @@ export const TimePicker = ({
   label,
   id,
   isValue,
+  errorMessage,
 }: TimePickerProps) => {
   const errorClassName = "flex items-center text-alert-600 text-sm mt-2";
 
@@ -37,7 +39,7 @@ export const TimePicker = ({
       {isValue ? null : (
         <div className={errorClassName}>
           <Icon iconName="informationCircle" />
-          <span className="ml-2">Este campo es requerido</span>
+          <span className="ml-2">{errorMessage}</span>
         </div>
       )}
     </>

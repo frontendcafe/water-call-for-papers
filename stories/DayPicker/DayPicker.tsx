@@ -17,6 +17,7 @@ interface DatePickerProps {
    *  Event onChange
    */
   isValue: boolean;
+  errorMessage: string;
   onChange: (date: Date, event: SyntheticEvent<Event>) => void;
 }
 
@@ -25,6 +26,7 @@ export const DayPicker = ({
   label,
   onChange,
   isValue,
+  errorMessage,
 }: DatePickerProps) => {
   const containerStyles =
     "bg-white flex items-center gap-2 hover:ring-[1.5px] ring-1  mt-1 text-sm ring-1 px-2 ring-secondary-500 h-12 rounded-xl focus:border-2 focus:border-gray-400 disabled:border-gray-200";
@@ -53,7 +55,7 @@ export const DayPicker = ({
       {isValue ? null : (
         <div className={errorClassName}>
           <Icon iconName="informationCircle" />
-          <span className="ml-2">Este campo es requerido</span>
+          <span className="ml-2">{errorMessage}</span>
         </div>
       )}
     </div>

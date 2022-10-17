@@ -8,11 +8,11 @@ import { DayPicker } from "../../stories/DayPicker/DayPicker";
 import { TimePicker } from "../../stories/TimePicker/TimePicker";
 import { InputText } from "../../stories/Input/InputText";
 import { SidebarDrawer } from "../../stories/SidebarDrawer/SidebarDrawer";
+import { Button } from "../../stories/Button/Button";
 
 import freepikCharacter from "../../public/img/freepik--Character--inject-25.svg";
 
 import { timezones } from "../../mocks/timezones";
-import { Button } from "../../stories/Button/Button";
 
 const modalityOptions = [
   { title: "Presencial", isDisabled: false },
@@ -98,6 +98,7 @@ const CreateEvent = () => {
                         onChange={setStartDate}
                         label="Fecha de inicio"
                         isValue={isNotStartDateValue}
+                        errorMessage="Este Campo es requerido"
                       />
                     </div>
                     <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
@@ -106,6 +107,7 @@ const CreateEvent = () => {
                         onChange={setEndDate}
                         label="Fecha de finalización"
                         isValue={isNotEndDateValue}
+                        errorMessage="Este Campo es requerido"
                       />
                     </div>
                   </div>
@@ -136,6 +138,7 @@ const CreateEvent = () => {
                         time={startTime}
                         setTime={setStartTime}
                         isValue={isNotStartTimeValue}
+                        errorMessage="Este Campo es requerido"
                       />
                     </div>
                     <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
@@ -145,6 +148,7 @@ const CreateEvent = () => {
                         time={endTime}
                         setTime={setEndTime}
                         isValue={isNotEndTimeValue}
+                        errorMessage="Este Campo es requerido"
                       />
                     </div>
                   </div>

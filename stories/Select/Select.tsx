@@ -58,7 +58,7 @@ const Select = ({
   isValue,
 }: SelectProps) => {
   const errorClassName = "flex items-center text-alert-600 text-sm mt-2";
-  // console.log(timeZoneSelected);
+
   return (
     <Listbox
       disabled={isInputDisabled}
