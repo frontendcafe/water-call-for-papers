@@ -129,14 +129,6 @@ const Select = ({
               </Listbox.Options>
             </Transition>
           </div>
-          {/* {errorMessage && (
-            <div
-              className="flex items-center gap-1 px-3 text-xs text-alert-600"
-              id="select-message"
-            >
-              <Icon iconName="informationCircle" size="small" /> {errorMessage}
-            </div>
-          )} */}
           {isValue ? null : (
             <div className={errorClassName}>
               <Icon iconName="informationCircle" />
