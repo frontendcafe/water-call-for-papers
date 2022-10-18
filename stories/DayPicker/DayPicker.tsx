@@ -16,9 +16,9 @@ interface DatePickerProps {
   /**
    *  Event onChange
    */
+  onChange: (date: Date, event: SyntheticEvent<Event>) => void;
   isValue: boolean;
   errorMessage: string;
-  onChange: (date: Date, event: SyntheticEvent<Event>) => void;
 }
 
 export const DayPicker = ({
