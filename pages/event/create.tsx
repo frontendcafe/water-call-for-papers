@@ -1,9 +1,8 @@
 import { ChangeEvent, useState } from "react";
-import { Disclosure } from "@headlessui/react";
-import { Icon } from "../../stories/Icon/Icon";
 import { InputText } from "../../stories/Input/InputText";
 import { TextArea } from "../../stories/TextArea/TextArea";
 import { InputFile } from "../../stories/InputFile/InputFile";
+import { AccordionDefault } from "../../stories/Accordion/Accordion";
 
 const Create = () => {
   const [data, setData] = useState({
@@ -45,18 +44,7 @@ const Create = () => {
 
   return (
     <form className="mx-auto w-full lg:max-w-xl bg-white">
-      <Disclosure>
-        {({ open }) => (
-          <>
-            <Disclosure.Button className="flex w-full justify-between rounded-lg bg-[#B2B7FF] px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-              <span className="font-semibold text-xl">Datos Generales</span>
-              {open ? (
-                <Icon iconName="chevronUp" />
-              ) : (
-                <Icon iconName="chevronDown" />
-              )}
-            </Disclosure.Button>
-            <Disclosure.Panel className="pt-2 pb-2 flex flex-col gap-2">
+      <AccordionDefault title="Datos Generales">
               <InputText
                 label="Nombre de la organización (*)"
                 placeholder="Ingrese el nombre de la organización"
@@ -109,10 +97,7 @@ const Create = () => {
                 label="Banner del evento"
                 placeholder="Cargar imagen"
               />
-            </Disclosure.Panel>
-          </>
-        )}
-      </Disclosure>
+       </AccordionDefault>
     </form>
   );
 };
