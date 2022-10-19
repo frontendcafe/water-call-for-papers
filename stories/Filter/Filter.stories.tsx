@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { TagProps } from "../Tag/Tag";
 import { Filter } from "./Filter";
 
@@ -7,6 +7,11 @@ export default {
   title: "Filter",
   component: Filter,
 } as ComponentMeta<typeof Filter>;
+
+const options = [
+  { title: "Más viejo a más nuevo", isDisabled: false },
+  { title: "Más nuevo a más viejo", isDisabled: false },
+];
 
 const Template: ComponentStory<typeof Filter> = (args) => {
   const tagList: Array<TagProps> = [
@@ -24,6 +29,7 @@ const Template: ComponentStory<typeof Filter> = (args) => {
     },
   ];
 
+  const [selected, setSelected] = useState<string>(options[0].title);
   const [values, setValues] = useState(tagList);
   function test(params: string) {
     setValues((previews) => {
@@ -39,7 +45,19 @@ const Template: ComponentStory<typeof Filter> = (args) => {
     });
   }
 
-  return <Filter {...args} tags={values} />;
+  return (
+    <Filter {...args} btnLabel="Filtros" title="Filtros">
+      {/* TODO: Needs refactor */}
+      <Filter.Radial
+        label="Ordenar:"
+        options={options}
+        onSelectedChange={(value: string) => setSelected(value)}
+        value={selected}
+        defaultValue={options[0].title}
+      />
+      <Filter.Tags title="Tags:" tags={values} />
+    </Filter>
+  );
 };
 
 export const Default = Template.bind({});
