@@ -1,77 +1,84 @@
-import { Menu, Transition } from "@headlessui/react";
-import { useState } from "react";
+import { Popover, Transition } from "@headlessui/react";
+import { Fragment, ReactNode } from "react";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
-import RadioButtons from "../Radio/Radio";
-import { TagProps } from "../Tag/Tag";
-import { TagList } from "../TagList/TagList";
-interface FilterProps {
-  tags: TagProps[];
-}
-export const Filter = ({ tags }: FilterProps) => {
-  const options = [
-    { title: "Más viejo a más nuevo", isDisabled: false },
-    { title: "Más nuevo a más viejo", isDisabled: false },
-  ];
-  const [visible, inVisible] = useState(false);
-  const [selected, setSelected] = useState<string>(options[0].title);
+import RadioButtons, { RadioGroup } from "../Radio/Radio";
+import { TagList, TagListProps } from "../TagList/TagList";
 
-  const eventClick = () => {
-    inVisible(!visible);
-  };
+interface FilterProps {
+  btnLabel: string;
+  children: ReactNode;
+  title: string;
+}
+
+export const Filter = ({ btnLabel, children, title }: FilterProps) => {
   const clear = () => {};
 
-  const accept = () => {};
   return (
-    <Menu as="div" className="bg-slate-50 w-screen p-4 md:w-72">
-      <div className="flex flex-col font-semibold">
-        <Menu.Button className="absolute invisible md:visible md:relative">
-          <div className="flex gap-1">
-            <Icon iconName="adjustment" size="small" />
-            <small>Filtros</small>
-            <Icon iconName="arrowDown" size="small" />
-          </div>
-        </Menu.Button>
-        <div className=" md:absolute md:invisible">
-          <div className="flex justify-between">
-            <Menu.Button onClick={eventClick}>Filtro</Menu.Button>
-            {visible ? <Icon iconName="xMark" size="small" /> : <></>}
-          </div>
-        </div>
-      </div>
-      <Transition>
-        <Menu.Items className="h-screen divide-y divide-gray-100 md:h-72 overflow-y-scroll">
-          <Menu.Item>
-            <RadioButtons
-              label="Ordenar:"
-              options={options}
-              onSelectedChange={(value: string) => setSelected(value)}
-              value={selected}
-              defaultValue={options[0].title}
-            />
-          </Menu.Item>
-          <Menu.Item>
-            <div className="py-2 font-semibold">
-              <h3 className="text-sm pb-3">Tema:</h3>
-              <TagList tags={tags} />
-            </div>
-          </Menu.Item>
-          <Menu.Item>
-            <div className="py-2 font-semibold">
-              <h3 className="text-sm pb-3">Formato:</h3>
-              <TagList tags={tags} />
-            </div>
-          </Menu.Item>
-        </Menu.Items>
-        <div className="flex justify-between md:absolute md:invisible ">
-          <Button size="small" variant="transparent" onClick={clear}>
-            Limpiar filtros{" "}
-          </Button>
-          <Button size="small" onClick={accept}>
-            Aplicar (n){" "}
-          </Button>
-        </div>
+    <Popover className="relative">
+      <Popover.Button as="span">
+        <Button variant="transparent">
+          <Icon iconName="adjustment" />
+          {btnLabel}
+          <Icon iconName="arrowDown" />
+        </Button>
+      </Popover.Button>
+      <Transition
+        as={Fragment}
+        enter="transition duration-100 ease-out"
+        enterFrom="transform scale-95 opacity-0"
+        enterTo="transform scale-100 opacity-100"
+        leave="transition duration-75 ease-out"
+        leaveFrom="transform scale-100 opacity-100"
+        leaveTo="transform scale-95 opacity-0"
+      >
+        <Popover.Panel className="fixed inset-0 z-50 flex flex-col p-4 bg-white ring-1 ring-black ring-opacity-5 md:absolute md:z-0 md:shadow-lg md:inset-auto md:rounded-xl md:min-w-max md:max-h-96">
+          {({ close }) => (
+            <>
+              <div className="flex items-center justify-between md:hidden">
+                <h1 className="text-xl font-semibold">{title}</h1>
+                <Button icon variant="transparent" onClick={() => close()}>
+                  <Icon iconName="xMark" />
+                </Button>
+              </div>
+              <div className="space-y-4 overflow-y-auto grow">{children}</div>
+              <div className="flex gap-4 md:hidden">
+                <Button size="stretched" onClick={clear} variant="transparent">
+                  Limpiar filtros
+                </Button>
+                <Button size="stretched" onClick={() => close()}>
+                  Aplicar (n)
+                </Button>
+              </div>
+            </>
+          )}
+        </Popover.Panel>
       </Transition>
-    </Menu>
+    </Popover>
   );
 };
+
+interface FilterRadialProps extends RadioGroup {
+  title: string;
+}
+const FilterRadial = ({ title, ...props }: FilterRadialProps) => {
+  return (
+    <div>
+      <h3 className="mb-2 md:font-semibold">{title}</h3>
+      <RadioButtons {...props} />
+    </div>
+  );
+};
+
+interface FilterTagsProps extends FilterRadialProps, TagListProps {}
+const FilterTags = ({ title, ...props }: FilterTagsProps) => {
+  return (
+    <div>
+      <h3 className="mb-2 md:font-semibold">{title}</h3>
+      <TagList {...props} />
+    </div>
+  );
+};
+
+Filter.Radial = FilterRadial;
+Filter.Tags = FilterTags;
