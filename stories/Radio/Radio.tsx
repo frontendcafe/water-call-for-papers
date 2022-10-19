@@ -1,7 +1,7 @@
 import { RadioGroup } from "@headlessui/react";
 import { InputHTMLAttributes } from "react";
 
-interface RadioGroup extends InputHTMLAttributes<HTMLInputElement> {
+export interface RadioGroup extends InputHTMLAttributes<HTMLInputElement> {
   onSelectedChange: (value: string) => void;
   label: string;
   options: { title: string; isDisabled: boolean }[];

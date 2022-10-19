@@ -1,6 +1,6 @@
 import { Tag, TagProps } from "../Tag/Tag";
 
-interface TagListProps {
+export interface TagListProps {
   tags: TagProps[];
 }
 
