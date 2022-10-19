@@ -59,8 +59,9 @@ export const Filter = ({ btnLabel, children, title }: FilterProps) => {
 };
 
 interface FilterRadialProps extends RadioGroup {
-  title: string;
+  title?: string;
 }
+// TODO: Needs refactor
 const FilterRadial = ({ title, ...props }: FilterRadialProps) => {
   return (
     <div>
@@ -70,7 +71,9 @@ const FilterRadial = ({ title, ...props }: FilterRadialProps) => {
   );
 };
 
-interface FilterTagsProps extends FilterRadialProps, TagListProps {}
+interface FilterTagsProps extends TagListProps {
+  title: string;
+}
 const FilterTags = ({ title, ...props }: FilterTagsProps) => {
   return (
     <div>
