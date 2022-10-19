@@ -94,6 +94,7 @@ export const InputText = ({
         value={value}
         className={`px-2 py-2 mt-1 text-sm text-gray-700 border border-secondary-700 rounded-md placeholder:text-gray-300 focus:border-2 focus:border-primary-900 disabled:border-gray-300 active:border active:border-primary-900 active:text-gray-800 ${positionIconText} ${withError}`}
         disabled={disabled}
+        onChange={props.onChange}
         {...props}
       />
       {position == "left" && (
