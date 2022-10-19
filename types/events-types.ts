@@ -30,4 +30,5 @@ export interface EventData {
   proposalsStartingDate: Date;
   proposalsEndDate: Date;
   timezone: string;
+  daysLeft?: number;
 }

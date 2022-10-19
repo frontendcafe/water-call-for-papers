@@ -35,6 +35,9 @@ module.exports = {
         warning: colors.amber,
         valid: colors.lime,
       },
+      fontFamily: {
+        work_sans: ["Work Sans", "sans-serif"],
+      },
     },
   },
   plugins: [require("@tailwindcss/line-clamp")],

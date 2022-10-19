@@ -13,7 +13,7 @@ import {
 } from "firebase/firestore";
 import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
-import { formatFirebaseDate } from "../lib/utils";
+import { calculateDaysLeft, formatFirebaseDate } from "../lib/utils";
 import { EventData } from "../types/events-types";
 import { Organizer } from "../types/organizers-types";
 import { EventQueryOptions } from "../types/others";
@@ -76,8 +76,9 @@ export const getEvent = async (id: string) => {
   if (!id) {
     throw { code: 422, message: "Se requiere el ID del evento" };
   }
-  const event = (await getDocById(id, collectionsRef.events)) as EventData[];
-  return event[0];
+  const [event] = (await getDocById(id, collectionsRef.events)) as EventData[];
+  event.daysLeft = calculateDaysLeft(event.startingDate);
+  return event;
 };
 
 export const deleteEvent = async (id: string) => {
