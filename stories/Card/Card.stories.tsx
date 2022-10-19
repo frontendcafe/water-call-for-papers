@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Card } from "./Card";
-import { ContactTeamCard } from "./ContactTeamCard";
 import { CreateEventCard } from "./CreateEventCard";
 
 const dummyData = {
@@ -10,24 +9,6 @@ const dummyData = {
   endDate: new Date(),
   status: "Borrador",
 };
-
-const aboutData = {
-  name: "Water Perez",
-  rol: "Frontend Developer",
-  description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem
-  perferendis eius alias, illo tempore deserunt pariatur rerum minima.
-  Fugiat molestias veniam nulla, numquam recusandae asperiores fugit
-  voluptate nesciunt quidem esse!`,
-  social: [
-    { iconName: "github", url: "https://github.com/" },
-    { iconName: "linkedin", url: "https://www.linkedin.com/" },
-    { iconName: "link", url: "https://jairdev.netlify.app/" },
-    { iconName: "mail", url: "devalfredomoscoso@gmail.com" },
-    { iconName: "behance", url: "https://behance.net/" },
-  ],
-};
-
-const aboutDataArr = Array(6).fill(aboutData);
 
 const dummyDataArr = Array(10).fill(dummyData);
 
@@ -55,34 +36,6 @@ MultipleCards.decorators = [
       <CreateEventCard />
       {dummyDataArr.map((dummyData) => (
         <Card event={dummyData} />
-      ))}
-    </div>
-  ),
-];
-
-export const ContactCard: ComponentStory<typeof ContactTeamCard> = () => (
-  <ContactTeamCard
-    name="Water Perez"
-    rol="Frontend Developer"
-    description="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem
-    perferendis eius alias, illo tempore deserunt pariatur rerum minima.
-    Fugiat molestias veniam nulla, numquam recusandae asperiores fugit
-    voluptate nesciunt quidem esse!"
-    social={aboutData.social}
-  />
-);
-
-export const MultipleContactCards = Template.bind({});
-MultipleContactCards.decorators = [
-  () => (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 px-4">
-      {aboutDataArr.map(({ name, rol, description, social }) => (
-        <ContactTeamCard
-          name={name}
-          rol={rol}
-          description={description}
-          social={social}
-        />
       ))}
     </div>
   ),
