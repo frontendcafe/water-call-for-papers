@@ -131,7 +131,7 @@ const CreateEvent = () => {
                     Horario del evento
                   </div>
                   <div className="flex flex-col sm:flex-row gap-x-4">
-                    <div className="flex flex-col flex-1">
+                    <div className="flex-1">
                       <TimePicker
                         id="start-time"
                         label="Hora de inicio"
@@ -141,7 +141,7 @@ const CreateEvent = () => {
                         errorMessage="Este Campo es requerido"
                       />
                     </div>
-                    <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
+                    <div className="flex-1 last:mt-8 sm:last:mt-0">
                       <TimePicker
                         id="end-time"
                         label="Hora de finalización"

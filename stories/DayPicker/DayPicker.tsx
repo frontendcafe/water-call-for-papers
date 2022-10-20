@@ -35,10 +35,7 @@ export const DayPicker = ({
 
   return (
     <div className="flex flex-col">
-      <label
-        className="text-sm font-semibold text-gray-800"
-        htmlFor="datepicker"
-      >
+      <label className="text-sm text-gray-800" htmlFor="datepicker">
         {label}
       </label>
       <div className={containerStyles}>

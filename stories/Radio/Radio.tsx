@@ -17,7 +17,7 @@ const RadioButtons = ({
   defaultValue,
 }: RadioGroup) => {
   return (
-    <div className="w-full px-4 py-16">
+    <div className="w-full py-16">
       <div className="w-full max-w-md">
         <RadioGroup value={value ?? defaultValue} onChange={onSelectedChange}>
           <RadioGroup.Label className="text-base font-semibold">
