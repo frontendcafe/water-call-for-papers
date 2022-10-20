@@ -18,7 +18,7 @@ interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   placeholder?: string;
 
   // Element value.
-  value: string;
+  value?: string;
 
   // Element's id
   idValue: string;
@@ -74,7 +74,7 @@ export const TextArea = ({
       {description && <p className={`text-xs`}>{description}</p>}
 
       <textarea
-        className={`px-2 py-2 mt-1 text-sm text-gray-700 border border-secondary-700 rounded-md placeholder:text-gray-300 focus:border-2 focus:border-primary-900 disabled:border-gray-300 active:border active:border-primary-900 active:text-gray-800 ${withError}`}
+        className={`px-2 py-2 mt-1 text-sm text-gray-700 border border-secondary-700 rounded-md placeholder:text-gray-400 focus:border-2 focus:border-primary-900 disabled:border-gray-300 active:border active:border-primary-900 active:text-gray-800 ${withError}`}
         id={idValue}
         name={idValue}
         maxLength={maxLength}
