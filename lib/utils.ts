@@ -13,3 +13,13 @@ export function tw(...classes: string[]) {
 
 export const getDate = (date: Date) => new Date(date).toLocaleDateString();
 export const getTime = (date: Date) => new Date(date).toLocaleTimeString();
+export function checkInputValue<Type>(
+  value: Type,
+  setValue: React.Dispatch<React.SetStateAction<boolean>>
+) {
+  if (!value) {
+    setValue(false);
+  } else {
+    setValue(true);
+  }
+}

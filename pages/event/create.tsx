@@ -13,6 +13,7 @@ import { Button } from "../../stories/Button/Button";
 import freepikCharacter from "../../public/img/freepik--Character--inject-25.svg";
 
 import { timezones } from "../../mocks/timezones";
+import { checkInputValue } from "../../lib/utils";
 
 const modalityOptions = [
   { title: "Presencial", isDisabled: false },
@@ -36,45 +37,27 @@ const CreateEvent = () => {
   const [isNotTimeZoneValue, setIsNotTimeZoneValue] = useState(true);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const inputsValues = [startTime, endTime, startDate, endDate];
+    e.preventDefault();
+    const inputsValues = [
+      startTime,
+      endTime,
+      timeZoneSelected,
+      startDate,
+      endDate,
+    ];
     const isEmptyValue = inputsValues.some(
       (value) => value === undefined || value === null
     );
 
-    if (!startTime) {
-      setIsNotStartTimeValue(false);
-    } else {
-      setIsNotStartTimeValue(true);
-    }
-    if (!endTime) {
-      setIsNotEndTimeValue(false);
-    } else {
-      setIsNotEndTimeValue(true);
-    }
-
-    if (!startDate) {
-      setIsNotStarDateValue(false);
-    } else {
-      setIsNotStarDateValue(true);
-    }
-    if (!endDate) {
-      setIsNotEndDateValue(false);
-    } else {
-      setIsNotEndDateValue(true);
-    }
-
-    if (!timeZoneSelected) {
-      setIsNotTimeZoneValue(false);
-    } else {
-      setIsNotTimeZoneValue(true);
-    }
-
+    checkInputValue(startDate, setIsNotStarDateValue);
+    checkInputValue(endDate, setIsNotEndDateValue);
+    checkInputValue(timeZoneSelected, setIsNotTimeZoneValue);
+    checkInputValue(startTime, setIsNotStartTimeValue);
+    checkInputValue(endTime, setIsNotEndTimeValue);
     if (isEmptyValue) {
       e.preventDefault();
       return;
     }
-    // console.log("submit");
-    e.preventDefault();
   };
 
   return (
