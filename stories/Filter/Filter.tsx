@@ -2,7 +2,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
-import RadioButtons, { RadioGroup } from "../Radio/Radio";
+import { RadioButtons, RadioGroup } from "../Radio/Radio";
 import { TagList, TagListProps } from "../TagList/TagList";
 
 interface FilterProps {
@@ -58,22 +58,15 @@ export const Filter = ({ btnLabel, children, title }: FilterProps) => {
   );
 };
 
-interface FilterRadialProps extends RadioGroup {
-  title?: string;
-}
-// TODO: Needs refactor
-const FilterRadial = ({ title, ...props }: FilterRadialProps) => {
-  return (
-    <div>
-      <h3 className="mb-2 md:font-semibold">{title}</h3>
-      <RadioButtons {...props} />
-    </div>
-  );
+interface FilterRadialProps extends RadioGroup {}
+const FilterRadial = ({ ...props }: FilterRadialProps) => {
+  return <RadioButtons {...props} />;
 };
 
 interface FilterTagsProps extends TagListProps {
   title: string;
 }
+// TODO: Implement "topics" for events list
 const FilterTags = ({ title, ...props }: FilterTagsProps) => {
   return (
     <div>
