@@ -130,7 +130,10 @@ const Create = () => {
           <div className="flex-1">
             <h1 className="text-3xl font-semibold mb-8 px-4">Crear Evento</h1>
 
-            <form className="bg-white p-4" onSubmit={handleSubmit}>
+            <form
+              className="bg-white p-4 flex flex-col space-y-4"
+              onSubmit={handleSubmit}
+            >
               <div className="">
                 <AccordionDefault title="Fecha y localización">
                   <div className="">
