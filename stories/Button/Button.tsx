@@ -122,7 +122,7 @@ export const Button = ({
     <button
       className={tw(
         "font-medium text-base whitespace-nowrap",
-        "transition duration-100",
+        "transition-[colors,_drop_shadow] duration-100",
         alignmentStyles,
         borderRadius[rounded],
         button[size],

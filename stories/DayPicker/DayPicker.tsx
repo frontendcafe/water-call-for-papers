@@ -33,7 +33,7 @@ export const DayPicker = ({
   const todayDate = new Date();
 
   const containerStyles =
-    "w-full pl-9 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300";
+    "transition-[colors,_drop_shadow] duration-100 w-full pl-9 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300";
 
   return (
     <div className="relative text-secondary-900">

@@ -19,7 +19,7 @@ export const AccordionDefault = ({ title, children }: Accordion) => {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex items-center justify-between w-full p-4 font-semibold text-left rounded-xl bg-primary-50 text-primary-700 hover:bg-primary-100 focus:ring-2 ring-primary-700 focus:bg-primary-200 focus:text-primary-800">
+            <Disclosure.Button className="transition-[colors,_drop_shadow] duration-100 flex items-center justify-between w-full p-4 font-semibold text-left rounded-xl bg-primary-50 text-primary-700 hover:bg-primary-100 focus:ring-2 ring-primary-700 focus:bg-primary-200 focus:text-primary-800">
               {title}
               <Icon
                 iconName="chevronDown"

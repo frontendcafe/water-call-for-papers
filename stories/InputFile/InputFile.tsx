@@ -85,7 +85,7 @@ export const InputFile = ({
         onKeyDown={(e: KeyboardEvent<HTMLDivElement>) =>
           e.key === "Enter" && e.currentTarget.click()
         }
-        className={`flex items-center justify-center gap-2 py-4 mt-1 font-medium border cursor-pointer hover:bg-primary-100 border-primary-700 hover:ring-1 text-primary-700 rounded-xl ${
+        className={`transition-[colors,_drop_shadow] duration-100 flex items-center justify-center gap-2 py-4 mt-1 font-medium border cursor-pointer hover:bg-primary-100 border-primary-700 hover:ring-1 text-primary-700 rounded-xl ${
           dragActive ? "bg-gray-400" : "bg-primary-50"
         }`}
         tabIndex={0}
