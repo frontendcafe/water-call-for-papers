@@ -68,7 +68,7 @@ const Create = () => {
   };
 
   return (
-    <form className="grid gap-14 mx-auto w-full lg:max-w-xl bg-white">
+    <form className="grid w-full mx-auto bg-white gap-14 lg:max-w-xl">
       <AccordionDefault title="Datos Generales">
         <InputText
           label="Nombre de la organización (*)"
@@ -132,16 +132,18 @@ const Create = () => {
               participar de tu evento.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             <DayPicker
               date={data.StartDate}
               label="Fecha de inicio"
               onChange={(date) => handleDateChange(date, "StartDate")}
+              id="StartDate"
             />
             <DayPicker
               date={data.EndDate}
               label="Fecha de finalización"
               onChange={(date) => handleDateChange(date, "EndDate")}
+              id="EndDate"
             />
           </div>
         </div>
