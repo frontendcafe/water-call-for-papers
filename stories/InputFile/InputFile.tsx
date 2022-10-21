@@ -69,7 +69,7 @@ export const InputFile = ({
   return (
     <div className="flex flex-col">
       <label
-        className={`text-sm font-semibold text-gray-900 ${
+        className={`font-semibold text-secondary-900 ${
           labelHidden ? "sr-only" : ""
         }`}
         htmlFor="file"
@@ -85,17 +85,20 @@ export const InputFile = ({
         onKeyDown={(e: KeyboardEvent<HTMLDivElement>) =>
           e.key === "Enter" && e.currentTarget.click()
         }
-        className={`border border-[#4B64EF] gap-2 borde mt-1 flex justify-center items-center font-bold text-base pt-4 pb-4 text-[#4B64EF] rounded cursor-pointer ${
-          dragActive ? "bg-gray-400" : "bg-[#E5E5FF]"
+        className={`flex items-center justify-center gap-2 py-4 mt-1 font-medium border cursor-pointer hover:bg-primary-100 border-primary-700 hover:ring-1 text-primary-700 rounded-xl ${
+          dragActive ? "bg-gray-400" : "bg-primary-50"
         }`}
         tabIndex={0}
       >
         {placeholder}
-        <Icon iconName="photo" />
+        <Icon iconName="arrowUpTray" />
         <input ref={inputRef} type="file" id="file" className="hidden" />
       </div>
       {description && (
-        <p className={`font-normal text-xs text-gray-600`}>{description}</p>
+        <p className="flex items-center gap-1 mt-1 ml-2 text-xs text-secondary-700">
+          <Icon iconName="exclamationCircleIconOutline" size="small" />
+          {description}
+        </p>
       )}
     </div>
   );
