@@ -20,7 +20,7 @@ export const RadioButtons = ({
 }: RadioGroup) => {
   return (
     <RadioGroup value={value} onChange={onSelectedChange}>
-      <RadioGroup.Label className="md:font-semibold">{label}</RadioGroup.Label>
+      <RadioGroup.Label className="font-semibold">{label}</RadioGroup.Label>
       <div className="my-2 space-y-2">
         {options.map((option) => (
           <RadioGroup.Option

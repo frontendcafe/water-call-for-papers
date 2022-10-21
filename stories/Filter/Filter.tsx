@@ -70,7 +70,7 @@ interface FilterTagsProps extends TagListProps {
 const FilterTags = ({ title, ...props }: FilterTagsProps) => {
   return (
     <div>
-      <h3 className="mb-2 md:font-semibold">{title}</h3>
+      <h3 className="mb-2 font-semibold">{title}</h3>
       <TagList {...props} />
     </div>
   );
