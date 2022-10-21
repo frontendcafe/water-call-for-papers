@@ -2,6 +2,9 @@ import es from "date-fns/locale/es";
 import { SyntheticEvent } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import { Icon } from "../Icon/Icon";
+import subDays from "date-fns/subDays";
+import addDays from "date-fns/addDays";
+
 registerLocale("es", es);
 
 interface DatePickerProps {
@@ -12,10 +15,15 @@ interface DatePickerProps {
   /**
    *  The string
    */
+  /** Set the actual date as selected by default. */
+
+  /** The string */
   label: string;
-  /**
-   *  Event onChange
-   */
+
+  /** Specify maximum of days possible to the future to pick a date. Example, if today is 13/10/22, set 'untilDays' for X amount of days to the future. Default is 90 days. */
+  untilDays?: number;
+
+  /** Event onChange */
   onChange: (date: Date, event: SyntheticEvent<Event>) => void;
   isValue: boolean;
   errorMessage: string;
@@ -27,7 +35,9 @@ export const DayPicker = ({
   onChange,
   isValue,
   errorMessage,
+  untilDays = 90,
 }: DatePickerProps) => {
+  const todayDate = new Date();
   const containerStyles =
     "bg-white flex items-center gap-2 hover:ring-[1.5px] ring-1  mt-1 text-sm ring-1 px-2 ring-secondary-500 h-12 rounded-xl focus:border-2 focus:border-gray-400 disabled:border-gray-200";
 
@@ -35,7 +45,7 @@ export const DayPicker = ({
 
   return (
     <div className="flex flex-col">
-      <label className="text-sm text-gray-800" htmlFor="datepicker">
+      <label className="text-sm font-normal text-gray-800" htmlFor="datepicker">
         {label}
       </label>
       <div className={containerStyles}>
@@ -44,8 +54,14 @@ export const DayPicker = ({
           id="datepicker"
           className="w-full outline-none"
           dateFormat="dd/MM/yyyy"
-          selected={date}
+          includeDateIntervals={[
+            {
+              start: subDays(todayDate, 1),
+              end: addDays(todayDate, untilDays),
+            },
+          ]}
           locale="es"
+          selected={date}
           onChange={onChange}
         />
       </div>
