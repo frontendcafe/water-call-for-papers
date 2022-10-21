@@ -18,8 +18,8 @@ export function checkInputValue<Type>(
   setValue: React.Dispatch<React.SetStateAction<boolean>>
 ) {
   if (!value) {
-    setValue(false);
+    setValue(Boolean(value));
   } else {
-    setValue(true);
+    setValue(Boolean(value));
   }
 }
