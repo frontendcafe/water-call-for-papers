@@ -33,5 +33,13 @@ export const calculateDaysLeft = (date: Date) => {
   const remainingDays = dayStart.getTime() - dayEnd.getTime();
   const result = Math.floor(remainingDays / (-1000 * 60 * 60 * 24) + 1);
 
+  if (result === 0) {
+    return "Hoy";
+  }
+
+  if (result < 0) {
+    return "Finalizado";
+  }
+
   return result;
 };
