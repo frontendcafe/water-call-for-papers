@@ -13,7 +13,7 @@ interface FilterBarProps {
 }
 
 export const FilterBar = ({
-  // isLoading,
+  isLoading,
   orderOnChange,
   orderValue,
   searchHandler,
@@ -32,11 +32,9 @@ export const FilterBar = ({
       </Filter>
 
       <InputText
-        // TODO: Enable when search feature gets implemented
-        disabled={true}
+        disabled={isLoading}
         idValue="search-bar"
-        // TODO: Finish after refactor in issue #138
-        label="This makes Typescript happy"
+        label="Barra de búsqueda"
         onChange={searchHandler}
         placeholder="Buscar"
         value={searchQuery}

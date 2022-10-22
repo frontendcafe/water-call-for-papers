@@ -40,7 +40,7 @@ const orderOptions = [
 ];
 
 const ListEvent = () => {
-  const [events, setEvents] = useState<EventData[] | null>(null);
+  const [events, setEvents] = useState<EventData[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -84,6 +84,10 @@ const ListEvent = () => {
     return <>{JSON.stringify({ error })}</>;
   }
 
+  const filteredEvents = events.filter(({ name }) =>
+    name.toLocaleLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <section className="md:px-4">
       <TabsGroup handler={tabHandler}>
@@ -116,7 +120,7 @@ const ListEvent = () => {
         <TabsPanels>
           {charlas.map(({ type }) => (
             <TabsPanel key={type}>
-              <CardsGrid events={events} isLoading={isLoading} />
+              <CardsGrid events={filteredEvents} isLoading={isLoading} />
             </TabsPanel>
           ))}
         </TabsPanels>
