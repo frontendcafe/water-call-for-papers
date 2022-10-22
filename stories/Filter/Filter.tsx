@@ -40,7 +40,7 @@ export const Filter = ({ btnLabel, children, title }: FilterProps) => {
         <Popover.Panel className="fixed inset-0 z-50 flex flex-col p-4 bg-white ring-1 ring-black ring-opacity-5 md:absolute md:z-0 md:shadow-lg md:inset-auto md:rounded-xl md:min-w-max md:max-h-96">
           {({ close }) => (
             <>
-              <div className="flex items-center justify-between mb-8 md:hidden">
+              <div className="flex items-center justify-between my-8 md:hidden">
                 <h1 className="text-xl font-semibold ">{title}</h1>
                 <Button icon variant="transparent" onClick={() => close()}>
                   <Icon iconName="xMark" />

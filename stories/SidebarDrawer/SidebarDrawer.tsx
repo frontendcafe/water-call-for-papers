@@ -54,7 +54,7 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
         id="sidebar-drawer"
         aria-label="Sidebar"
         aria-expanded={ariaExpanded}
-        className={`fixed top-0 left-0 z-10 flex flex-col justify-between min-h-screen p-3 font-semibold transition-all bg-black text-secondary-200 md:sticky whitespace-nowrap ${responsiveBehavior}`}
+        className={`fixed top-0 left-0 z-30 flex flex-col justify-between min-h-screen p-3 font-semibold transition-all bg-black text-secondary-200 md:sticky whitespace-nowrap ${responsiveBehavior}`}
       >
         <div className="space-y-6">
           <BrandSection {...sidebarState} clickHandler={clickHandler} />
@@ -95,7 +95,7 @@ function TopBarButton({
   };
 
   return (
-    <div className="fixed top-0 left-0 z-20 inline-flex items-center gap-2 p-2 text-white md:hidden">
+    <div className="fixed top-0 left-0 z-40 inline-flex items-center gap-2 p-2 text-white md:hidden">
       <Button
         aria-controls="sidebar-drawer"
         aria-label={ariaLabel}
