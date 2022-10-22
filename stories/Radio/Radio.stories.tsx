@@ -22,8 +22,8 @@ export const Modalidad: ComponentStory<typeof RadioButtons> = () => {
     <div className="flex flex-col items-start">
       <RadioButtons
         label="Modalidad (*)"
+        onChange={setSelected}
         options={modeOptions}
-        onSelectedChange={setSelected}
         value={selected}
       />
     </div>
@@ -42,8 +42,8 @@ export const Ordenar: ComponentStory<typeof RadioButtons> = () => {
     <div className="flex flex-col items-start">
       <RadioButtons
         label="Ordenar:"
+        onChange={setSelected}
         options={sortOptions}
-        onSelectedChange={setSelected}
         value={selected}
       />
     </div>
@@ -63,8 +63,8 @@ export const Estado: ComponentStory<typeof RadioButtons> = () => {
     <div className="flex flex-col items-start">
       <RadioButtons
         label="Estado:"
-        options={talkOptions}
-        onSelectedChange={setSelected}
+        onChange={setSelected}
+        options={sortOptions}
         value={selected}
       />
     </div>

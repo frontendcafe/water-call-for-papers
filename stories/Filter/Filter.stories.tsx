@@ -50,8 +50,8 @@ const Template: ComponentStory<typeof Filter> = (args) => {
     <Filter {...args} btnLabel="Filtros" title="Filtros">
       <Filter.Radial
         label="Ordenar:"
+        onChange={setSelected}
         options={options}
-        onSelectedChange={setSelected}
         value={selected}
       />
       <Filter.Tags title="Tags:" tags={values} />
