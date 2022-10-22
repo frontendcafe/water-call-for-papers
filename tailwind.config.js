@@ -34,6 +34,7 @@ module.exports = {
         alert: colors.red,
         warning: colors.amber,
         valid: colors.lime,
+        textGray: "#393939",
       },
       fontFamily: {
         work_sans: ["Work Sans", "sans-serif"],

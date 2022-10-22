@@ -6,12 +6,14 @@ interface StyledLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children?: React.ReactNode;
   href?: string;
   variant?: "primary" | "transparent";
+  classNames?: string;
 }
 
 export const StyledLink = ({
   children,
   href = "#",
   variant = "transparent",
+  classNames = "",
   ...props
 }: StyledLinkProps) => {
   const linkStyle = {
@@ -41,7 +43,8 @@ export const StyledLink = ({
           "flex items-center gap-2",
           "outline-none",
           "transition-colors duration-75",
-          linkStyle[variant]
+          linkStyle[variant],
+          classNames
         )}
         {...props}
       >

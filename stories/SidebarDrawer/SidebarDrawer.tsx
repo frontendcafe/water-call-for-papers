@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect } from "react";
-import logo_vercel from "../../public/img/powered-by-vercel.svg";
+import logo_vercel from "../../public/img/vercel-logo-black.svg";
 import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";

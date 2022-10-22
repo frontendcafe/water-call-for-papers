@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { SidebarDrawer } from "../stories/SidebarDrawer/SidebarDrawer";
 import { EventData } from "../types/events-types";
 
-const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+const Layout: React.FC<{ children?: React.ReactNode; isHomePage: boolean }> = ({
+  children,
+  isHomePage,
+}) => {
   const [events, setEvents] = useState<EventData[]>([]);
 
   useEffect(() => {
@@ -17,7 +20,7 @@ const Layout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
 
   return (
     <div className="app-layout">
-      <SidebarDrawer events={events} />
+      {!isHomePage && <SidebarDrawer events={events} />}
       <div className="bg-secondary-50">{children}</div>
     </div>
   );
