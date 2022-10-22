@@ -5,7 +5,7 @@ import { TagProps } from "../Tag/Tag";
 import { Filter } from "./Filter";
 
 export default {
-  title: "Filter",
+  title: "Components/Filter",
   component: Filter,
 } as ComponentMeta<typeof Filter>;
 
