@@ -38,6 +38,7 @@ interface ButtonProps
    * Applies styles to the button to render a only an icon and hides the text content.
    */
   icon?: boolean;
+  classNames?: string;
 }
 
 /**
@@ -50,6 +51,7 @@ interface ButtonProps
  * @param {string} rounded - The rounded corners of the button, small, medium, or full (circle in icons).
  * @param {string} size - The size of the button, can be small, medium, large, or stretched (takes all width of parent).
  * @param {string} variant - The variant of the button, can be primary, secondary, or transparent.
+ * @param {string} classNames - Extra classNames.
  */
 export const Button = ({
   children,
@@ -60,6 +62,7 @@ export const Button = ({
   rounded = icon ? "full" : "medium",
   size = "normal",
   variant = "primary",
+  classNames = "",
   ...props
 }: ButtonProps) => {
   const mode = {
@@ -127,7 +130,8 @@ export const Button = ({
         borderRadius[rounded],
         button[size],
         mode[variant],
-        statesStyles
+        statesStyles,
+        classNames
       )}
       disabled={loading || disabled}
       onClick={onClick}

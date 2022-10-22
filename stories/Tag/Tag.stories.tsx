@@ -3,15 +3,11 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Tag } from "./Tag";
 
 export default {
-  title: "Example/Tag", // Title for our storybook
-  component: Tag, // Component to render
-  args: {
-    //Todas las historias para el componente tag
-    //tendran un estilo secundario por defecto
-  },
+  title: "Components/Tag",
+  component: Tag,
+  args: {},
 } as ComponentMeta<typeof Tag>;
 
-//👇 We create a “template” of how args map to rendering
 const Template: ComponentStory<typeof Tag> = (args) => <Tag {...args} />;
 
 export const DefaultTag = Template.bind({});

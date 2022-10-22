@@ -5,7 +5,7 @@ import { ProposalStatus } from "../../types/talk-types";
 import { RadioButtons, SelectedOption } from "./Radio";
 
 export default {
-  title: "RadioButtons/Radio", // Title for our storybook
+  title: "Components/Radio", // Title for our storybook
   component: RadioButtons, // Component to render
 } as ComponentMeta<typeof RadioButtons>;
 
