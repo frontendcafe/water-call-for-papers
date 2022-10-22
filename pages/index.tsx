@@ -45,7 +45,8 @@ const Home: NextPage = () => {
               Todo en un mismo lugar.
             </p>
             <StyledLink
-              href="/event/list"
+              // TODO: Cambiar a /event/list cuando se mergee https://github.com/frontendcafe/water-call-for-papers/pull/141
+              href="/event/create"
               variant="primary"
               classNames="rounded-md lg:w-72"
             >
