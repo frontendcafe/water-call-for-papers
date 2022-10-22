@@ -17,11 +17,16 @@ export const Filter = ({ btnLabel, children, title }: FilterProps) => {
   return (
     <Popover className="relative">
       <Popover.Button as="span">
-        <Button variant="transparent">
-          <Icon iconName="adjustment" />
-          {btnLabel}
-          <Icon iconName="arrowDown" />
-        </Button>
+        {({ open }) => (
+          <Button variant="transparent" size="small">
+            <Icon iconName="adjustment" />
+            {btnLabel}
+            <Icon
+              iconName="chevronDown"
+              className={`transition-transform ${open ? "" : "-rotate-90"}`}
+            />
+          </Button>
+        )}
       </Popover.Button>
       <Transition
         as={Fragment}
@@ -35,8 +40,8 @@ export const Filter = ({ btnLabel, children, title }: FilterProps) => {
         <Popover.Panel className="fixed inset-0 z-50 flex flex-col p-4 bg-white ring-1 ring-black ring-opacity-5 md:absolute md:z-0 md:shadow-lg md:inset-auto md:rounded-xl md:min-w-max md:max-h-96">
           {({ close }) => (
             <>
-              <div className="flex items-center justify-between md:hidden">
-                <h1 className="text-xl font-semibold">{title}</h1>
+              <div className="flex items-center justify-between mb-8 md:hidden">
+                <h1 className="text-xl font-semibold ">{title}</h1>
                 <Button icon variant="transparent" onClick={() => close()}>
                   <Icon iconName="xMark" />
                 </Button>
