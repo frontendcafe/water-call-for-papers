@@ -4,10 +4,10 @@ export interface RadioOption {
   label: string;
   value: string;
 }
-export type SelectedOption = string | RadioOption;
+export type SelectedOption = RadioOption;
 export interface RadioGroup {
   label: string;
-  onSelectedChange: (value: SelectedOption) => void;
+  onChange: (value: SelectedOption) => void;
   options: RadioOption[];
   value: SelectedOption;
 }
@@ -15,11 +15,11 @@ export interface RadioGroup {
 export const RadioButtons = ({
   label,
   options,
-  onSelectedChange,
+  onChange,
   value,
 }: RadioGroup) => {
   return (
-    <RadioGroup value={value} onChange={onSelectedChange}>
+    <RadioGroup value={value} onChange={onChange}>
       <RadioGroup.Label className="font-semibold">{label}</RadioGroup.Label>
       <div className="my-2 space-y-2">
         {options.map((option) => (

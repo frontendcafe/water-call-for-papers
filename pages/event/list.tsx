@@ -1,10 +1,11 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { getAllEvents } from "../../lib/api-handlers";
-import { Button } from "../../stories/Button/Button";
 import { Card } from "../../stories/Card/Card";
 import { CreateEventCard } from "../../stories/Card/CreateEventCard";
+import { Filter } from "../../stories/Filter/Filter";
 import { Icon } from "../../stories/Icon/Icon";
 import { InputText } from "../../stories/Input/InputText";
+import { SelectedOption } from "../../stories/Radio/Radio";
 import { Spinner } from "../../stories/Spinner/Spinner";
 import { StyledLink } from "../../stories/StyledLink/StyledLink";
 import { Tab } from "../../stories/TabsGroup/Tab";
@@ -34,12 +35,18 @@ const charlas = [
   },
 ];
 
+const options = [
+  { label: "Más viejo a más nuevo", value: "asc" },
+  { label: "Más nuevo a más viejo", value: "desc" },
+];
+
 const ListEvent = () => {
   const [events, setEvents] = useState<EventData[] | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [statusQuery, setStatusQuery] = useState("");
+  const [order, setOrder] = useState<SelectedOption>(options[0]);
 
   const fetchEvents = (params?: string) => {
     getAllEvents(params)
@@ -57,13 +64,13 @@ const ListEvent = () => {
     setIsLoading(true);
     const searchParams = new URLSearchParams();
 
-    if (!statusQuery || statusQuery === eventStatusTodos) {
-      return fetchEvents();
+    if (statusQuery && statusQuery !== eventStatusTodos) {
+      searchParams.append("status", statusQuery);
     }
-    searchParams.append("status", statusQuery);
+    searchParams.append("order", order.value);
 
     fetchEvents(`?${searchParams.toString()}`);
-  }, [statusQuery]);
+  }, [statusQuery, order]);
 
   const tabHandler = (index: number) => {
     setStatusQuery(charlas[index].type);
@@ -102,6 +109,8 @@ const ListEvent = () => {
             isLoading={isLoading}
             searchHandler={searchHandler}
             searchQuery={searchQuery}
+            orderOnChange={setOrder}
+            orderValue={order}
           />
         </div>
         <TabsPanels>
@@ -120,23 +129,29 @@ export default ListEvent;
 
 interface FilterBarProps {
   isLoading: boolean;
-  searchHandler: (e: ChangeEvent<HTMLInputElement>) => void;
+  orderOnChange: (value: SelectedOption) => void;
+  orderValue: SelectedOption;
+  searchHandler: (value: ChangeEvent<HTMLInputElement>) => void;
   searchQuery: string;
 }
 
-function FilterBar({ searchHandler, searchQuery }: FilterBarProps) {
+function FilterBar({
+  // isLoading,
+  orderOnChange,
+  orderValue,
+  searchHandler,
+  searchQuery,
+}: FilterBarProps) {
   return (
     <div className="flex items-center justify-between p-4 bg-white md:rounded-xl md:rounded-tl-none">
-      <Button
-        // TODO: Enable when filter feature gets implemented
-        disabled={true}
-        size="small"
-        variant="transparent"
-      >
-        <Icon iconName="adjustment" />{" "}
-        <span className="sr-only md:not-sr-only">Filtros</span>{" "}
-        <Icon iconName="arrowDown" size="small" />
-      </Button>
+      <Filter btnLabel="Filtros" title="Filtros">
+        <Filter.Radial
+          label="Ordenar:"
+          onChange={orderOnChange}
+          options={options}
+          value={orderValue}
+        />
+      </Filter>
 
       <InputText
         // TODO: Enable when search feature gets implemented
