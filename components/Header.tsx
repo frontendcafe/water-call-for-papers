@@ -5,8 +5,8 @@ import { MenuDropdown } from "../stories/MenuDropdown/MenuDropdown";
 
 const Header = ({ title }: { title: string }) => {
   return (
-    <div className="flex justify-between my-4">
-      <div className="flex gap-4">
+    <div className="flex justify-between mb-4">
+      <div className="flex gap-4 py-2">
         <h2 className="font-semibold text-5xl">{title}</h2>
         <MenuDropdown
           itemList={[
@@ -33,7 +33,7 @@ const Header = ({ title }: { title: string }) => {
           <Icon iconName="dotsVertical" />
         </MenuDropdown>
       </div>
-      <Button icon={true} classNames="rounded-lg px-4 py-2">
+      <Button icon={true} classNames="rounded-lg px-4 py-2 hidden md:flex">
         Compartir <Icon iconName="share" size="small" />
       </Button>
     </div>
