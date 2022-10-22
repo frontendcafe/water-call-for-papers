@@ -2,9 +2,8 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { getAllEvents } from "../../lib/api-handlers";
 import { Card } from "../../stories/Card/Card";
 import { CreateEventCard } from "../../stories/Card/CreateEventCard";
-import { Filter } from "../../stories/Filter/Filter";
+import { FilterBar } from "../../stories/FilterBar/FilterBar";
 import { Icon } from "../../stories/Icon/Icon";
-import { InputText } from "../../stories/Input/InputText";
 import { SelectedOption } from "../../stories/Radio/Radio";
 import { Spinner } from "../../stories/Spinner/Spinner";
 import { StyledLink } from "../../stories/StyledLink/StyledLink";
@@ -35,7 +34,7 @@ const charlas = [
   },
 ];
 
-const options = [
+const orderOptions = [
   { label: "Más viejo a más nuevo", value: "asc" },
   { label: "Más nuevo a más viejo", value: "desc" },
 ];
@@ -46,7 +45,7 @@ const ListEvent = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [statusQuery, setStatusQuery] = useState("");
-  const [order, setOrder] = useState<SelectedOption>(options[0]);
+  const [order, setOrder] = useState<SelectedOption>(orderOptions[0]);
 
   const fetchEvents = (params?: string) => {
     getAllEvents(params)
@@ -107,10 +106,11 @@ const ListEvent = () => {
           </TabsList>
           <FilterBar
             isLoading={isLoading}
+            orderOnChange={setOrder}
+            orderOptions={orderOptions}
+            orderValue={order}
             searchHandler={searchHandler}
             searchQuery={searchQuery}
-            orderOnChange={setOrder}
-            orderValue={order}
           />
         </div>
         <TabsPanels>
@@ -126,46 +126,6 @@ const ListEvent = () => {
 };
 
 export default ListEvent;
-
-interface FilterBarProps {
-  isLoading: boolean;
-  orderOnChange: (value: SelectedOption) => void;
-  orderValue: SelectedOption;
-  searchHandler: (value: ChangeEvent<HTMLInputElement>) => void;
-  searchQuery: string;
-}
-
-function FilterBar({
-  // isLoading,
-  orderOnChange,
-  orderValue,
-  searchHandler,
-  searchQuery,
-}: FilterBarProps) {
-  return (
-    <div className="flex items-center justify-between p-4 bg-white md:rounded-xl md:rounded-tl-none">
-      <Filter btnLabel="Filtros" title="Filtros">
-        <Filter.Radial
-          label="Ordenar:"
-          onChange={orderOnChange}
-          options={options}
-          value={orderValue}
-        />
-      </Filter>
-
-      <InputText
-        // TODO: Enable when search feature gets implemented
-        disabled={true}
-        idValue="search-bar"
-        // TODO: Finish after refactor in issue #138
-        label="This makes Typescript happy"
-        onChange={searchHandler}
-        placeholder="Buscar"
-        value={searchQuery}
-      />
-    </div>
-  );
-}
 
 interface CardsGrid {
   events: EventData[] | null;
