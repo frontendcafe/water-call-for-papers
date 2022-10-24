@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Clip } from "./Clip";
 
 export default {
-  title: "Clipboard",
+  title: "Components/Clipboard",
   component: Clip,
 } as ComponentMeta<typeof Clip>;
 

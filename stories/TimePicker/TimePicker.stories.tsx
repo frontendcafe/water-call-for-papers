@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { TimePicker } from "./TimePicker";
 
 export default {
-  title: "Input/TimePicker",
+  title: "Components/TimePicker",
   component: TimePicker,
   args: {
     label: "Hora de inicio",
