@@ -2,13 +2,11 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import { Button } from "../stories/Button/Button";
 
-
-
 const Home: NextPage = () => {
   return (
     <div className=" grid grid-cols-2 h-screen w-screen">
-      <div className="flex justify-between pl-20 mt-20">
-        <div className="flex flex-row">
+      <div className=" flex flex-col justify-between pl-20 mt-20">
+        <div className="flex">
           <Image
             src="/img/logo.svg"
             width={40}
@@ -18,9 +16,9 @@ const Home: NextPage = () => {
           <h1 className="text-[#003FC1] text-3xl pl-2 pt-3">Aqua</h1>
         </div>
 
-        <div className="mt-60">
+        <div className="">
           <h1 className="text-4xl">
-            <span className="text-[#003FC1] ">Simplifica</span> la organizacion
+            <span className="text-[#003FC1]">Simplifica</span> la organizacion
             de tus eventos
           </h1>
           <br />
@@ -36,11 +34,14 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-        <div>
-          <Image src="/img/powered-by-vercel.svg" width={160} height={38} />
+        <div className="">
+          <Image src="/img/logoVercel.svg" width={160} height={38} />
         </div>
       </div>
-      
+
+      <div className="bg-primary-50 grid place-content-center ">
+        <Image src="/img/cuate.svg" width={576} height={518} />
+      </div>
     </div>
   );
 };
