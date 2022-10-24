@@ -62,6 +62,7 @@ export const InputText = ({
   requiredLabel,
   position,
   disabled,
+  // onChange,
   value,
   ...props
 }: InputTextProps) => {

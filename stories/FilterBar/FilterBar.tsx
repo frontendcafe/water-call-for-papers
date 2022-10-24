@@ -25,9 +25,10 @@ export const FilterBar = ({
       <Filter btnLabel="Filtros" title="Filtros">
         <Filter.Radial
           label="Ordenar:"
-          onChange={orderOnChange}
+          onSelectedChange={orderOnChange}
           options={orderOptions}
           value={orderValue}
+          defaultValue={orderOptions[0].value}
         />
       </Filter>
 

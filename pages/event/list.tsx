@@ -35,8 +35,8 @@ const charlas = [
 ];
 
 const orderOptions = [
-  { label: "Más viejo a más nuevo", value: "asc" },
-  { label: "Más nuevo a más viejo", value: "desc" },
+  { title: "Más viejo a más nuevo", value: "asc" },
+  { title: "Más nuevo a más viejo", value: "desc" },
 ];
 
 const ListEvent = () => {
