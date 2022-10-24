@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { AccordionDefault } from "../../stories/Accordion/Accordion";
 import Select, { SelectValue } from "../../stories/Select/Select";
-import RadioButtons from "../../stories/Radio/Radio";
+import { RadioButtons, SelectedOption } from "../../stories/Radio/Radio";
 import { DayPicker } from "../../stories/DayPicker/DayPicker";
 import { TimePicker } from "../../stories/TimePicker/TimePicker";
 import { InputText } from "../../stories/Input/InputText";
@@ -22,9 +22,9 @@ import { timezones } from "../../mocks/timezones";
 import { checkInputValue } from "../../lib/utils";
 
 const modalityOptions = [
-  { title: "Presencial", isDisabled: false },
-  { title: "Online", isDisabled: false },
-  { title: "Híbrido", isDisabled: false },
+  { title: "Presencial", isDisabled: false, value: "Presencial" },
+  { title: "Online", isDisabled: false, value: "Online" },
+  { title: "Híbrido", isDisabled: false, value: "Híbrido" },
 ];
 
 const Create = () => {
@@ -46,7 +46,9 @@ const Create = () => {
     Requirements: "",
   });
 
-  const [selected, setSelected] = useState<string>(modalityOptions[0].title);
+  const [selected, setSelected] = useState<SelectedOption>(
+    modalityOptions[0].title
+  );
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [startTime, setStartTime] = useState<string>();
@@ -129,99 +131,10 @@ const Create = () => {
         <div className="flex flex-1 pt-20 md:pt-4 max-w-[1440px]">
           <div className="flex-1">
             <h1 className="text-3xl font-semibold mb-8 px-4">Crear Evento</h1>
-
             <form
               className="bg-white p-4 flex flex-col space-y-4"
               onSubmit={handleSubmit}
             >
-              <div className="">
-                <AccordionDefault title="Fecha y localización">
-                  <div className="">
-                    <div className=" text-base font-semibold text-gray-900 mb-2">
-                      Fechas del evento
-                    </div>
-                    <div className="flex flex-col sm:flex-row gap-x-4">
-                      <div className="flex flex-col flex-1">
-                        <DayPicker
-                          date={startDate}
-                          onChange={setStartDate}
-                          label="Fecha de inicio"
-                          isValue={isNotStartDateValue}
-                          errorMessage="Este Campo es requerido"
-                        />
-                      </div>
-                      <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
-                        <DayPicker
-                          date={endDate}
-                          onChange={setEndDate}
-                          label="Fecha de finalización"
-                          isValue={isNotEndDateValue}
-                          errorMessage="Este Campo es requerido"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-12">
-                    <Select
-                      values={timezones}
-                      placeholder="Service Design Club"
-                      label="TimeZone"
-                      isLabelVisible={true}
-                      timeZoneSelected={timeZoneSelected}
-                      setTimeZoneSelected={setTimeZoneSelected}
-                      isValue={isNotTimeZoneValue}
-                      errorMessage="Este Campo es requerido"
-                    ></Select>
-                  </div>
-
-                  <div className="">
-                    <div className=" text-base font-semibold text-gray-900 mb-2">
-                      Horario del evento
-                    </div>
-                    <div className="flex flex-col sm:flex-row gap-x-4">
-                      <div className="flex-1">
-                        <TimePicker
-                          id="start-time"
-                          label="Hora de inicio"
-                          time={startTime}
-                          setTime={setStartTime}
-                          isValue={isNotStartTimeValue}
-                          errorMessage="Este Campo es requerido"
-                        />
-                      </div>
-                      <div className="flex-1 last:mt-8 sm:last:mt-0">
-                        <TimePicker
-                          id="end-time"
-                          label="Hora de finalización"
-                          time={endTime}
-                          setTime={setEndTime}
-                          isValue={isNotEndTimeValue}
-                          errorMessage="Este Campo es requerido"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <RadioButtons
-                      label="Modalidad (*)"
-                      options={modalityOptions}
-                      onSelectedChange={(value: string) => setSelected(value)}
-                      value={selected}
-                      defaultValue={modalityOptions[0].title}
-                    ></RadioButtons>
-                  </div>
-                  <div>
-                    <InputText
-                      label="Localización"
-                      placeholder="Ingrese localización"
-                      idValue="localización"
-                      description=""
-                      value=""
-                    />
-                  </div>
-                </AccordionDefault>
-              </div>
               <AccordionDefault title="Datos Generales">
                 <InputText
                   label="Nombre de la organización (*)"
@@ -234,7 +147,6 @@ const Create = () => {
                   description="Máximo 50 caracteres"
                   required
                 />
-
                 <InputText
                   label="Nombre del evento (*)"
                   placeholder="Ingrese el nombre del evento"
@@ -246,9 +158,6 @@ const Create = () => {
                   description="Máximo 50 caracteres"
                   required
                 />
-
-                {/* Agregar componente para los temas */}
-
                 <InputText
                   label="Temas (*)"
                   placeholder="Ingrese hasta 5 temas"
@@ -257,7 +166,6 @@ const Create = () => {
                   onChange={handleValidation}
                   required
                 />
-
                 <TextArea
                   label="Descripción (*)"
                   value={data.Description}
@@ -276,7 +184,92 @@ const Create = () => {
                   placeholder="Cargar imagen"
                 />
               </AccordionDefault>
-
+              <AccordionDefault title="Fecha y localización">
+                <div className="">
+                  <div className=" text-base font-semibold text-gray-900 mb-2">
+                    Fechas del evento
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-x-4">
+                    <div className="flex flex-col flex-1">
+                      <DayPicker
+                        date={startDate}
+                        onChange={setStartDate}
+                        label="Fecha de inicio"
+                        isValue={isNotStartDateValue}
+                        errorMessage="Este Campo es requerido"
+                      />
+                    </div>
+                    <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
+                      <DayPicker
+                        date={endDate}
+                        onChange={setEndDate}
+                        label="Fecha de finalización"
+                        isValue={isNotEndDateValue}
+                        errorMessage="Este Campo es requerido"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-12">
+                  <Select
+                    values={timezones}
+                    placeholder="Service Design Club"
+                    label="TimeZone"
+                    isLabelVisible={true}
+                    timeZoneSelected={timeZoneSelected}
+                    setTimeZoneSelected={setTimeZoneSelected}
+                    isValue={isNotTimeZoneValue}
+                    errorMessage="Este Campo es requerido"
+                  ></Select>
+                </div>
+                <div className="">
+                  <div className=" text-base font-semibold text-gray-900 mb-2">
+                    Horario del evento
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-x-4">
+                    <div className="flex-1">
+                      <TimePicker
+                        id="start-time"
+                        label="Hora de inicio"
+                        time={startTime}
+                        setTime={setStartTime}
+                        isValue={isNotStartTimeValue}
+                        errorMessage="Este Campo es requerido"
+                      />
+                    </div>
+                    <div className="flex-1 last:mt-8 sm:last:mt-0">
+                      <TimePicker
+                        id="end-time"
+                        label="Hora de finalización"
+                        time={endTime}
+                        setTime={setEndTime}
+                        isValue={isNotEndTimeValue}
+                        errorMessage="Este Campo es requerido"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <RadioButtons
+                    label="Modalidad (*)"
+                    options={modalityOptions}
+                    onSelectedChange={(value: SelectedOption) =>
+                      setSelected(value)
+                    }
+                    value={selected}
+                    defaultValue={modalityOptions[0].value}
+                  ></RadioButtons>
+                </div>
+                <div>
+                  <InputText
+                    label="Localización"
+                    placeholder="Ingrese localización"
+                    idValue="localización"
+                    description=""
+                    value=""
+                  />
+                </div>
+              </AccordionDefault>
               <AccordionDefault title="Convocatoria postulantes">
                 <div className="grid gap-1">
                   <div className="grid gap-0.5">
@@ -293,11 +286,15 @@ const Create = () => {
                       date={data.StartDate}
                       label="Fecha de inicio"
                       onChange={(date) => handleDateChange(date, "StartDate")}
+                      isValue={false}
+                      errorMessage={""}
                     />
                     <DayPicker
                       date={data.EndDate}
                       label="Fecha de finalización"
                       onChange={(date) => handleDateChange(date, "EndDate")}
+                      isValue={false}
+                      errorMessage={""}
                     />
                   </div>
                 </div>
