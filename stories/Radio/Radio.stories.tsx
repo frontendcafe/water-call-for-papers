@@ -1,70 +1,71 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import RadioButtons from "./Radio";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useState } from "react";
+import { EventType } from "../../types/events-types";
+import { ProposalStatus } from "../../types/talk-types";
+import { RadioButtons, SelectedOption } from "./Radio";
 
 export default {
-  title: "RadioButtons/Radio", // Title for our storybook
+  title: "Components/Radio", // Title for our storybook
   component: RadioButtons, // Component to render
 } as ComponentMeta<typeof RadioButtons>;
 
+const modeOptions = [
+  { label: "Presencial", value: EventType.Presencial },
+  { label: "Online", value: EventType.Virtual },
+  { label: "Híbrido", value: EventType.Hibrido },
+];
+
 export const Modalidad: ComponentStory<typeof RadioButtons> = () => {
-  const options = [
-    { title: "Presencial", isDisabled: false },
-    { title: "Online", isDisabled: false },
-    { title: "Híbrido", isDisabled: false },
-  ];
-  const [selected, setSelected] = useState<string>(options[0].title);
-  //Typing functions with <type> is like using : in the props
+  const [selected, setSelected] = useState<SelectedOption>(modeOptions[0]);
+
   return (
     <div className="flex flex-col items-start">
       <RadioButtons
         label="Modalidad (*)"
-        options={options}
-        onSelectedChange={(value: string) => setSelected(value)}
+        options={modeOptions}
+        onSelectedChange={setSelected}
         value={selected}
-        defaultValue={options[0].title}
       />
     </div>
   );
 };
 
+const sortOptions = [
+  { label: "Más viejo a más nuevo", value: "asc" },
+  { label: "Más nuevo a más viejo", value: "desc" },
+];
+
 export const Ordenar: ComponentStory<typeof RadioButtons> = () => {
-  const options = [
-    { title: "Más viejo a más nuevo", isDisabled: false },
-    { title: "Más nuevo a más viejo", isDisabled: false },
-  ];
-  const [selected, setSelected] = useState<string>(options[0].title);
-  //Typing functions with <type> is like using : in the props
+  const [selected, setSelected] = useState<SelectedOption>(sortOptions[0]);
+
   return (
     <div className="flex flex-col items-start">
       <RadioButtons
         label="Ordenar:"
-        options={options}
-        onSelectedChange={(value: string) => setSelected(value)}
+        options={sortOptions}
+        onSelectedChange={setSelected}
         value={selected}
-        defaultValue={options[0].title}
       />
     </div>
   );
 };
 
+const talkOptions = [
+  { label: "En revisión", value: ProposalStatus.EnEspera },
+  { label: "Aprobada", value: ProposalStatus.Aprobada },
+  { label: "Desestimada", value: ProposalStatus.Rechazada },
+];
+
 export const Estado: ComponentStory<typeof RadioButtons> = () => {
-  const options = [
-    { title: "En revisión", isDisabled: false },
-    { title: "Aprobada", isDisabled: false },
-    { title: "Desestimada", isDisabled: false },
-  ];
-  const [selected, setSelected] = useState<string>(options[0].title);
-  //Typing functions with <type> is like using : in the props
+  const [selected, setSelected] = useState<SelectedOption>(talkOptions[0]);
+
   return (
     <div className="flex flex-col items-start">
       <RadioButtons
         label="Estado:"
-        options={options}
-        onSelectedChange={(value: string) => setSelected(value)}
+        options={talkOptions}
+        onSelectedChange={setSelected}
         value={selected}
-        defaultValue={options[0].title}
       />
     </div>
   );

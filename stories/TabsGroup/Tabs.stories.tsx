@@ -45,7 +45,7 @@ const charlas = [
 ];
 
 export default {
-  title: "TabsGroup/Tabs",
+  title: "Components/Tabs",
   component: TabsGroup,
   decorators: [
     (Story) => (

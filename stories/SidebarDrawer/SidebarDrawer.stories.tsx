@@ -10,7 +10,7 @@ const dummyData: Pick<EventData, "id" | "name">[] = [
 ];
 
 export default {
-  title: "Components",
+  title: "Components/SidebarDrawer",
   component: SidebarDrawer,
   argTypes: {},
   args: {

@@ -3,13 +3,11 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Select from "./Select";
 
 export default {
-  title: "Select",
+  title: "Components/Select",
   component: Select,
 } as ComponentMeta<typeof Select>;
 
-const Template: ComponentStory<typeof Select> = (args) => (
-  <Select {...args} />
-);
+const Template: ComponentStory<typeof Select> = (args) => <Select {...args} />;
 
 const storyValues = [
   {
@@ -27,7 +25,7 @@ const storyValues = [
     value: "Uruguay",
     isSelected: false,
   },
-]
+];
 /**
  * Select default template
  */
@@ -39,7 +37,7 @@ SelectDefault.args = {
   isLabelVisible: true,
   label: "País",
   placeholder: "Elige tu país",
-  values: storyValues
+  values: storyValues,
 };
 
 /**
@@ -54,20 +52,20 @@ SelectWithError.args = {
   isLabelVisible: true,
   label: "País",
   placeholder: "Elige tu país",
-  values: storyValues
+  values: storyValues,
 };
 
 /**
  * Select with hidden label
  */
- export const SelectWithHiddenLabel = Template.bind({});
+export const SelectWithHiddenLabel = Template.bind({});
 
- SelectWithHiddenLabel.args = {
-   description: "Aquí puedes elegir tu país de residencia",
-   errorMessage: "Este campo es obligatorio",
-   isInputDisabled: false,
-   isLabelVisible: false,
-   label: "País",
-   placeholder: "Elige tu país",
-   values: storyValues
- };
+SelectWithHiddenLabel.args = {
+  description: "Aquí puedes elegir tu país de residencia",
+  errorMessage: "Este campo es obligatorio",
+  isInputDisabled: false,
+  isLabelVisible: false,
+  label: "País",
+  placeholder: "Elige tu país",
+  values: storyValues,
+};

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect } from "react";
-import logo_vercel from "../../public/img/powered-by-vercel.svg";
+import logo_vercel from "../../public/img/vercel-logo-white.svg";
 import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
@@ -191,7 +191,7 @@ function AboutNavSection({ isOpen }: Pick<DrawerCompProps, "isOpen">) {
 
       <li>
         <StyledLink
-          href="https://vercel.com/?utm_source=hifrontendcafe&utm_campaign=oss"
+          href="https://vercel.com"
           target="_blank"
           rel="noopener noreferrer"
         >
