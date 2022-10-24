@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "../stories/Button/Button";
-import { ContactTeamCard } from "../stories/Card/ContactTeamCard";
+import { ContactTeamCard } from "../stories/ContactTeamCard/ContactTeamCard";
 
 const aboutData = [
   {
