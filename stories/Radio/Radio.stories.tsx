@@ -10,9 +10,9 @@ export default {
 } as ComponentMeta<typeof RadioButtons>;
 
 const modeOptions = [
-  { label: "Presencial", value: EventType.Presencial },
-  { label: "Online", value: EventType.Virtual },
-  { label: "Híbrido", value: EventType.Hibrido },
+  { title: "Presencial", value: EventType.Presencial },
+  { title: "Online", value: EventType.Virtual },
+  { title: "Híbrido", value: EventType.Hibrido },
 ];
 
 export const Modalidad: ComponentStory<typeof RadioButtons> = () => {
@@ -25,14 +25,15 @@ export const Modalidad: ComponentStory<typeof RadioButtons> = () => {
         options={modeOptions}
         onSelectedChange={setSelected}
         value={selected}
+        defaultValue={modeOptions[0].value}
       />
     </div>
   );
 };
 
 const sortOptions = [
-  { label: "Más viejo a más nuevo", value: "asc" },
-  { label: "Más nuevo a más viejo", value: "desc" },
+  { title: "Más viejo a más nuevo", value: "asc" },
+  { title: "Más nuevo a más viejo", value: "desc" },
 ];
 
 export const Ordenar: ComponentStory<typeof RadioButtons> = () => {
@@ -45,19 +46,22 @@ export const Ordenar: ComponentStory<typeof RadioButtons> = () => {
         options={sortOptions}
         onSelectedChange={setSelected}
         value={selected}
+        defaultValue={sortOptions[0].value}
       />
     </div>
   );
 };
 
 const talkOptions = [
-  { label: "En revisión", value: ProposalStatus.EnEspera },
-  { label: "Aprobada", value: ProposalStatus.Aprobada },
-  { label: "Desestimada", value: ProposalStatus.Rechazada },
+  { title: "En revisión", value: ProposalStatus.EnEspera },
+  { title: "Aprobada", value: ProposalStatus.Aprobada },
+  { title: "Desestimada", value: ProposalStatus.Rechazada },
 ];
 
 export const Estado: ComponentStory<typeof RadioButtons> = () => {
-  const [selected, setSelected] = useState<SelectedOption>(talkOptions[0]);
+  const [selected, setSelected] = useState<SelectedOption>(
+    talkOptions[0].value
+  );
 
   return (
     <div className="flex flex-col items-start">
@@ -66,6 +70,7 @@ export const Estado: ComponentStory<typeof RadioButtons> = () => {
         options={talkOptions}
         onSelectedChange={setSelected}
         value={selected}
+        defaultValue={talkOptions[0].value}
       />
     </div>
   );

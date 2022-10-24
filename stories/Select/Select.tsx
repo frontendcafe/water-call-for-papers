@@ -1,14 +1,13 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { Icon } from "../Icon/Icon";
 
-interface SelectValue {
+export interface SelectValue {
   name: string;
   value: string;
   isSelected?: boolean;
   isDisabled?: boolean;
 }
-
 interface SelectProps {
   /**
    * Optional description of the select input
@@ -38,6 +37,12 @@ interface SelectProps {
    * Selectable values
    */
   values: SelectValue[];
+
+  timeZoneSelected: SelectValue | undefined;
+  setTimeZoneSelected: React.Dispatch<
+    React.SetStateAction<SelectValue | undefined>
+  >;
+  isValue: boolean;
 }
 
 const Select = ({
@@ -48,12 +53,18 @@ const Select = ({
   label,
   placeholder,
   values,
+  timeZoneSelected,
+  setTimeZoneSelected,
+  isValue,
 }: SelectProps) => {
-  const defaultValue = values.find((value) => value.isSelected);
-  const [selected, setSelected] = useState(defaultValue);
+  const errorClassName = "flex items-center text-alert-600 text-sm mt-2";
 
   return (
-    <Listbox disabled={isInputDisabled} onChange={setSelected} value={selected}>
+    <Listbox
+      disabled={isInputDisabled}
+      onChange={setTimeZoneSelected}
+      value={timeZoneSelected}
+    >
       {({ open }) => (
         <div className="w-full space-y-2">
           <Listbox.Label
@@ -64,13 +75,13 @@ const Select = ({
           {description && <div className="text-xs">{description}</div>}
           <div className="relative" aria-labelledby="select-message">
             <Listbox.Button
-              className={`relative flex gap-1 items-center w-full p-4 text-left transition-shadow bg-white shadow-md cursor-default rounded-xl sm:text-sm focus:outline-none focus-visible:ring-primary-900 focus-visible:ring-[1.5px] hover:ring-[1.5px] ring-1 ${
+              className={`relative flex gap-1 px-2 items-center w-full h-12 text-left  bg-white  cursor-default rounded-xl sm:text-sm focus:outline-none focus-visible:ring-primary-900 focus-visible:ring-[1.5px] hover:ring-[1.5px] ring-1 ${
                 open ? "ring-[1.5px] ring-primary-900" : "ring-secondary-500"
               }
               `}
             >
               <div className="truncate grow">
-                {selected?.name || (
+                {timeZoneSelected?.name || (
                   <span className="flex items-center gap-1 text-secondary-300">
                     <Icon className="text-[#ABADC6]" iconName="globeAltIcon" />
                     {placeholder}
@@ -88,7 +99,7 @@ const Select = ({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute w-full my-2 overflow-auto text-sm bg-white rounded-lg shadow-lg focus:outline-none ring-1 ring-black ring-opacity-5">
+              <Listbox.Options className="absolute w-full my-2 overflow-auto text-sm bg-white rounded-lg shadow-lg focus:outline-none ring-1 ring-black ring-opacity-5 z-10">
                 {values.map((value, valueIdx) => (
                   <Listbox.Option
                     key={valueIdx}
@@ -118,12 +129,10 @@ const Select = ({
               </Listbox.Options>
             </Transition>
           </div>
-          {errorMessage && (
-            <div
-              className="flex items-center gap-1 px-3 text-xs text-alert-600"
-              id="select-message"
-            >
-              <Icon iconName="informationCircle" size="small" /> {errorMessage}
+          {isValue ? null : (
+            <div className={errorClassName}>
+              <Icon iconName="informationCircle" />
+              <span className="ml-2">{errorMessage}</span>
             </div>
           )}
         </div>

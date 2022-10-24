@@ -10,8 +10,8 @@ export default {
 } as ComponentMeta<typeof Filter>;
 
 const options = [
-  { label: "Más viejo a más nuevo", value: "asc" },
-  { label: "Más nuevo a más viejo", value: "desc" },
+  { title: "Más viejo a más nuevo", value: "asc" },
+  { title: "Más nuevo a más viejo", value: "desc" },
 ];
 
 const Template: ComponentStory<typeof Filter> = (args) => {
@@ -53,6 +53,7 @@ const Template: ComponentStory<typeof Filter> = (args) => {
         options={options}
         onSelectedChange={setSelected}
         value={selected}
+        defaultValue={options[0].value}
       />
       <Filter.Tags title="Tags:" tags={values} />
     </Filter>
