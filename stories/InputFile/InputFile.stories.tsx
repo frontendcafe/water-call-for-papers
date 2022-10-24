@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { InputFile } from "./InputFile";
 
 export default {
-  title: "Input/File",
+  title: "Components/File",
   component: InputFile,
 } as ComponentMeta<typeof InputFile>;
 

@@ -8,8 +8,14 @@ import addDays from "date-fns/addDays";
 registerLocale("es", es);
 
 interface DatePickerProps {
+  /**
+   *  The date
+   */
+  date: Date | undefined;
+  /**
+   *  The string
+   */
   /** Set the actual date as selected by default. */
-  date: Date;
 
   /** The string */
   label: string;
@@ -21,43 +27,53 @@ interface DatePickerProps {
   id: string;
   /** Event onChange */
   onChange: (date: Date, event: SyntheticEvent<Event>) => void;
+  isValue: boolean;
+  errorMessage: string;
 }
 
 export const DayPicker = ({
   date,
   label,
-  untilDays = 90,
   onChange,
+  isValue,
+  errorMessage,
+  untilDays = 90,
   id,
 }: DatePickerProps) => {
   const todayDate = new Date();
-
   const containerStyles =
-    "transition-[colors,_drop_shadow] duration-100 w-full pl-9 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300";
+    "bg-white flex items-center gap-2 hover:ring-[1.5px] ring-1  mt-1 text-sm ring-1 px-2 ring-secondary-500 h-12 rounded-xl focus:border-2 focus:border-gray-400 disabled:border-gray-200";
+
+  const errorClassName = "flex items-center text-alert-600 text-sm mt-2";
 
   return (
     <div className="relative text-secondary-900">
       <label className="text-sm" htmlFor={id}>
         {label}
       </label>
-      <Icon
-        iconName="calendar"
-        className="absolute z-10 pointer-events-none top-11 left-2 text-secondary-300"
-      />
-      <DatePicker
-        id={id}
-        className={containerStyles}
-        dateFormat="dd/MM/yyyy"
-        includeDateIntervals={[
-          {
-            start: subDays(todayDate, 1),
-            end: addDays(todayDate, untilDays),
-          },
-        ]}
-        locale="es"
-        selected={date}
-        onChange={onChange}
-      />
+      <div className={containerStyles}>
+        <Icon iconName="calendar" size="medium" />
+        <DatePicker
+          id="datepicker"
+          className="w-full outline-none"
+          dateFormat="dd/MM/yyyy"
+          includeDateIntervals={[
+            {
+              start: subDays(todayDate, 1),
+              end: addDays(todayDate, untilDays),
+            },
+          ]}
+          locale="es"
+          selected={date}
+          onChange={onChange}
+        />
+      </div>
+      {isValue ? null : (
+        <div className={errorClassName}>
+          <Icon iconName="informationCircle" />
+          <span className="ml-2">{errorMessage}</span>
+        </div>
+      )}
     </div>
   );
 };

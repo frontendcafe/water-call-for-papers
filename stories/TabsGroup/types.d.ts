@@ -1,4 +1,5 @@
 export interface TypeChildren {
+  handler?: (index: number) => void;
   children: React.ReactNode;
 }
 

@@ -12,6 +12,18 @@ export function tw(...classes: string[]) {
 }
 
 export const getDate = (date: Date) => new Date(date).toLocaleDateString();
+
+export function checkInputValue<Type>(
+  value: Type,
+  setValue: React.Dispatch<React.SetStateAction<boolean>>
+) {
+  if (!value) {
+    setValue(Boolean(value));
+  } else {
+    setValue(Boolean(value));
+  }
+}
+
 export const getTime = (date: Date) =>
   new Date(date).toLocaleTimeString(navigator.language, {
     hour: "2-digit",
@@ -26,12 +38,21 @@ export const getTime = (date: Date) =>
  * @param {Date} date
  * @returns The number of days left to today
  */
+
 export const calculateDaysLeft = (date: Date) => {
   const dayStart = new Date();
   const dayEnd = new Date(date);
 
   const remainingDays = dayStart.getTime() - dayEnd.getTime();
   const result = Math.floor(remainingDays / (-1000 * 60 * 60 * 24) + 1);
+
+  if (result === 0) {
+    return "Hoy";
+  }
+
+  if (result < 0) {
+    return "Finalizado";
+  }
 
   return result;
 };
