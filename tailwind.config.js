@@ -28,7 +28,7 @@ module.exports = {
           600: "#727272",
           700: "#5E5E5E",
           800: "#4B4B4B",
-          900: "#5E5E5E",
+          900: "#393939",
         },
         black: "#1F1F1F",
         alert: colors.red,

@@ -1,15 +1,17 @@
 import { RadioGroup } from "@headlessui/react";
 
 export interface RadioOption {
-  label: string;
+  title: string;
   value: string;
+  isDisabled?: boolean;
 }
-export type SelectedOption = string | RadioOption;
+export type SelectedOption = RadioOption;
 export interface RadioGroup {
   label: string;
   onSelectedChange: (value: SelectedOption) => void;
   options: RadioOption[];
   value: SelectedOption;
+  defaultValue: string;
 }
 
 export const RadioButtons = ({
@@ -17,9 +19,10 @@ export const RadioButtons = ({
   options,
   onSelectedChange,
   value,
+  defaultValue,
 }: RadioGroup) => {
   return (
-    <RadioGroup value={value} onChange={onSelectedChange}>
+    <RadioGroup value={value ?? defaultValue} onChange={onSelectedChange}>
       <RadioGroup.Label className="font-semibold">{label}</RadioGroup.Label>
       <div className="my-2 space-y-2">
         {options.map((option) => (
@@ -27,6 +30,7 @@ export const RadioButtons = ({
             className="flex items-center gap-2 mx-1 outline-offset-2"
             key={option.value}
             value={option}
+            disabled={Boolean(option.isDisabled)}
           >
             {({ checked }) => (
               <>
@@ -38,7 +42,7 @@ export const RadioButtons = ({
                   }`}
                 ></span>
                 <RadioGroup.Label className="text-gray-700">
-                  {option.label}
+                  {option.title}
                 </RadioGroup.Label>
               </>
             )}

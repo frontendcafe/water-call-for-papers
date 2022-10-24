@@ -34,6 +34,7 @@ export const Card = ({ event }: { event: EventData }) => {
         <span className="absolute select-none top-4 right-4">
           <Tag label={status} size="sm" status="event" />
         </span>
+        {/* TODO: Add image sources when implemented */}
         <img className="object-cover h-48" src="" />
       </div>
       <div className="p-4 space-y-2">

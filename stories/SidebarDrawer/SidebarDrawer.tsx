@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect } from "react";
-import logo_vercel from "../../public/img/vercel-logo-black.svg";
+import logo_vercel from "../../public/img/vercel-logo-white.svg";
 import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
@@ -54,7 +54,7 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
         id="sidebar-drawer"
         aria-label="Sidebar"
         aria-expanded={ariaExpanded}
-        className={`fixed top-0 left-0 z-10 flex flex-col justify-between min-h-screen p-3 font-semibold transition-all bg-black text-secondary-200 md:sticky whitespace-nowrap ${responsiveBehavior}`}
+        className={`fixed top-0 left-0 z-30 flex flex-col justify-between min-h-screen p-3 font-semibold transition-all bg-black text-secondary-200 md:sticky whitespace-nowrap ${responsiveBehavior}`}
       >
         <div className="space-y-6">
           <BrandSection {...sidebarState} clickHandler={clickHandler} />
@@ -95,7 +95,7 @@ function TopBarButton({
   };
 
   return (
-    <div className="fixed top-0 left-0 z-20 inline-flex items-center gap-2 p-2 text-white md:hidden">
+    <div className="fixed top-0 left-0 z-40 inline-flex items-center gap-2 p-2 text-white md:hidden">
       <Button
         aria-controls="sidebar-drawer"
         aria-label={ariaLabel}
@@ -191,7 +191,7 @@ function AboutNavSection({ isOpen }: Pick<DrawerCompProps, "isOpen">) {
 
       <li>
         <StyledLink
-          href="https://vercel.com/?utm_source=hifrontendcafe&utm_campaign=oss"
+          href="https://vercel.com"
           target="_blank"
           rel="noopener noreferrer"
         >

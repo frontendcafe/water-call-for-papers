@@ -19,6 +19,7 @@ export interface FirebaseCollectionsRefs {
 export interface EventQueryOptions {
   limit?: string;
   order?: OrderByDirection;
+  status?: string;
   type?: string | string[];
 }
 

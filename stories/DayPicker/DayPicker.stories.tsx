@@ -5,14 +5,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../../styles/globals.css";
 
 export default {
-  title: "Input/DatePicker",
+  title: "Components/DatePicker",
   component: DayPicker,
 } as ComponentMeta<typeof DayPicker>;
 
 const Template: ComponentStory<typeof DayPicker> = (args) => {
   const [date, setDate] = useState<Date>(new Date());
 
-  return <DayPicker {...args} date={date} onChange={setDate} />;
+  return <DayPicker {...args} date={date} onChange={setDate} id="datepicker" />;
 };
 
 /**

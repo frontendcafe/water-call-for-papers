@@ -5,7 +5,7 @@ import { ComponentStory } from "@storybook/react";
 
 export default {
   component: TagList,
-  title: "TagList",
+  title: "Components/TagList",
 };
 
 const Template: ComponentStory<typeof TagList> = (args) => (

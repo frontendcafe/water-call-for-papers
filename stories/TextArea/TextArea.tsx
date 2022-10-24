@@ -56,25 +56,22 @@ export const TextArea = ({
 }: TextAreaProps) => {
   // Conditionally apply specific border depending if there is an error.
   const withError = error
-    ? "border-red-400/80 focus:border-red-400"
-    : "border-gray-500";
+    ? "border-alert-600 focus:border-alert-600 ring-1 ring-alert-600"
+    : "";
 
   // Conditionally apply display value depending if there is a description.
   const labelVisibility = isLabelVisible ? "block" : "sr-only";
 
   return (
-    <div className="flex flex-col gap-1 text-[#667080]">
-      <label
-        className={`text-sm font-semibold text-gray-900  ${labelVisibility} `}
-        htmlFor={idValue}
-      >
+    <div className="flex flex-col gap-1 text-secondary-900">
+      <label className={`font-semibold  ${labelVisibility} `} htmlFor={idValue}>
         {label}
       </label>
 
       {description && <p className={`text-xs`}>{description}</p>}
 
       <textarea
-        className={`px-2 py-2 mt-1 text-sm text-gray-700 border border-secondary-700 rounded-md placeholder:text-gray-400 focus:border-2 focus:border-primary-900 disabled:border-gray-300 active:border active:border-primary-900 active:text-gray-800 ${withError}`}
+        className={`transition-[colors,_drop_shadow] duration-100 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300 ${withError}`}
         id={idValue}
         name={idValue}
         maxLength={maxLength}
@@ -97,14 +94,8 @@ export const TextArea = ({
         >
           {/* If error evaluated to true, display it. */}
           {error && (
-            <p className="flex items-start mt-2 text-xs leading-3 text-red-600">
-              <span className="mr-1">
-                <Icon
-                  iconName="exclamationCircleIconOutline"
-                  size="small"
-                  className="text-red-600"
-                />
-              </span>
+            <p className="flex items-center gap-1 mt-1 ml-2 text-xs text-alert-600">
+              <Icon iconName="exclamationCircleIconOutline" size="small" />
               {error}
             </p>
           )}
