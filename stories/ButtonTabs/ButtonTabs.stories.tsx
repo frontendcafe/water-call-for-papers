@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ButtonTabs } from "./ButtonTabs";
 
 export default {
-  title: "TabsGroup/ButtonTabs",
+  title: "Components/ButtonTabs",
   component: ButtonTabs,
   args: {
     states: "active",
