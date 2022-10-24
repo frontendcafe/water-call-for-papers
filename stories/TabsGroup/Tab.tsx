@@ -15,10 +15,12 @@ const setClassName = (selected: boolean, disabled: boolean) => {
 const Tabs = ({ children, disabled }: TabsProps) => {
   return (
     <Tab
-      className={({ selected }) => `
-       py-2 px-2 md:px-4 text-xs md:text-sm lg:text-base
-       focus:outline-none focus:ring-2 focus:ring-blue-800 rounded-t-lg 
-        ${setClassName(selected, disabled)}`}
+      className={({ selected }) =>
+        `py-2 px-2 md:px-4 text-xs md:text-sm lg:text-base whitespace-nowrap focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-800 rounded-t-xl ${setClassName(
+          selected,
+          disabled
+        )}`
+      }
       disabled={disabled}
     >
       {children}

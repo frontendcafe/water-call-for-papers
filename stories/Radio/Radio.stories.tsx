@@ -5,8 +5,8 @@ import { ProposalStatus } from "../../types/talk-types";
 import { RadioButtons, SelectedOption } from "./Radio";
 
 export default {
-  title: "Components/Radio", // Title for our storybook
-  component: RadioButtons, // Component to render
+  title: "Components/Radio",
+  component: RadioButtons,
 } as ComponentMeta<typeof RadioButtons>;
 
 const modeOptions = [
@@ -22,8 +22,8 @@ export const Modalidad: ComponentStory<typeof RadioButtons> = () => {
     <div className="flex flex-col items-start">
       <RadioButtons
         label="Modalidad (*)"
-        options={modeOptions}
         onSelectedChange={setSelected}
+        options={modeOptions}
         value={selected}
         defaultValue={modeOptions[0].value}
       />
@@ -43,8 +43,8 @@ export const Ordenar: ComponentStory<typeof RadioButtons> = () => {
     <div className="flex flex-col items-start">
       <RadioButtons
         label="Ordenar:"
-        options={sortOptions}
         onSelectedChange={setSelected}
+        options={sortOptions}
         value={selected}
         defaultValue={sortOptions[0].value}
       />
@@ -59,16 +59,14 @@ const talkOptions = [
 ];
 
 export const Estado: ComponentStory<typeof RadioButtons> = () => {
-  const [selected, setSelected] = useState<SelectedOption>(
-    talkOptions[0].value
-  );
+  const [selected, setSelected] = useState<SelectedOption>(talkOptions[0]);
 
   return (
     <div className="flex flex-col items-start">
       <RadioButtons
         label="Estado:"
-        options={talkOptions}
         onSelectedChange={setSelected}
+        options={sortOptions}
         value={selected}
         defaultValue={talkOptions[0].value}
       />

@@ -5,7 +5,7 @@ export interface RadioOption {
   value: string;
   isDisabled?: boolean;
 }
-export type SelectedOption = string | RadioOption;
+export type SelectedOption = RadioOption;
 export interface RadioGroup {
   label: string;
   onSelectedChange: (value: SelectedOption) => void;

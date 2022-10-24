@@ -46,9 +46,7 @@ const Create = () => {
     Requirements: "",
   });
 
-  const [selected, setSelected] = useState<SelectedOption>(
-    modalityOptions[0].title
-  );
+  const [selected, setSelected] = useState<SelectedOption>(modalityOptions[0]);
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [startTime, setStartTime] = useState<string>();
