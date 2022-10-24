@@ -12,7 +12,7 @@ export default {
 const Template: ComponentStory<typeof DayPicker> = (args) => {
   const [date, setDate] = useState<Date>(new Date());
 
-  return <DayPicker {...args} date={date} onChange={setDate} />;
+  return <DayPicker {...args} date={date} onChange={setDate} id="datepicker" />;
 };
 
 /**

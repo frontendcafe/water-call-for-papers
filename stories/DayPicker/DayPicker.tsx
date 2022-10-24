@@ -23,6 +23,8 @@ interface DatePickerProps {
   /** Specify maximum of days possible to the future to pick a date. Example, if today is 13/10/22, set 'untilDays' for X amount of days to the future. Default is 90 days. */
   untilDays?: number;
 
+  /** Unique ID */
+  id: string;
   /** Event onChange */
   onChange: (date: Date, event: SyntheticEvent<Event>) => void;
   isValue: boolean;
@@ -36,6 +38,7 @@ export const DayPicker = ({
   isValue,
   errorMessage,
   untilDays = 90,
+  id,
 }: DatePickerProps) => {
   const todayDate = new Date();
   const containerStyles =
@@ -44,8 +47,8 @@ export const DayPicker = ({
   const errorClassName = "flex items-center text-alert-600 text-sm mt-2";
 
   return (
-    <div className="flex flex-col">
-      <label className="text-sm font-normal text-gray-800" htmlFor="datepicker">
+    <div className="relative text-secondary-900">
+      <label className="text-sm" htmlFor={id}>
         {label}
       </label>
       <div className={containerStyles}>

@@ -190,6 +190,7 @@ const Create = () => {
                   <div className="flex flex-col sm:flex-row gap-x-4">
                     <div className="flex flex-col flex-1">
                       <DayPicker
+                        id={"fecha-inicio"}
                         date={startDate}
                         onChange={setStartDate}
                         label="Fecha de inicio"
@@ -199,6 +200,7 @@ const Create = () => {
                     </div>
                     <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
                       <DayPicker
+                        id={"fecha-finalizacion"}
                         date={endDate}
                         onChange={setEndDate}
                         label="Fecha de finalización"
@@ -281,6 +283,7 @@ const Create = () => {
                   </div>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <DayPicker
+                      id={"fecha-inicio-postulacion"}
                       date={data.StartDate}
                       label="Fecha de inicio"
                       onChange={(date) => handleDateChange(date, "StartDate")}
@@ -288,6 +291,7 @@ const Create = () => {
                       errorMessage={""}
                     />
                     <DayPicker
+                      id={"fecha-finalizacion-postulacion"}
                       date={data.EndDate}
                       label="Fecha de finalización"
                       onChange={(date) => handleDateChange(date, "EndDate")}

@@ -19,19 +19,15 @@ export const AccordionDefault = ({ title, children }: Accordion) => {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex w-full justify-between items-center py-2 rounded-md bg-primary-50 text-primary-700 text-left font-semibold hover:bg-primary-100 focus:border-2 focus:border-primary-700 focus:bg-primary-200 focus:text-primary-800">
-              <span className="ml-3">{title}</span>
-              <span className="mr-3">
-                <Icon
-                  iconName="chevronDown"
-                  className={`${
-                    open ? " rotate-180 transform" : ""
-                  } w-5 h-5 text-primary-700 focus:text-primary-800`}
-                />
-              </span>
+            <Disclosure.Button className="transition-[colors,_drop_shadow] duration-100 flex items-center justify-between w-full p-4 font-semibold text-left rounded-xl bg-primary-50 text-primary-700 hover:bg-primary-100 focus:ring-2 ring-primary-700 focus:bg-primary-200 focus:text-primary-800">
+              {title}
+              <Icon
+                iconName="chevronDown"
+                className={`transition-transform ${open ? "rotate-180" : ""}`}
+              />
             </Disclosure.Button>
             {!open && (
-              <Disclosure.Panel className="flex flex-col space-y-4 pt-2" static>
+              <Disclosure.Panel className="flex flex-col pt-2 space-y-6" static>
                 {children}
               </Disclosure.Panel>
             )}

@@ -57,6 +57,7 @@ import {
   UsersIcon,
   XMarkIcon,
   GlobeAltIcon,
+  ArrowUpTrayIcon,
 } from "@heroicons/react/24/outline";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
@@ -120,6 +121,7 @@ const iconsSupported = {
   photo: PhotoIcon,
   exclamationCircleIconOutline: ExclamationCircleIconOutline,
   globeAltIcon: GlobeAltIcon,
+  arrowUpTray: ArrowUpTrayIcon,
 };
 
 const iconSize = {
