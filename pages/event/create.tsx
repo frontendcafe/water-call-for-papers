@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { ChangeEvent } from "react";
 import Image from "next/image";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
 import { AccordionDefault } from "../../stories/Accordion/Accordion";
-import Select, { SelectValue } from "../../stories/Select/Select";
-import { RadioButtons, SelectedOption } from "../../stories/Radio/Radio";
-import { DayPicker } from "../../stories/DayPicker/DayPicker";
-import { TimePicker } from "../../stories/TimePicker/TimePicker";
-import { InputText } from "../../stories/Input/InputText";
 import { Button } from "../../stories/Button/Button";
-import { TextArea } from "../../stories/TextArea/TextArea";
+import { DayPicker } from "../../stories/DayPicker/DayPicker";
+import { InputText } from "../../stories/Input/InputText";
 import { InputFile } from "../../stories/InputFile/InputFile";
+import { RadioButtons, SelectedOption } from "../../stories/Radio/Radio";
+import Select, { SelectValue } from "../../stories/Select/Select";
+import { TextArea } from "../../stories/TextArea/TextArea";
+import { TimePicker } from "../../stories/TimePicker/TimePicker";
 
 import isAfter from "date-fns/isAfter";
 import isBefore from "date-fns/isBefore";
@@ -18,10 +17,10 @@ import isEqual from "date-fns/isEqual";
 
 import freepikCharacter from "../../public/img/freepik--Character--inject-25.svg";
 
-import { timezones } from "../../mocks/timezones";
-import { checkInputValue } from "../../lib/utils";
-import ComboboxComponent from "../../stories/Combobox/Combobox";
 import { getAllTopics } from "../../lib/api-handlers";
+import { checkInputValue } from "../../lib/utils";
+import { timezones } from "../../mocks/timezones";
+import ComboboxComponent from "../../stories/Combobox/Combobox";
 
 const modalityOptions = [
   { title: "Presencial", isDisabled: false, value: "Presencial" },
@@ -144,214 +143,207 @@ const Create = () => {
   };
 
   return (
-    <>
-      <div className="flex mb-4 bg-slate-100">
-        <div className="flex flex-col flex-1 pt-11 md:pt-8 max-w-[1440px]">
-          <h1 className="px-6 py-4 text-3xl font-semibold">Crear Evento</h1>
-          <div className="flex bg-white lg:mx-6 lg:rounded-xl">
-            <form
-              className="flex flex-col flex-1 p-4 space-y-4 lg:col-span-9"
-              onSubmit={handleSubmit}
-            >
-              <AccordionDefault title="Datos Generales">
-                <InputText
-                  label="Nombre de la organización (*)"
-                  placeholder="Ingrese el nombre de la organización"
-                  idValue="OrganizationName"
-                  value={data.OrganizationName}
-                  onChange={handleValidation}
-                  error={dataError.OrganizationName}
-                  maxLength={50}
-                  description="Máximo 50 caracteres"
-                  required
-                />
-                <InputText
-                  label="Nombre del evento (*)"
-                  placeholder="Ingrese el nombre del evento"
-                  idValue="EventName"
-                  value={data.EventName}
-                  onChange={handleValidation}
-                  error={dataError.EventName}
-                  maxLength={50}
-                  description="Máximo 50 caracteres"
-                  required
-                />
-                <ComboboxComponent
-                  id="topics"
-                  actionLabel="Temas (*)"
-                  placeholder="Ingrese hasta 5 temas"
-                  valuesSelected={topicsSelected!}
-                  options={topics}
-                  onChange={setTopicsSelected}
-                />
-                <TextArea
-                  label="Descripción (*)"
-                  value={data.Description}
-                  placeholder="El evento se trata de..."
-                  idValue="Description"
-                  isLabelVisible={true}
-                  onChange={handleValidation}
-                  error={dataError.Description}
-                  maxLength={280}
-                  description="Máximo 280 caracteres"
-                  required
-                />
-                <InputFile
-                  label="Banner del evento"
-                  placeholder="Cargar imagen"
-                />
-              </AccordionDefault>
-              <AccordionDefault title="Fecha y localización">
-                <div className="">
-                  <div className="mb-2 text-base font-semibold text-gray-900 ">
-                    Fechas del evento
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-x-4">
-                    <div className="flex flex-col flex-1">
-                      <DayPicker
-                        placeholder="dd/mm/aaaa"
-                        id={"fecha-inicio"}
-                        date={startDate}
-                        onChange={setStartDate}
-                        label="Fecha de inicio"
-                        isValue={isNotStartDateValue}
-                        errorMessage="Este Campo es requerido"
-                      />
-                    </div>
-                    <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
-                      <DayPicker
-                        placeholder="dd/mm/aaaa"
-                        id={"fecha-finalizacion"}
-                        date={endDate}
-                        onChange={setEndDate}
-                        label="Fecha de finalización"
-                        isValue={isNotEndDateValue}
-                        errorMessage="Este Campo es requerido"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-12">
-                  <Select
-                    values={timezones}
-                    placeholder="Seleccionar huso horario"
-                    label="TimeZone"
-                    isLabelVisible={true}
-                    timeZoneSelected={timeZoneSelected}
-                    setTimeZoneSelected={setTimeZoneSelected}
-                    isValue={isNotTimeZoneValue}
+    <div className="flex flex-col flex-1 mx-auto pt-14 md:px-10 lg:container md:py-8">
+      <h1 className="px-4 py-4 mb-4 text-3xl font-semibold md:px-0">
+        Crear Evento
+      </h1>
+      <div className="flex bg-white md:rounded-xl">
+        <form
+          className="flex flex-col flex-1 p-4 space-y-4 lg:col-span-9"
+          onSubmit={handleSubmit}
+        >
+          <AccordionDefault title="Datos Generales">
+            <InputText
+              label="Nombre de la organización (*)"
+              placeholder="Ingrese el nombre de la organización"
+              idValue="OrganizationName"
+              value={data.OrganizationName}
+              onChange={handleValidation}
+              error={dataError.OrganizationName}
+              maxLength={50}
+              description="Máximo 50 caracteres"
+              required
+            />
+            <InputText
+              label="Nombre del evento (*)"
+              placeholder="Ingrese el nombre del evento"
+              idValue="EventName"
+              value={data.EventName}
+              onChange={handleValidation}
+              error={dataError.EventName}
+              maxLength={50}
+              description="Máximo 50 caracteres"
+              required
+            />
+            <ComboboxComponent
+              id="topics"
+              actionLabel="Temas (*)"
+              placeholder="Ingrese hasta 5 temas"
+              valuesSelected={topicsSelected!}
+              options={topics}
+              onChange={setTopicsSelected}
+            />
+            <TextArea
+              label="Descripción (*)"
+              value={data.Description}
+              placeholder="El evento se trata de..."
+              idValue="Description"
+              isLabelVisible={true}
+              onChange={handleValidation}
+              error={dataError.Description}
+              maxLength={280}
+              description="Máximo 280 caracteres"
+              required
+            />
+            <InputFile label="Banner del evento" placeholder="Cargar imagen" />
+          </AccordionDefault>
+          <AccordionDefault title="Fecha y localización">
+            <div className="">
+              <div className="mb-2 text-base font-semibold text-gray-900 ">
+                Fechas del evento
+              </div>
+              <div className="flex flex-col sm:flex-row gap-x-4">
+                <div className="flex flex-col flex-1">
+                  <DayPicker
+                    placeholder="dd/mm/aaaa"
+                    id={"fecha-inicio"}
+                    date={startDate}
+                    onChange={setStartDate}
+                    label="Fecha de inicio"
+                    isValue={isNotStartDateValue}
                     errorMessage="Este Campo es requerido"
-                  ></Select>
-                </div>
-                <div className="">
-                  <div className="mb-2 text-base font-semibold text-gray-900 ">
-                    Horario del evento
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-x-4">
-                    <div className="flex-1">
-                      <TimePicker
-                        placeholder="00:00"
-                        id="start-time"
-                        label="Hora de inicio"
-                        time={startTime}
-                        setTime={setStartTime}
-                        isValue={isNotStartTimeValue}
-                        errorMessage="Este Campo es requerido"
-                      />
-                    </div>
-                    <div className="flex-1 last:mt-8 sm:last:mt-0">
-                      <TimePicker
-                        placeholder="00:00"
-                        id="end-time"
-                        label="Hora de finalización"
-                        time={endTime}
-                        setTime={setEndTime}
-                        isValue={isNotEndTimeValue}
-                        errorMessage="Este Campo es requerido"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <RadioButtons
-                    label="Modalidad (*)"
-                    options={modalityOptions}
-                    onSelectedChange={(value: SelectedOption) =>
-                      setSelected(value)
-                    }
-                    value={selected}
-                    defaultValue={modalityOptions[0].value}
-                  ></RadioButtons>
-                </div>
-                <div>
-                  <InputText
-                    label="Localización"
-                    placeholder="Ingrese localización"
-                    idValue="localización"
-                    description=""
-                    value=""
                   />
                 </div>
-              </AccordionDefault>
-              <AccordionDefault title="Convocatoria postulantes">
-                <div className="grid gap-1">
-                  <div className="grid gap-0.5">
-                    <p className="text-base font-semibold">
-                      Período de postulación (*)
-                    </p>
-                    <p className="text-xs">
-                      Durante este período los speakers podrán postularse para
-                      participar de tu evento.
-                    </p>
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <DayPicker
-                      placeholder="dd/mm/aaaa"
-                      id={"fecha-inicio-postulacion"}
-                      date={data.StartDate}
-                      label="Fecha de inicio"
-                      onChange={(date) => handleDateChange(date, "StartDate")}
-                      isValue={true}
-                      errorMessage={""}
-                    />
-                    <DayPicker
-                      placeholder="dd/mm/aaaa"
-                      id={"fecha-finalizacion-postulacion"}
-                      date={data.EndDate}
-                      label="Fecha de finalización"
-                      onChange={(date) => handleDateChange(date, "EndDate")}
-                      isValue={true}
-                      errorMessage={""}
-                    />
-                  </div>
+                <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
+                  <DayPicker
+                    placeholder="dd/mm/aaaa"
+                    id={"fecha-finalizacion"}
+                    date={endDate}
+                    onChange={setEndDate}
+                    label="Fecha de finalización"
+                    isValue={isNotEndDateValue}
+                    errorMessage="Este Campo es requerido"
+                  />
                 </div>
-                <TextArea
-                  label="Requisitos de los postulantes (*)"
-                  isLabelVisible
-                  idValue="Requirements"
-                  maxLength={500}
-                  placeholder={
-                    "Indique qué requisitos deben cumplir las personas interesadas para ser admitidas."
-                  }
-                  rows={6}
-                  value={data.Requirements}
-                  onChange={handleValidation}
-                  error={dataError.Requirements}
-                />
-              </AccordionDefault>
-              <div className="mt-14">
-                <Button>Crear Evento</Button>
-              </div>
-            </form>
-            <div className="relative hidden lg:block lg:w-1/3 xl:w-auto">
-              <div className="sticky left-0 px-8 mt-8">
-                <Image src={freepikCharacter} />
               </div>
             </div>
+            <div className="mt-12">
+              <Select
+                values={timezones}
+                placeholder="Seleccionar huso horario"
+                label="TimeZone"
+                isLabelVisible={true}
+                timeZoneSelected={timeZoneSelected}
+                setTimeZoneSelected={setTimeZoneSelected}
+                isValue={isNotTimeZoneValue}
+                errorMessage="Este Campo es requerido"
+              ></Select>
+            </div>
+            <div className="">
+              <div className="mb-2 text-base font-semibold text-gray-900 ">
+                Horario del evento
+              </div>
+              <div className="flex flex-col sm:flex-row gap-x-4">
+                <div className="flex-1">
+                  <TimePicker
+                    placeholder="00:00"
+                    id="start-time"
+                    label="Hora de inicio"
+                    time={startTime}
+                    setTime={setStartTime}
+                    isValue={isNotStartTimeValue}
+                    errorMessage="Este Campo es requerido"
+                  />
+                </div>
+                <div className="flex-1 last:mt-8 sm:last:mt-0">
+                  <TimePicker
+                    placeholder="00:00"
+                    id="end-time"
+                    label="Hora de finalización"
+                    time={endTime}
+                    setTime={setEndTime}
+                    isValue={isNotEndTimeValue}
+                    errorMessage="Este Campo es requerido"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <RadioButtons
+                label="Modalidad (*)"
+                options={modalityOptions}
+                onSelectedChange={(value: SelectedOption) => setSelected(value)}
+                value={selected}
+                defaultValue={modalityOptions[0].value}
+              ></RadioButtons>
+            </div>
+            <div>
+              <InputText
+                label="Localización"
+                placeholder="Ingrese localización"
+                idValue="localización"
+                description=""
+                value=""
+              />
+            </div>
+          </AccordionDefault>
+          <AccordionDefault title="Convocatoria postulantes">
+            <div className="grid gap-1">
+              <div className="grid gap-0.5">
+                <p className="text-base font-semibold">
+                  Período de postulación (*)
+                </p>
+                <p className="text-xs">
+                  Durante este período los speakers podrán postularse para
+                  participar de tu evento.
+                </p>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <DayPicker
+                  placeholder="dd/mm/aaaa"
+                  id={"fecha-inicio-postulacion"}
+                  date={data.StartDate}
+                  label="Fecha de inicio"
+                  onChange={(date) => handleDateChange(date, "StartDate")}
+                  isValue={true}
+                  errorMessage={""}
+                />
+                <DayPicker
+                  placeholder="dd/mm/aaaa"
+                  id={"fecha-finalizacion-postulacion"}
+                  date={data.EndDate}
+                  label="Fecha de finalización"
+                  onChange={(date) => handleDateChange(date, "EndDate")}
+                  isValue={true}
+                  errorMessage={""}
+                />
+              </div>
+            </div>
+            <TextArea
+              label="Requisitos de los postulantes (*)"
+              isLabelVisible
+              idValue="Requirements"
+              maxLength={500}
+              placeholder={
+                "Indique qué requisitos deben cumplir las personas interesadas para ser admitidas."
+              }
+              rows={6}
+              value={data.Requirements}
+              onChange={handleValidation}
+              error={dataError.Requirements}
+            />
+          </AccordionDefault>
+          <div className="mt-14">
+            <Button>Crear Evento</Button>
+          </div>
+        </form>
+        <div className="relative hidden lg:block lg:w-1/3 xl:w-auto">
+          <div className="sticky left-0 px-8 mt-8">
+            <Image src={freepikCharacter} />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

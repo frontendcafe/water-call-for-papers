@@ -65,7 +65,7 @@ const EventPage: NextPage = () => {
   ];
 
   return (
-    <div className="pt-16 md:py-10 md:px-10">
+    <div className="pt-12 mx-auto md:px-10 lg:container md:py-6">
       <Header title={event?.name ?? "Evento"} />
       <TabsGroup>
         <TabsList>
@@ -78,7 +78,7 @@ const EventPage: NextPage = () => {
         <TabsPanels>
           {/* Begin Tab Resumen */}
           <TabsPanel>
-            <section className="container flex flex-col gap-6 p-6 bg-white rounded-tl-none md:items-start md:flex-row rounded-xl md:mx-auto">
+            <section className="flex flex-col gap-6 p-6 bg-white rounded-tl-none lg:items-start lg:flex-row rounded-xl">
               <div className="flex flex-col flex-1 gap-6 px-3 py-4 bg-secondary-50 rounded-xl">
                 <div className="flex flex-col">
                   <div className="flex items-center justify-between">
@@ -155,7 +155,7 @@ const EventPage: NextPage = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-6 px-3 py-4 md:w-2/5 bg-secondary-50 rounded-xl">
+              <div className="flex flex-col w-auto gap-6 px-3 py-4 lg:w-2/5 bg-secondary-50 rounded-xl">
                 <h4 className="font-semibold text-md">Convocatoria</h4>
                 <div className="flex flex-col">
                   <div className="flex gap-2">

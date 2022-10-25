@@ -90,9 +90,9 @@ const ListEvent = () => {
   );
 
   return (
-    <section className="md:px-4">
+    <section className="md:px-10">
       <TabsGroup handler={tabHandler}>
-        <div className="sticky top-0 z-10 pt-11 md:pt-8 bg-secondary-50 rounded-b-xl">
+        <div className="sticky top-0 z-10 pt-12 mx-auto md:pt-7 lg:container bg-secondary-50 rounded-b-xl">
           <header className="flex items-center justify-between px-4 py-4 mb-2 md:px-0">
             <h2 className="inline-block text-3xl font-semibold">Mis eventos</h2>
             <StyledLink href="/event/create" variant="primary">
