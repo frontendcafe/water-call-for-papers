@@ -343,7 +343,7 @@ const Create = () => {
                 <Button>Crear Evento</Button>
               </div>
             </form>
-            <div className="relative hidden lg:block">
+            <div className="relative hidden lg:block lg:w-1/3 xl:w-auto">
               <div className="sticky left-0 px-8 mt-8">
                 <Image src={freepikCharacter} />
               </div>
