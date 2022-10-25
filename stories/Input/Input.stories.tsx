@@ -21,7 +21,6 @@ InputTextDefault.args = {
   idValue: "",
   placeholder: "Text your text here ...",
   disabled: false,
-  visible: true,
 };
 
 /**
@@ -35,7 +34,6 @@ InputWithDescription.args = {
   placeholder: "Text your text here ...",
   description: "This is a description",
   disabled: false,
-  visible: true,
 };
 
 /**
@@ -48,7 +46,6 @@ InputWithError.args = {
   idValue: "",
   placeholder: "Text your text here ...",
   error: "This is an error",
-  visible: true,
 };
 
 /**
@@ -61,7 +58,6 @@ InputWithIcon.args = {
   idValue: "",
   placeholder: "Text your text here ...",
   position: "left",
-  visible: true,
 };
 
 /**
@@ -73,7 +69,6 @@ InputWithDisabled.args = {
   label: "Label Name",
   idValue: "",
   placeholder: "Text your text here ...",
-  visible: true,
   disabled: true,
 };
 
@@ -86,7 +81,6 @@ InputWithoutLabel.args = {
   label: "",
   idValue: "",
   placeholder: "Text your text here ...",
-  visible: false,
 };
 
 /**
@@ -98,5 +92,4 @@ InputWithRequired.args = {
   label: "Label Name",
   idValue: "",
   placeholder: "Text your text here ...",
-  visible: true,
 };

@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import { Filter } from "../Filter/Filter";
+import { Icon } from "../Icon/Icon";
 import { InputText } from "../Input/InputText";
 import { RadioOption, SelectedOption } from "../Radio/Radio";
 
@@ -39,8 +40,11 @@ export const FilterBar = ({
         placeholder="Buscar"
         value={searchQuery}
         hideLabel={true}
-        inputClassnames={"w-96 py-3"}
-      />
+        position="right"
+        inputClassnames={"w-full lg:w-96 py-3 border-[#797979]"}
+      >
+        <Icon iconName="glass" />
+      </InputText>
     </div>
   );
 };

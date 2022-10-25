@@ -40,7 +40,7 @@ const participants = [
     bio: "Soy diseñadora industrial. Me interesan temas como innovación, research y ética aplicados a diseño. Busco trabajo como Product Designer o UX Designer.",
     role: "UX Designer",
     links: [
-      "linkedin.com/in/paulinalera/",
+      "https://linkedin.com/in/paulinalera/",
       "https://miportfoliopaulina.notion.site/Hola-Soy-Paulina-10303af7f1e4484698a38ca3c4cc9826",
     ],
   },
@@ -50,7 +50,11 @@ const participants = [
     mail: "tonymckes@gmail.com",
     bio: "Mis próximos pasos serán ir en la búsqueda de mi primer trabajo de tiempo completo como desarrollador web, así poder dedicarle más tiempo a seguir aprendiendo sobre la inmensidad de tecnologías que tiene para ofrecer.",
     role: "Developer",
-    links: ["https://www.linkedin.com/in/tonymckes/"],
+    links: [
+      "https://www.linkedin.com/in/tonymckes/",
+      "https://github.com/TonyMckes",
+      "https://tonymckes.vercel.app",
+    ],
   },
   {
     id: 5,
@@ -112,7 +116,8 @@ const participants = [
     role: "Frontend Developer",
     links: [
       "https://www.linkedin.com/in/alfredomoscosofrontend/",
-      "https://jairdev.netlify.app/ https://github.com/JairDev",
+      "https://github.com/JairDev",
+      "https://jairdev.netlify.app/",
     ],
   },
   {
@@ -143,8 +148,8 @@ const participants = [
 
 const AboutUs = () => {
   return (
-    <div className="bg-white px-4 py-16 md:px-10 md:py-8 max-w-[1440px] h-full">
-      <div className="flex flex-col md:flex-row justify-between">
+    <div className="bg-white text-black px-4 pt-16 md:pt-12 md:px-10 max-w-[1440px] h-full">
+      <div className="flex flex-col justify-between md:flex-row">
         <div className="md:w-8/12">
           <h1 className="text-4xl">Acerca de CMYK</h1>
           <p className="my-8">
@@ -162,12 +167,14 @@ const AboutUs = () => {
           </p>
         </div>
         <div>
-          <StyledLink href="https://frontend.cafe/cmyk">Saber más</StyledLink>
+          <StyledLink variant="primary" href="https://frontend.cafe/cmyk">
+            Saber más
+          </StyledLink>
         </div>
       </div>
       <div className="mt-10">
         <h2 className="text-3xl">Equipo</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 mt-4">
+        <div className="grid gap-6 mt-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
           {participants.map(({ name, role, bio, links, id, mail }) => (
             <ContactTeamCard
               key={id}
@@ -190,7 +197,7 @@ const AboutUs = () => {
                   }
                   return { iconName: "link", url };
                 }),
-                { iconName: "mail", url: mail },
+                { iconName: "mail", url: `mailto:${mail}` },
               ]}
             />
           ))}

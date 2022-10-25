@@ -98,7 +98,7 @@ const ComboboxComponent = ({
           >
             {filteredOptions?.map((option) => (
               <Combobox.Option
-                key={option.id}
+                key={option.label}
                 value={option.label}
                 className={
                   "text-black text-sm font-normal px-2 py-4 cursor-pointer hover:bg-black hover:bg-opacity-5"

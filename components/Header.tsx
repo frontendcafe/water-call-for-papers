@@ -5,9 +5,9 @@ import { MenuDropdown } from "../stories/MenuDropdown/MenuDropdown";
 
 const Header = ({ title }: { title: string }) => {
   return (
-    <div className="flex justify-between mb-4">
-      <div className="flex gap-4 py-2">
-        <h2 className="font-semibold text-5xl">{title}</h2>
+    <div className="flex justify-between px-4 mb-8">
+      <div className="flex items-center gap-4 py-2">
+        <h2 className="text-3xl font-semibold">{title}</h2>
         <MenuDropdown
           itemList={[
             {
@@ -30,7 +30,9 @@ const Header = ({ title }: { title: string }) => {
             },
           ]}
         >
-          <Icon iconName="dotsVertical" />
+          <Button icon variant="secondary">
+            <Icon iconName="dotsVertical" />
+          </Button>
         </MenuDropdown>
       </div>
       <Button icon={true} classNames="rounded-lg px-4 py-2 hidden md:flex">

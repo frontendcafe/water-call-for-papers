@@ -75,22 +75,24 @@ const Select = ({
           {description && <div className="text-xs">{description}</div>}
           <div className="relative" aria-labelledby="select-message">
             <Listbox.Button
-              className={`relative flex gap-1 px-2 items-center w-full h-12 text-left  bg-white  cursor-default rounded-xl sm:text-sm focus:outline-none focus-visible:ring-primary-900 focus-visible:ring-[1.5px] hover:ring-[1.5px] ring-1 ${
-                open ? "ring-[1.5px] ring-primary-900" : "ring-secondary-500"
+              className={`relative flex gap-1 items-center w-full text-left transition-[colors,_drop_shadow] duration-100 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300 ${
+                open ? "ring-[1.5px] ring-primary-900" : ""
               }
               `}
             >
               <div className="truncate grow">
                 {timeZoneSelected?.name || (
                   <span className="flex items-center gap-1 text-secondary-300">
-                    <Icon className="text-[#ABADC6]" iconName="globeAltIcon" />
+                    <Icon iconName="globeAltIcon" />
                     {placeholder}
                   </span>
                 )}
               </div>
               <Icon
-                className="text-[#ABADC6]"
-                iconName={open ? "chevronUp" : "chevronDown"}
+                className={`transition-transform text-secondary-300 ${
+                  open ? "rotate-180" : ""
+                }`}
+                iconName="chevronUp"
               />
             </Listbox.Button>
             <Transition
@@ -99,7 +101,7 @@ const Select = ({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Listbox.Options className="absolute w-full my-2 overflow-auto text-sm bg-white rounded-lg shadow-lg focus:outline-none ring-1 ring-black ring-opacity-5 z-10">
+              <Listbox.Options className="absolute z-10 w-full my-2 overflow-auto text-sm bg-white rounded-lg shadow-lg max-h-96 focus:outline-none ring-1 ring-black ring-opacity-5">
                 {values.map((value, valueIdx) => (
                   <Listbox.Option
                     key={valueIdx}

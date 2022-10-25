@@ -56,8 +56,9 @@ export const TopicsCombobox = () => {
 
   return (
     <div className="w-96">
-      <h4 className="font-semibold text-base text-white mb-2">Tema</h4>
+      <h4 className="mb-2 text-base font-semibold text-white">Tema</h4>
       <ComboboxComponent
+        id="topics"
         valuesSelected={topicsSelected}
         onChange={setTopicsSelected}
         options={topics?.map(({ id, description }) => ({

@@ -5,7 +5,7 @@ import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
 import { LogoCallForPapers } from "../Spinner/LogoCallForPapers";
-import { StyledLink } from "./StyledLink/StyledLink";
+import { StyledLink } from "..//StyledLink/StyledLink";
 import { TextContainer } from "./TextContainer";
 import { Action, useSidebarReducer } from "./useSidebarReducer";
 
@@ -54,12 +54,12 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
         id="sidebar-drawer"
         aria-label="Sidebar"
         aria-expanded={ariaExpanded}
-        className={`fixed top-0 left-0 z-30 flex flex-col justify-between min-h-screen p-3 font-semibold transition-all bg-black text-secondary-200 md:sticky whitespace-nowrap ${responsiveBehavior}`}
+        className={`fixed md:pt-12  top-0 left-0 z-30 flex flex-col justify-between min-h-screen p-3 font-semibold transition-all bg-black text-secondary-200 md:sticky whitespace-nowrap ${responsiveBehavior}`}
       >
         <div className="space-y-6">
           <BrandSection {...sidebarState} clickHandler={clickHandler} />
 
-          <StyledLink href="/event/create" variant="primary">
+          <StyledLink href="/event/create" variant="primary" rounded="full">
             <TextContainer {...sidebarState}>Crear Evento</TextContainer>
             <Icon className={iconStyles} iconName="plusCircle" />
           </StyledLink>
@@ -130,7 +130,7 @@ function BrandSection({
       </span>
 
       <h1 className="pl-20 text-xl grow md:p-1">
-        <TextContainer isOpen={isOpen}>Call for Papers</TextContainer>
+        <TextContainer isOpen={isOpen}>Ola</TextContainer>
       </h1>
 
       <span className={`${isOpen ? "hidden md:block" : "hidden"}`}>
