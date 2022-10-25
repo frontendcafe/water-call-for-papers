@@ -7,7 +7,7 @@ export default errorHandler(
     const { body, method } = req;
 
     if (method === "POST") {
-      const data = await addTopic(body);
+      const data = await addTopic(JSON.parse(body));
 
       const message: string = "Se ha creado el tópico";
 

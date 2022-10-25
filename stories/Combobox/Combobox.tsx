@@ -11,6 +11,7 @@ export interface ComboboxComponentInterface {
   actionHandler?: (value: string) => void;
   noOptionsLabel?: string;
   id: string;
+  label: string;
 }
 
 const ComboboxSeletedList = ({
@@ -45,6 +46,7 @@ const ComboboxComponent = ({
   actionHandler,
   noOptionsLabel,
   id,
+  label,
 }: ComboboxComponentInterface) => {
   const [searchValue, setSearchValue] = useState<string>("");
 
@@ -62,8 +64,8 @@ const ComboboxComponent = ({
         newValuesSelected.add(value);
       }
       onChange?.(newValuesSelected);
-      setSearchValue("");
     }
+    setSearchValue("");
   };
 
   const filteredOptions =
@@ -76,7 +78,7 @@ const ComboboxComponent = ({
   return (
     <div className="w-full">
       <label className="font-semibold text-secondary-900" htmlFor={id}>
-        {actionLabel}
+        {label}
       </label>
       <Combobox value={searchValue} onChange={comboboxOnChangeHandler}>
         <div className="flex flex-col">

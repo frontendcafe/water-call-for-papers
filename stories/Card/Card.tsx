@@ -7,7 +7,7 @@ import { Item, MenuDropdown } from "../MenuDropdown/MenuDropdown";
 import { Tag } from "../Tag/Tag";
 
 export const Card = ({ event }: { event: EventData }) => {
-  const { endDate, id, name, startingDate, talks, status } = event;
+  const { endDate, id, name, startingDate, talks, status, bannerUrl } = event;
 
   // TODO: Add href after functionality gets implemented
   const menuItems: Item[] = [
@@ -35,7 +35,7 @@ export const Card = ({ event }: { event: EventData }) => {
           <Tag label={status} size="sm" status="event" />
         </span>
         {/* TODO: Add image sources when implemented */}
-        <img className="object-cover h-48" src="" />
+        <img className="object-cover h-48" src={bannerUrl} />
       </div>
       <div className="p-4 space-y-2">
         <Link href={id ? `/event/${id}` : "#"}>

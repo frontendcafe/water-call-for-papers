@@ -10,7 +10,7 @@ export const TextContainer = ({
   children,
 }: TextContainerProps) => {
   const textStyles = isOpen ? "md:opacity-100" : "md:sr-only md:opacity-0";
-  const textOverflow = truncate ? "truncate max-w-[10ch]" : "";
+  const textOverflow = truncate ? "truncate max-w-[15ch]" : "";
 
   return (
     <span className={`duration-300 ${textOverflow} ${textStyles}`}>
