@@ -145,12 +145,12 @@ const Create = () => {
 
   return (
     <>
-      <div className="flex bg-slate-100 mb-4">
+      <div className="flex mb-4 bg-slate-100">
         <div className="flex flex-col flex-1 pt-20 md:pt-4 max-w-[1440px]">
-          <h1 className="text-3xl font-semibold px-6 py-4">Crear Evento</h1>
-          <div className="lg:mx-6 lg:rounded-xl grid lg:grid-cols-12 bg-white">
+          <h1 className="px-6 py-4 text-3xl font-semibold">Crear Evento</h1>
+          <div className="flex bg-white lg:mx-6 lg:rounded-xl">
             <form
-              className="p-4 flex flex-col space-y-4 lg:col-span-9"
+              className="flex flex-col flex-1 p-4 space-y-4 lg:col-span-9"
               onSubmit={handleSubmit}
             >
               <AccordionDefault title="Datos Generales">
@@ -203,7 +203,7 @@ const Create = () => {
               </AccordionDefault>
               <AccordionDefault title="Fecha y localización">
                 <div className="">
-                  <div className=" text-base font-semibold text-gray-900 mb-2">
+                  <div className="mb-2 text-base font-semibold text-gray-900 ">
                     Fechas del evento
                   </div>
                   <div className="flex flex-col sm:flex-row gap-x-4">
@@ -244,7 +244,7 @@ const Create = () => {
                   ></Select>
                 </div>
                 <div className="">
-                  <div className=" text-base font-semibold text-gray-900 mb-2">
+                  <div className="mb-2 text-base font-semibold text-gray-900 ">
                     Horario del evento
                   </div>
                   <div className="flex flex-col sm:flex-row gap-x-4">
@@ -304,7 +304,7 @@ const Create = () => {
                       participar de tu evento.
                     </p>
                   </div>
-                  <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="grid gap-4 sm:grid-cols-2">
                     <DayPicker
                       placeholder="dd/mm/aaaa"
                       id={"fecha-inicio-postulacion"}
@@ -343,8 +343,8 @@ const Create = () => {
                 <Button>Crear Evento</Button>
               </div>
             </form>
-            <div className="hidden lg:block relative w-80 h-full lg:col-span-3 mt-8 px-8">
-              <div className="sticky left-0">
+            <div className="relative hidden lg:block">
+              <div className="sticky left-0 px-8 mt-8">
                 <Image src={freepikCharacter} />
               </div>
             </div>
