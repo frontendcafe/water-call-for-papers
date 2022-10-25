@@ -39,7 +39,7 @@ export const FilterBar = ({
         placeholder="Buscar"
         value={searchQuery}
         hideLabel={true}
-        inputClassnames={"w-96 py-3"}
+        inputClassnames={"lg:w-96 py-3"}
       />
     </div>
   );
