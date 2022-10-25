@@ -5,7 +5,7 @@ import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
 import { LogoCallForPapers } from "../Spinner/LogoCallForPapers";
-import { StyledLink } from "./StyledLink/StyledLink";
+import { StyledLink } from "..//StyledLink/StyledLink";
 import { TextContainer } from "./TextContainer";
 import { Action, useSidebarReducer } from "./useSidebarReducer";
 
@@ -59,7 +59,7 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
         <div className="space-y-6">
           <BrandSection {...sidebarState} clickHandler={clickHandler} />
 
-          <StyledLink href="/event/create" variant="primary">
+          <StyledLink href="/event/create" variant="primary" rounded="full">
             <TextContainer {...sidebarState}>Crear Evento</TextContainer>
             <Icon className={iconStyles} iconName="plusCircle" />
           </StyledLink>

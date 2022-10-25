@@ -167,7 +167,9 @@ const AboutUs = () => {
           </p>
         </div>
         <div>
-          <StyledLink href="https://frontend.cafe/cmyk">Saber más</StyledLink>
+          <StyledLink variant="primary" href="https://frontend.cafe/cmyk">
+            Saber más
+          </StyledLink>
         </div>
       </div>
       <div className="mt-10">

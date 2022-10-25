@@ -47,7 +47,7 @@ const Home: NextPage = () => {
             <StyledLink
               href="/event/list"
               variant="primary"
-              classNames="lg:w-72 rounded"
+              classNames="lg:w-72"
             >
               Comenzar
             </StyledLink>

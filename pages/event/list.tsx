@@ -94,7 +94,7 @@ const ListEvent = () => {
         <div className="sticky top-0 z-10 pt-11 md:p-0 bg-secondary-50 rounded-b-xl">
           <header className="flex items-center justify-between px-4 py-4 md:px-0">
             <h2 className="inline-block text-3xl font-semibold">Mis eventos</h2>
-            <StyledLink href="/event/create">
+            <StyledLink href="/event/create" variant="primary">
               <span className="font-medium sr-only md:not-sr-only">
                 Crear evento
               </span>
