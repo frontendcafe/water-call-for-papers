@@ -21,7 +21,7 @@ const charlas = [
     disabled: false,
   },
   {
-    // FIXME: Change "EnCurso" for "Abiertos", also affects backend queries
+    label: "Abiertos",
     type: EventStatus.EnCurso,
     disabled: false,
   },
@@ -103,9 +103,9 @@ const ListEvent = () => {
             </StyledLink>
           </header>
           <TabsList>
-            {charlas.map(({ type, disabled }) => (
+            {charlas.map(({ label, type, disabled }) => (
               <Tab key={type} disabled={disabled}>
-                {type}
+                {label || type}
               </Tab>
             ))}
           </TabsList>
