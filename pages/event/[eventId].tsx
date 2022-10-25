@@ -90,7 +90,8 @@ const EventPage: NextPage = () => {
                     </span>
                   </div>
                   <h2 className="mt-1 text-lg font-bold">
-                    Service Design Club
+                    {/* @ts-ignore */}
+                    {event?.organizers[0].fullName ?? "Frontend Café"}
                   </h2>
                 </div>
                 <div className="flex flex-col">
@@ -118,7 +119,7 @@ const EventPage: NextPage = () => {
                     {event && (
                       <>
                         {getTime(event?.startingDate as Date)} -{" "}
-                        {getTime(event?.endDate as Date)} ({event?.timezone})
+                        {getTime(event?.endDate as Date)} - {event?.timezone}
                       </>
                     )}
                   </p>

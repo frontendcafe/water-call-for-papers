@@ -21,7 +21,7 @@ import { addOrganizer, getOrganizer } from "./organizers";
 
 export async function getAllEvents({
   limit,
-  order = "asc",
+  order = "desc",
   type = [],
   status,
 }: Partial<EventQueryOptions>): Promise<EventData[]> {

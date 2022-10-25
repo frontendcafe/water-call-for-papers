@@ -14,7 +14,7 @@ export default errorHandler(
     }
 
     if (method === "POST") {
-      const data = await createEvent(body);
+      const data = await createEvent(JSON.parse(body));
       const message = "Se ha creado el evento";
 
       return res.status(201).json({ data, message });
