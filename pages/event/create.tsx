@@ -146,7 +146,7 @@ const Create = () => {
   return (
     <>
       <div className="flex mb-4 bg-slate-100">
-        <div className="flex flex-col flex-1 pt-20 md:pt-4 max-w-[1440px]">
+        <div className="flex flex-col flex-1 pt-11 md:pt-8 max-w-[1440px]">
           <h1 className="px-6 py-4 text-3xl font-semibold">Crear Evento</h1>
           <div className="flex bg-white lg:mx-6 lg:rounded-xl">
             <form

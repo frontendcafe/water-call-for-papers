@@ -148,7 +148,7 @@ const participants = [
 
 const AboutUs = () => {
   return (
-    <div className="bg-white px-4 py-16 md:px-10 md:py-8 max-w-[1440px] h-full">
+    <div className="bg-white text-black px-4 pt-16 md:pt-12 md:px-10 max-w-[1440px] h-full">
       <div className="flex flex-col justify-between md:flex-row">
         <div className="md:w-8/12">
           <h1 className="text-4xl">Acerca de CMYK</h1>

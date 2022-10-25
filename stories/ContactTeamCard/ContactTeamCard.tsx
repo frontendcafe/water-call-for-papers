@@ -16,19 +16,21 @@ export const ContactTeamCard = ({
   social,
 }: ContactTeamCardProps) => {
   return (
-    <div className="bg-gray-100 p-6 rounded-lg max-w-sm flex flex-col justify-between">
+    <div className="flex flex-col justify-between max-w-sm p-6 bg-gray-100 rounded-lg">
       <div>
         <div>
-          <h3 className="text-lg font-semibold">{name}</h3>
-          <h4 className="text-gray-500 font-semibold mt-2">{rol}</h4>
+          <h3 className="text-xl font-semibold">{name}</h3>
+          <h4 className="mt-1 text-lg font-semibold text-secondary-500">
+            {rol}
+          </h4>
         </div>
-        <div className="mt-4">{description}</div>
+        <div className="mt-4 text-secondary-800">{description}</div>
       </div>
       <div className="mt-12">
-        <div className="text-gray-500 font-semibold">Social</div>
+        <div className="font-semibold text-secondary-600">Social</div>
         <div className="flex flex-wrap justify-start mt-2">
           {social.map(({ iconName, url }) => (
-            <a key={iconName} className="mr-8 mt-2" href={url}>
+            <a key={iconName} className="mt-2 mr-8" href={url}>
               <Icon
                 icon={`ant-design:${iconName}-outlined`}
                 style={{ fontSize: "24px", color: "#6778FF" }}
