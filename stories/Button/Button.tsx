@@ -1,5 +1,6 @@
 import React, { ButtonHTMLAttributes, MouseEvent } from "react";
 import { tw } from "../../lib/utils";
+import { Spinner } from "../Spinner/Spinner";
 
 interface ButtonProps
   extends Pick<
@@ -39,6 +40,7 @@ interface ButtonProps
    */
   icon?: boolean;
   classNames?: string;
+  name?: string;
 }
 
 /**
@@ -63,6 +65,7 @@ export const Button = ({
   size = "normal",
   variant = "primary",
   classNames = "",
+  name = "button",
   ...props
 }: ButtonProps) => {
   const mode = {
@@ -123,6 +126,7 @@ export const Button = ({
 
   return (
     <button
+      name={name}
       className={tw(
         "font-medium text-base whitespace-nowrap",
         "transition-[colors,_drop_shadow] duration-100",
@@ -138,6 +142,7 @@ export const Button = ({
       {...props}
     >
       {children}
+      {loading && <Spinner />}
     </button>
   );
 };

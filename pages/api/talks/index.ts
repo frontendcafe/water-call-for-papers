@@ -15,7 +15,7 @@ export default errorHandler(
     }
 
     if (method === "POST") {
-      const data = await postTalk(body);
+      const data = await postTalk(JSON.parse(body));
       const message = "Se ha creado la propuesta";
 
       return res.status(201).json({ data, message });

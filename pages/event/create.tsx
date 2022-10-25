@@ -21,12 +21,15 @@ import freepikCharacter from "../../public/img/freepik--Character--inject-25.svg
 import { timezones } from "../../mocks/timezones";
 import { checkInputValue } from "../../lib/utils";
 import ComboboxComponent from "../../stories/Combobox/Combobox";
-import { getAllTopics } from "../../lib/api-handlers";
+import { createEvent, createTopic, getAllTopics } from "../../lib/api-handlers";
+import { EventData, EventStatus, EventType } from "../../types/events-types";
+import { Notification } from "../../stories/Notification/Notification";
+import { Icon } from "../../stories/Icon/Icon";
 
 const modalityOptions = [
-  { title: "Presencial", isDisabled: false, value: "Presencial" },
-  { title: "Online", isDisabled: false, value: "Online" },
-  { title: "Híbrido", isDisabled: false, value: "Híbrido" },
+  { title: "Presencial", isDisabled: false, value: EventType.Presencial },
+  { title: "Online", isDisabled: false, value: EventType.Virtual },
+  { title: "Híbrido", isDisabled: false, value: EventType.Hibrido },
 ];
 
 const Create = () => {
@@ -38,6 +41,7 @@ const Create = () => {
     StartDate: new Date(),
     EndDate: new Date(),
     Requirements: "",
+    Location: "",
   });
 
   const [dataError, setDataError] = useState({
@@ -65,6 +69,9 @@ const Create = () => {
   const [isNotEndDateValue, setIsNotEndDateValue] = useState(true);
   const [isNotTimeZoneValue, setIsNotTimeZoneValue] = useState(true);
 
+  const [showNotificationError, setShowNotificationError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     getAllTopics()
       // @ts-ignore
@@ -80,7 +87,23 @@ const Create = () => {
       .catch(() => setTopics([]));
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const createTopicHandler = async (value: string) => {
+    try {
+      await createTopic({ description: value });
+      const newTopicsSelected = new Set(topicsSelected);
+      newTopicsSelected.add(value);
+      setTopicsSelected(newTopicsSelected);
+    } catch (error) {
+      setShowNotificationError(true);
+    }
+  };
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+    status: EventStatus = EventStatus.EnCurso
+  ) => {
+    setShowNotificationError(false);
+    setIsLoading(true);
     e.preventDefault();
     const inputsValues = [
       startTime,
@@ -99,8 +122,34 @@ const Create = () => {
     checkInputValue(startTime, setIsNotStartTimeValue);
     checkInputValue(endTime, setIsNotEndTimeValue);
     if (isEmptyValue) {
-      e.preventDefault();
       return;
+    }
+
+    const event: EventData = {
+      name: data.EventName,
+      type: selected.value as EventType,
+      description: data.Description,
+      talks: [],
+      startingDate: new Date(),
+      endDate: new Date(),
+      bannerUrl: "/img/placeholder.png",
+      location: data.Location,
+      organizers: [{ fullName: data.OrganizationName, email: "test@fec.com" }],
+      status,
+      proposalsStartingDate: startDate!,
+      proposalsEndDate: endDate!,
+      timezone:
+        timeZoneSelected?.value ??
+        timezones.find((tz) => tz.name.includes("Buenos Aires"))?.value!,
+    };
+
+    try {
+      await createEvent(event);
+      // router.push("/event/list");
+    } catch (error) {
+      setShowNotificationError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
   const handleValidation = (
@@ -110,9 +159,13 @@ const Create = () => {
     const validation = regex.test(e.target.value);
 
     if (
-      ["OrganizationName", "EventName", "Description", "Requirements"].includes(
-        e.currentTarget.name
-      )
+      [
+        "OrganizationName",
+        "EventName",
+        "Description",
+        "Requirements",
+        "Location",
+      ].includes(e.currentTarget.name)
     ) {
       setData({ ...data, [e.currentTarget.name]: e.target.value });
       if (!validation) {
@@ -178,11 +231,19 @@ const Create = () => {
                 />
                 <ComboboxComponent
                   id="topics"
-                  actionLabel="Temas (*)"
+                  label="Temas (*)"
+                  actionLabel={
+                    <button className="flex flex-row gap-2 text-blue-600">
+                      <Icon iconName="plus" size="medium" />
+                      <span>Crear tema</span>
+                    </button>
+                  }
                   placeholder="Ingrese hasta 5 temas"
                   valuesSelected={topicsSelected!}
                   options={topics}
                   onChange={setTopicsSelected}
+                  actionHandler={createTopicHandler}
+                  noOptionsLabel={"Aún no hay temas"}
                 />
                 <TextArea
                   label="Descripción (*)"
@@ -287,9 +348,9 @@ const Create = () => {
                   <InputText
                     label="Localización"
                     placeholder="Ingrese localización"
-                    idValue="localización"
-                    description=""
-                    value=""
+                    idValue="Location"
+                    value={data["Location"]}
+                    onChange={handleValidation}
                   />
                 </div>
               </AccordionDefault>
@@ -339,9 +400,26 @@ const Create = () => {
                   error={dataError.Requirements}
                 />
               </AccordionDefault>
-              <div className="mt-14">
-                <Button>Crear Evento</Button>
+              <div className="mt-14 flex justify-between gap-4">
+                <Button
+                  name="borrador"
+                  disabled={true}
+                  variant="secondary"
+                  classNames="w-1/2"
+                >
+                  Guardar borrador
+                </Button>
+                <Button classNames="w-1/2" name="crear" loading={isLoading}>
+                  Crear Evento
+                </Button>
               </div>
+              {showNotificationError && (
+                <Notification
+                  title="Algo salió Mal"
+                  description="Hubo un problema al enviar el formulario. Por favor vuelve a intentarlo."
+                  color="error"
+                />
+              )}
             </form>
             <div className="relative hidden lg:block lg:w-1/3 xl:w-auto">
               <div className="sticky left-0 px-8 mt-8">
