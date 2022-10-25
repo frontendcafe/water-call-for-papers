@@ -44,8 +44,7 @@ export const DayPicker = ({
 }: DatePickerProps) => {
   const todayDate = new Date();
   const containerStyles =
-    "bg-white flex items-center gap-2 hover:ring-[1.5px] ring-1  mt-1 text-sm ring-1 px-2 ring-secondary-500 h-12 rounded-xl focus:border-2 focus:border-gray-400 disabled:border-gray-200";
-
+    "w-full pl-9 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300";
   const errorClassName = "flex items-center text-alert-600 text-sm mt-2";
 
   return (
@@ -53,24 +52,25 @@ export const DayPicker = ({
       <label className="text-sm" htmlFor={id}>
         {label}
       </label>
-      <div className={containerStyles}>
-        <Icon iconName="calendar" size="medium" />
-        <DatePicker
-          id="datepicker"
-          className="w-full outline-none"
-          dateFormat="dd/MM/yyyy"
-          includeDateIntervals={[
-            {
-              start: subDays(todayDate, 1),
-              end: addDays(todayDate, untilDays),
-            },
-          ]}
-          locale="es"
-          selected={date}
-          onChange={onChange}
-          placeholderText={placeholder}
-        />
-      </div>
+      <Icon
+        iconName="calendar"
+        className="absolute z-10 pointer-events-none top-11 left-2 text-secondary-300"
+      />
+      <DatePicker
+        id={id}
+        className={containerStyles}
+        dateFormat="dd/MM/yyyy"
+        includeDateIntervals={[
+          {
+            start: subDays(todayDate, 1),
+            end: addDays(todayDate, untilDays),
+          },
+        ]}
+        locale="es"
+        selected={date}
+        onChange={onChange}
+        placeholderText={placeholder}
+      />
       {isValue ? null : (
         <div className={errorClassName}>
           <Icon iconName="informationCircle" />
