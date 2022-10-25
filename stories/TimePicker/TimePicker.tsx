@@ -28,13 +28,13 @@ export const TimePicker = ({
   return (
     <>
       <div className="flex flex-col">
-        <label htmlFor={id} className="text-sm  text-gray-900 pb-1">
+        <label htmlFor={id} className="pb-1 text-sm text-secondary-900">
           {label}
         </label>
         <input
           name={id}
           id={id}
-          className="ring-1 ring-secondary-500  px-2 h-12 text-sm rounded-xl focus:outline-none focus:ring-primary-900 focus:ring-[1.5px] hover:ring-[1.5px]"
+          className="transition-[colors,_drop_shadow] duration-100 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300"
           type="time"
           value={time ?? "00:00"}
           onChange={handleChange}
