@@ -5,7 +5,7 @@ import { MenuDropdown } from "../stories/MenuDropdown/MenuDropdown";
 
 const Header = ({ title }: { title: string }) => {
   return (
-    <div className="flex justify-between px-4 mb-8">
+    <div className="flex justify-between px-4 py-4 mb-2 md:px-0">
       <div className="flex items-center gap-4 py-2">
         <h2 className="text-3xl font-semibold">{title}</h2>
         <MenuDropdown
