@@ -21,6 +21,7 @@ const charlas = [
     disabled: false,
   },
   {
+    // FIXME: Change "EnCurso" for "Abiertos", also affects backend queries
     type: EventStatus.EnCurso,
     disabled: false,
   },
@@ -91,8 +92,8 @@ const ListEvent = () => {
   return (
     <section className="md:px-4">
       <TabsGroup handler={tabHandler}>
-        <div className="sticky top-0 z-10 pt-11 md:p-0 bg-secondary-50 rounded-b-xl">
-          <header className="flex items-center justify-between px-4 py-4 md:px-0">
+        <div className="sticky top-0 z-10 pt-11 md:pt-8 bg-secondary-50 rounded-b-xl">
+          <header className="flex items-center justify-between px-4 py-4 mb-2 md:px-0">
             <h2 className="inline-block text-3xl font-semibold">Mis eventos</h2>
             <StyledLink href="/event/create" variant="primary">
               <span className="font-medium sr-only md:not-sr-only">

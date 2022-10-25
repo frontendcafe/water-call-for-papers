@@ -39,7 +39,7 @@ const EventPage: NextPage = () => {
 
   if (isLoading || !eventId) {
     return (
-      <div className="grid place-content-center h-screen">
+      <div className="grid h-screen place-content-center">
         <Spinner />
       </div>
     );
@@ -65,7 +65,7 @@ const EventPage: NextPage = () => {
   ];
 
   return (
-    <div className="p-2 pt-16 md:p-10">
+    <div className="pt-16 md:py-10 md:px-10">
       <Header title={event?.name ?? "Evento"} />
       <TabsGroup>
         <TabsList>
@@ -78,12 +78,12 @@ const EventPage: NextPage = () => {
         <TabsPanels>
           {/* Begin Tab Resumen */}
           <TabsPanel>
-            <section className="container md:mx-auto grid gap-6 px-2 md:px-4 py-3 md:grid-cols-12 bg-white">
-              <div className="py-4 px-3 bg-secondary-50 rounded-xl col-span-12 lg:col-span-9 flex flex-col gap-6">
+            <section className="container flex flex-col gap-6 p-6 bg-white rounded-tl-none md:items-start md:flex-row rounded-xl md:mx-auto">
+              <div className="flex flex-col flex-1 gap-6 px-3 py-4 bg-secondary-50 rounded-xl">
                 <div className="flex flex-col">
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <h4 className="text-sm font-normal">Organiza:</h4>
-                    <span className="px-2 py-1 text-xs text-white bg-secondary-600 rounded-full">
+                    <span className="px-2 py-1 text-xs text-white rounded-full bg-secondary-600">
                       {typeof event?.daysLeft === "number"
                         ? `Faltan ${event?.daysLeft} días`
                         : event?.daysLeft}
@@ -96,7 +96,7 @@ const EventPage: NextPage = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <Icon iconName="calendar" />
-                    <h4 className="text-md font-semibold">Fechas del evento</h4>
+                    <h4 className="font-semibold text-md">Fechas del evento</h4>
                   </div>
                   <p className="mt-2 text-sm">
                     {event && (
@@ -110,7 +110,7 @@ const EventPage: NextPage = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <Icon iconName="clock" />
-                    <h4 className="text-md font-semibold">
+                    <h4 className="font-semibold text-md">
                       Horarios del evento
                     </h4>
                   </div>
@@ -126,9 +126,9 @@ const EventPage: NextPage = () => {
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <Icon iconName="photo" />
-                    <h4 className="text-md font-semibold">Banner del evento</h4>
+                    <h4 className="font-semibold text-md">Banner del evento</h4>
                   </div>
-                  <div className="relative w-full h-40 bg-gradient-to-b from-primary-500 to-primary-500/25 rounded-md mt-2">
+                  <div className="relative w-full h-40 mt-2 rounded-md bg-gradient-to-b from-primary-500 to-primary-500/25">
                     <Image
                       layout="fill"
                       src={event?.bannerUrl as string}
@@ -139,28 +139,28 @@ const EventPage: NextPage = () => {
                   </div>
                 </div>
                 <div className="flex flex-col">
-                  <h4 className="text-md font-semibold">Descripción</h4>
-                  <p className="text-sm w-full">{event?.description}</p>
+                  <h4 className="font-semibold text-md">Descripción</h4>
+                  <p className="w-full text-sm">{event?.description}</p>
                 </div>
                 <div className="flex flex-col">
-                  <h4 className="text-md font-semibold">Modalidad</h4>
-                  <p className="text-sm w-full">{event?.type}</p>
+                  <h4 className="font-semibold text-md">Modalidad</h4>
+                  <p className="w-full text-sm">{event?.type}</p>
                 </div>
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <Icon iconName="mapPin" />
-                    <h4 className="text-md font-semibold">Locación</h4>
+                    <h4 className="font-semibold text-md">Locación</h4>
                   </div>
                   <p className="mt-2 text-sm">{event?.location}</p>
                 </div>
               </div>
 
-              <div className="py-4 px-3 bg-secondary-50 rounded-xl flex flex-col gap-6 col-span-12 lg:col-span-3">
-                <h4 className="text-md font-semibold">Convocatoria</h4>
+              <div className="flex flex-col gap-6 px-3 py-4 md:w-2/5 bg-secondary-50 rounded-xl">
+                <h4 className="font-semibold text-md">Convocatoria</h4>
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <Icon iconName="calendar" />
-                    <h4 className="text-md font-semibold">
+                    <h4 className="font-semibold text-md">
                       Período de postulación
                     </h4>
                   </div>
@@ -170,10 +170,10 @@ const EventPage: NextPage = () => {
                   </p>
                 </div>
                 <div className="flex flex-col">
-                  <h4 className="text-md font-semibold">
+                  <h4 className="font-semibold text-md">
                     Requisitos postulantes
                   </h4>
-                  <p className="text-sm w-full">{event?.type}</p>
+                  <p className="w-full text-sm">{event?.type}</p>
                 </div>
               </div>
             </section>

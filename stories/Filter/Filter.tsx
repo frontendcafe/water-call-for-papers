@@ -17,16 +17,11 @@ export const Filter = ({ btnLabel, children, title }: FilterProps) => {
   return (
     <Popover className="relative">
       <Popover.Button as="span">
-        {({ open }) => (
-          <Button variant="transparent" size="small">
-            <Icon iconName="adjustment" />
-            {btnLabel}
-            <Icon
-              iconName="chevronDown"
-              className={`transition-transform ${open ? "" : "-rotate-90"}`}
-            />
-          </Button>
-        )}
+        <Button variant="transparent" size="small">
+          <Icon iconName="adjustment" />
+          {btnLabel}
+          <Icon iconName="chevronDown" />
+        </Button>
       </Popover.Button>
       <Transition
         as={Fragment}
