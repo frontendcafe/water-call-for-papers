@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes, ReactNode } from "react";
 import { Icon } from "../Icon/Icon";
 
 interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -32,22 +32,21 @@ interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   /**
    * Label name visible option
    */
-  visible?: boolean;
+  hideLabel?: boolean;
   /**
    * Input required option
    */
   requiredLabel?: string;
-
   /**
    * Input States
    */
   disabled?: boolean;
-
   /**
    * Optional Variables
    */
-  position?: "left"; // To position Icon to the right or left of the input
-  hideLabel?: boolean;
+  position?: "left" | "right"; // To position Icon to the right or left of the input
+
+  children?: ReactNode;
   inputClassnames?: string;
 }
 
@@ -62,25 +61,25 @@ export const InputText = ({
   description,
   error,
   requiredLabel,
-  position,
+  position = "left",
   disabled,
   value,
-  visible,
+  children,
   hideLabel = false,
+  onChange,
   inputClassnames = "",
   ...props
 }: InputTextProps) => {
-  const positionIconText = position == "left" && "pl-9 pr-2 py-4";
+  const positionIconText = position == "left" ? "pl-9" : "pr-9";
 
   const withError = error
     ? "border-alert-600 focus:border-alert-600 ring-1 ring-alert-600"
     : "";
 
-  const positionIcon = position == "left" ? `left-2` : `right-6`;
+  const positionIcon = position == "left" ? "flex-row" : "flex-row-reverse";
 
-  // TODO: Refactor to accept icons as children and use flex to position the icon within a container
   return (
-    <div className="relative flex flex-col text-secondary-900">
+    <div className="relative flex flex-col flex-nowrap text-secondary-900">
       <label
         htmlFor={idValue}
         className={`font-semibold  ${
@@ -89,28 +88,23 @@ export const InputText = ({
       >
         {label}
       </label>
-      <input
-        type="text"
-        placeholder={placeholder}
-        id={idValue}
-        name={idValue}
-        value={value}
-        className={`transition-[colors,_drop_shadow] duration-100 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300 ${positionIconText} ${withError} ${inputClassnames}`}
-        disabled={disabled}
-        onChange={props.onChange}
-        {...props}
-      />
-      {position == "left" && (
-        <span
-          className={
-            visible
-              ? `absolute top-16 ${positionIcon}`
-              : `absolute top-5 ${positionIcon}`
-          }
-        >
-          <Icon iconName="calendar" size="medium" />
-        </span>
-      )}
+      <div className={`flex items-center  ${positionIcon}`}>
+        <input
+          type="text"
+          placeholder={placeholder}
+          id={idValue}
+          name={idValue}
+          value={value}
+          className={`grow transition-[colors,_drop_shadow] duration-100 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300 ${positionIconText} ${withError} ${inputClassnames}`}
+          disabled={disabled}
+          onChange={onChange}
+          {...props}
+        />
+        <div className="absolute px-2 mt-1 text-secondary-300">
+          {children || <Icon iconName="calendar" />}
+        </div>
+      </div>
+
       {description && <p className="text-xs leading-6">{description}</p>}
       {/* TODO: Can be extracted to one component since they're similar */}
       {error && (
