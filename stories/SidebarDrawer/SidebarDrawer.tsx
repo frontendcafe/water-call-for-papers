@@ -154,10 +154,11 @@ function EventsNavSection({
 }: Omit<DrawerCompProps, "clickHandler">) {
   return (
     <div className="space-y-2">
-      <h2 className="flex items-center gap-2 p-2 text-white">
-        <Icon className={iconStyles} size="large" iconName="calendar" />
-
-        <TextContainer isOpen={isOpen}>Mis Eventos</TextContainer>
+      <h2>
+        <StyledLink href="/event/list" classNames="!text-white">
+          <Icon className={iconStyles} size="large" iconName="calendar" />
+          <TextContainer isOpen={isOpen}>Mis Eventos</TextContainer>
+        </StyledLink>
       </h2>
 
       <ul aria-label="Listado de próximos eventos" className="space-y-2">
