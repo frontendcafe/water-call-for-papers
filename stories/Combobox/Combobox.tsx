@@ -10,6 +10,7 @@ export interface ComboboxComponentInterface {
   actionLabel?: React.ReactNode;
   actionHandler?: (value: string) => void;
   noOptionsLabel?: string;
+  id: string;
 }
 
 const ComboboxSeletedList = ({
@@ -28,7 +29,7 @@ const ComboboxSeletedList = ({
           label: value,
           size: "sm",
           status: "comboLabels",
-          onClick: () => handlerDeselectValue(value, "deselect"),
+          onDelete: () => handlerDeselectValue(value, "deselect"),
         }))}
       />
     </div>
@@ -43,6 +44,7 @@ const ComboboxComponent = ({
   actionLabel,
   actionHandler,
   noOptionsLabel,
+  id,
 }: ComboboxComponentInterface) => {
   const [searchValue, setSearchValue] = useState<string>("");
 
@@ -73,54 +75,59 @@ const ComboboxComponent = ({
 
   return (
     <div className="w-full">
+      <label className="font-semibold text-secondary-900" htmlFor={id}>
+        {actionLabel}
+      </label>
       <Combobox value={searchValue} onChange={comboboxOnChangeHandler}>
-        <Combobox.Input
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setSearchValue(event.target.value)
-          }
-          placeholder={placeholder}
-          className={`p-2 mt-1 text-sm border-2 rounded-md focus:border-2 focus:border-gray-400 w-full`}
-        />
-        {valuesSelected?.size > 0 && (
-          <ComboboxSeletedList
-            valuesSelected={valuesSelected}
-            handlerDeselectValue={comboboxOnChangeHandler}
+        <div className="flex flex-col">
+          <Combobox.Input
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setSearchValue(event.target.value)
+            }
+            placeholder={placeholder}
+            className={`transition-[colors,_drop_shadow] duration-100 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300`}
           />
-        )}
-        <Combobox.Options
-          className={`relative flex flex-col pt-2 my-1 rounded bg-white w-full`}
-        >
-          {filteredOptions?.map((option) => (
-            <Combobox.Option
-              key={option.id}
-              value={option.label}
-              className={
-                "text-black text-sm font-normal px-2 py-4 cursor-pointer hover:bg-black hover:bg-opacity-5"
-              }
-            >
-              {option.label}
-            </Combobox.Option>
-          ))}
-          {filteredOptions?.length === 0 && noOptionsLabel && (
-            <>
-              <Combobox.Option
-                value={""}
-                disabled
-                className={"text-secondary-600 mb-2 px-2 py-2"}
-              >
-                {noOptionsLabel}
-              </Combobox.Option>
-              {actionLabel && actionHandler && (
-                <Combobox.Option
-                  value={actionLabel}
-                  className="px-2 py-4 hover:bg-black hover:bg-opacity-5"
-                >
-                  {actionLabel}
-                </Combobox.Option>
-              )}
-            </>
+          {valuesSelected?.size > 0 && (
+            <ComboboxSeletedList
+              valuesSelected={valuesSelected}
+              handlerDeselectValue={comboboxOnChangeHandler}
+            />
           )}
-        </Combobox.Options>
+          <Combobox.Options
+            className={`relative flex flex-col pt-2 my-1 rounded bg-white w-full`}
+          >
+            {filteredOptions?.map((option) => (
+              <Combobox.Option
+                key={option.id}
+                value={option.label}
+                className={
+                  "text-black text-sm font-normal px-2 py-4 cursor-pointer hover:bg-black hover:bg-opacity-5"
+                }
+              >
+                {option.label}
+              </Combobox.Option>
+            ))}
+            {filteredOptions?.length === 0 && noOptionsLabel && (
+              <>
+                <Combobox.Option
+                  value={""}
+                  disabled
+                  className={"text-secondary-600 mb-2 px-2 py-2"}
+                >
+                  {noOptionsLabel}
+                </Combobox.Option>
+                {actionLabel && actionHandler && (
+                  <Combobox.Option
+                    value={actionLabel}
+                    className="px-2 py-4 hover:bg-black hover:bg-opacity-5"
+                  >
+                    {actionLabel}
+                  </Combobox.Option>
+                )}
+              </>
+            )}
+          </Combobox.Options>
+        </div>
       </Combobox>
     </div>
   );

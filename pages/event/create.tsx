@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChangeEvent } from "react";
 import Image from "next/image";
 
@@ -20,6 +20,8 @@ import freepikCharacter from "../../public/img/freepik--Character--inject-25.svg
 
 import { timezones } from "../../mocks/timezones";
 import { checkInputValue } from "../../lib/utils";
+import ComboboxComponent from "../../stories/Combobox/Combobox";
+import { getAllTopics } from "../../lib/api-handlers";
 
 const modalityOptions = [
   { title: "Presencial", isDisabled: false, value: "Presencial" },
@@ -53,12 +55,30 @@ const Create = () => {
   const [endTime, setEndTime] = useState<string>();
   const [timeZoneSelected, setTimeZoneSelected] = useState<SelectValue>();
 
+  const [topics, setTopics] = useState<{ id: string; label: string }[]>();
+  const [topicsSelected, setTopicsSelected] = useState<Set<string>>();
+
   // booleanos para renderizar o no el mensaje de error
   const [isNotStartTimeValue, setIsNotStartTimeValue] = useState(true);
   const [isNotEndTimeValue, setIsNotEndTimeValue] = useState(true);
   const [isNotStartDateValue, setIsNotStarDateValue] = useState(true);
   const [isNotEndDateValue, setIsNotEndDateValue] = useState(true);
   const [isNotTimeZoneValue, setIsNotTimeZoneValue] = useState(true);
+
+  useEffect(() => {
+    getAllTopics()
+      // @ts-ignore
+      .then((res: { data: { id: string; description: string }[] }) => {
+        const topicsSet: { id: string; label: string }[] = [];
+        if (res.data) {
+          res.data.map(({ id, description }) =>
+            topicsSet.push({ id, label: description })
+          );
+        }
+        return setTopics(topicsSet);
+      })
+      .catch(() => setTopics([]));
+  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -156,13 +176,13 @@ const Create = () => {
                   description="Máximo 50 caracteres"
                   required
                 />
-                <InputText
-                  label="Temas (*)"
+                <ComboboxComponent
+                  id="topics"
+                  actionLabel="Temas (*)"
                   placeholder="Ingrese hasta 5 temas"
-                  idValue="Themes"
-                  value={data.Themes}
-                  onChange={handleValidation}
-                  required
+                  valuesSelected={topicsSelected!}
+                  options={topics}
+                  onChange={setTopicsSelected}
                 />
                 <TextArea
                   label="Descripción (*)"
@@ -176,7 +196,6 @@ const Create = () => {
                   description="Máximo 280 caracteres"
                   required
                 />
-
                 <InputFile
                   label="Banner del evento"
                   placeholder="Cargar imagen"
