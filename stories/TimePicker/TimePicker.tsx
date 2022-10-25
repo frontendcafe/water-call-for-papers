@@ -36,7 +36,7 @@ export const TimePicker = ({
           id={id}
           className="ring-1 ring-secondary-500  px-2 h-12 text-sm rounded-xl focus:outline-none focus:ring-primary-900 focus:ring-[1.5px] hover:ring-[1.5px]"
           type="time"
-          value={time}
+          value={time ?? "00:00"}
           onChange={handleChange}
           placeholder={placeholder}
         />

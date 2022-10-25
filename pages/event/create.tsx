@@ -311,7 +311,7 @@ const Create = () => {
                       date={data.StartDate}
                       label="Fecha de inicio"
                       onChange={(date) => handleDateChange(date, "StartDate")}
-                      isValue={false}
+                      isValue={true}
                       errorMessage={""}
                     />
                     <DayPicker
@@ -320,7 +320,7 @@ const Create = () => {
                       date={data.EndDate}
                       label="Fecha de finalización"
                       onChange={(date) => handleDateChange(date, "EndDate")}
-                      isValue={false}
+                      isValue={true}
                       errorMessage={""}
                     />
                   </div>
