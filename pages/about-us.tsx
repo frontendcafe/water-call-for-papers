@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "../stories/Button/Button";
 import { ContactTeamCard } from "../stories/ContactTeamCard/ContactTeamCard";
+import { StyledLink } from "../stories/StyledLink/StyledLink";
 
 const participants = [
   {
@@ -162,7 +162,7 @@ const AboutUs = () => {
           </p>
         </div>
         <div>
-          <Button>Saber más</Button>
+          <StyledLink href="https://frontend.cafe/cmyk">Saber más</StyledLink>
         </div>
       </div>
       <div className="mt-10">
