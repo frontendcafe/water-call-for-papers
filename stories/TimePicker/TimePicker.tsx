@@ -8,6 +8,7 @@ interface TimePickerProps {
   isValue: boolean;
   errorMessage: string;
   setTime: React.Dispatch<React.SetStateAction<string | undefined>>;
+  placeholder: string;
 }
 
 export const TimePicker = ({
@@ -17,6 +18,7 @@ export const TimePicker = ({
   id,
   isValue,
   errorMessage,
+  placeholder,
 }: TimePickerProps) => {
   const errorClassName = "flex items-center text-alert-600 text-sm mt-2";
 
@@ -36,6 +38,7 @@ export const TimePicker = ({
           type="time"
           value={time}
           onChange={handleChange}
+          placeholder={placeholder}
         />
         {isValue ? null : (
           <div className={errorClassName}>

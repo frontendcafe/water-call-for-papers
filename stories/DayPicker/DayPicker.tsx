@@ -29,6 +29,7 @@ interface DatePickerProps {
   onChange: (date: Date, event: SyntheticEvent<Event>) => void;
   isValue: boolean;
   errorMessage: string;
+  placeholder: string;
 }
 
 export const DayPicker = ({
@@ -39,6 +40,7 @@ export const DayPicker = ({
   errorMessage,
   untilDays = 90,
   id,
+  placeholder,
 }: DatePickerProps) => {
   const todayDate = new Date();
   const containerStyles =
@@ -66,6 +68,7 @@ export const DayPicker = ({
           locale="es"
           selected={date}
           onChange={onChange}
+          placeholderText={placeholder}
         />
       </div>
       {isValue ? null : (

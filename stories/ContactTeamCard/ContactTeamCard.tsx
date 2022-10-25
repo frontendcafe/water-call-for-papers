@@ -16,12 +16,14 @@ export const ContactTeamCard = ({
   social,
 }: ContactTeamCardProps) => {
   return (
-    <div className="bg-gray-100 p-6 rounded-lg max-w-sm">
+    <div className="bg-gray-100 p-6 rounded-lg max-w-sm flex flex-col justify-between">
       <div>
-        <h3 className="text-lg font-semibold">{name}</h3>
-        <h4 className="text-gray-500 font-semibold mt-2">{rol}</h4>
+        <div>
+          <h3 className="text-lg font-semibold">{name}</h3>
+          <h4 className="text-gray-500 font-semibold mt-2">{rol}</h4>
+        </div>
+        <div className="mt-4">{description}</div>
       </div>
-      <div className="mt-4">{description}</div>
       <div className="mt-12">
         <div className="text-gray-500 font-semibold">Social</div>
         <div className="flex flex-wrap justify-start mt-2">

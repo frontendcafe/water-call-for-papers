@@ -209,6 +209,7 @@ const Create = () => {
                   <div className="flex flex-col sm:flex-row gap-x-4">
                     <div className="flex flex-col flex-1">
                       <DayPicker
+                        placeholder="dd/mm/aaaa"
                         id={"fecha-inicio"}
                         date={startDate}
                         onChange={setStartDate}
@@ -219,6 +220,7 @@ const Create = () => {
                     </div>
                     <div className="flex flex-col flex-1 last:mt-8 sm:last:mt-0">
                       <DayPicker
+                        placeholder="dd/mm/aaaa"
                         id={"fecha-finalizacion"}
                         date={endDate}
                         onChange={setEndDate}
@@ -232,7 +234,7 @@ const Create = () => {
                 <div className="mt-12">
                   <Select
                     values={timezones}
-                    placeholder="Service Design Club"
+                    placeholder="Seleccionar huso horario"
                     label="TimeZone"
                     isLabelVisible={true}
                     timeZoneSelected={timeZoneSelected}
@@ -248,6 +250,7 @@ const Create = () => {
                   <div className="flex flex-col sm:flex-row gap-x-4">
                     <div className="flex-1">
                       <TimePicker
+                        placeholder="00:00"
                         id="start-time"
                         label="Hora de inicio"
                         time={startTime}
@@ -258,6 +261,7 @@ const Create = () => {
                     </div>
                     <div className="flex-1 last:mt-8 sm:last:mt-0">
                       <TimePicker
+                        placeholder="00:00"
                         id="end-time"
                         label="Hora de finalización"
                         time={endTime}
@@ -302,6 +306,7 @@ const Create = () => {
                   </div>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <DayPicker
+                      placeholder="dd/mm/aaaa"
                       id={"fecha-inicio-postulacion"}
                       date={data.StartDate}
                       label="Fecha de inicio"
@@ -310,6 +315,7 @@ const Create = () => {
                       errorMessage={""}
                     />
                     <DayPicker
+                      placeholder="dd/mm/aaaa"
                       id={"fecha-finalizacion-postulacion"}
                       date={data.EndDate}
                       label="Fecha de finalización"
