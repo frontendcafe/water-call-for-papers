@@ -67,9 +67,6 @@ export const TextArea = ({
       <label className={`font-semibold  ${labelVisibility} `} htmlFor={idValue}>
         {label}
       </label>
-
-      {description && <p className={`text-xs`}>{description}</p>}
-
       <textarea
         className={`transition-[colors,_drop_shadow] duration-100 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300 ${withError}`}
         id={idValue}
@@ -83,7 +80,7 @@ export const TextArea = ({
         cols={columns}
         onChange={props.onChange}
       />
-
+      {description && <p className={`text-xs`}>{description}</p>}
       {/* If there is an error or maxLength, the div elemet will be rendered. */}
       {error && (
         <div

@@ -47,6 +47,8 @@ interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
    * Optional Variables
    */
   position?: "left"; // To position Icon to the right or left of the input
+  hideLabel?: boolean;
+  inputClassnames?: string;
 }
 
 /**
@@ -62,9 +64,10 @@ export const InputText = ({
   requiredLabel,
   position,
   disabled,
-  // onChange,
   value,
   visible,
+  hideLabel = false,
+  inputClassnames = "",
   ...props
 }: InputTextProps) => {
   const positionIconText = position == "left" && "pl-9 pr-2 py-4";
@@ -80,18 +83,19 @@ export const InputText = ({
     <div className="relative flex flex-col text-secondary-900">
       <label
         htmlFor={idValue}
-        className={`font-semibold  ${label ? "not-sr-only" : "sr-only"}`}
+        className={`font-semibold  ${
+          label && !hideLabel ? "not-sr-only" : "sr-only"
+        }`}
       >
         {label}
       </label>
-      {description && <p className="text-xs leading-6">{description}</p>}
       <input
         type="text"
         placeholder={placeholder}
         id={idValue}
         name={idValue}
         value={value}
-        className={`transition-[colors,_drop_shadow] duration-100 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300 ${positionIconText} ${withError}`}
+        className={`transition-[colors,_drop_shadow] duration-100 px-2 py-4 mt-1 border focus:outline-none focus:border-primary-900 focus:ring-1 focus:ring-primary-900 disabled:ring-gray-300 disabled:ring-1 hover:ring-primary-900 hover:ring-1 rounded-xl border-secondary-700 text-secondary-800 placeholder:text-secondary-300 ${positionIconText} ${withError} ${inputClassnames}`}
         disabled={disabled}
         onChange={props.onChange}
         {...props}
@@ -107,6 +111,7 @@ export const InputText = ({
           <Icon iconName="calendar" size="medium" />
         </span>
       )}
+      {description && <p className="text-xs leading-6">{description}</p>}
       {/* TODO: Can be extracted to one component since they're similar */}
       {error && (
         <p className="absolute flex items-center gap-1 ml-2 text-xs -bottom-5 text-alert-600">

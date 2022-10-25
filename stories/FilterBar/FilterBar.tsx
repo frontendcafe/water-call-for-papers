@@ -31,7 +31,6 @@ export const FilterBar = ({
           defaultValue={orderOptions[0].value}
         />
       </Filter>
-
       <InputText
         disabled={isLoading}
         idValue="search-bar"
@@ -39,6 +38,8 @@ export const FilterBar = ({
         onChange={searchHandler}
         placeholder="Buscar"
         value={searchQuery}
+        hideLabel={true}
+        inputClassnames={"w-96 py-3"}
       />
     </div>
   );

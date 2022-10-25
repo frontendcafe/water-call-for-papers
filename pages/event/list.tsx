@@ -35,8 +35,8 @@ const charlas = [
 ];
 
 const orderOptions = [
-  { title: "Más viejo a más nuevo", value: "asc" },
-  { title: "Más nuevo a más viejo", value: "desc" },
+  { title: "Más antiguos", value: "asc" },
+  { title: "Más recientes", value: "desc" },
 ];
 
 const ListEvent = () => {
@@ -152,7 +152,7 @@ function CardsGrid({ events, isLoading }: CardsGrid) {
         <p className="px-4 py-3 text-sm text-secondary-600">
           {events.length} eventos
         </p>
-        <div className="grid gap-6 px-4 py-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="grid gap-6 px-4 py-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5">
           {events.map((event) => (
             <Card key={event.id} event={event} />
           ))}

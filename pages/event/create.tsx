@@ -125,12 +125,12 @@ const Create = () => {
 
   return (
     <>
-      <div className="flex bg-slate-100">
-        <div className="flex flex-1 pt-20 md:pt-4 max-w-[1440px]">
-          <div className="flex-1">
-            <h1 className="text-3xl font-semibold mb-8 px-4">Crear Evento</h1>
+      <div className="flex bg-slate-100 mb-4">
+        <div className="flex flex-col flex-1 pt-20 md:pt-4 max-w-[1440px]">
+          <h1 className="text-3xl font-semibold px-6 py-4">Crear Evento</h1>
+          <div className="lg:mx-6 lg:rounded-xl grid lg:grid-cols-12 bg-white">
             <form
-              className="bg-white p-4 flex flex-col space-y-4"
+              className="p-4 flex flex-col space-y-4 lg:col-span-9"
               onSubmit={handleSubmit}
             >
               <AccordionDefault title="Datos Generales">
@@ -318,10 +318,10 @@ const Create = () => {
                 <Button>Crear Evento</Button>
               </div>
             </form>
-          </div>
-          <div className="hidden lg:block relative w-80">
-            <div className="sticky top-4 left-0">
-              <Image src={freepikCharacter} />
+            <div className="hidden lg:block relative w-80 h-full lg:col-span-3 mt-8 px-8">
+              <div className="sticky left-0">
+                <Image src={freepikCharacter} />
+              </div>
             </div>
           </div>
         </div>
