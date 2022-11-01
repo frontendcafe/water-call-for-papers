@@ -23,7 +23,7 @@ import { timezones } from "../../mocks/timezones";
 import ComboboxComponent from "../../stories/Combobox/Combobox";
 import { Icon } from "../../stories/Icon/Icon";
 import { Notification } from "../../stories/Notification/Notification";
-import { EventData, EventStatus, EventType } from "../../types/events-types";
+import { EventStatus, EventType, NewEventData } from "../../types/events-types";
 
 const modalityOptions = [
   { title: "Presencial", isDisabled: false, value: EventType.Presencial },
@@ -124,11 +124,10 @@ const Create = () => {
       return;
     }
 
-    const event: EventData = {
+    const event: NewEventData = {
       name: data.EventName,
       type: selected.value as EventType,
       description: data.Description,
-      talks: [],
       startingDate: new Date(),
       endDate: new Date(),
       bannerUrl: "/img/placeholder.png",

@@ -1,5 +1,5 @@
 import fetcher from "./fetcher";
-import { EventId, EventData } from "../types/events-types";
+import { EventId, NewEventData } from "../types/events-types";
 import { Topic } from "../types/talk-types";
 
 /**
@@ -27,7 +27,7 @@ export async function getEventById(id: EventId) {
  * @param  {Partial<EventData>} event
  * @returns {EventData}
  */
-export async function createEvent(event: Partial<EventData>) {
+export async function createEvent(event: NewEventData) {
   return await fetcher(`/api/events`, {
     method: "POST",
     body: JSON.stringify(event),
