@@ -69,8 +69,8 @@ export const isDate = (param: string): boolean => {
   return Boolean(Date.parse(param));
 };
 export const isStatus = (params: string): boolean => {
-  return Object.keys(EventStatus).includes(params);
+  return Object.values(EventStatus).includes(params);
 };
 export const isType = (params: string): boolean => {
-  return Object.keys(EventType).includes(params);
+  return Object.values(EventType).includes(params);
 };
