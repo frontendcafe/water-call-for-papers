@@ -2,7 +2,9 @@ import { NewEventData } from "../types/events-types";
 import { isArray, isDate, isStatus, isString, isType } from "./utils";
 
 /* eslint @typescript-eslint/no-explicit-any: "off" */
-export const parseEvent = (event: any): NewEventData => {
+export const parseEvent = (rawEvent: any): NewEventData => {
+  const event = typeof rawEvent === "string" ? JSON.parse(rawEvent) : rawEvent;
+
   return {
     bannerUrl: parseString(event.bannerUrl),
     description: parseString(event.description),
