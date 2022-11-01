@@ -25,11 +25,10 @@ export async function getDocById(
   const docsSnap = await getDocs(q);
 
   if (docsSnap.empty) {
-    // TODO: Add error handler
-    // throw { code: 404, message: `Un documento relacionado no existe!` };
-
-    // TODO: ID is just for debugging?, delete ID from template string.
-    return { error: `El documento con ID: ${id} no existe!` };
+    throw {
+      code: 404,
+      message: `Un documento relacionado con el ID: '${id}' no existe!`,
+    };
   }
 
   const docsData = docsSnap.docs.map(async (doc) => {
