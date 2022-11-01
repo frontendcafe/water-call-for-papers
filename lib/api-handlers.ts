@@ -1,6 +1,6 @@
 import fetcher from "./fetcher";
 import { EventId, NewEventData } from "../types/events-types";
-import { Topic } from "../types/talk-types";
+import { NewTopic } from "../types/talk-types";
 
 /**
  * Función para retornar todos los eventos de la API
@@ -24,7 +24,7 @@ export async function getEventById(id: EventId) {
 /**
  * Función para crear un evento en la API
  *
- * @param  {Partial<EventData>} event
+ * @param  {NewEventData} event
  * @returns {EventData}
  */
 export async function createEvent(event: NewEventData) {
@@ -46,10 +46,10 @@ export async function getAllTopics() {
 /**
  * Función para crear un topic
  *
- * @param  {Partial<Topic>} event
+ * @param  {NewTopic[]} topic
  * @returns {Topic[]}
  */
-export async function createTopic(topic: Partial<Topic>) {
+export async function createTopic(topic: NewTopic[]) {
   return await fetcher("/api/topics", {
     method: "POST",
     body: JSON.stringify(topic),
