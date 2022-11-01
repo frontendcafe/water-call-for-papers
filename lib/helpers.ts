@@ -39,7 +39,7 @@ export async function getDocById(
       if (key === "uniqueCode") delete docData.uniqueCode;
 
       if (key in datesTimestamps) {
-        docData[key] = new Date(docData[key]);
+        docData[key] = docData[key].toDate();
       }
 
       if (key in collectionsRef && docData[key].length > 0) {
