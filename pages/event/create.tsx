@@ -124,6 +124,7 @@ const Create = () => {
       return;
     }
 
+    // @ts-ignore
     const event: NewEventData = {
       name: data.EventName,
       type: selected.value as EventType,
@@ -139,6 +140,7 @@ const Create = () => {
       timezone:
         timeZoneSelected?.value ??
         timezones.find((tz) => tz.name.includes("Buenos Aires"))?.value!,
+      // FIXME: Missing "topics", send topics on submit too?
     };
 
     try {
