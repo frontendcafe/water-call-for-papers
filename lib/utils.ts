@@ -68,9 +68,9 @@ export const isArray = (params: unknown): boolean => {
 export const isDate = (param: string): boolean => {
   return Boolean(Date.parse(param));
 };
-export const isStatus = (params: string): boolean => {
+export const isStatus = (params: EventStatus): boolean => {
   return Object.values(EventStatus).includes(params);
 };
-export const isType = (params: string): boolean => {
+export const isType = (params: EventType): boolean => {
   return Object.values(EventType).includes(params);
 };
