@@ -1,11 +1,20 @@
 import { CollectionReference, OrderByDirection } from "firebase/firestore";
+import { EventData } from "./events-types";
 
 // interfaces error
 export interface ResponseError {
-  name?: string;
+  code: number;
+  data?: never;
   message: string;
-  code?: number;
+  name?: string;
 }
+export interface ResponseData {
+  code?: never;
+  data: EventData[] | EventData | void;
+  message: string | undefined;
+  name?: never;
+}
+export type ResponseObject = ResponseData | ResponseError;
 
 export interface FirebaseCollectionsRefs {
   [key: string]: CollectionReference;

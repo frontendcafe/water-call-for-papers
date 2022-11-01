@@ -4,7 +4,7 @@ import { ResponseError } from "../types/others";
 export default function errorHandler(
   handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>
 ) {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
+  return async (req: NextApiRequest, res: NextApiResponse<ResponseError>) => {
     return handler(req, res).catch((error: ResponseError) => {
       // Set default message for 500 error if needed.
       const { name, message, code } = error;
