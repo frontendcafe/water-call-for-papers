@@ -1,5 +1,4 @@
 import {
-  addDoc,
   deleteDoc,
   doc,
   getDoc,
@@ -8,13 +7,14 @@ import {
   orderBy,
   query,
   QueryConstraint,
+  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
 import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { calculateDaysLeft, formatFirebaseDate } from "../lib/utils";
-import { EventData } from "../types/events-types";
+import { DBEventData, EventData, NewEventData } from "../types/events-types";
 import { Organizer } from "../types/organizers-types";
 import { EventQueryOptions } from "../types/others";
 import { addOrganizer, getOrganizer } from "./organizers";
@@ -69,6 +69,7 @@ export async function getAllEvents({
         status: data.status,
         timezone: data.timezone,
         type: data.type,
+        daysLeft: calculateDaysLeft(data.startingDate),
       };
 
       return event;
@@ -76,7 +77,7 @@ export async function getAllEvents({
   );
 }
 
-export const getEvent = async (id: string) => {
+export const getEvent = async (id: string): Promise<EventData> => {
   if (!id) {
     throw { code: 422, message: "Se requiere el ID del evento" };
   }
@@ -104,10 +105,10 @@ export const updateEvent = async (eventId: string, eventData: {}) => {
   });
 };
 
-export const createEvent = async (event: EventData) => {
+export const createEvent = async (event: NewEventData): Promise<EventData> => {
   // create new event
   const organizersData = event.organizers.map(async (result) => {
-    const { fullName, email } = result as Omit<Organizer, "id">;
+    const { fullName, email } = result as Organizer;
     const eventSnap = await getDoc(doc(collectionsRef.organizers, email));
     if (!eventSnap.exists()) {
       // validate if organizer exists and create a new organizer
@@ -120,19 +121,28 @@ export const createEvent = async (event: EventData) => {
 
     return { id: email, fullName, email } as Organizer;
   });
-  const organizers = await Promise.all(organizersData);
-  event.organizers = organizers.map(({ email }) => email);
+
+  const organizers: Organizer[] = await Promise.all(organizersData);
 
   //create events
-  const docRef = await addDoc(collectionsRef.events, event);
-  const EventRef = doc(db, "events", docRef.id);
-  await updateDoc(EventRef, {
-    id: docRef.id,
-  });
-  const docSnapEvent = await getDoc(EventRef);
+  const eventRef = doc(collectionsRef.events);
+
+  const eventDBData: DBEventData = {
+    ...event,
+    id: eventRef.id,
+    organizers: organizers.map(({ email }) => email),
+    talks: [],
+  };
+  await setDoc(eventRef, eventDBData);
+
+  const docSnapEvent = await getDoc(eventRef);
   if (!docSnapEvent.exists()) {
     throw { code: 404, message: "Evento no creado!" };
   }
 
-  return { ...docSnapEvent.data(), organizers };
+  return {
+    ...eventDBData,
+    daysLeft: calculateDaysLeft(event.startingDate),
+    organizers: await getOrganizer(eventDBData.organizers),
+  };
 };

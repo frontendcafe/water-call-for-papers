@@ -1,4 +1,4 @@
-import { OrganizerId, Organizer } from "./organizers-types";
+import { Organizer, OrganizerId, OrganizerWithoutID } from "./organizers-types";
 import { TalkProposalId } from "./talk-types";
 
 export enum EventType {
@@ -14,9 +14,10 @@ export enum EventStatus {
 }
 
 export type EventId = string;
+export type DaysLeft = number | "Hoy" | "Finalizado";
 
 export interface EventData {
-  id?: EventId;
+  id: EventId;
   name: string;
   type: EventType;
   description: string;
@@ -25,10 +26,19 @@ export interface EventData {
   endDate: Date;
   bannerUrl: string;
   location: string;
-  organizers: OrganizerId[] | Organizer[];
+  organizers: Organizer[];
   status: EventStatus;
   proposalsStartingDate: Date;
   proposalsEndDate: Date;
   timezone: string;
-  daysLeft?: number | "Hoy" | "Finalizado";
+  daysLeft: DaysLeft;
+}
+
+export interface DBEventData
+  extends Omit<EventData, "daysLeft" | "organizers"> {
+  organizers: OrganizerId[];
+}
+export interface NewEventData
+  extends Omit<EventData, "id" | "daysLeft" | "organizers" | "talks"> {
+  organizers: OrganizerWithoutID[];
 }

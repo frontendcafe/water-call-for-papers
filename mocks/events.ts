@@ -1,6 +1,6 @@
-import { EventType, EventData, EventStatus } from "../types/events-types";
+import { DBEventData, EventStatus, EventType } from "../types/events-types";
 
-export const events: EventData[] = [
+export const events: DBEventData[] = [
   {
     id: "1000001",
     name: "Event 1",
