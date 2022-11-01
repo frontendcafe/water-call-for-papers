@@ -17,6 +17,7 @@ export const parseEvent = (rawEvent: any): NewEventData => {
     startingDate: parseDate(event.startingDate),
     status: parseStatus(event.status),
     timezone: parseString(event.timezone),
+    topics: parseTopics(event.topics),
     type: parseType(event.type),
   };
 };
@@ -48,6 +49,16 @@ const parseStatus = (param: any) => {
       message: `Property 'status' is missing or the value '${param}' is not valid`,
     };
   }
+  return param;
+};
+const parseTopics = (param: any) => {
+  if (!isArray(param)) {
+    throw {
+      code: 422,
+      message: `Property 'organizers' is missing or the value of type: '${typeof param}' is not valid`,
+    };
+  }
+
   return param;
 };
 const parseType = (param: any) => {

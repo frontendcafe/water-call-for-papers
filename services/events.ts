@@ -17,7 +17,9 @@ import { calculateDaysLeft, formatFirebaseDate } from "../lib/utils";
 import { DBEventData, EventData, NewEventData } from "../types/events-types";
 import { Organizer } from "../types/organizers-types";
 import { EventQueryOptions } from "../types/others";
+import { Topic, TopicId } from "../types/talk-types";
 import { addOrganizer, getOrganizer } from "./organizers";
+import { addTopic } from "./topic";
 
 export async function getAllEvents({
   limit,
@@ -70,6 +72,10 @@ export async function getAllEvents({
         timezone: data.timezone,
         type: data.type,
         daysLeft: calculateDaysLeft(data.startingDate.toDate()),
+        topics: (await getDocById(
+          data.topics,
+          collectionsRef.topics
+        )) as Topic[],
       };
 
       return event;
@@ -123,6 +129,8 @@ export const createEvent = async (event: NewEventData): Promise<EventData> => {
   });
 
   const organizers: Organizer[] = await Promise.all(organizersData);
+  const topicsData: Topic[] = (await addTopic(event.topics)) as Topic[];
+  const topicsIds: TopicId[] = topicsData.map((topic) => topic.id as TopicId);
 
   //create events
   const eventRef = doc(collectionsRef.events);
@@ -132,6 +140,7 @@ export const createEvent = async (event: NewEventData): Promise<EventData> => {
     id: eventRef.id,
     organizers: organizers.map(({ email }) => email),
     talks: [],
+    topics: topicsIds,
   };
   await setDoc(eventRef, eventDBData);
 
@@ -144,5 +153,6 @@ export const createEvent = async (event: NewEventData): Promise<EventData> => {
     ...eventDBData,
     daysLeft: calculateDaysLeft(event.startingDate),
     organizers: await getOrganizer(eventDBData.organizers),
+    topics: topicsData,
   };
 };

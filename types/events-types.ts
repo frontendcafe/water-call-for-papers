@@ -1,5 +1,5 @@
 import { Organizer, OrganizerId, OrganizerWithoutID } from "./organizers-types";
-import { TalkProposalId } from "./talk-types";
+import { TalkProposalId, Topic, TopicId } from "./talk-types";
 
 export enum EventType {
   Presencial = "Presencial",
@@ -32,13 +32,19 @@ export interface EventData {
   proposalsEndDate: Date;
   timezone: string;
   daysLeft: DaysLeft;
+  topics: Topic[];
 }
 
 export interface DBEventData
-  extends Omit<EventData, "daysLeft" | "organizers"> {
+  extends Omit<EventData, "daysLeft" | "organizers" | "topics"> {
   organizers: OrganizerId[];
+  topics: TopicId[];
 }
 export interface NewEventData
-  extends Omit<EventData, "id" | "daysLeft" | "organizers" | "talks"> {
+  extends Omit<
+    EventData,
+    "id" | "daysLeft" | "organizers" | "talks" | "topics"
+  > {
   organizers: OrganizerWithoutID[];
+  topics: Pick<Topic, "description">[];
 }
