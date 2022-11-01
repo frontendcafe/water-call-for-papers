@@ -1,3 +1,5 @@
+import { EventStatus, EventType } from "../types/events-types";
+
 export const formatFirebaseDate = (date: number): Date => {
   return new Date(date * 1000);
 };
@@ -55,4 +57,20 @@ export const calculateDaysLeft = (date: Date) => {
   }
 
   return result;
+};
+
+export const isString = (param: string): boolean => {
+  return typeof param === "string";
+};
+export const isArray = (params: unknown): boolean => {
+  return params instanceof Array;
+};
+export const isDate = (param: string): boolean => {
+  return Boolean(Date.parse(param));
+};
+export const isStatus = (params: EventStatus): boolean => {
+  return Object.values(EventStatus).includes(params);
+};
+export const isType = (params: EventType): boolean => {
+  return Object.values(EventType).includes(params);
 };

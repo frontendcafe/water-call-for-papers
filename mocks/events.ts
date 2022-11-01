@@ -1,6 +1,6 @@
-import { EventType, EventData, EventStatus } from "../types/events-types";
+import { DBEventData, EventStatus, EventType } from "../types/events-types";
 
-export const events: EventData[] = [
+export const events: DBEventData[] = [
   {
     id: "1000001",
     name: "Event 1",
@@ -16,6 +16,7 @@ export const events: EventData[] = [
     proposalsStartingDate: new Date("2022-08-12 15:00"),
     proposalsEndDate: new Date("2022-08-30 15:00"),
     timezone: "America/Argentina/Buenos_Aires",
+    topics: ["4000003", "4000004"],
   },
   {
     id: "1000002",
@@ -32,6 +33,7 @@ export const events: EventData[] = [
     proposalsStartingDate: new Date("2022-08-12 15:00"),
     proposalsEndDate: new Date("2022-09-30 15:00"),
     timezone: "America/Argentina/Buenos_Aires",
+    topics: ["4000001"],
   },
   {
     id: "1000003",
@@ -48,5 +50,6 @@ export const events: EventData[] = [
     proposalsStartingDate: new Date("2022-08-01 15:00"),
     proposalsEndDate: new Date("2022-10-30 15:00"),
     timezone: "America/Argentina/Buenos_Aires",
+    topics: ["4000002"],
   },
 ];
