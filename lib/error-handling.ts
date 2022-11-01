@@ -34,4 +34,4 @@ export const err = {
   //
   "500": { code: 500, message: "Internal Server Error" },
   "501": { code: 501, message: "Not Implemented" },
-};
+} as const;
