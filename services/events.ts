@@ -69,7 +69,7 @@ export async function getAllEvents({
         status: data.status,
         timezone: data.timezone,
         type: data.type,
-        daysLeft: calculateDaysLeft(data.startingDate),
+        daysLeft: calculateDaysLeft(data.startingDate.toDate()),
       };
 
       return event;
