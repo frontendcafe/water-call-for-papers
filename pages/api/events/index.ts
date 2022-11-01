@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import errorHandler, { err } from "../../../lib/error-handling";
+import { parseEvent } from "../../../lib/parsers";
 import { createEvent, getAllEvents } from "../../../services/events";
 
 export default errorHandler(
@@ -14,7 +15,8 @@ export default errorHandler(
     }
 
     if (method === "POST") {
-      const data = await createEvent(JSON.parse(body));
+      const eventData = parseEvent(body);
+      const data = await createEvent(eventData);
       const message = "Se ha creado el evento";
 
       return res.status(201).json({ data, message });
