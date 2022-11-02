@@ -49,6 +49,7 @@ const Create = () => {
     Themes: "",
     Description: "",
     Requirements: "",
+    Location: "",
   });
 
   const [selected, setSelected] = useState<SelectedOption>(modalityOptions[0]);
@@ -114,7 +115,6 @@ const Create = () => {
     const isEmptyValue = inputsValues.some(
       (value) => value === undefined || value === null
     );
-
     checkInputValue(startDate, setIsNotStarDateValue);
     checkInputValue(endDate, setIsNotEndDateValue);
     checkInputValue(timeZoneSelected, setIsNotTimeZoneValue);
@@ -160,7 +160,6 @@ const Create = () => {
   ) => {
     const regex = new RegExp(/^[A-ZÑa-zñáéíóúÁÉÍÓÚ0-9\s]+$/g);
     const validation = regex.test(e.target.value);
-
     if (
       [
         "OrganizationName",
@@ -342,13 +341,14 @@ const Create = () => {
                 defaultValue={modalityOptions[0].value}
               ></RadioButtons>
             </div>
-            <div>
+            <div className="pb-6">
               <InputText
                 label="Localización"
                 placeholder="Ingrese localización"
                 idValue="Location"
-                value={data["Location"]}
+                value={data.Location}
                 onChange={handleValidation}
+                error={dataError.Location}
               />
             </div>
           </AccordionDefault>
