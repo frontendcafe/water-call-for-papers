@@ -1,5 +1,5 @@
 import { Organizer, OrganizerId, OrganizerWithoutID } from "./organizers-types";
-import { TalkProposalId, Topic, TopicId } from "./talk-types";
+import { NewTopic, TalkProposalId, Topic, TopicId } from "./talk-types";
 
 export enum EventType {
   Presencial = "Presencial",
@@ -46,5 +46,5 @@ export interface NewEventData
     "id" | "daysLeft" | "organizers" | "talks" | "topics"
   > {
   organizers: OrganizerWithoutID[];
-  topics: Pick<Topic, "description">[];
+  topics: NewTopic[];
 }

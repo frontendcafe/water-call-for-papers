@@ -1,8 +1,8 @@
-import { where, query, doc, getDocs, setDoc } from "firebase/firestore";
+import { doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import { collectionsRef } from "../lib/firebase-config";
-import { Topic } from "../types/talk-types";
+import { NewTopic, Topic } from "../types/talk-types";
 
-export const addTopic = (topics: Pick<Topic, "description">[]) => {
+export const addTopic = (topics: NewTopic[]): Promise<Topic[]> => {
   // Topic needs to be an array.
   if (!Array.isArray(topics)) {
     throw { code: 422, message: `Topics needs to be an array.` };
@@ -13,25 +13,25 @@ export const addTopic = (topics: Pick<Topic, "description">[]) => {
     throw { code: 422, message: "Es requerido al menos un tópico." };
   }
 
-  const topicsId = topics.map(async ({ description }) => {
+  const topicsId = topics.map(async (topic) => {
     // Check if there is a description.
-    if (!description) {
+    if (!topic) {
       throw { code: 422, message: "There is no description" };
     }
 
     // Check if description isn't an empty string.
-    if (!description.trim()) {
+    if (!topic.trim()) {
       throw { code: 422, message: "An empty string isn't valid." };
     }
 
-    const constrain = where("description", "==", description);
+    const constrain = where("description", "==", topic);
     const q = query(collectionsRef.topics, constrain);
 
     const topicsSnap = await getDocs(q);
 
     if (topicsSnap.empty) {
       const topicRef = doc(collectionsRef.topics);
-      const topicData = { id: topicRef.id, description };
+      const topicData = { id: topicRef.id, description: topic };
       await setDoc(topicRef, topicData);
       return topicData;
     }
@@ -40,7 +40,7 @@ export const addTopic = (topics: Pick<Topic, "description">[]) => {
       const data = topic.data();
       data.id = topic.id;
       return data;
-    });
+    }) as Topic[];
 
     return topicData;
   });

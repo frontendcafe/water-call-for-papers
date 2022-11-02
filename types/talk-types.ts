@@ -9,10 +9,10 @@ export enum ProposalStatus {
 }
 
 export type TopicId = string;
-
+export type NewTopic = string;
 export interface Topic {
   id: TopicId;
-  description: string;
+  description: NewTopic;
 }
 
 export type TalkProposalId = string;

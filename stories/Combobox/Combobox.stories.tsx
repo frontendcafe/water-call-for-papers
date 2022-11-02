@@ -45,7 +45,7 @@ export const TopicsCombobox = () => {
 
   const createTopicHandler = async (value: string) => {
     try {
-      await createTopic({ description: value });
+      await createTopic([value]);
       const newTopicsSelected = new Set(topicsSelected);
       newTopicsSelected.add(value);
       setTopicsSelected(newTopicsSelected);

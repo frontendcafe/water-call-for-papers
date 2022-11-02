@@ -13,13 +13,14 @@ import { v4 as uuidv4 } from "uuid";
 import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { Candidate, CandidateId } from "../types/candidates-types";
+import { FilterOptions } from "../types/others";
 import {
+  NewTopic,
   ProposalStatus,
   TalkProposal,
   TalkProposalId,
   TopicId,
 } from "../types/talk-types";
-import { FilterOptions } from "../types/others";
 import { saveCandidate } from "./candidate";
 import { addTopic } from "./topic";
 
@@ -97,7 +98,7 @@ export const postTalk = async ({
   topics,
   eventId,
   createdAt,
-}: Omit<TalkProposal, "topics"> & { topics: { description: string }[] }) => {
+}: Omit<TalkProposal, "topics"> & { topics: NewTopic[] }) => {
   // TODO: Add validations?
 
   const topicsData = await addTopic(topics);
