@@ -8,6 +8,7 @@ import { LogoCallForPapers } from "../Spinner/LogoCallForPapers";
 import { StyledLink } from "..//StyledLink/StyledLink";
 import { TextContainer } from "./TextContainer";
 import { Action, useSidebarReducer } from "./useSidebarReducer";
+import { randomIntegerBetween } from "../../lib/utils";
 
 interface SidebarProps {
   /**
@@ -152,6 +153,13 @@ function EventsNavSection({
   events,
   isOpen,
 }: Omit<DrawerCompProps, "clickHandler">) {
+  const colors = [
+    ["text-[#B81B31]", "bg-[#FFE5EF]"],
+    ["text-[#124C47]", "bg-[#E7FFFE]"],
+    ["text-[#6D4F19]", "bg-[#FFFAE3]"],
+    ["text-[#245938]", "bg-[#D1FADF]"],
+  ];
+
   return (
     <div className="space-y-2">
       <h2>
@@ -162,19 +170,24 @@ function EventsNavSection({
       </h2>
 
       <ul aria-label="Listado de próximos eventos" className="space-y-2">
-        {events.map(({ id, name }) => (
-          <li key={id}>
-            <StyledLink href={`/event/${id}`}>
-              <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-xs text-black rounded-full bg-secondary-100">
-                {name.substring(0, 2).toUpperCase()}
-              </div>
+        {events.map(({ id, name }) => {
+          const textColors = colors[randomIntegerBetween(0, 3)].join(" ");
+          return (
+            <li key={id}>
+              <StyledLink href={`/event/${id}`}>
+                <div
+                  className={`inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-xs rounded-full ${textColors}`}
+                >
+                  {name.substring(0, 2).toUpperCase()}
+                </div>
 
-              <TextContainer truncate isOpen={isOpen}>
-                {name}
-              </TextContainer>
-            </StyledLink>
-          </li>
-        ))}
+                <TextContainer truncate isOpen={isOpen}>
+                  {name}
+                </TextContainer>
+              </StyledLink>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
