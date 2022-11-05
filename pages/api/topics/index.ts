@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import errorHandler, { err } from "../../../lib/error-handling";
+import { parseTopic } from "../../../lib/parsers";
 import { addTopic, getAllTopics } from "../../../services/topic";
 
 export default errorHandler(
@@ -7,8 +8,8 @@ export default errorHandler(
     const { body, method } = req;
 
     if (method === "POST") {
-      const parsedBody = typeof body === "string" ? JSON.parse(body) : body;
-      const data = await addTopic(parsedBody);
+      const topicData = parseTopic(body);
+      const data = await addTopic(topicData);
 
       const message: string = "Se ha creado el tópico";
 
