@@ -31,6 +31,7 @@ const eventSchema = z.object({
   topics: topicsSchema,
   type: z.nativeEnum(EventType),
 });
+const updateEvtSchema = eventSchema.partial();
 
 const candidateSchema = z.object({
   email: z.string().email(),
@@ -52,4 +53,10 @@ const talkSchema = z.object({
 
 const talkStatusSchema = talkSchema.pick({ status: true });
 
-export { topicsSchema, eventSchema, talkSchema, talkStatusSchema };
+export {
+  topicsSchema,
+  eventSchema,
+  updateEvtSchema,
+  talkSchema,
+  talkStatusSchema,
+};
