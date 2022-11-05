@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import errorHandler, { err } from "../../../lib/error-handling";
+import { parseTalk } from "../../../lib/parsers";
 import { getTalksFromEvent, postTalk } from "../../../services/talks";
 
 export default errorHandler(
@@ -15,7 +16,8 @@ export default errorHandler(
     }
 
     if (method === "POST") {
-      const data = await postTalk(JSON.parse(body));
+      const talkData = parseTalk(body);
+      const data = await postTalk(talkData);
       const message = "Se ha creado la propuesta";
 
       return res.status(201).json({ data, message });

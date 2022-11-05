@@ -1,6 +1,6 @@
-import { ProposalStatus, TalkProposal } from "../types/talk-types";
+import { DBTalkProposal, ProposalStatus } from "../types/talk-types";
 
-export const talks: TalkProposal[] = [
+export const talks: DBTalkProposal[] = [
   {
     id: "5000001",
     title: "Talk 1",

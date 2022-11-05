@@ -44,7 +44,7 @@ const talkSchema = z.object({
   candidates: z.array(candidateSchema),
   estimatedDuration: z.number(),
   eventId: z.string(),
-  status: z.string().default(ProposalStatus.EnEsperaSinAbrir),
+  status: z.nativeEnum(ProposalStatus).default(ProposalStatus.EnEsperaSinAbrir),
   streamed: z.boolean(),
   summary: z.string(),
   title: z.string().min(1),

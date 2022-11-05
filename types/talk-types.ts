@@ -1,4 +1,4 @@
-import { Candidate, CandidateId } from "./candidates-types";
+import { Candidate, CandidateId, CandidateWithoutID } from "./candidates-types";
 
 export enum ProposalStatus {
   EnEsperaSinAbrir = "En revisión sin abrir",
@@ -25,9 +25,26 @@ export interface TalkProposal {
   status: ProposalStatus;
   attachments: string[];
   streamed: boolean;
-  topics: TopicId[] | Topic[];
-  candidates: CandidateId[] | Candidate[];
-  uniqueCode?: string;
+  topics: Topic[];
+  candidates: Candidate[];
   eventId: string;
   createdAt: Date;
+}
+
+export interface TalkProposalSensitiveData extends TalkProposal {
+  uniqueCode?: string;
+}
+export interface NewTalkProposal
+  extends Omit<
+    TalkProposal,
+    "id" | "status" | "createdAt" | "status" | "topics" | "candidates"
+  > {
+  candidates: CandidateWithoutID[];
+  topics: NewTopic[];
+}
+export interface DBTalkProposal
+  extends Omit<TalkProposal, "candidates" | "topics"> {
+  candidates: CandidateId[];
+  topics: TopicId[];
+  uniqueCode?: string;
 }

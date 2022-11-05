@@ -9,6 +9,11 @@ export default function errorHandler(
       // Set default message for 500 error if needed.
       const { name, message, code } = error;
 
+      // TODO: Add custom error messages
+      // if (error instanceof z.ZodError) {
+      //   // console.log(error.issues);
+      // }
+
       if (process.env.NODE_ENV === "development") {
         // Pass error to Next.js own error handler
         /* eslint-disable no-console */
