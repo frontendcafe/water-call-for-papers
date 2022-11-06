@@ -1,18 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { ResponseError } from "../types/others";
+import { z } from "zod";
 
 export default function errorHandler(
   handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>
 ) {
-  return async (req: NextApiRequest, res: NextApiResponse<ResponseError>) => {
-    return handler(req, res).catch((error: ResponseError) => {
+  return async (req: NextApiRequest, res: NextApiResponse) => {
+    return handler(req, res).catch((error) => {
       // Set default message for 500 error if needed.
       const { name, message, code } = error;
 
-      // TODO: Add custom error messages
-      // if (error instanceof z.ZodError) {
-      //   // console.log(error.issues);
-      // }
+      if (error instanceof z.ZodError) {
+        const zodIssues = error.flatten(({ code, message }) => ({
+          code,
+          message,
+        })).fieldErrors;
+
+        const issues = Object.entries(zodIssues);
+        return res.status(422).send({ message: issues, code: 422 });
+      }
 
       if (process.env.NODE_ENV === "development") {
         // Pass error to Next.js own error handler
