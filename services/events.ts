@@ -14,7 +14,12 @@ import {
 import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { calculateDaysLeft, formatFirebaseDate } from "../lib/utils";
-import { DBEventData, EventData, NewEventData } from "../types/events-types";
+import {
+  DBEventData,
+  EventData,
+  EventId,
+  NewEventData,
+} from "../types/events-types";
 import { Organizer } from "../types/organizers-types";
 import { EventQueryOptions } from "../types/others";
 import { Topic, TopicId } from "../types/talk-types";
@@ -100,13 +105,16 @@ export const deleteEvent = async (id: string) => {
   await deleteDoc(doc(db, "events", id));
 };
 
-export const updateEvent = async (eventId: string, eventData: {}) => {
-  if (!eventId) {
+export const updateEvent = async (
+  id: EventId,
+  event: Partial<NewEventData>
+) => {
+  if (!id) {
     throw { code: 422, message: "Se requiere el ID del evento" };
   }
 
-  const eventRef = doc(db, "events", eventId);
-  await updateDoc(eventRef, { ...eventData }).catch(() => {
+  const eventRef = doc(db, "events", id);
+  await updateDoc(eventRef, { ...event }).catch(() => {
     throw { code: 404, message: "El evento no existe!" };
   });
 };

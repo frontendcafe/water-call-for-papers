@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import errorHandler, { err } from "../../../lib/error-handling";
+import { parseTalkStatus } from "../../../lib/parsers";
 import { getTalk, updateStatusFromTalks } from "../../../services/talks";
 
 export default errorHandler(
@@ -15,7 +16,8 @@ export default errorHandler(
     }
 
     if (method === "PUT") {
-      const data = await updateStatusFromTalks(id, body);
+      const talkStatusData = parseTalkStatus(body);
+      const data = await updateStatusFromTalks(id, talkStatusData);
       const message = "Se ha actualizado la propuesta";
 
       return res.status(200).json({ data, message });

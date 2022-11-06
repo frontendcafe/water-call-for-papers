@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import errorHandler, { err } from "../../../lib/error-handling";
+import { parseUpdateEvt } from "../../../lib/parsers";
 import { deleteEvent, getEvent, updateEvent } from "../../../services/events";
 import { ResponseObject } from "../../../types/others";
 
@@ -16,7 +17,8 @@ export default errorHandler(
     }
 
     if (method === "PUT") {
-      const data = await updateEvent(id, body);
+      const eventData = parseUpdateEvt(body);
+      const data = await updateEvent(id, eventData);
       const message = "Se ha actualizado el evento";
 
       return res.status(200).json({ data, message });

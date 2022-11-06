@@ -6,3 +6,5 @@ export interface Candidate {
   lastName: string;
   email: string;
 }
+
+export interface CandidateWithoutID extends Omit<Candidate, "id"> {}

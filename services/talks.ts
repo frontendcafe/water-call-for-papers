@@ -13,9 +13,11 @@ import { v4 as uuidv4 } from "uuid";
 import { collectionsRef, db } from "../lib/firebase-config";
 import { getDocById } from "../lib/helpers";
 import { Candidate, CandidateId } from "../types/candidates-types";
+import { EventId } from "../types/events-types";
 import { FilterOptions } from "../types/others";
 import {
-  NewTopic,
+  DBTalkProposal,
+  NewTalkProposal,
   ProposalStatus,
   TalkProposal,
   TalkProposalId,
@@ -25,9 +27,9 @@ import { saveCandidate } from "./candidate";
 import { addTopic } from "./topic";
 
 export const getTalksFromEvent = async (
-  eventId: string,
+  eventId: EventId,
   { duration, order = "asc", status, streamed, topics = [] }: FilterOptions
-) => {
+): Promise<TalkProposal[]> => {
   if (!eventId) {
     throw { code: 422, message: "Se requiere el ID del evento" };
   }
@@ -68,7 +70,7 @@ export const getTalksFromEvent = async (
 
     delete talk.uniqueCode;
 
-    return talk;
+    return talk as TalkProposal;
   });
 
   return Promise.all(talks);
@@ -97,10 +99,7 @@ export const postTalk = async ({
   title,
   topics,
   eventId,
-  createdAt,
-}: Omit<TalkProposal, "topics"> & { topics: NewTopic[] }) => {
-  // TODO: Add validations?
-
+}: NewTalkProposal): Promise<TalkProposal> => {
   const topicsData = await addTopic(topics);
 
   const topicsIds = topicsData.map((topic) => {
@@ -110,15 +109,15 @@ export const postTalk = async ({
   const candidatesIds: CandidateId[] = [];
   const candidatesData: Candidate[] = [];
 
-  for (const candidate of candidates as Candidate[]) {
+  for (const candidate of candidates) {
     await saveCandidate(candidate);
 
-    candidatesIds.push(candidate.id);
-    candidatesData.push(candidate);
+    candidatesIds.push(candidate.email);
+    candidatesData.push({ ...candidate, id: candidate.email });
   }
 
   const talkRef = doc(collectionsRef.talks);
-  const talkData: TalkProposal = {
+  const talkData: DBTalkProposal = {
     attachments,
     candidates: candidatesIds,
     estimatedDuration,
@@ -130,7 +129,7 @@ export const postTalk = async ({
     topics: topicsIds,
     uniqueCode: uuidv4(),
     eventId,
-    createdAt,
+    createdAt: new Date(),
   };
 
   await setDoc(talkRef, talkData);
@@ -140,7 +139,9 @@ export const postTalk = async ({
   return { ...talkData, topics: topicsData, candidates: candidatesData };
 };
 
-export const getTalk = async (talkId: TalkProposalId) => {
+export const getTalk = async (
+  talkId: TalkProposalId
+): Promise<TalkProposal> => {
   if (!talkId) {
     throw { code: 422, message: "Se requiere el ID de la propuesta de charla" };
   }
@@ -165,5 +166,5 @@ export const getTalk = async (talkId: TalkProposalId) => {
 
   delete talk.uniqueCode;
 
-  return talk;
+  return talk as TalkProposal;
 };
