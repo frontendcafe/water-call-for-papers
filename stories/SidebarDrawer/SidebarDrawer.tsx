@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import logo_vercel from "../../public/img/vercel-logo-white.svg";
 import { EventData } from "../../types/events-types";
 import { Button } from "../Button/Button";
@@ -22,7 +22,15 @@ interface DrawerCompProps {
   events: EventData[];
   ariaLabel: string;
   isOpen: boolean;
+  colors?: Array<string>;
 }
+
+const colors = [
+  ["text-[#B81B31]", "bg-[#FFE5EF]"],
+  ["text-[#124C47]", "bg-[#E7FFFE]"],
+  ["text-[#6D4F19]", "bg-[#FFFAE3]"],
+  ["text-[#245938]", "bg-[#D1FADF]"],
+];
 
 const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 
@@ -30,16 +38,26 @@ const iconStyles = "inline-flex flex-shrink-0";
 
 export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
   const { sidebarState, setSidebarState } = useSidebarReducer();
+  const [eventColors, setEventColors] = useState<Array<string>>([]);
   const { ariaExpanded, isOpen } = sidebarState;
 
   useEffect(() => {
     const type = isMobile() ? Action.MOBILE_INITIAL : Action.DESKTOP_INITIAL;
     setSidebarState({ type });
+    setEventColors(generateEventColors);
   }, []);
 
   const clickHandler = () => {
     const type = isMobile() ? Action.MOBILE : Action.DESKTOP;
     setSidebarState({ type });
+  };
+
+  const generateEventColors = () => {
+    const generatedColors: Array<string> = [];
+    events.forEach(() => {
+      generatedColors.push(colors[randomIntegerBetween(0, 3)].join(" "));
+    });
+    return generatedColors;
   };
 
   const responsiveBehavior = `md:translate-x-0 w-full ${
@@ -65,7 +83,11 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
             <Icon className={iconStyles} iconName="plusCircle" />
           </StyledLink>
 
-          <EventsNavSection {...sidebarState} events={events} />
+          <EventsNavSection
+            colors={eventColors}
+            {...sidebarState}
+            events={events}
+          />
         </div>
 
         <AboutNavSection {...sidebarState} />
@@ -152,14 +174,8 @@ function BrandSection({
 function EventsNavSection({
   events,
   isOpen,
+  colors,
 }: Omit<DrawerCompProps, "clickHandler">) {
-  const colors = [
-    ["text-[#B81B31]", "bg-[#FFE5EF]"],
-    ["text-[#124C47]", "bg-[#E7FFFE]"],
-    ["text-[#6D4F19]", "bg-[#FFFAE3]"],
-    ["text-[#245938]", "bg-[#D1FADF]"],
-  ];
-
   return (
     <div className="space-y-2">
       <h2>
@@ -170,24 +186,23 @@ function EventsNavSection({
       </h2>
 
       <ul aria-label="Listado de próximos eventos" className="space-y-2">
-        {events.map(({ id, name }) => {
-          const textColors = colors[randomIntegerBetween(0, 3)].join(" ");
-          return (
-            <li key={id}>
-              <StyledLink href={`/event/${id}`}>
-                <div
-                  className={`inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-xs rounded-full ${textColors}`}
-                >
-                  {name.substring(0, 2).toUpperCase()}
-                </div>
+        {events.map(({ id, name }, index) => (
+          <li key={id}>
+            <StyledLink href={`/event/${id}`}>
+              <div
+                className={`inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-xs rounded-full ${
+                  colors ? colors[index] : ""
+                }`}
+              >
+                {name.substring(0, 2).toUpperCase()}
+              </div>
 
-                <TextContainer truncate isOpen={isOpen}>
-                  {name}
-                </TextContainer>
-              </StyledLink>
-            </li>
-          );
-        })}
+              <TextContainer truncate isOpen={isOpen}>
+                {name}
+              </TextContainer>
+            </StyledLink>
+          </li>
+        ))}
       </ul>
     </div>
   );
