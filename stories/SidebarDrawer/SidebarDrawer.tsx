@@ -45,7 +45,7 @@ export const SidebarDrawer = ({ events = [] }: SidebarProps) => {
     const type = isMobile() ? Action.MOBILE_INITIAL : Action.DESKTOP_INITIAL;
     setSidebarState({ type });
     setEventColors(generateEventColors);
-  }, []);
+  }, [events]);
 
   const clickHandler = () => {
     const type = isMobile() ? Action.MOBILE : Action.DESKTOP;
