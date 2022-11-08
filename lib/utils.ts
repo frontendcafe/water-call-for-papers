@@ -74,3 +74,12 @@ export const isStatus = (params: EventStatus): boolean => {
 export const isType = (params: EventType): boolean => {
   return Object.values(EventType).includes(params);
 };
+
+/**
+ * Generates an integer between @min and @max, both are included.
+ * @param min Number, minimum
+ * @param max Number, maximum
+ * @returns Random integer
+ */
+export const randomIntegerBetween = (min: number, max: number): number =>
+  Math.floor(Math.random() * (max - min + 1) + min);
