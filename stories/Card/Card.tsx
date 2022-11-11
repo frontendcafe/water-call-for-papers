@@ -7,7 +7,8 @@ import { Item, MenuDropdown } from "../MenuDropdown/MenuDropdown";
 import { Tag } from "../Tag/Tag";
 
 export const Card = ({ event }: { event: EventData }) => {
-  const { endDate, id, name, startingDate, talks, status, bannerUrl } = event;
+  const { endDate, id, name, startingDate, talks, status, bannerUrl, topics } =
+    event;
 
   // TODO: Add href after functionality gets implemented
   const menuItems: Item[] = [
@@ -55,7 +56,16 @@ export const Card = ({ event }: { event: EventData }) => {
           <Icon iconName="calendar" />
           {getDate(startingDate)} - {getDate(endDate)}
         </div>
-        <div>{/* TODO: Add Tags component */}</div>
+        <div className="flex gap-1">
+          {topics.map(({ description, id }, index) => {
+            if (index < 3)
+              return <Tag label={description} key={id} size="sm" />;
+            if (index === 3)
+              return (
+                <Tag label={`+${topics.length - index}`} key={id} size="sm" />
+              );
+          })}
+        </div>
         <div className="flex items-end">
           <span className="text-xs grow text-secondary-800">
             {talks.length} postulaciones recibidas
